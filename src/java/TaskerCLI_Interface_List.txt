@@ -55,5 +55,9 @@ ConnWindow
 	
 EditWindow(Task editTask)
 	void displayTask()
-	void updateTask(String filepath)	//
+	void updateTask(String filepath)
+	
+LoginWindow
+	void logIn(String username)
+	void openConnSettings()
 	
