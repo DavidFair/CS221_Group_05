@@ -13,23 +13,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 
-public class LoginWindow {
+public class LoginWindowGUI {
 
 	private JFrame frame;
 	private JTextField emailField;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
+
+	public void launchWindow() throws Exception {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					LoginWindow window = new LoginWindow();
+					LoginWindowGUI window = new LoginWindowGUI();
 					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
 			}
 		});
 	}
@@ -37,7 +31,7 @@ public class LoginWindow {
 	/**
 	 * Create the application.
 	 */
-	public LoginWindow() {
+	public LoginWindowGUI() {
 		initialize();
 	}
 
