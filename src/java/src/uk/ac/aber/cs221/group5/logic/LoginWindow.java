@@ -9,15 +9,17 @@ import uk.ac.aber.cs221.group5.gui.LoginWindowGUI;
 
 /**
  * @author David
- *
+ * Provides a wrapper for common window functions
+ * such as creating and destroying the login window
+ * 
  */
-public class LoginWindow implements WindowInterface {
+public class LoginWindow extends WindowCommon{
 
 	private LoginWindowGUI childWindow;
-	private boolean windowExists;
 	
 	public LoginWindow() {
-		windowExists = false;
+		//Initiate common window functions
+		super();
 	}
 		
 	/**
@@ -26,20 +28,18 @@ public class LoginWindow implements WindowInterface {
 	 */
 	@Override
 	public void createWindow() {
-		//Get a new child window
+		//Create new childWindow for super to work on
 		childWindow = new LoginWindowGUI();
+		//Ask parent to setup window for us and pass
+		//this class's methods for it to work on
+		setupWindowLaunch(this);
 		
-		//Try to launch a new window
-		try {
-			childWindow.launchWindow();
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		//Set window status to visible
-		windowExists = true;
 	}
 	
+	@Override
+	public void callWindowLaunch() throws Exception {
+		childWindow.launchWindow();
+	}
 
 
 	@Override
@@ -75,10 +75,10 @@ public class LoginWindow implements WindowInterface {
 		// TODO Auto-generated method stub
 		//This should open ConnSettings Window 
 	}
+
+
 	
-	@Override
-	public boolean doesWindowExist() {
-		return windowExists;
-	}
+
+
 
 }

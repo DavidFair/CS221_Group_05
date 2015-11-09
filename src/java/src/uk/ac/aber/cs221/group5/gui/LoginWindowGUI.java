@@ -18,7 +18,11 @@ public class LoginWindowGUI {
 	private JFrame frame;
 	private JTextField emailField;
 
-
+	/**
+	 * Creates a new thread for the login window and
+	 * sets that to visible through the event queue
+	 * @throws Exception
+	 */
 	public void launchWindow() throws Exception {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

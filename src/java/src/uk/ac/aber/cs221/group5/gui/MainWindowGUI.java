@@ -21,13 +21,11 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextPane;
 import javax.swing.UIManager;
 import java.awt.Color;
-import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 import javax.swing.JTable;
-import javax.swing.text.Document;
 
-public class MainWindow {
+public class MainWindowGUI {
 
 	private JFrame frame;
 	private JTextField txtTaskName;
@@ -44,15 +42,11 @@ public class MainWindow {
 	 * @version 1.0
 	 * @since 1.0 Initial Development
 	 */
-	public static void main(String[] args) {
+	public void launchWindow() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
-					MainWindow window = new MainWindow();
+					MainWindowGUI window = new MainWindowGUI();
 					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
 			}
 		});
 	}
@@ -65,7 +59,7 @@ public class MainWindow {
 	 * @since 1.0 Initial Development
 	 * @see #initialize()
 	 */
-	public MainWindow() {
+	public MainWindowGUI() {
 		initialize();
 	}
 

@@ -21,6 +21,11 @@ public interface WindowInterface {
 	public void destroyWindow();
 	
 	/**
+	 * Call launch window on any window objects
+	 * the class is currently holding
+	 */
+	
+	/**
 	 * Allows the window manager to change the
 	 * text within the window title
 	 * @param newTitleText The text to be displayed on window
@@ -45,5 +50,7 @@ public interface WindowInterface {
 	 * @return True is visible and exists otherwise false
 	 */
 	public boolean doesWindowExist();
+
+	public void callWindowLaunch() throws Exception;
 	
 }
