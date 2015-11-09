@@ -1,4 +1,4 @@
-package uk.ac.aber.cs221.group5.logic;
+package uk.ac.aber.cs221.group5.gui;
 
 /**
  * Provides common functions to all objects

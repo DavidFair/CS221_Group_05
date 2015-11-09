@@ -32,7 +32,7 @@ public class LoginWindowTest {
 	}
 
 	/**
-	 * Test method for {@link uk.ac.aber.cs221.group5.logic.LoginWindow#logIn(java.lang.String)}.
+	 * Test method for {@link uk.ac.aber.cs221.group5.gui.LoginWindow#logIn(java.lang.String)}.
 	 */
 	@Test
 	public void testLogIn() {
@@ -40,7 +40,7 @@ public class LoginWindowTest {
 	}
 
 	/**
-	 * Test method for {@link uk.ac.aber.cs221.group5.logic.LoginWindow#openConnSettings()}.
+	 * Test method for {@link uk.ac.aber.cs221.group5.gui.LoginWindow#openConnSettings()}.
 	 */
 	@Test
 	public void testOpenConnSettings() {

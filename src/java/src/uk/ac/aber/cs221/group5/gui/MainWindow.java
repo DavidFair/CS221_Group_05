@@ -1,9 +1,7 @@
 /**
  * 
  */
-package uk.ac.aber.cs221.group5.logic;
-
-import uk.ac.aber.cs221.group5.gui.MainWindowGUI;
+package uk.ac.aber.cs221.group5.gui;
 
 /**
  * @author David (daf5)

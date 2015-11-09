@@ -4,7 +4,7 @@
  * methods each window class and the
  * GUI element it controls must support
  */
-package uk.ac.aber.cs221.group5.logic;
+package uk.ac.aber.cs221.group5.gui;
 
 public interface WindowInterface {
 	

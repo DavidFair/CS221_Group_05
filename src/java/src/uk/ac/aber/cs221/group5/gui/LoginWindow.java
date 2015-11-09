@@ -3,9 +3,7 @@
  * This class implements methods required by the login GUI
  */
 
-package uk.ac.aber.cs221.group5.logic;
-
-import uk.ac.aber.cs221.group5.gui.LoginWindowGUI;
+package uk.ac.aber.cs221.group5.gui;
 
 /**
  * @author David
