@@ -1,0 +1,102 @@
+Save File Format
+
+Written in Backus-Naur Form to remove all ambiguity
+https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_Form
+https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_Form
+
+
+Username File:
+	First line of file holds the number of usernames within the file
+	List of usernames, line-seperated by the newline character
+	
+	username ::=	<local> "@" <domain>
+	
+	local	 ::=	<char> | <char> <symbol> | <symbol> <char> | <char> <local> | <symbol> <local> "." <local> 
+					| <char> "." " " " <local> " " " "." <local> | <comment> <local> | <local> <comment>
+	
+	<char>	 ::=	"A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" |
+					"T" | "U" | "V" | "W" | "X" | "Y" | "Z" |
+					
+					"a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" |
+					"t" | "u" | "v" | "w" | "x" | "y" | "z" |
+					
+					<number>
+					
+	<number>		"0" | "1" | "2" | "3" | "4" | "5" | "6" | "8" | "9" 
+				
+	<symbol>		"!" | "#" | "$" | "%" | "&" | "'" | "*" | "+" | "-" | "/" | "=" | "?" | "^" | "_" | "`" | "{" | "}" | "\" | "~" 
+					
+	<comment> ::=	"(" <local> ")"
+	
+	<domain>  ::=	<label> "." <label>
+	
+	<label>	  ::=	"-" |
+	
+					"a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" |
+					"t" | "u" | "v" | "w" | "x" | "y" | "z" |
+					
+					"0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+					
+					
+Task File:
+	First line of file holds the number of tasks within the save file.
+	List of task attributes.
+	Each task will have an exclamation point (!) seperating them. This is because the first and last attribute of each task cannot contain an exclamation point.
+		When the number at the top of the file matches the number of exclamation points that have been parsed, all tasks have been loaded.
+	If the save file parser encounters an exclamation point a new task needs to be added.
+	
+	
+	
+	task			::=		<element> {<element>} <name> <status> <assigned> <start-date> <end-date>
+	
+	element			::=		<element-name> "," <element-comment>
+	
+	element-name 	::=		<char> | <char> <element-name>
+	
+	element-comment ::=		<char> | <symbol> | <char> " " <element-comment> | <symbol> " " <element-comment>
+	
+	name			::=		<char> | <char> <name> | <char> " " <name>
+	
+	status			::=		"Allocated" | "Abandoned" | "Completed"
+	
+	assigned		::=		<name>
+	
+	start-date		::=		<day> "/" <month> "/" <year>
+	
+	end-date		::=		<day> "/" <month> "/" <year>
+	
+	day				::=		"1" | "2" | "3" | "4" |"5" | "6" | "7" | "8" | "9" | "10" | "11" | "12" | "13" | "14" | "15" | "16" | "17" | "18" | "19" |
+							"20" | "21" | "22" | "23" | "24" | "25" | "26" | "27" | "28" | "29" | "30" | "31"
+
+	month			::=		"1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12"
+	
+	year			::=		<number> <number> <number> <number>
+	
+	Attributes will each be held on one line with one veritcal pipe "|" seperating them if there are multiple of the same attribute (assignees, comments, etc.).
+	Each attribute will be tagged so the program can cope with missing data.
+	
+	Tags:
+		
+		tag				::=	"[" <attribute-title> "]"
+		
+		attribute-title	::=	"element" | "name" | "status" | "assigned" | "startDate" | "endDate"
+		
+		If a tag is not present or the attribute title is not recognised, the save file has been corrupted and needs to be replaced.
+		
+	An example of the Task save file is given below:
+		
+		2
+		[element]List alll SQL queries, List all the queries we need|Push work, As soon as we have the queries, push them to GitHub!
+		[name]Create SQL Queries
+		[status]Allocated
+		[assigned]Ben Dudley
+		[startDate]29/11/2015
+		[endDate]30/11/2015
+		!
+		[element]Check code compliance, Check that all code complies to the given style sheet
+		[name]Check code compliance
+		[status]Completed
+		[assigned]Oliver Earl|Jonathan Englund
+		[startDate]25/11/2015
+		[endDate]28/11/2015
+		!
