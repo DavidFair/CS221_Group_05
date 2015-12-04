@@ -6,6 +6,9 @@
  * Time: 00:23
  */
 
+define("SITENAME","TaskerMAN");
+define("SITEVER","Alpha 1.0");
+
 $config = array (
     "database" => array (
         "hostname"  => "",
@@ -21,3 +24,5 @@ $config = array (
         "js"        => $_SERVER["DOCUMENT_ROOT"] . "/js",
     )
 );
+
+date_default_timezone_set("Europe/London");
