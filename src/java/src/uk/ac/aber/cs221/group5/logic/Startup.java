@@ -10,7 +10,7 @@ public class Startup {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//TODO
+		//TODO implement main
 		// Rough outline should be
 		//spin up required logic
 		//Open Window in separate thread

@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
+
 /**
  * @(#)Database.java 0.1 2015-12-02
  * 
@@ -24,11 +26,13 @@ import java.sql.Statement;
  *
  */
 
+
 //This is currently a skeleton class to allow SQL to be created
 public class Database {
 	
 	private String URL;
 	private String portNo;
+	private String dbName;
 	
 	private String dbUsername;
 	private String dbPassword;
@@ -38,8 +42,14 @@ public class Database {
 	private DelayTimer connTimer;
 	private DelayTimer latencyTimer;
 	
+	private DbStatus currentStatus;
+	
 	public Database(){
 		//TODO implement DB constructor
+		//Leave blank so default port is used
+		portNo = "";
+		
+		currentStatus = DbStatus.DISCONNECTED;
 		
 		/* First load JDBC connector */
 		//Try to load driver else exit with error code
@@ -47,7 +57,8 @@ public class Database {
 		{
 			//This is recommended method in documentation
 			//As it dynamically loads the class into memory at run time
-			Class.forName("com.mysql.jdbc.driver");
+			
+			Class.forName("com.mysql.jdbc.Driver");
 			
 		} catch (ClassNotFoundException e){
 			System.err.println("Unable to load MYSQL JDBC implementation class");
@@ -57,40 +68,71 @@ public class Database {
 		
 	}
 	
-	public void saveUserName(String filePath){
+	public void saveUserName(String filePath, MemberList allUsers){
 		//TODO implement save user name in DB
 	}
 	
-	public boolean connect(String URL, String portNo){
+	
+	public boolean connect(String hostName, String portNo, String dbUser, String dbPass, String dbName){
+		dbUsername = dbUser;
+		dbPassword = dbPass;
+		
+		//Create appropriate connection string
+		final String urlPrepend = "jdbc:mysql://";
+		//Append connection parameters - such as automatically reconnecting
+		final String urlAppend = "?autoReconnect=true";
+		
+		this.URL = urlPrepend + hostName + portNo + "/" + dbName + urlAppend;
 		
 		try {
 			connection = DriverManager.getConnection(URL, dbUsername, dbPassword);
 		} catch (SQLException e) {
-			System.err.println("Could not connect to DB in connect method");
-			Thread.dumpStack();
+			System.err.println("Could not establish connection to DB in connect method");
+			//For use debugging
+			//Thread.dumpStack();
+			System.err.println("Full connection string was: " + this.URL);
+			
+			//Reset state
+			currentStatus = DbStatus.DISCONNECTED;
+			return false;
 		}
 		
-		return false;
+		currentStatus = DbStatus.CONNECTED;
+		return true;
 	}
 	
-	public boolean closeDbConn(){
-		//TODO implement connection closing
-		return false;
+	public void closeDbConn(){
+		if (connection != null){
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				System.err.println("Could not close JDBC connection");
+				//For debugging
+				//e.printStackTrace();
+				
+				//XXX should we call terminate if a JDBC connection cannot be closed
+				
+			}
+		}
+		
+		//Release current connection
+		connection = null;
+		
+		//Set status
+		currentStatus = DbStatus.DISCONNECTED;
+		
+		//TODO reset any held timers
 	}
 	
-	//TODO change return type to ConnStatus enum
-	public void getConnStatus(){
-		//TODO implement getConnStatus
+	
+	public DbStatus getConnStatus(){
+		return currentStatus;
 	}
 	
 	public Task[] getTasks(String username){
 		//TODO method getTasks logic
-		
-		Statement sqlStatementObject = getNewSqlStatement();
-		
-		String query = "SQL STATEMENT TO GET TASKS AND ELEMENTS FROM USERNAME";
-		
-		executeSQLStatement(sqlStatementObject, query);
+
+		executeSqlStatement("//TODO QUERY WHICH GETS TASKS FROM DB WHERE USERNAME");
 
 		//TODO process data from getTasks SQL query
 		
@@ -98,43 +140,65 @@ public class Database {
 
 	}
 	
+
 	public Members[] getMembers(){
 		//TODO method getMembers logic
 		
-		Statement sqlStatementObject = getNewSqlStatement();
-		
-		String query = "SQL STATEMENT TO GET ALL USERS IN DB";
-		
-		executeSQLStatement(sqlStatementObject, query);
+		executeSqlStatement("//TODO SQL QUERY WHICH GETS ALL MEMBERS");
 		
 		//TODO process data from getMembers SQL query
 		return null;
 	}
 	
-	private void executeSQLStatement(Statement statementToExec, String query){
+	/**
+	 * Takes a statement object and SQL query and executes the query. 
+	 * Returns the query result as a ResultSet object
+	 * @param statementToExec The Statement object to use 
+	 * @param query The SQL query to execute
+	 * @return ResultSet containing result. If it fails null.
+	 */
+	private ResultSet executeSQLStatement(Statement statementToExec, String query){
+		
+		ResultSet sqlOutput;
+		
 		try{
-			ResultSet sqlOutput = statementToExec.executeQuery(query);
+			sqlOutput = statementToExec.executeQuery(query);
 		} catch (SQLException e){
 			System.err.println("Sql query failed. Query used was:");
-			System.err.println();
 			System.err.println(query);
-			System.err.println();
-			System.err.println("Stack trace");
-			Thread.dumpStack();
+			
+			//Reset ResultSet to null
+			sqlOutput = null;
+			
+			//For debugging
+			//System.err.println("Stack trace");
+			//Thread.dumpStack();
 		}
+		
+		return sqlOutput;
 
 	}
 	
-	private Statement getNewSqlStatement(){
+	/**
+	 * Executes SQL query passed in by the parameter and returns a ResultSet
+	 * containing the returned data from the database 
+	 * @param query SQL query to execute on the database
+	 * @return ResultSet containing data if query succeeded. Null if it did not
+	 */
+	private ResultSet executeSqlStatement(String query){
 		Statement sqlStatementObject = null;
 		try{
 			sqlStatementObject = connection.createStatement();
 		} catch (SQLException e) {
 			System.err.println("Could not create SQL statement in ");
-			Thread.dumpStack();
+			//To use when debugging
+			//Thread.dumpStack();
+			
 		}
 		
-		return sqlStatementObject;
+		//Pass resultSet straight through to caller
+		return executeSQLStatement(sqlStatementObject, query);
+		
 	}
 	
 	

@@ -36,7 +36,8 @@ public class LoginWindowTest {
 	 */
 	@Test
 	public void testLogIn() {
-		fail("Not yet implemented"); // TODO
+		fail("Not yet implemented"); 
+		// TODO implement login window tests
 	}
 
 	/**
@@ -44,7 +45,8 @@ public class LoginWindowTest {
 	 */
 	@Test
 	public void testOpenConnSettings() {
-		fail("Not yet implemented"); // TODO
+		fail("Not yet implemented"); 
+		// TODO implement open connection window tests
 	}
 
 }
