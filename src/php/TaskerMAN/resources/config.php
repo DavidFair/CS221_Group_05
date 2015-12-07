@@ -24,6 +24,7 @@ $debug = false;
 */
 define("APP_NAME",  "TaskerMAN");
 define("APP_VER",   "Alpha 1.0");
+define("GROUP",     "Group 5");
 define("COPYRIGHT", "Aberystwyth University");
 
 /*

@@ -6,15 +6,18 @@
  *   This file should be included into init.php to provide access to the database
  *   Accessible program-wide under $pdo
  **/
-include('init.php');
+require('init.php');
 
 // Activate database connection, available wherever $pdo is injected
 $pdo = configureDatabase($db_config);
 
 /**
  * Database Establish Function utilising PDO for MySQL
- * @param $conf
- * @return PDO
+ * TODO PHPDoc
+ * @param $conf - The function is passed an array containing database connection information
+ * @return PDO - Returns a PDO instance for connecting to the database
+ * @resources http://www.stackoverflow.com/tags/pdo/info - Very useful
+ * @resources CS25010 Advanced PHP slides provide a great overview of PDO
  */
 function configureDatabase($conf)
 {

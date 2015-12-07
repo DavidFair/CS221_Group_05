@@ -1,35 +1,32 @@
 <?php
-//======================================================================
-// Login Page
-//======================================================================
 /**
  * TODO Insert PHPDoc comment here
  * TODO Develop PHPUnit / custom code tests for login sequence
  */
-
-session_save_path("tmp");
-session_start();
-
 require('init.php');
 
-// Check for login and redirect them back to TaskerMan if they are
-if (isset($_SESSION['login'])) {
-    // Redirect
+/*
+ * Login Codeblocks
+ */
+
+// Initial login flag set on load and refresh
+if (isset($_POST['login']))
+{
+    // Set the session and redirect
+    $_SESSION['login'] = $_POST['login'];
     header('Location: taskerman.php');
 }
 
-// Check for login
-if (isset($_POST['login'])) {
-    // Set session
-    $_SESSION['login'] = $_POST['login'];
-    // Redirect
+// Check for login and redirect them back to TaskerMAN if they are
+if (isset($_SESSION['login']))
+{
     header('Location: taskerman.php');
 }
 ?>
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 <head>
-    <?php include('meta.php');?>
+    <?php include('meta.php'); ?>
     <title>Login - <?php echo SITENAME . ' ' . SITEVER; ?></title>
 </head>
 <body>
