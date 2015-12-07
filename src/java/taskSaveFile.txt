@@ -1,0 +1,14 @@
+2
+[element] Create Quality Assurance Documents, QA1, QA2, and QA3 need to be created
+[name] QAS
+[status] allocated
+[assigned] Oliver Earl
+[startDate] 26/10/15
+[endDate] 23/10/15
+!
+[element] Creation of testing specification, Create the testing specification
+[name] Testing specification
+[status] allocated
+[assigned] Maurice Jordan Corriette
+[startDate] 26/10/15/10/15
+[endDate] 13/11/15
