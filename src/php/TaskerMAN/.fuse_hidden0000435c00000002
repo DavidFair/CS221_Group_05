@@ -8,22 +8,17 @@
  **/
 include('init.php');
 
-// Activate database connection, available wherever $pdo is injected
+// Activate PDO
 $pdo = configureDatabase($db_config);
 
-/**
- * Database Establish Function utilising PDO for MySQL
- * @param $conf
- * @return PDO
- */
-function configureDatabase($conf)
+function configureDatabase($databaseConf)
 {
     try
     {
         // Declare data source name
-        $dsn = "mysql:host=" . $conf['hostname'] . ";dbname=" . $conf['dbname'];
+        $dsn = "mysql:host=
         // Instantiate PDO object
-        $pdo = new PDO($dsn, $conf['username'], $conf['password']);
+        $pdo = new PDO($dsn, $username, $password);
         // Set error mode exceptions for PDO
         $pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         // Return PDO for access

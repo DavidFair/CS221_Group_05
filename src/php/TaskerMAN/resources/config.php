@@ -1,28 +1,66 @@
 <?php
 /**
- * Created by PhpStorm.
+ * Configuration Module
+ * @author Oliver Earl
+ *
+ * This file contains constants and other parameters used in the program.
+ *
+ * Created by PhpStorm
  * User: Oliver
  * Date: 16/11/2015
  * Time: 00:23
- */
+ *
+ **/
 
-define("SITENAME","TaskerMAN");
-define("SITEVER","Alpha 1.0");
+/*
+** Debug Mode
+*/
 
-$config = array (
-    "database" => array (
-        "hostname"  => "",
-        "dbname"    => "",
-        "username"  => "",
-        "password"  => "",
-    ),
-    "paths" => array (
-        "include"   => $_SERVER["DOCUMENT_ROOT"] . "/include",
-        "resources" => $_SERVER["DOCUMENT_ROOT"] . "/resources",
-        "css"       => $_SERVER["DOCUMENT_ROOT"] . "/css",
-        "img"       => $_SERVER["DOCUMENT_ROOT"] . "/img",
-        "js"        => $_SERVER["DOCUMENT_ROOT"] . "/js",
-    )
+// Is this version of the program in development mode?
+$debug = false;
+
+/*
+** Global Constants
+*/
+define("APP_NAME",  "TaskerMAN");
+define("APP_VER",   "Alpha 1.0");
+define("COPYRIGHT", "Aberystwyth University");
+
+/*
+** Timezone Settings
+*/
+date_default_timezone_set("Europe/London");
+
+/*
+** Error Reporting Settings
+*/
+define("LOGFILE",   "error.log");
+ini_set("error_log", LOGFILE);
+ini_set("log_errors", 1);
+
+// Disable errors caused by Aberystwyth University servers
+error_reporting(E_ALL ^ E_NOTICE);
+
+/*
+** Database Array
+ * TODO Enter database information
+*/
+$db_config = array
+(
+    "hostname"  =>  "",
+    "dbname"    =>  "",
+    "username"  =>  "",
+    "password"  =>  "",
 );
 
-date_default_timezone_set("Europe/London");
+/*
+** Path Array
+*/
+$paths = array
+(
+    "include"   =>  $_SERVER["DOCUMENT_ROOT"] . "/include",
+    "resources" =>  $_SERVER["DOCUMENT_ROOT"] . "/resources",
+    "css"       =>  $_SERVER["DOCUMENT_ROOT"] . "/css",
+    "js"        =>  $_SERVER["DOCUMENT_ROOT"] . "/js",
+    "img"       =>  $_SERVER["DOCUMENT_ROOT"] . "/img"
+);
