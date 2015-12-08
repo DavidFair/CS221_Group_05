@@ -5,10 +5,21 @@
  *
  *   This file should be included into init.php to provide access to the database
  *   Accessible program-wide under $pdo
+ *  ░░░░░░░░░░░░░░░░░░░░░
+ *  ░░░░░░░░░░░░▄▀▀▀▀▄░░░
+ *  ░░░░░░░░░░▄▀░░▄░▄░█░░
+ *  ░▄▄░░░░░▄▀░░░░▄▄▄▄█░░
+ *  █░░▀▄░▄▀░░░░░░░░░░█░░
+ *  ░▀▄░░▀▄░░░░█░░░░░░█░░
+ *  ░░░▀▄░░▀░░░█░░░░░░█░░
+ *  ░░░▄▀░░░░░░█░░░░▄▀░░░
+ *  ░░░▀▄▀▄▄▀░░█▀░▄▀░░░░░
+ *  ░░░░░░░░█▀▀█▀▀░░░░░░░
+ *  ░░░░░░░░▀▀░▀▀░░░░░░░░
  **/
 require('init.php');
 
-// Activate database connection, available wherever $pdo is injected
+// Activate database connection, available wherever $pdo  is injected
 $pdo = configureDatabase($db_config);
 
 /**
@@ -35,7 +46,7 @@ function configureDatabase($conf)
     catch (PDOException $ex)
     {
         // Call error handler and die
-        errorHandler($ex->getMessage(), "Database Error", LOGFILE, timePrint());
+        errorHandler($ex->getMessage(), "PDO Database Error", LOGFILE, timePrint());
         die();
     }
 }

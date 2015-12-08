@@ -2,6 +2,9 @@
 /**
  * TODO Insert PHPDoc comment here
  * TODO Develop PHPUnit / custom code tests for login sequence
+ * @resources http://phpro.org/tutorials/Basic-Login-Authentication-with-PHP-and-MySQL.html
+ * @resources https://www.reddit.com/r/PHP/comments/luprk/how_do_you_sanitize_input/
+ *
  */
 require('init.php');
 
@@ -9,19 +12,35 @@ require('init.php');
  * Login Codeblocks
  */
 
-// Initial login flag set on load and refresh
+// First, check for logout token
+if (isset($_POST['logout']))
+{
+    // Unset, destroy, refresh
+    session_unset();
+    session_destroy();
+    header('Location: index.php');
+}
+
+// Check for login token
 if (isset($_POST['login']))
 {
-    // Set the session and redirect
-    $_SESSION['login'] = $_POST['login'];
+    // Authenticate user information, whilst also sanitising HTML tags
+    $auth = authCheck(strip_tags($_POST['username']),$pdo);
+    if ($auth)
+    {
+        // Set flag and redirect
+        $_SESSION['login_auth'] = true;
+        header('Location: taskerman.php');
+    }
+}
+
+// Check for authenticated login and redirect if necessary
+if ($_SESSION['login_auth'])
+{
     header('Location: taskerman.php');
 }
 
-// Check for login and redirect them back to TaskerMAN if they are
-if (isset($_SESSION['login']))
-{
-    header('Location: taskerman.php');
-}
+
 ?>
 <!DOCTYPE HTML>
 <html lang="en">

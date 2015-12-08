@@ -45,6 +45,10 @@ function errorHandler($ex,$errorType,$logfile,$currentTime)
         $ex . "\n";
     // Print to logfile
     file_put_contents($logfile, $toPrint, FILE_APPEND);
+    // Echo out user friendly message - DON'T PRINT THE EXCEPTION! CHECK THE LOG
+    echo '<p>' . $errorType . '</p><br/>';
+    echo '<p><em>The administrator has been informed.</em></p>';
+    echo '<hr/>';
 }
 
 /**
@@ -58,4 +62,41 @@ function timePrint()
     $date = date('d-m-Y') . " " . time();
     // Return
     return $date;
+}
+
+/**
+ * TODO PHPDoc
+ * @param $email
+ * @param $db
+ * @return bool
+ */
+function authCheck($email, $db)
+{
+    try
+    {
+        // Prepare statement handle
+        $sth = $db->prepare('SELECT email FROM users WHERE email = :email');
+        // Bind parameters
+        $sth->bindParam(':email', $email, PDO::PARAM_STR);
+        // Send query to MySQL
+        $sth->execute();
+        // Fetch what we found
+        $returned_email = $sth->fetchColumn();
+        // and check if we successfully laid anchor
+        if($returned_email == false)
+        {
+            // Login has failed
+            return false;
+        }
+        else
+        {
+            // Successful login
+            return true;
+        }
+    }
+    catch (PDOException $e)
+    {
+        errorHandler($e->getMessage(),"Database Authentication Error",LOGFILE,timePrint());
+        die();
+    }
 }
