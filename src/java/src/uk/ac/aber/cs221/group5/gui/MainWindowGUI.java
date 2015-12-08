@@ -16,14 +16,35 @@ import java.awt.GridBagConstraints;
 import javax.swing.border.TitledBorder;
 import javax.swing.JLabel;
 import java.awt.Insets;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JTextPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumnModel;
+
+import uk.ac.aber.cs221.group5.logic.Task;
+import uk.ac.aber.cs221.group5.logic.TaskStatuses;
+import uk.ac.aber.cs221.group5.logic.TaskList;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainWindowGUI {
 
@@ -34,6 +55,8 @@ public class MainWindowGUI {
 	private JTextField txtStartDate;
 	private JTextField txtEndDate;
 	private JTable table;
+	
+	private ArrayList<Task> taskList = new ArrayList<Task>();
 
 	/**
 	 * Launch the application.
@@ -46,6 +69,12 @@ public class MainWindowGUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 					MainWindowGUI window = new MainWindowGUI();
+					try {
+						window.populateTable("taskSaveFile.txt");
+					} catch (NumberFormatException | IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					window.frame.setVisible(true);
 			}
 		});
@@ -97,7 +126,7 @@ public class MainWindowGUI {
 		gbl_quickViewPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
 		quickViewPanel.setLayout(gbl_quickViewPanel);
 		
-		JLabel lblTaskName = new JLabel("Task Status:");
+		JLabel lblTaskName = new JLabel("Task Name:");
 		GridBagConstraints gbc_lblTaskName = new GridBagConstraints();
 		gbc_lblTaskName.anchor = GridBagConstraints.WEST;
 		gbc_lblTaskName.insets = new Insets(0, 0, 5, 5);
@@ -197,23 +226,13 @@ public class MainWindowGUI {
 		gbc_lblTaskElements.gridy = 5;
 		quickViewPanel.add(lblTaskElements, gbc_lblTaskElements);
 		
-		JTextPane txtElements = new JTextPane();
-		txtElements.setEditable(false);
-		GridBagConstraints gbc_txtElements = new GridBagConstraints();
-		gbc_txtElements.gridheight = 2;
-		gbc_txtElements.insets = new Insets(0, 0, 5, 0);
-		gbc_txtElements.fill = GridBagConstraints.BOTH;
-		gbc_txtElements.gridx = 2;
-		gbc_txtElements.gridy = 5;
-		quickViewPanel.add(txtElements, gbc_txtElements);
-		
-		JButton btnNewButton = new JButton("<");
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.anchor = GridBagConstraints.EAST;
-		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
-		gbc_btnNewButton.gridx = 0;
-		gbc_btnNewButton.gridy = 7;
-		quickViewPanel.add(btnNewButton, gbc_btnNewButton);
+		JButton btnViewElements = new JButton("View");
+		btnViewElements.setEnabled(false);
+		GridBagConstraints gbc_btnViewElements = new GridBagConstraints();
+		gbc_btnViewElements.insets = new Insets(0, 0, 5, 0);
+		gbc_btnViewElements.gridx = 2;
+		gbc_btnViewElements.gridy = 5;
+		quickViewPanel.add(btnViewElements, gbc_btnViewElements);
 		
 		JButton btnEdit = new JButton("Edit");
 		GridBagConstraints gbc_btnEdit = new GridBagConstraints();
@@ -221,13 +240,18 @@ public class MainWindowGUI {
 		gbc_btnEdit.gridx = 1;
 		gbc_btnEdit.gridy = 7;
 		quickViewPanel.add(btnEdit, gbc_btnEdit);
-		
-		JButton button = new JButton(">");
-		GridBagConstraints gbc_button = new GridBagConstraints();
-		gbc_button.anchor = GridBagConstraints.WEST;
-		gbc_button.gridx = 2;
-		gbc_button.gridy = 7;
-		quickViewPanel.add(button, gbc_button);
+		btnEdit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int row = table.getSelectedRow();
+				if(row > -1){
+					EditWindow editWindow = new EditWindow();
+					editWindow.createWindow();
+					editWindow.setFields(txtTaskName.getText(), TaskStatuses.valueOf(TaskStatuses.class, txtStatus.getText()), 
+							txtAssigned.getText(), txtStartDate.getText(), 
+							txtEndDate.getText());
+				}
+			}
+		});
 		
 		JPanel connSettingsPanel = new JPanel();
 		connSettingsPanel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Connection Status", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -282,13 +306,96 @@ public class MainWindowGUI {
 		gbl_panel.rowWeights = new double[]{1.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 0;
+		gbc_scrollPane.gridy = 0;
+		panel.add(scrollPane, gbc_scrollPane);
+		
 		table = new JTable();
-		table.setBorder(new LineBorder(new Color(0, 0, 0)));
-		GridBagConstraints gbc_table = new GridBagConstraints();
-		gbc_table.fill = GridBagConstraints.BOTH;
-		gbc_table.gridx = 0;
-		gbc_table.gridy = 0;
-		panel.add(table, gbc_table);
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Task ID", "Task Name", "Status", "Assigned Members", "Start Date", "End Date"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				String.class, String.class, String.class, String.class, String.class, String.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
+		table.getColumnModel().getColumn(1).setPreferredWidth(324);
+		table.getColumnModel().getColumn(3).setPreferredWidth(340);
+		table.getColumnModel().getColumn(4).setPreferredWidth(97);
+		table.getColumnModel().getColumn(5).setPreferredWidth(129);
+		scrollPane.setViewportView(table);
+		
+		//Populate Quick View fields when a row from the table is selected
+		table.addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e){
+				int row = table.getSelectedRow();
+				if(row > -1){
+					txtTaskName.setText((String)table.getModel().getValueAt(row, 1));
+					txtStatus.setText((String)table.getModel().getValueAt(row, 2));
+					txtAssigned.setText((String)table.getModel().getValueAt(row, 3));
+					txtStartDate.setText((String)table.getModel().getValueAt(row, 4));
+					txtEndDate.setText((String)table.getModel().getValueAt(row, 5));
+				}
+			}
+		});
+	}
+	
+	public void populateTable(String filename) throws NumberFormatException, IOException{
+		FileReader fileReader = new FileReader(filename);
+		BufferedReader read = new BufferedReader(fileReader);
+		int numOfTasks = 0;
+		String taskID           = null;
+		String taskName         = null;
+		TaskStatuses taskStatus = null;
+		String assigned         = null;
+		String startDate        = null;
+		String endDate          = null;
+		
+		//First read in the number of tasks
+		numOfTasks = Integer.parseInt(read.readLine());
+		//Load data and create Task objects
+		for(int loopCount = 0; loopCount < numOfTasks; loopCount++){
+			taskID     = read.readLine();
+			//Skip over task elements for the demo
+			read.readLine();
+			taskName   = read.readLine();
+			taskStatus = TaskStatuses.valueOf(TaskStatuses.class, read.readLine());
+			assigned   = read.readLine();
+			startDate  = read.readLine();
+			endDate    = read.readLine();
+			Task task = new Task(taskID, taskName, startDate, endDate, assigned, taskStatus);
+			taskList.add(task);
+		}
+		for(int loopCount = 0; loopCount < taskList.size(); loopCount++){
+			Task task = taskList.get(loopCount);
+			DefaultTableModel model = (DefaultTableModel)(table.getModel());
+			model.addRow(new Object[]{task.getID(), task.getName(), task.getStatus(), task.getMembers(),
+					task.getStart(), task.getEnd()});
+		}
+	}
+	
+	
+	public void resizeTableCols(JTable table){
+		final TableColumnModel columnModel = table.getColumnModel();
+		for(int column = 0; column < table.getColumnCount(); column++){
+			int minWidth = 75;
+			for(int row = 0; row < table.getRowCount(); row++){
+				TableCellRenderer renderer = table.getCellRenderer(row, column);
+				Component comp = table.prepareRenderer(renderer, row, column);
+				minWidth = Math.max(comp.getPreferredSize().width+1, minWidth);
+			}
+			columnModel.getColumn(column).setPreferredWidth(minWidth);
+		}
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 	}
 
 }

@@ -18,6 +18,11 @@ public class MainWindow extends WindowCommon {
 		super();
 	}
 	
+	public static void main(String[] args) throws Exception{
+		MainWindow window = new MainWindow();
+		window.createWindow();
+	}
+	
 	@Override
 	public void createWindow() {
 		//Get a new child window for super class
