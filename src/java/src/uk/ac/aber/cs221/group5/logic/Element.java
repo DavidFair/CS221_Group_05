@@ -1,4 +1,4 @@
-package java.src.uk.ac.aber.cs221.group5.logic;
+package uk.ac.aber.cs221.group5.logic;
 
 public class Element {
 	String elementName;

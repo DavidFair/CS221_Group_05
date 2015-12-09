@@ -114,7 +114,7 @@ public class EditWindowGUI {
 		gbc_lblTaskStatus.gridy = 2;
 		frmEditTask.getContentPane().add(lblTaskStatus, gbc_lblTaskStatus);
 		
-		JComboBox cmbTaskStatus = new JComboBox();
+		cmbTaskStatus = new JComboBox();
 		cmbTaskStatus.setModel(new DefaultComboBoxModel(new String[] {"Allocated", "Abandoned", "Completed"}));
 		GridBagConstraints gbc_cmbTaskStatus = new GridBagConstraints();
 		gbc_cmbTaskStatus.gridwidth = 2;
