@@ -1,0 +1,66 @@
+/*
+Authored by Liam Fitzgerald, Oliver Earl
+*/
+body {
+    background-color: #ccc;
+}
+
+h1 {
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    font-weight: lighter;
+    text-align: center;
+}
+
+h2 {
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    font-weight: lighter;
+    text-align: center;
+}
+
+p {
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+}
+
+input {
+    border-color: #808080;
+    border-style: solid;
+    border-width: 3px;
+    left: 14%;
+    margin-bottom: 1%;
+    position: relative;
+    width: 70%
+}
+
+#login {
+    background-color: #cccccc;
+    border-color: #808080;
+    border-style: solid;
+    border-width: 1px;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    margin-left: 41%;
+    margin-right: 41%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    position: relative;
+    text-align: center;
+}
+
+#login_container {
+    background-color: #999999;
+    border-radius: 1%;
+    border-width: 4px;
+    border-style: solid;
+    height: 150%;
+    left: 25%;
+    margin-top: 12%;
+    padding-bottom: 2%;
+    position: relative;
+    text-align: center;
+    width: 50%
+}
+
+#request {
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    margin-bottom: 0%;
+    text-indent: 15%;
+}

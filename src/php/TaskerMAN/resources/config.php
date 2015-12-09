@@ -35,7 +35,7 @@ date_default_timezone_set("Europe/London");
 /*
 ** Error Reporting Settings
 */
-define("LOGFILE",   "error.log");
+define("LOGFILE",   "error.txt");
 ini_set("error_log", LOGFILE);
 ini_set("log_errors", 1);
 
@@ -44,14 +44,13 @@ error_reporting(E_ALL ^ E_NOTICE);
 
 /*
 ** Database Array
- * TODO Enter database information
 */
 $db_config = array
 (
-    "hostname"  =>  "",
-    "dbname"    =>  "",
-    "username"  =>  "",
-    "password"  =>  "",
+    "hostname"  =>  "db.dcs.aber.ac.uk",
+    "dbname"    =>  "csgp_5_15_16",
+    "username"  =>  "csgpadm_5",
+    "password"  =>  "redacted",
 );
 
 /*

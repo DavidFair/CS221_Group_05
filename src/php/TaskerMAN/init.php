@@ -14,7 +14,7 @@
 
 // Session Location
 // TODO Change this to a more suitable location when we have a working server
-session_save_path("tmp");
+session_save_path("/tmp");
 session_start();
 
 // Configuration file

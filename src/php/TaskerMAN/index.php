@@ -2,6 +2,7 @@
 /**
  * TODO Insert PHPDoc comment here
  * TODO Develop PHPUnit / custom code tests for login sequence
+ * @author OLiver Earl, Liam Fitzgerald
  * @resources http://phpro.org/tutorials/Basic-Login-Authentication-with-PHP-and-MySQL.html
  * @resources https://www.reddit.com/r/PHP/comments/luprk/how_do_you_sanitize_input/
  *
@@ -25,7 +26,7 @@ if (isset($_POST['logout']))
 if (isset($_POST['login']))
 {
     // Authenticate user information, whilst also sanitising HTML tags
-    $auth = authCheck(strip_tags($_POST['username']),$pdo);
+    // $auth = authCheck(strip_tags($_POST['username']),$pdo); TODO RE-ENABLE WHEN DATABASE WRITTEN
     if ($auth)
     {
         // Set flag and redirect
@@ -46,20 +47,25 @@ if ($_SESSION['login_auth'])
 <html lang="en">
 <head>
     <?php include('meta.php'); ?>
-    <title>Login - <?php echo SITENAME . ' ' . SITEVER; ?></title>
+    <title>Login - <?php echo APP_NAME . ' ' . APP_VER; ?></title>
 </head>
 <body>
-    <main id="login">
+    <main id="login_container">
+        <h1>Welcome to <?php echo APP_NAME . ' ' . APP_VER; ?></h1>
         <div id="login">
             <script src="js/validation.js"></script>
             <form name="login" action="index.php" method="POST" onsubmit="return loginValidation()">
                 <fieldset>
-                    <legend>Email: </legend>
+                    <legend>Login: </legend>
                     <input name="email" type="email" placeholder="Email: " required />
                     <input name="submit" type="submit" value="Login" />
                 </fieldset>
             </form>
         </div>
+        <h2>Disclaimer</h2>
+        <p>This is an alpha version of the software. Some things may not be working completely as intended.
+        Functionality may be partially or completely unimplemented. By logging in, you have agreed to
+        acknowledge this warning in its entirety.</p>
     </main>
 </body>
 </html>

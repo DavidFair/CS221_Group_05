@@ -17,9 +17,8 @@
  *  ░░░░░░░░█▀▀█▀▀░░░░░░░
  *  ░░░░░░░░▀▀░▀▀░░░░░░░░
  **/
-require('init.php');
 
-// Activate database connection, available wherever $pdo  is injected
+// Activate database connection, available wherever $pdo is injected
 $pdo = configureDatabase($db_config);
 
 /**
