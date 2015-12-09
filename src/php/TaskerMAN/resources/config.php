@@ -50,7 +50,7 @@ $db_config = array
     "hostname"  =>  "db.dcs.aber.ac.uk",
     "dbname"    =>  "csgp_5_15_16",
     "username"  =>  "csgpadm_5",
-    "password"  =>  "redacted",
+    "password"  =>  "",
 );
 
 /*
