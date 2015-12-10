@@ -35,10 +35,9 @@ public class EditWindowGUI {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+			public void run() {				try {
 					EditWindowGUI window = new EditWindowGUI();
 					window.frmEditTask.setVisible(true);
 				} catch (Exception e) {
@@ -46,7 +45,7 @@ public class EditWindowGUI {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the application.
@@ -61,7 +60,6 @@ public class EditWindowGUI {
 			@Override
 			public void run() {
 				EditWindowGUI window = new EditWindowGUI();
-				window.frmEditTask.setVisible(true);
 			}
 			
 		});
@@ -229,6 +227,7 @@ public class EditWindowGUI {
 		txtAssignedTaskMembers.setText(assigned);
 		txtStartDate.setText(start);
 		txtExpectedEndDate.setText(end);
+		frmEditTask.setVisible(true);
 	}
 
 }
