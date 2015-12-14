@@ -1,12 +1,17 @@
 /.project
 ###---------------------------------------------------------------------------
 ### Eclipse + Java git ignore 
-# Added gitignore from http://www.bmchild.com/2012/06/git-ignore-for-java-eclipse-project.html
+# Added and adapted gitignore from
+# http://www.bmchild.com/2012/06/git-ignore-for-java-eclipse-project.html
 
 # Directories #
 /build/
 /bin/
 target/
+ 
+# MS Word #
+# Auto recovery version
+~$*
  
 # OS Files #
 .DS_Store
@@ -75,3 +80,10 @@ local.properties
 # PDT-specific
 .buildpath
 ####--------------------End of java git ignore-----------------------
+#####################
+# Visual Paradigm
+#####################
+
+*.vpp~1
+*.vpp~2
+
