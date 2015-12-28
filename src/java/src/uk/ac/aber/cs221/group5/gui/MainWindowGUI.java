@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 import java.awt.GridBagConstraints;
 import javax.swing.border.TitledBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -227,12 +229,22 @@ public class MainWindowGUI {
 		quickViewPanel.add(lblTaskElements, gbc_lblTaskElements);
 		
 		JButton btnViewElements = new JButton("View");
-		btnViewElements.setEnabled(false);
 		GridBagConstraints gbc_btnViewElements = new GridBagConstraints();
 		gbc_btnViewElements.insets = new Insets(0, 0, 5, 0);
 		gbc_btnViewElements.gridx = 2;
 		gbc_btnViewElements.gridy = 5;
 		quickViewPanel.add(btnViewElements, gbc_btnViewElements);
+		btnViewElements.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int selectedRow = table.getSelectedRow();
+				if(selectedRow > -1){
+					
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "Select a Task to View Task Elements", "Selection Error", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		
 		JButton btnEdit = new JButton("Edit");
 		GridBagConstraints gbc_btnEdit = new GridBagConstraints();
@@ -249,6 +261,9 @@ public class MainWindowGUI {
 					editWindow.setFields(txtTaskName.getText(), TaskStatuses.valueOf(TaskStatuses.class, txtStatus.getText()), 
 							txtAssigned.getText(), txtStartDate.getText(), 
 							txtEndDate.getText());
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "Select a Task to Edit", "Selection Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

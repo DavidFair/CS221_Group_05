@@ -1,5 +1,6 @@
 package uk.ac.aber.cs221.group5.logic;
 
+import java.util.ArrayList;
 
 public class Task {
 	String taskID;
@@ -10,6 +11,8 @@ public class Task {
 	
 	TaskStatuses status;
 	
+	ArrayList<Element> taskElements;
+	
 	public Task(String id, String name, String start, String end, String members, TaskStatuses status){
 		this.taskID    = id;
 		this.taskName  = name;
@@ -19,6 +22,8 @@ public class Task {
 		this.taskMembers = members;
 		
 		this.status = status;
+		
+		taskElements = new ArrayList<Element>();
 	}
 	
 	public String getID(){
@@ -43,5 +48,14 @@ public class Task {
 	
 	public String getStatus(){
 		return this.status.toString();
+	}
+	
+	public void addElement(String elementName, String elementComment){
+		Element newElement = new Element(elementName, elementComment);
+		taskElements.add(newElement);
+	}
+	
+	public Element getElement(int index){
+		return taskElements.get(index);
 	}
 }
