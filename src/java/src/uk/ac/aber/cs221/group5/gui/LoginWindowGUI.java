@@ -3,20 +3,31 @@ package uk.ac.aber.cs221.group5.gui;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import net.miginfocom.swing.MigLayout;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
+
+import uk.ac.aber.cs221.group5.logic.MemberList;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.Window;
 
 public class LoginWindowGUI {
 
-	private JFrame frame;
-	private JTextField emailField;
+	private JFrame frmLogIn;
+	private JTextField txtEmailField;
+	
+	private MemberList memberList = new MemberList();
 
 	/**
 	 * Creates a new thread for the login window and
@@ -27,7 +38,7 @@ public class LoginWindowGUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 					LoginWindowGUI window = new LoginWindowGUI();
-					window.frame.setVisible(true);
+					window.frmLogIn.setVisible(true);
 			}
 		});
 	}
@@ -36,6 +47,12 @@ public class LoginWindowGUI {
 	 * Create the application.
 	 */
 	public LoginWindowGUI() {
+		try {
+			memberList.loadMembers("memberSaveFile.txt");
+		} catch (NumberFormatException | IOException e) {
+			System.out.println("Failed to load member save file");
+			e.printStackTrace();
+		}
 		initialize();
 	}
 
@@ -43,50 +60,62 @@ public class LoginWindowGUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 300, 150);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		
-		JPanel emailFieldPanel = new JPanel();
-		emailFieldPanel.setBounds(0, 0, 284, 50);
-		frame.getContentPane().add(emailFieldPanel);
-		emailFieldPanel.setLayout(new MigLayout("", "[][][grow]", "[][][]"));
+		frmLogIn = new JFrame();
+		frmLogIn.setTitle("Log In");
+		frmLogIn.setResizable(false);
+		frmLogIn.setBounds(100, 100, 296, 233);
+		frmLogIn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		GridBagLayout gridBagLayout = new GridBagLayout();
+		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		frmLogIn.getContentPane().setLayout(gridBagLayout);
 		
 		JLabel lblEmail = new JLabel("Email:");
-		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		emailFieldPanel.add(lblEmail, "cell 0 1");
+		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
+		gbc_lblEmail.insets = new Insets(0, 0, 5, 5);
+		gbc_lblEmail.gridx = 1;
+		gbc_lblEmail.gridy = 1;
+		frmLogIn.getContentPane().add(lblEmail, gbc_lblEmail);
 		
-		emailField = new JTextField();
-		emailFieldPanel.add(emailField, "cell 2 1,growx");
-		emailField.setColumns(10);
-	
+		txtEmailField = new JTextField();
+		GridBagConstraints gbc_txtEmailField = new GridBagConstraints();
+		gbc_txtEmailField.gridwidth = 2;
+		gbc_txtEmailField.insets = new Insets(0, 0, 5, 5);
+		gbc_txtEmailField.anchor = GridBagConstraints.NORTH;
+		gbc_txtEmailField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtEmailField.gridx = 2;
+		gbc_txtEmailField.gridy = 1;
+		frmLogIn.getContentPane().add(txtEmailField, gbc_txtEmailField);
+		txtEmailField.setColumns(10);
 		
-		JPanel loginButtonsPanel = new JPanel();
-		loginButtonsPanel.setBounds(0, 44, 284, 33);
-		frame.getContentPane().add(loginButtonsPanel);
-		loginButtonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-		JButton btnLogin = new JButton("Login");
-		
-		
-		loginButtonsPanel.add(btnLogin);
-		
-		JPanel connButtonPanel = new JPanel();
-		connButtonPanel.setBounds(0, 77, 284, 33);
-		frame.getContentPane().add(connButtonPanel);
-		connButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-		JButton btnConnSet = new JButton("Connection Settings");
-		
-		btnConnSet.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		JButton btnLogin = new JButton("Log In");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0){
+				if(memberList.memberExists(txtEmailField.getText())){
+					MainWindow window = new MainWindow();
+					window.createWindow();
+				}
+				else{
+					JOptionPane.showMessageDialog(null, "Error: Login Failed - Check your email was entered correctly", "InfoBox: Login Error", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
-		connButtonPanel.add(btnConnSet);
+		GridBagConstraints gbc_btnLogin = new GridBagConstraints();
+		gbc_btnLogin.gridwidth = 2;
+		gbc_btnLogin.insets = new Insets(0, 0, 5, 5);
+		gbc_btnLogin.gridx = 2;
+		gbc_btnLogin.gridy = 3;
+		frmLogIn.getContentPane().add(btnLogin, gbc_btnLogin);
 		
-		//Set preferred size so btnLogin is same size as btnConnSet
-		btnLogin.setPreferredSize(btnConnSet.getPreferredSize());
+		JButton btnCancel = new JButton("Cancel");
+		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
+		gbc_btnCancel.gridwidth = 2;
+		gbc_btnCancel.insets = new Insets(0, 0, 0, 5);
+		gbc_btnCancel.gridx = 2;
+		gbc_btnCancel.gridy = 4;
+		frmLogIn.getContentPane().add(btnCancel, gbc_btnCancel);
 		
 		
 	}

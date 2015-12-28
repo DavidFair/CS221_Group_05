@@ -18,10 +18,10 @@ public class MainWindow extends WindowCommon {
 		super();
 	}
 	
-	public static void main(String[] args) throws Exception{
+/*	public static void main(String[] args) throws Exception{
 		MainWindow window = new MainWindow();
 		window.createWindow();
-	}
+	}*/
 	
 	@Override
 	public void createWindow() {

@@ -5,6 +5,10 @@
 
 package uk.ac.aber.cs221.group5.gui;
 
+import java.io.IOException;
+
+import uk.ac.aber.cs221.group5.logic.MemberList;
+
 /**
  * @author David
  * Provides a wrapper for common window functions
@@ -18,6 +22,13 @@ public class LoginWindow extends WindowCommon{
 	public LoginWindow() {
 		//Initiate common window functions
 		super();
+	}
+	
+	public static void main(String args[]) throws NumberFormatException, IOException{
+		LoginWindow window = new LoginWindow();
+		window.createWindow();
+
+		
 	}
 		
 	/**
