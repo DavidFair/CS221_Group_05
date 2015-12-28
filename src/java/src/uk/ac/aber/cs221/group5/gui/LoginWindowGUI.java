@@ -96,6 +96,7 @@ public class LoginWindowGUI {
 				if(memberList.memberExists(txtEmailField.getText())){
 					MainWindow window = new MainWindow();
 					window.createWindow();
+					frmLogIn.dispose();
 				}
 				else{
 					JOptionPane.showMessageDialog(null, "Error: Login Failed - Check your email was entered correctly", "InfoBox: Login Error", JOptionPane.ERROR_MESSAGE);
@@ -116,6 +117,11 @@ public class LoginWindowGUI {
 		gbc_btnCancel.gridx = 2;
 		gbc_btnCancel.gridy = 4;
 		frmLogIn.getContentPane().add(btnCancel, gbc_btnCancel);
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0){
+				System.exit(0);	//Terminates the program
+			}
+		});
 		
 		
 	}
