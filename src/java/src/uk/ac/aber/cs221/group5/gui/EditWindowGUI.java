@@ -32,20 +32,6 @@ public class EditWindowGUI {
 	private JTextField txtExpectedEndDate;
 	private JTable table;
 
-	/**
-	 * Launch the application.
-	 */
-/*	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {				try {
-					EditWindowGUI window = new EditWindowGUI();
-					window.frmEditTask.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
 
 	/**
 	 * Create the application.

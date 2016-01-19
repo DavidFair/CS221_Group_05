@@ -48,7 +48,7 @@ public class LoginWindowGUI {
 	 */
 	public LoginWindowGUI() {
 		try {
-			memberList.loadMembers("memberSaveFile.txt");
+			memberList.loadMembers("./src/java/memberSaveFile.txt");
 		} catch (NumberFormatException | IOException e) {
 			System.out.println("Failed to load member save file");
 			e.printStackTrace();

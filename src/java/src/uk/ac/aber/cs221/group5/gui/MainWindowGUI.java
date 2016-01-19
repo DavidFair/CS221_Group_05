@@ -72,7 +72,7 @@ public class MainWindowGUI {
 			public void run() {
 					MainWindowGUI window = new MainWindowGUI();
 					try {
-						window.populateTable("taskSaveFile.txt");
+						window.populateTable("./src/java/taskSaveFile.txt");
 					} catch (NumberFormatException | IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -261,6 +261,7 @@ public class MainWindowGUI {
 					editWindow.setFields(txtTaskName.getText(), TaskStatuses.valueOf(TaskStatuses.class, txtStatus.getText()), 
 							txtAssigned.getText(), txtStartDate.getText(), 
 							txtEndDate.getText());
+					
 				}
 				else{
 					JOptionPane.showMessageDialog(null, "Select a Task to Edit", "Selection Error", JOptionPane.ERROR_MESSAGE);
