@@ -135,10 +135,10 @@ then
 	exit 2
 fi
 
-echo "Connection established"
+echo -e "Connection established\n"
 
 do_query(){
-	echo $1
+	#echo $1
 	result=$(mysql -B -h $URL --user="$userName" -D $dbName --password="$password" <<< $1)
 	echo "$result"
 }
@@ -155,7 +155,7 @@ usersTableExists=FALSE
 tasksTableExists=FALSE
 
 while read -r table; do
-	echo "Current Line: $table"
+	#echo "Current Line: $table"
 	
 	#Checks if either tables exist in DB
 	if [ "$table" = "tbl_tasks" ]
@@ -166,7 +166,6 @@ while read -r table; do
 	
 	if [ "$table" = "tbl_users" ]
 	then
-	echo "found users table"
 		usersTableExists=TRUE
 	fi
 	
@@ -174,62 +173,94 @@ done <<< "$tables"
 
 
 
+
+
 #Inform and deal with this
-if [ "$usersTableExists" = TRUE ]
-then
-
-	if [ "$force" = TRUE ] #If force is on skip question
-	then
-		echo "User table found - overwriting due to force flag"
-		echo "Overwrite users - force"
-	else
-		#Prompt for conformation
-		read -p "User table found - do you want to clear this? (THIS WILL DESTROY ALL USERS DATA) Y/N" -n 1 -r
-	
-		if [ $REPLY = "Y" ] || [ $REPLY = "y" ]
-		then
-			echo -e "\nTODO:Overwrite users"
-		else 
-			echo -e "\nSkipping users table"
-		fi
-	fi
-	
-else
-
-	echo "TODO:Create users"
-	
-fi
-
-
-
+#First tasks table due to FK
 if [ "$tasksTableExists" = TRUE ]
 then
+	dropTasks=FALSE
 
 	if [ "$force" = TRUE ] #If force is on skip question
 	then
 		echo "Tasks table found - overwriting due to force flag"
-		echo "Overwrite tasks - force"
+		dropTasks=TRUE
 		
 	else
 		#Prompt for conformation
 		read -p "Tasks table found - do you want to clear this? (THIS WILL DESTROY ALL TASK DATA) Y/N" -n 1 -r
 		if [ $REPLY = "Y" ] || [ $REPLY = "y" ]
 		then
-			echo -e "\nTODO: Overwrite tasks"
+			dropTasks=TRUE
 		else 
 			echo -e "\nSkipping tasks table"
+			skipTasks=TRUE
 		fi
 	fi
-
-else 
-	echo "TODO: Create tasks"
+	
+	if [ "$dropTasks" = TRUE ]
+	then
+		string="DROP TABLE \`tbl_tasks\`;"
+		echo "Dropping Tasks Table"
+		do_query "$string"
+	fi
 	
 fi
 
 
+
+if [ "$usersTableExists" = TRUE ]
+then
+	dropUsers=FALSE
+
+	if [ "$force" = TRUE ] #If force is on skip question
+	then
+		echo "User table found - overwriting due to force flag"
+		dropUsers=TRUE
+	else
+		#Prompt for conformation
+		read -p "User table found - do you want to clear this? (THIS WILL DESTROY ALL USERS DATA) Y/N" -n 1 -r
 	
+		if [ $REPLY = "Y" ] || [ $REPLY = "y" ]
+		then
+			dropUsers=TRUE
+		else 
+			echo -e "\nSkipping users table"
+			skipUsers=TRUE
+		fi
+	fi
+	
+	
+	if [ "$dropUsers" = TRUE ]
+	then
+		string="DROP TABLE \`tbl_users\`;"
+		echo "Dropping Users Table"
+		do_query "$string"
+	fi
+
+fi
 
 
-	
-			
+
+
+#Finally create tables
+
+#Users table
+
+if [ "$skipUsers"  != TRUE ]
+then
+string="CREATE TABLE \`tbl_users\` ( \`Email\` VARCHAR(20) NOT NULL, \`FirstName\` VARCHAR(15) NOT NULL, \`LastName\` VARCHAR(15) NOT NULL, \`isManager\` INT NOT NULL, PRIMARY KEY (\`Email\`));"
+  echo "Creating Users Table"
+  do_query "$string"
+fi
+  
+#Tasks Table
+
+if [ "$skipTasks" != TRUE ]
+then
+string="CREATE TABLE \`tbl_tasks\` ( \`TaskID\` INT NOT NULL AUTO_INCREMENT, \`TaskName\` VARCHAR(45) NOT NULL, \`StartDate\` DATE NOT NULL, \`EndDate\` VARCHAR(45) NOT NULL, \`Status\` INT NOT NULL, \`TaskOwner\` VARCHAR(15) NULL, PRIMARY KEY (\`TaskID\`), INDEX \`TaskOwner_idx\` (\`TaskOwner\` ASC), CONSTRAINT \`TaskAssigned\` FOREIGN KEY (\`TaskOwner\`) REFERENCES \`tbl_users\` (\`Email\`) ON DELETE NO ACTION ON UPDATE NO ACTION);"
+	echo "Creating Tasks Table"
+	do_query "$string"
+fi
+
 		
