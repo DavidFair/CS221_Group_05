@@ -169,6 +169,11 @@ while read -r table; do
 		usersTableExists=TRUE
 	fi
 	
+	if [ "$table" = "tbl_elements" ]
+	then
+		elementsTableExists=TRUE
+	fi
+	
 done <<< "$tables"
 
 
@@ -177,6 +182,40 @@ done <<< "$tables"
 
 #Inform and deal with this
 #First tasks table due to FK
+
+if [ "$elementsTableExists" = TRUE ]
+then
+	dropElements=FALSE
+
+	if [ "$force" = TRUE ] #If force is on skip question
+	then
+		echo "Task Elements table found - overwriting due to force flag"
+		dropElements=TRUE
+		
+	else
+		#Prompt for conformation
+		read -p "Task Elements table found - do you want to clear this? (THIS WILL DESTROY ALL TASK DATA) Y/N" -n 1 -r
+		if [ $REPLY = "Y" ] || [ $REPLY = "y" ]
+		then
+			dropElements=TRUE
+		else 
+			echo -e "\nSkipping tasks table"
+			skipElements=TRUE
+		fi
+	fi
+	
+	if [ "$dropElements" = TRUE ]
+	then
+		string="DROP TABLE \`tbl_elements\`;"
+		echo -e "\nDropping Task Elements Table"
+		do_query "$string"
+	fi
+	
+fi
+
+
+
+
 if [ "$tasksTableExists" = TRUE ]
 then
 	dropTasks=FALSE
@@ -201,7 +240,7 @@ then
 	if [ "$dropTasks" = TRUE ]
 	then
 		string="DROP TABLE \`tbl_tasks\`;"
-		echo "Dropping Tasks Table"
+		echo -e "\nDropping Tasks Table"
 		do_query "$string"
 	fi
 	
@@ -234,7 +273,7 @@ then
 	if [ "$dropUsers" = TRUE ]
 	then
 		string="DROP TABLE \`tbl_users\`;"
-		echo "Dropping Users Table"
+		echo -e "\nDropping Users Table"
 		do_query "$string"
 	fi
 
@@ -263,4 +302,12 @@ string="CREATE TABLE \`tbl_tasks\` ( \`TaskID\` INT NOT NULL AUTO_INCREMENT, \`T
 	do_query "$string"
 fi
 
-		
+#TaskElements
+ 
+if [ "$skipElements" != TRUE ]
+then 
+ string="CREATE TABLE \`tbl_elements\` (\`Index\` INT NOT NULL AUTO_INCREMENT, \`ElementString\` VARCHAR(45) NOT NULL, \`TaskID\` INT NULL, PRIMARY KEY (\`Index\`),INDEX \`TaskReference_idx\` (\`TaskID\` ASC), CONSTRAINT \`TaskReference\` FOREIGN KEY (\`TaskID\`) REFERENCES \`tbl_tasks\` (\`TaskID\`) ON DELETE NO ACTION ON UPDATE NO ACTION);"
+	echo "Creating Task Elements Table"
+	do_query "$string"
+fi
+
