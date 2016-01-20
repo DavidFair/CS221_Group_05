@@ -265,7 +265,7 @@ public class MainWindowGUI {
 				}
 				else{
 					JOptionPane.showMessageDialog(null, "Select a Task to Edit", "Selection Error", JOptionPane.ERROR_MESSAGE);
-				}
+				}	
 			}
 		});
 		
