@@ -50,7 +50,6 @@ public class Database {
 	 * @param usersFilePath The location to save and load users to
 	 */
 	public Database(String usersFilePath){
-		//TODO implement DB constructor
 		//Leave blank so default port is used
 		portNo = "";
 		
@@ -147,13 +146,17 @@ public class Database {
 	
 	public Task[] getTasks(String username){
 		//TODO method getTasks logic
-
-		executeSqlStatement("//TODO QUERY WHICH GETS TASKS FROM DB WHERE USERNAME");
-
-		//TODO process data from getTasks SQL query
+		String templateQuery = "SELECT * FROM `tbl_tasks` WHERE TaskOwner='" + username + "';";
 		
-		return null;
+		ResultSet tasksSet = executeSqlStatement(templateQuery);
 
+		if (tasksSet != null){
+			Task[] tasksArray = resultSetToTaskArray(tasksSet);
+			return tasksArray;
+		} else {
+			throw new NullPointerException("Result set was null in getTasks");
+		}
+		
 	}
 	
 
@@ -220,6 +223,60 @@ public class Database {
 		//Pass resultSet straight through to caller
 		return executeSqlStatement(sqlStatementObject, query);
 		
+	}
+	
+	private Task[] resultSetToTaskArray(ResultSet toConvert){
+		try {
+			//Get last index for complete length
+			toConvert.last();
+			int numOfTasks = toConvert.getRow();
+		
+			Task[] taskArray = new Task[numOfTasks];
+		
+			toConvert.beforeFirst(); //Move back to beginning 
+			int index = 0;
+			
+			while (toConvert.next()){
+				String id = toConvert.getString("TaskID");
+				String taskName = toConvert.getString("TaskName");
+				String startDate = toConvert.getString("StartDate");
+				String endDate = toConvert.getString("EndDate");
+				String owner = toConvert.getString("TaskOwner");
+				int status = toConvert.getInt("Status");
+				
+				//Convert status to enum in Java
+				TaskStatuses enumStatus = null;
+				switch (status) {
+				case 0:
+					enumStatus = TaskStatuses.Abandoned;
+					break;
+					
+				case 1:
+					enumStatus = TaskStatuses.Allocated;
+					break;
+				case 2:
+					enumStatus = TaskStatuses.Completed;
+					break;
+				default:
+					//XXX Need to handle bad value for enum
+					break;
+				}
+				
+				//Create object and store
+				Task newTask = new Task(id, taskName, startDate, endDate, owner, enumStatus);
+				taskArray[index] = newTask;
+				index++;
+			} //End of while loop
+			return taskArray;
+			
+		} catch (SQLException e){
+			//XXX Error handling
+			System.err.println(e.getMessage());
+			return null;
+			
+		}
+		
+
 	}
 	
 	private MemberList resultSetToMemberList(ResultSet toConvert){

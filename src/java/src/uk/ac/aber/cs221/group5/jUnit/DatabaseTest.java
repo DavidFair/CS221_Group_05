@@ -76,6 +76,10 @@ public class DatabaseTest {
 		testClass.getMembers();
 	}
 	
+	@Test
+	public void getTasks(){
+		testClass.getTasks("example@example.com");
+	}
 
 	
 }
