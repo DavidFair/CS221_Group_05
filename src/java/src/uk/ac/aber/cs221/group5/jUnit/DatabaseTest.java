@@ -17,14 +17,15 @@ public class DatabaseTest {
 	 * !! ESP - PERSONAL DETAILS SUCH AS YOUR OWN USERNAME/PASSWORD !!
 	 */
 
+	//These are the shared group details
 	private static String dbURL = "db.dcs.aber.ac.uk";
-	private static String dbUsername = "";
-	private static String dbName = "";
+	private static String dbUsername = "csgpadm_5";
+	private static String dbName = "csgp_5_15_16";
 	
 	//This can be blank to force JDBC to use default port
 	private static String dbPort = "";
 	
-	private static String dbPassword = "";
+	private static String dbPassword = "906BnQjD";
 	
 	private Database testClass;
 	
@@ -49,7 +50,8 @@ public class DatabaseTest {
 	
 	@Before
 	public void createDbClass(){		
-		testClass = new Database();
+		testClass = new Database("");
+		testClass.connect(dbURL, dbPort, dbUsername, dbPassword, dbName);
 	}
 	
 	@Test
@@ -61,8 +63,18 @@ public class DatabaseTest {
 		
 	}
 	
+	@Test
+	public void testBlankConnect(){
+		boolean isConnected;
+		isConnected = testClass.connect();
+		
+		assertTrue("Blank connection failed", isConnected);
+	}
 	
-	
+	@Test
+	public void getUsers(){
+		testClass.getMembers();
+	}
 	
 
 	

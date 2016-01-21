@@ -43,7 +43,13 @@ public class Database {
 	
 	private DbStatus currentStatus;
 	
-	public Database(){
+	private String usersPath;
+	
+	/**
+	 * Creates a new database object and loads JDBC into memory
+	 * @param usersFilePath The location to save and load users to
+	 */
+	public Database(String usersFilePath){
 		//TODO implement DB constructor
 		//Leave blank so default port is used
 		portNo = "";
@@ -64,14 +70,25 @@ public class Database {
 			System.exit(1);
 		}
 		
+		usersPath = usersFilePath;
 		
 	}
 	
+	/**
+	 * Saves a list of all user names to a local file
+	 * @param filePath Path of file to be saved
+	 * @param allUsers A MemberList containing all users to be saved
+	 */
 	public void saveUserName(String filePath, MemberList allUsers){
 		//TODO implement save user name in DB
 	}
 	
-	
+	public boolean connect(){
+		//XXX Remove when config reading is implemented
+		//Currently hardcoded until a method which reads from config calls connect
+		return connect("db.dcs.aber.ac.uk", "", "csgpadm_5", "906BnQjD", "csgp_5_15_16");
+	}
+
 	public boolean connect(String hostName, String portNo, String dbUser, String dbPass, String dbName){
 		dbUsername = dbUser;
 		dbPassword = dbPass;
@@ -140,13 +157,18 @@ public class Database {
 	}
 	
 
-	public Members[] getMembers(){
-		//TODO method getMembers logic
+	public MemberList getMembers(){
 		
-		executeSqlStatement("//TODO SQL QUERY WHICH GETS ALL MEMBERS");
+		ResultSet members;
+		members = executeSqlStatement("Select * FROM tbl_users");
 		
-		//TODO process data from getMembers SQL query
-		return null;
+		if (members != null){
+			MemberList createdList = resultSetToMemberList(members);
+			saveUserName(usersPath, createdList);
+			return createdList;
+		} else {
+			throw new NullPointerException("No resultset returned in getMembers");
+		}
 	}
 	
 	/**
@@ -156,7 +178,7 @@ public class Database {
 	 * @param query The SQL query to execute
 	 * @return ResultSet containing result. If it fails null.
 	 */
-	private ResultSet executeSQLStatement(Statement statementToExec, String query){
+	private ResultSet executeSqlStatement(Statement statementToExec, String query){
 		
 		ResultSet sqlOutput;
 		
@@ -189,16 +211,37 @@ public class Database {
 		try{
 			sqlStatementObject = connection.createStatement();
 		} catch (SQLException e) {
-			System.err.println("Could not create SQL statement in ");
+			System.err.println("Could not create SQL statement");
 			//To use when debugging
 			//Thread.dumpStack();
 			
 		}
 		
 		//Pass resultSet straight through to caller
-		return executeSQLStatement(sqlStatementObject, query);
+		return executeSqlStatement(sqlStatementObject, query);
 		
 	}
 	
-	
+	private MemberList resultSetToMemberList(ResultSet toConvert){
+		MemberList newList = new MemberList();
+		
+		if (toConvert == null){
+			throw new NullPointerException("Passed null result set in resultSetToMemberList");
+		}
+		
+		try {
+			while (toConvert.next()){
+				String name = toConvert.getString("FirstName") + " " + toConvert.getString("LastName");
+				String email = toConvert.getString("Email");
+				Members newMember = new Members(name, email);
+				newList.addMember(newMember);
+			}
+			
+			
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+		}
+		
+		return newList;
+	}
 }
