@@ -7,6 +7,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import com.mysql.fabric.xmlrpc.base.Data;
+import com.mysql.fabric.xmlrpc.base.Member;
 
 
 /**
@@ -32,18 +37,19 @@ public class Database {
 	private String URL;
 	private String portNo;
 	private String dbName;
-	
 	private String dbUsername;
 	private String dbPassword;
-	
 	private Connection connection;
 	
-	private DelayTimer connTimer;
-	private DelayTimer latencyTimer;
+	private Timer connTimer;
+	private Timer latencyTimer;
 	
 	private DbStatus currentStatus;
 	
 	private String usersPath;
+	
+	//How often the DB attempts to update program information
+	private static final int REFRESH_SEC_DELAY = 60;
 	
 	/**
 	 * Creates a new database object and loads JDBC into memory
@@ -52,7 +58,7 @@ public class Database {
 	public Database(String usersFilePath){
 		//Leave blank so default port is used
 		portNo = "";
-		
+		connTimer = null;
 		currentStatus = DbStatus.DISCONNECTED;
 		
 		/* First load JDBC connector */
@@ -82,12 +88,18 @@ public class Database {
 		//TODO implement save user name in DB
 	}
 	
+	
+	
+	
 	public boolean connect(){
 		//XXX Remove when config reading is implemented
 		//Currently hardcoded until a method which reads from config calls connect
 		return connect("db.dcs.aber.ac.uk", "", "csgpadm_5", "906BnQjD", "csgp_5_15_16");
 	}
 
+	
+	
+	
 	public boolean connect(String hostName, String portNo, String dbUser, String dbPass, String dbName){
 		dbUsername = dbUser;
 		dbPassword = dbPass;
@@ -116,7 +128,16 @@ public class Database {
 		return true;
 	}
 	
+	
+	
 	public void closeDbConn(){
+		
+		if (connTimer != null){
+			connTimer.cancel();
+			connTimer = null;
+		}
+
+		
 		if (connection != null){
 			try {
 				connection.close();
@@ -125,7 +146,8 @@ public class Database {
 				//For debugging
 				//e.printStackTrace();
 				
-				//XXX should we call terminate if a JDBC connection cannot be closed
+				//Exit as we cannot close JDBC which means something is wrong
+				System.exit(100);
 				
 			}
 		}
@@ -136,28 +158,48 @@ public class Database {
 		//Set status
 		currentStatus = DbStatus.DISCONNECTED;
 		
-		//TODO reset any held timers
 	}
+	
 	
 	
 	public DbStatus getConnStatus(){
 		return currentStatus;
 	}
 	
+	
+	
+	
 	public Task[] getTasks(String username){
-		//TODO method getTasks logic
-		String templateQuery = "SELECT * FROM `tbl_tasks` WHERE TaskOwner='" + username + "';";
-		
-		ResultSet tasksSet = executeSqlStatement(templateQuery);
-
-		if (tasksSet != null){
-			Task[] tasksArray = resultSetToTaskArray(tasksSet);
-			return tasksArray;
+		String templateQuery;
+		if (username != ""){
+			templateQuery = "SELECT * FROM `tbl_tasks` WHERE TaskOwner='" + username + "';";
 		} else {
-			throw new NullPointerException("Result set was null in getTasks");
+			templateQuery = "SELECT * FROM `tbl_tasks`";
 		}
 		
+		
+		Thread sqlExec = new Thread(new Runnable() {
+			
+			public void run() {
+				ResultSet tasksSet = executeSqlStatement(templateQuery);
+				
+				if (tasksSet != null){
+					Task[] tasksArray = resultSetToTaskArray(tasksSet);
+					
+					//TODO need to pass forward instead of back
+				} else {
+					throw new NullPointerException("Result set was null in getTasks");
+				}
+			}
+		});
+
+		//Create timer to refresh on success
+		createRefreshTimer(REFRESH_SEC_DELAY, this );
+
+		return null;
+		
 	}
+
 	
 
 	public MemberList getMembers(){
@@ -168,6 +210,7 @@ public class Database {
 		if (members != null){
 			MemberList createdList = resultSetToMemberList(members);
 			saveUserName(usersPath, createdList);
+			createRefreshTimer(REFRESH_SEC_DELAY, this);
 			return createdList;
 		} else {
 			throw new NullPointerException("No resultset returned in getMembers");
@@ -301,4 +344,33 @@ public class Database {
 		
 		return newList;
 	}
+	
+	private void createRefreshTimer(int seconds, Database database) {
+
+		class RefreshTask extends TimerTask {
+
+			@Override
+			public void run() {
+				// This will be run when timer fires
+				// First check if we are connected and not busy
+
+				if (database.getConnStatus() != DbStatus.CONNECTED) {
+					// Give up
+					return;
+				}
+				MemberList newUserList = database.getMembers();
+				// Get all tasks
+				Task[] newTasksList = database.getTasks("");
+				System.out.println("Fired refresh");
+				// TODO Call external method to update held state
+			}
+
+		}
+		
+		connTimer = new Timer();
+		connTimer.schedule(new RefreshTask(), seconds * 1000);
+
+	}
+		
+	
 }
