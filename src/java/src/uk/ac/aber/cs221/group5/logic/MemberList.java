@@ -8,7 +8,7 @@ import java.io.Reader;
 import java.util.ArrayList;
 
 public class MemberList {
-	//TODO implement memberList
+	//TODO implement updating memberList
 	private ArrayList<Members> memberList = new ArrayList<Members>();
 	
 	public MemberList(){
@@ -46,8 +46,5 @@ public class MemberList {
 		}
 		return false;
 	}
-	
-	public int getLength(){
-		return this.memberList.size();
-	}
 }
+

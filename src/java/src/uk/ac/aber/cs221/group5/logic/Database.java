@@ -3,10 +3,15 @@ package uk.ac.aber.cs221.group5.logic;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import uk.ac.aber.cs221.group5.gui.LoginWindow;
+import uk.ac.aber.cs221.group5.gui.MainWindow;
+
 
 
 /**
@@ -32,27 +37,30 @@ public class Database {
 	private String URL;
 	private String portNo;
 	private String dbName;
-	
 	private String dbUsername;
 	private String dbPassword;
-	
 	private Connection connection;
 	
-	private DelayTimer connTimer;
-	private DelayTimer latencyTimer;
+	private Timer connTimer;
+	private Timer latencyTimer;
 	
 	private DbStatus currentStatus;
 	
 	private String usersPath;
+	private MainWindow hostWindow;
+	
+	//How often the DB attempts to update program information
+	private static final int REFRESH_SEC_DELAY = 60;
+	private static final int SYNC_ALRT_DELAY = 1;
 	
 	/**
 	 * Creates a new database object and loads JDBC into memory
 	 * @param usersFilePath The location to save and load users to
 	 */
-	public Database(String usersFilePath){
+	public Database(String usersFilePath, MainWindow parentWindow){
 		//Leave blank so default port is used
 		portNo = "";
-		
+		connTimer = null;
 		currentStatus = DbStatus.DISCONNECTED;
 		
 		/* First load JDBC connector */
@@ -69,7 +77,8 @@ public class Database {
 			System.exit(1);
 		}
 		
-		usersPath = usersFilePath;
+		this.usersPath = usersFilePath;
+		this.hostWindow = parentWindow;
 		
 	}
 	
@@ -82,12 +91,18 @@ public class Database {
 		//TODO implement save user name in DB
 	}
 	
+	
+	
+	
 	public boolean connect(){
 		//XXX Remove when config reading is implemented
 		//Currently hardcoded until a method which reads from config calls connect
 		return connect("db.dcs.aber.ac.uk", "", "csgpadm_5", "906BnQjD", "csgp_5_15_16");
 	}
 
+	
+	
+	
 	public boolean connect(String hostName, String portNo, String dbUser, String dbPass, String dbName){
 		dbUsername = dbUser;
 		dbPassword = dbPass;
@@ -116,7 +131,16 @@ public class Database {
 		return true;
 	}
 	
+	
+	
 	public void closeDbConn(){
+		
+		if (connTimer != null){
+			connTimer.cancel();
+			connTimer = null;
+		}
+
+		
 		if (connection != null){
 			try {
 				connection.close();
@@ -125,7 +149,8 @@ public class Database {
 				//For debugging
 				//e.printStackTrace();
 				
-				//XXX should we call terminate if a JDBC connection cannot be closed
+				//Exit as we cannot close JDBC which means something is wrong
+				System.exit(100);
 				
 			}
 		}
@@ -136,42 +161,99 @@ public class Database {
 		//Set status
 		currentStatus = DbStatus.DISCONNECTED;
 		
-		//TODO reset any held timers
 	}
+	
 	
 	
 	public DbStatus getConnStatus(){
 		return currentStatus;
 	}
 	
-	public Task[] getTasks(String username){
-		//TODO method getTasks logic
-		String templateQuery = "SELECT * FROM `tbl_tasks` WHERE TaskOwner='" + username + "';";
+	
+	
+	
+	public void getTasks(String username){
 		
-		ResultSet tasksSet = executeSqlStatement(templateQuery);
-
-		if (tasksSet != null){
-			Task[] tasksArray = resultSetToTaskArray(tasksSet);
-			return tasksArray;
+		String templateQuery;
+		
+		if (username != ""){
+			templateQuery = "SELECT * FROM `tbl_tasks` WHERE TaskOwner='" + username + "';";
 		} else {
-			throw new NullPointerException("Result set was null in getTasks");
+			templateQuery = "SELECT * FROM `tbl_tasks`";
 		}
+		
+		/*
+		 * Creates a new thread to avoid the
+		 * main execution thread getting stuck
+		 */
+		Thread sqlExec = new Thread(new Runnable() {
+			
+			public void run() {
+				ResultSet tasksSet = executeSqlStatement(templateQuery);
+				
+				if (tasksSet != null){
+					TaskList tasksList = resultSetToTaskList(tasksSet);
+					
+					//TODO need to pass forward instead of back
+					//caller.
+					hostWindow.updateTasks(tasksList);
+					//Create timer to refresh on success
+					try {
+						tasksSet.close();
+					} catch (SQLException e) {
+						System.err.println(e.getMessage());
+					}
+				} else {
+					throw new NullPointerException("Result set was null in getTasks");
+				}
+			}
+		});
+		
+		//Set status to sync
+		currentStatus = DbStatus.SYNCHRONIZING;
+		sqlExec.start();
+		
+
+		createRefreshTimer(REFRESH_SEC_DELAY, this );
 		
 	}
+
 	
 
-	public MemberList getMembers(){
+	public void getMembers(){
 		
-		ResultSet members;
-		members = executeSqlStatement("Select * FROM tbl_users");
+
 		
-		if (members != null){
-			MemberList createdList = resultSetToMemberList(members);
-			saveUserName(usersPath, createdList);
-			return createdList;
-		} else {
-			throw new NullPointerException("No resultset returned in getMembers");
-		}
+		/*
+		 * Creates a new thread to avoid the
+		 * main execution thread getting stuck
+		 */
+		Thread sqlExec = new Thread(new Runnable() {
+			
+			public void run() {
+				ResultSet members = executeSqlStatement("Select * FROM tbl_users");
+				
+				if (members != null){
+					MemberList newMemberList = resultSetToMemberList(members);
+					
+					hostWindow.updateUsers(newMemberList);
+					
+					//Create timer to refresh on success
+					
+					try {
+						members.close();
+					} catch (SQLException e) {
+						System.err.println(e.getMessage());
+					}
+				} else {
+					throw new NullPointerException("Result set was null in getMembers");
+				}
+			}
+		});
+		sqlExec.start();
+
+		createRefreshTimer(REFRESH_SEC_DELAY, this);
+
 	}
 	
 	/**
@@ -225,17 +307,10 @@ public class Database {
 		
 	}
 	
-	private Task[] resultSetToTaskArray(ResultSet toConvert){
+	private TaskList resultSetToTaskList(ResultSet toConvert){
+		TaskList result = new TaskList();
+		
 		try {
-			//Get last index for complete length
-			toConvert.last();
-			int numOfTasks = toConvert.getRow();
-		
-			Task[] taskArray = new Task[numOfTasks];
-		
-			toConvert.beforeFirst(); //Move back to beginning 
-			int index = 0;
-			
 			while (toConvert.next()){
 				String id = toConvert.getString("TaskID");
 				String taskName = toConvert.getString("TaskName");
@@ -264,10 +339,10 @@ public class Database {
 				
 				//Create object and store
 				Task newTask = new Task(id, taskName, startDate, endDate, owner, enumStatus);
-				taskArray[index] = newTask;
-				index++;
+				result.addTask(newTask);
+				
 			} //End of while loop
-			return taskArray;
+			return result;
 			
 		} catch (SQLException e){
 			//XXX Error handling
@@ -301,4 +376,62 @@ public class Database {
 		
 		return newList;
 	}
+	
+	private void createRefreshTimer(int seconds, Database database) {
+
+		class RefreshTask extends TimerTask {
+
+			@Override
+			public void run() {
+				// This will be run when timer fires
+				// First check if we are connected and not busy
+
+				if (database.getConnStatus() != DbStatus.CONNECTED) {
+					// Give up
+					return;
+				}
+				database.getMembers();
+				// Get all tasks
+				database.getTasks("");
+				System.out.println("Fired refresh");
+				// TODO Call external method to update held state
+			}
+
+		}
+		
+		if (connTimer != null){
+			connTimer.cancel();
+		}
+		
+		connTimer = new Timer();
+		connTimer.schedule(new RefreshTask(), seconds * 1000);
+
+	}
+		
+	private void setupLatencyTimer(){
+		latencyTimer = new Timer();
+		
+		class LatencyAlert extends TimerTask{
+
+			@Override
+			public void run() {
+				//hostWindow.whatever(currentStatus)
+				
+				if (currentStatus == DbStatus.SYNCHRONIZING){
+					//Still syncing create timer to check again
+					setupLatencyTimer();
+				} else if (currentStatus == DbStatus.CONNECTED){
+					//Finished cancel any and all timers
+					latencyTimer.cancel();
+				} else if (currentStatus == DbStatus.DISCONNECTED){
+					//TODO disconnected logic
+				}
+				
+			}
+			
+		}
+		
+		
+	}
+	
 }

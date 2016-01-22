@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.util.Scanner;
 
+import uk.ac.aber.cs221.group5.gui.MainWindow;
 import uk.ac.aber.cs221.group5.logic.Database;
 
 public class DatabaseTest {
@@ -21,11 +22,11 @@ public class DatabaseTest {
 	private static String dbURL = "db.dcs.aber.ac.uk";
 	private static String dbUsername = "csgpadm_5";
 	private static String dbName = "csgp_5_15_16";
-	
 	//This can be blank to force JDBC to use default port
 	private static String dbPort = "";
-	
 	private static String dbPassword = "906BnQjD";
+	
+	private MainWindow parentWindow;
 	
 	private Database testClass;
 	
@@ -49,8 +50,9 @@ public class DatabaseTest {
 	
 	
 	@Before
-	public void createDbClass(){		
-		testClass = new Database("");
+	public void createSupportingClasses(){		
+		parentWindow = new MainWindow();
+		testClass = new Database("", parentWindow);
 		testClass.connect(dbURL, dbPort, dbUsername, dbPassword, dbName);
 	}
 	

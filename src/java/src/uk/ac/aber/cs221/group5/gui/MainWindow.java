@@ -13,6 +13,11 @@ import uk.ac.aber.cs221.group5.logic.Task;
 import uk.ac.aber.cs221.group5.logic.TaskList;
 import uk.ac.aber.cs221.group5.logic.TaskStatuses;
 
+import uk.ac.aber.cs221.group5.logic.DbStatus;
+import uk.ac.aber.cs221.group5.logic.MemberList;
+import uk.ac.aber.cs221.group5.logic.TaskList;
+
+
 /**
  * @author David (daf5)
  * Provides a wrapper for common window functions
@@ -23,6 +28,7 @@ public class MainWindow extends WindowCommon {
 	
 	private MainWindowGUI childWindow;
 	
+
 	private TaskList taskList = new TaskList();
 	private MemberList memberList = new MemberList();
 	
@@ -41,6 +47,29 @@ public class MainWindow extends WindowCommon {
 		
 	}
 	
+
+	
+	public void updateUsers(MemberList newUserList){
+		//TODO implement updateUsers
+		
+		//Here for initial development 
+		System.out.println("Update users called");
+	}
+	
+	public void updateTasks(TaskList newTaskList){
+		//TODO implement updateTasks
+		
+		//Here for initial development
+		System.out.println("Update tasks called");
+	}
+	
+	public void setConnStatus(DbStatus connStatus){
+		//TODO implement setConnStatus
+	}
+	
+	//GUI Methods Below
+	
+
 	public MainWindow(){
 		//Setup common window features
 		super();
