@@ -3,6 +3,9 @@
  */
 package uk.ac.aber.cs221.group5.gui;
 
+import uk.ac.aber.cs221.group5.logic.MemberList;
+import uk.ac.aber.cs221.group5.logic.TaskList;
+
 /**
  * @author David (daf5)
  * Provides a wrapper for common window functions
@@ -12,6 +15,23 @@ package uk.ac.aber.cs221.group5.gui;
 public class MainWindow extends WindowCommon {
 	
 	private MainWindowGUI childWindow;
+	
+	
+	public void updateUsers(MemberList newUserList){
+		//TODO implement updateUsers
+		
+		//Here for initial development 
+		System.out.println("Update users called");
+	}
+	
+	public void updateTasks(TaskList newTaskList){
+		//TODO implement updateTasks
+		
+		//Here for initial development
+		System.out.println("Update tasks called");
+	}
+	
+	//GUI Methods Below
 	
 	public MainWindow(){
 		//Setup common window features

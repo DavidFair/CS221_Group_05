@@ -9,6 +9,9 @@ import java.sql.Statement;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import uk.ac.aber.cs221.group5.gui.LoginWindow;
+import uk.ac.aber.cs221.group5.gui.MainWindow;
+
 
 
 /**
@@ -44,6 +47,7 @@ public class Database {
 	private DbStatus currentStatus;
 	
 	private String usersPath;
+	private MainWindow hostWindow;
 	
 	//How often the DB attempts to update program information
 	private static final int REFRESH_SEC_DELAY = 60;
@@ -52,7 +56,7 @@ public class Database {
 	 * Creates a new database object and loads JDBC into memory
 	 * @param usersFilePath The location to save and load users to
 	 */
-	public Database(String usersFilePath){
+	public Database(String usersFilePath, MainWindow parentWindow){
 		//Leave blank so default port is used
 		portNo = "";
 		connTimer = null;
@@ -72,7 +76,8 @@ public class Database {
 			System.exit(1);
 		}
 		
-		usersPath = usersFilePath;
+		this.usersPath = usersFilePath;
+		this.hostWindow = parentWindow;
 		
 	}
 	
@@ -166,52 +171,84 @@ public class Database {
 	
 	
 	
-	public Task[] getTasks(String username){
+	public void getTasks(String username){
+		
 		String templateQuery;
+		
 		if (username != ""){
 			templateQuery = "SELECT * FROM `tbl_tasks` WHERE TaskOwner='" + username + "';";
 		} else {
 			templateQuery = "SELECT * FROM `tbl_tasks`";
 		}
 		
-		
+		/*
+		 * Creates a new thread to avoid the
+		 * main execution thread getting stuck
+		 */
 		Thread sqlExec = new Thread(new Runnable() {
 			
 			public void run() {
 				ResultSet tasksSet = executeSqlStatement(templateQuery);
 				
 				if (tasksSet != null){
-					Task[] tasksArray = resultSetToTaskArray(tasksSet);
+					TaskList tasksList = resultSetToTaskList(tasksSet);
 					
 					//TODO need to pass forward instead of back
+					//caller.
+					hostWindow.updateTasks(tasksList);
+					//Create timer to refresh on success
+					try {
+						tasksSet.close();
+					} catch (SQLException e) {
+						System.err.println(e.getMessage());
+					}
 				} else {
 					throw new NullPointerException("Result set was null in getTasks");
 				}
 			}
 		});
+		sqlExec.start();
 
-		//Create timer to refresh on success
 		createRefreshTimer(REFRESH_SEC_DELAY, this );
-
-		return null;
 		
 	}
 
 	
 
-	public MemberList getMembers(){
+	public void getMembers(){
 		
-		ResultSet members;
-		members = executeSqlStatement("Select * FROM tbl_users");
+
 		
-		if (members != null){
-			MemberList createdList = resultSetToMemberList(members);
-			saveUserName(usersPath, createdList);
-			createRefreshTimer(REFRESH_SEC_DELAY, this);
-			return createdList;
-		} else {
-			throw new NullPointerException("No resultset returned in getMembers");
-		}
+		/*
+		 * Creates a new thread to avoid the
+		 * main execution thread getting stuck
+		 */
+		Thread sqlExec = new Thread(new Runnable() {
+			
+			public void run() {
+				ResultSet members = executeSqlStatement("Select * FROM tbl_users");
+				
+				if (members != null){
+					MemberList newMemberList = resultSetToMemberList(members);
+					
+					hostWindow.updateUsers(newMemberList);
+					
+					//Create timer to refresh on success
+					
+					try {
+						members.close();
+					} catch (SQLException e) {
+						System.err.println(e.getMessage());
+					}
+				} else {
+					throw new NullPointerException("Result set was null in getMembers");
+				}
+			}
+		});
+		sqlExec.start();
+
+		createRefreshTimer(REFRESH_SEC_DELAY, this);
+
 	}
 	
 	/**
@@ -227,7 +264,6 @@ public class Database {
 		
 		try{
 			sqlOutput = statementToExec.executeQuery(query);
-			statementToExec.close();
 		} catch (SQLException e){
 			System.err.println("Sql query failed. Query used was:");
 			System.err.println(query);
@@ -266,17 +302,10 @@ public class Database {
 		
 	}
 	
-	private Task[] resultSetToTaskArray(ResultSet toConvert){
+	private TaskList resultSetToTaskList(ResultSet toConvert){
+		TaskList result = new TaskList();
+		
 		try {
-			//Get last index for complete length
-			toConvert.last();
-			int numOfTasks = toConvert.getRow();
-		
-			Task[] taskArray = new Task[numOfTasks];
-		
-			toConvert.beforeFirst(); //Move back to beginning 
-			int index = 0;
-			
 			while (toConvert.next()){
 				String id = toConvert.getString("TaskID");
 				String taskName = toConvert.getString("TaskName");
@@ -305,10 +334,10 @@ public class Database {
 				
 				//Create object and store
 				Task newTask = new Task(id, taskName, startDate, endDate, owner, enumStatus);
-				taskArray[index] = newTask;
-				index++;
+				result.addTask(newTask);
+				
 			} //End of while loop
-			return taskArray;
+			return result;
 			
 		} catch (SQLException e){
 			//XXX Error handling
@@ -356,13 +385,17 @@ public class Database {
 					// Give up
 					return;
 				}
-				MemberList newUserList = database.getMembers();
+				database.getMembers();
 				// Get all tasks
-				Task[] newTasksList = database.getTasks("");
+				database.getTasks("");
 				System.out.println("Fired refresh");
 				// TODO Call external method to update held state
 			}
 
+		}
+		
+		if (connTimer != null){
+			connTimer.cancel();
 		}
 		
 		connTimer = new Timer();
