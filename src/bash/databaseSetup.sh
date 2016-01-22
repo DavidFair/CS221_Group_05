@@ -306,7 +306,7 @@ fi
  
 if [ "$skipElements" != TRUE ]
 then 
- string="CREATE TABLE \`tbl_elements\` (\`Index\` INT NOT NULL AUTO_INCREMENT, \`ElementString\` VARCHAR(45) NOT NULL, \`TaskID\` INT NULL, PRIMARY KEY (\`Index\`),INDEX \`TaskReference_idx\` (\`TaskID\` ASC), CONSTRAINT \`TaskReference\` FOREIGN KEY (\`TaskID\`) REFERENCES \`tbl_tasks\` (\`TaskID\`) ON DELETE NO ACTION ON UPDATE NO ACTION);"
+ string="CREATE TABLE \`tbl_elements\` (\`Index\` INT NOT NULL AUTO_INCREMENT,\`TaskDesc\` VARCHAR(45) NOT NULL,\`TaskComments\` VARCHAR(45) NULL,\`TaskID\` INT NULL,PRIMARY KEY (\`Index\`),INDEX \`TaskRef_idx\` (\`TaskID\` ASC),CONSTRAINT \`TaskRef\`FOREIGN KEY (\`TaskID\`)REFERENCES \`tbl_tasks\` (\`TaskID\`)ON DELETE NO ACTION ON UPDATE NO ACTION);"
 	echo "Creating Task Elements Table"
 	do_query "$string"
 fi
