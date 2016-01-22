@@ -3,6 +3,7 @@
  */
 package uk.ac.aber.cs221.group5.gui;
 
+import uk.ac.aber.cs221.group5.logic.DbStatus;
 import uk.ac.aber.cs221.group5.logic.MemberList;
 import uk.ac.aber.cs221.group5.logic.TaskList;
 
@@ -29,6 +30,10 @@ public class MainWindow extends WindowCommon {
 		
 		//Here for initial development
 		System.out.println("Update tasks called");
+	}
+	
+	public void setConnStatus(DbStatus connStatus){
+		//TODO implement setConnStatus
 	}
 	
 	//GUI Methods Below

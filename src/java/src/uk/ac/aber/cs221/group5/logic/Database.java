@@ -51,6 +51,7 @@ public class Database {
 	
 	//How often the DB attempts to update program information
 	private static final int REFRESH_SEC_DELAY = 60;
+	private static final int SYNC_ALRT_DELAY = 1;
 	
 	/**
 	 * Creates a new database object and loads JDBC into memory
@@ -207,7 +208,11 @@ public class Database {
 				}
 			}
 		});
+		
+		//Set status to sync
+		currentStatus = DbStatus.SYNCHRONIZING;
 		sqlExec.start();
+		
 
 		createRefreshTimer(REFRESH_SEC_DELAY, this );
 		
@@ -403,5 +408,30 @@ public class Database {
 
 	}
 		
+	private void setupLatencyTimer(){
+		latencyTimer = new Timer();
+		
+		class LatencyAlert extends TimerTask{
+
+			@Override
+			public void run() {
+				//hostWindow.whatever(currentStatus)
+				
+				if (currentStatus == DbStatus.SYNCHRONIZING){
+					//Still syncing create timer to check again
+					setupLatencyTimer();
+				} else if (currentStatus == DbStatus.CONNECTED){
+					//Finished cancel any and all timers
+					latencyTimer.cancel();
+				} else if (currentStatus == DbStatus.DISCONNECTED){
+					//TODO disconnected logic
+				}
+				
+			}
+			
+		}
+		
+		
+	}
 	
 }
