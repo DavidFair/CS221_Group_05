@@ -26,7 +26,7 @@ public class LoginWindowGUI {
 
 	private JFrame frmLogIn;
 	private JTextField txtEmailField;
-	private MemberList memberList;
+	private MemberList memberList = new MemberList();
 	
 	/**
 	 * Create the application.
@@ -49,11 +49,10 @@ public class LoginWindowGUI {
 		});
 	}
 	
-	public MemberList passMemberList(MemberList recievingList){
+	public void passMemberList(MemberList recievingList){
 		for(int memberCount = 0; memberCount < recievingList.getLength(); memberCount++){
 			memberList.addMember(recievingList.getMember(memberCount));
 		}
-		return memberList;
 	}
 
 	/**
