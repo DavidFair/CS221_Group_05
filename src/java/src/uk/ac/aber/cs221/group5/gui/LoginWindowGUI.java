@@ -26,7 +26,7 @@ public class LoginWindowGUI {
 
 	private JFrame frmLogIn;
 	private JTextField txtEmailField;
-	private MemberList memberList = new MemberList();
+	private MemberList memberList;
 	
 	/**
 	 * Create the application.
@@ -49,17 +49,17 @@ public class LoginWindowGUI {
 		});
 	}
 	
-	public void passMemberList(MemberList recievingList){
+	public MemberList passMemberList(MemberList recievingList){
 		for(int memberCount = 0; memberCount < recievingList.getLength(); memberCount++){
 			memberList.addMember(recievingList.getMember(memberCount));
 		}
+		return memberList;
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
-		
+	private void initialize() {		
 		frmLogIn = new JFrame();
 		frmLogIn.setTitle("Log In");
 		frmLogIn.setResizable(false);

@@ -5,7 +5,11 @@
 
 package uk.ac.aber.cs221.group5.gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
+
+import javax.swing.JOptionPane;
 
 import uk.ac.aber.cs221.group5.logic.MemberList;
 
@@ -29,7 +33,6 @@ public class LoginWindow extends WindowCommon{
 		for(int memberCount = 0; memberCount < recievingList.getLength(); memberCount++){
 			memberList.addMember(recievingList.getMember(memberCount));
 		}
-//		memberList = recievingList;
 	}
 		
 	/**
@@ -44,9 +47,8 @@ public class LoginWindow extends WindowCommon{
 		//this class's methods for it to work on
 		setupWindowLaunch(this);
 		childWindow.passMemberList(memberList);
-		
-	}
-	
+
+	}	
 	@Override
 	public void callWindowLaunch() throws Exception {
 		childWindow.launchWindow();
@@ -86,6 +88,8 @@ public class LoginWindow extends WindowCommon{
 		// TODO Auto-generated method stub
 		//This should open ConnSettings Window 
 	}
+	
+	
 
 
 	

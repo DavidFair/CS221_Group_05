@@ -76,6 +76,7 @@ public class MainWindow extends WindowCommon {
 	}
 	
 	public void createWindow(){
+		
 		//Get a new child window for super class
 		childWindow = new MainWindowGUI();
 		

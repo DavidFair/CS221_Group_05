@@ -46,5 +46,9 @@ public class MemberList {
 		}
 		return false;
 	}
+
+	public int getLength() {
+		return this.memberList.size();
+	}
 }
 
