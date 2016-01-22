@@ -18,17 +18,18 @@ import uk.ac.aber.cs221.group5.logic.MemberList;
 public class LoginWindow extends WindowCommon{
 
 	private LoginWindowGUI childWindow;
+	private MemberList memberList = new MemberList();
 	
 	public LoginWindow() {
 		//Initiate common window functions
 		super();
 	}
 	
-	public static void main(String args[]) throws NumberFormatException, IOException{
-		LoginWindow window = new LoginWindow();
-		window.createWindow();
-
-		
+	public void passMemberList(MemberList recievingList){
+		for(int memberCount = 0; memberCount < recievingList.getLength(); memberCount++){
+			memberList.addMember(recievingList.getMember(memberCount));
+		}
+//		memberList = recievingList;
 	}
 		
 	/**
@@ -42,6 +43,7 @@ public class LoginWindow extends WindowCommon{
 		//Ask parent to setup window for us and pass
 		//this class's methods for it to work on
 		setupWindowLaunch(this);
+		childWindow.passMemberList(memberList);
 		
 	}
 	

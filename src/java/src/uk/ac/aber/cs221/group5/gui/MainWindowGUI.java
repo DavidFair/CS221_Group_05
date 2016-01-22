@@ -57,8 +57,6 @@ public class MainWindowGUI {
 	private JTextField txtStartDate;
 	private JTextField txtEndDate;
 	private JTable table;
-	
-	private ArrayList<Task> taskList = new ArrayList<Task>();
 
 	/**
 	 * Launch the application.
@@ -71,13 +69,7 @@ public class MainWindowGUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 					MainWindowGUI window = new MainWindowGUI();
-					try {
-						window.populateTable("taskSaveFile.txt");
-					} catch (NumberFormatException | IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					window.frame.setVisible(true);
+					//window.frame.setVisible(true);
 			}
 		});
 	}
@@ -92,6 +84,10 @@ public class MainWindowGUI {
 	 */
 	public MainWindowGUI() {
 		initialize();
+	}
+	
+	public void makeFrameVisible(){
+		frame.setVisible(true);
 	}
 
 	/**
@@ -365,38 +361,15 @@ public class MainWindowGUI {
 		});
 	}
 	
-	public void populateTable(String filename) throws NumberFormatException, IOException{
-		FileReader fileReader = new FileReader(filename);
-		BufferedReader read = new BufferedReader(fileReader);
-		int numOfTasks = 0;
-		String taskID           = null;
-		String taskName         = null;
-		TaskStatuses taskStatus = null;
-		String assigned         = null;
-		String startDate        = null;
-		String endDate          = null;
-		
-		//First read in the number of tasks
-		numOfTasks = Integer.parseInt(read.readLine());
-		//Load data and create Task objects
-		for(int loopCount = 0; loopCount < numOfTasks; loopCount++){
-			taskID     = read.readLine();
-			//Skip over task elements for the demo
-			read.readLine();
-			taskName   = read.readLine();
-			taskStatus = TaskStatuses.valueOf(TaskStatuses.class, read.readLine());
-			assigned   = read.readLine();
-			startDate  = read.readLine();
-			endDate    = read.readLine();
-			Task task = new Task(taskID, taskName, startDate, endDate, assigned, taskStatus);
-			taskList.add(task);
-		}
-		for(int loopCount = 0; loopCount < taskList.size(); loopCount++){
-			Task task = taskList.get(loopCount);
+	public void populateTable(TaskList taskList) throws NumberFormatException, IOException{
+		for(int loopCount = 0; loopCount < taskList.getListSize(); loopCount++){
+			Task task = taskList.getTask(loopCount);
 			DefaultTableModel model = (DefaultTableModel)(table.getModel());
 			model.addRow(new Object[]{task.getID(), task.getName(), task.getStatus(), task.getMembers(),
 					task.getStart(), task.getEnd()});
 		}
+		//Updates to show the contents of the table
+		frame.repaint();
 	}
 	
 	

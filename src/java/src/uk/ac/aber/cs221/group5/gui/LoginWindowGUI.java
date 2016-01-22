@@ -26,9 +26,15 @@ public class LoginWindowGUI {
 
 	private JFrame frmLogIn;
 	private JTextField txtEmailField;
-	
 	private MemberList memberList = new MemberList();
-
+	
+	/**
+	 * Create the application.
+	 */
+	public LoginWindowGUI() {
+		initialize();
+	}
+	
 	/**
 	 * Creates a new thread for the login window and
 	 * sets that to visible through the event queue
@@ -42,29 +48,23 @@ public class LoginWindowGUI {
 			}
 		});
 	}
-
-	/**
-	 * Create the application.
-	 */
-	public LoginWindowGUI() {
-		try {
-			memberList.loadMembers("memberSaveFile.txt");
-		} catch (NumberFormatException | IOException e) {
-			System.out.println("Failed to load member save file");
-			e.printStackTrace();
+	
+	public void passMemberList(MemberList recievingList){
+		for(int memberCount = 0; memberCount < recievingList.getLength(); memberCount++){
+			memberList.addMember(recievingList.getMember(memberCount));
 		}
-		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		frmLogIn = new JFrame();
 		frmLogIn.setTitle("Log In");
 		frmLogIn.setResizable(false);
 		frmLogIn.setBounds(100, 100, 296, 233);
-		frmLogIn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmLogIn.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
@@ -94,8 +94,6 @@ public class LoginWindowGUI {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0){
 				if(memberList.memberExists(txtEmailField.getText())){
-					MainWindow window = new MainWindow();
-					window.createWindow();
 					frmLogIn.dispose();
 				}
 				else{
@@ -125,4 +123,5 @@ public class LoginWindowGUI {
 		
 		
 	}
+	
 }
