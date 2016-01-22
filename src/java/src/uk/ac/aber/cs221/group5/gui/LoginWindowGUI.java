@@ -26,13 +26,14 @@ public class LoginWindowGUI {
 
 	private JFrame frmLogIn;
 	private JTextField txtEmailField;
-	private MemberList memberList = new MemberList();
+	private MemberList memberList;
 	
 	/**
 	 * Create the application.
 	 */
 	public LoginWindowGUI() {
 		initialize();
+		memberList = new MemberList();
 	}
 	
 	/**
@@ -92,7 +93,8 @@ public class LoginWindowGUI {
 		JButton btnLogin = new JButton("Log In");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0){
-				if(memberList.memberExists(txtEmailField.getText())){
+				String enteredEmail = txtEmailField.getText();
+				if(memberList.memberExists(enteredEmail)){
 					frmLogIn.dispose();
 				}
 				else{
