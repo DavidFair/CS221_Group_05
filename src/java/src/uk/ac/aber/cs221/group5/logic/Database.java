@@ -227,6 +227,7 @@ public class Database {
 		
 		try{
 			sqlOutput = statementToExec.executeQuery(query);
+			statementToExec.close();
 		} catch (SQLException e){
 			System.err.println("Sql query failed. Query used was:");
 			System.err.println(query);
