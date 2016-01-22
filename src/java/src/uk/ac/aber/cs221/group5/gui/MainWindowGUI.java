@@ -72,7 +72,7 @@ public class MainWindowGUI {
 			public void run() {
 					MainWindowGUI window = new MainWindowGUI();
 					try {
-						window.populateTable("./src/java/taskSaveFile.txt");
+						window.populateTable("taskSaveFile.txt");
 					} catch (NumberFormatException | IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
