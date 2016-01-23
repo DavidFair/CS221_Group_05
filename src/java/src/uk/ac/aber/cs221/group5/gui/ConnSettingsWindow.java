@@ -32,6 +32,10 @@ public class ConnSettingsWindow {
 		FileWriter fileWriter = new FileWriter(filename);
 		BufferedWriter writer = new BufferedWriter(fileWriter);
 		
+		if(portNo.equals("Leave Blank for Default") || portNo.equals("")){
+			portNo = "Default";	//TODO Give default value
+		}
+		
 		writer.write(dbName);
 		writer.newLine();
 		writer.write(username);
