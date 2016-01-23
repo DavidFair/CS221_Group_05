@@ -245,7 +245,12 @@ public class MainWindowGUI {
 			public void actionPerformed(ActionEvent arg0) {
 				int selectedRow = table.getSelectedRow();
 				if(selectedRow > -1){
-					
+					try {
+						ViewElementsWindow viewElements = new ViewElementsWindow(table.getSelectedRow());
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 				else{
 					JOptionPane.showMessageDialog(null, "Select a Task to View Task Elements", "Selection Error", JOptionPane.ERROR_MESSAGE);
