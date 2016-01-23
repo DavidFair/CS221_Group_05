@@ -178,6 +178,9 @@ public class ConnSettingsWindowGUI {
 		btnConnect.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				//A new ConnSettingsWindow Object that is used just for saving the connection settings. This is
+				// created without spawning a new GUI becuase of the doesGUIExit method within the ConnSettingsWindow
+				// Class.
 				ConnSettingsWindow saveWindow = new ConnSettingsWindow();
 				String dbName = txtDbName.getText();
 				String username = txtUsername.getText();

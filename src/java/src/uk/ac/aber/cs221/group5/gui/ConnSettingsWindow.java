@@ -11,16 +11,19 @@ public class ConnSettingsWindow {
 	
 	private ConnSettingsWindowGUI childWindow;
 	
-	public static void main (String args[]){
-		ConnSettingsWindow window = new ConnSettingsWindow();
-		if(!window.doesGUIExist()){
-			window.createWindow();
+	public ConnSettingsWindow(){
+		//Only spawns a new GUI if one does not already exist.
+		if(!this.doesGUIExist()){
+			this.createWindow();
 		}
-		
 	}
 	
 	public void createWindow(){
 		childWindow = new ConnSettingsWindowGUI();
+		ConnSettingsWindow window = new ConnSettingsWindow();
+		if(!window.doesGUIExist()){
+			window.createWindow();
+		}
 	}
 	
 	public void saveConnSettings(String filename, String dbName, String username, String password, 
@@ -44,6 +47,8 @@ public class ConnSettingsWindow {
 		
 	}
 	
+	//Checks all frames to see if the GUI for this Class exits. Enables us to create a new ConnSettingsWindow Object
+	//	without creating a new GUI window.
 	private boolean doesGUIExist(){
 		for(Frame frame : Frame.getFrames()){
 			if(frame.getTitle().equals("Connection Settings")){
