@@ -42,12 +42,22 @@ public class LoginWindowGUI {
 	 * @throws Exception
 	 */
 	public void launchWindow() throws Exception {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-					LoginWindowGUI window = new LoginWindowGUI();
-					window.frmLogIn.setVisible(true);
+		
+		//Create inner class which implements runnable
+		class SetVisible implements Runnable {
+			private LoginWindowGUI toSet;
+			
+			//Pass in previously created login window
+			public SetVisible(LoginWindowGUI callingWindow) {
+				this.toSet = callingWindow;
 			}
-		});
+			
+			//Run window
+			public void run() {
+				toSet.frmLogIn.setVisible(true);
+			}
+		}
+		EventQueue.invokeLater(new SetVisible(this));
 	}
 	
 	public void passMemberList(MemberList recievingList){

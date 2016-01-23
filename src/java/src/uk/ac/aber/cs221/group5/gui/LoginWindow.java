@@ -45,8 +45,10 @@ public class LoginWindow extends WindowCommon{
 		childWindow = new LoginWindowGUI();
 		//Ask parent to setup window for us and pass
 		//this class's methods for it to work on
-		setupWindowLaunch(this);
 		childWindow.passMemberList(memberList);
+		
+		setupWindowLaunch(this);
+
 
 	}	
 	@Override

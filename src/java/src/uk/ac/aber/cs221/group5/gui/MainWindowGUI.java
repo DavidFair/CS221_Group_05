@@ -66,12 +66,23 @@ public class MainWindowGUI {
 	 * @since 1.0 Initial Development
 	 */
 	public void launchWindow() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-					MainWindowGUI window = new MainWindowGUI();
-					//window.frame.setVisible(true);
+		
+		//Create inner class which implements runnable
+		class SetVisible implements Runnable {
+			private MainWindowGUI toSet;
+			
+			//Pass in previously created login window
+			public SetVisible(MainWindowGUI callingWindow) {
+				this.toSet = callingWindow;
 			}
-		});
+			
+			//Set window visible
+			public void run() {
+				toSet.frame.setVisible(true);
+			}
+		}
+		EventQueue.invokeLater(new SetVisible(this));
+		
 	}
 
 	/**
