@@ -219,28 +219,4 @@ public class ConnSettingsWindowGUI {
 		lblLastSynced.setText("Last Synced " + integerMinutes.toString() + "Minutes Ago");
 	}
 	
-	/**
-	 * Passes back the values from the text fields so they can be saved
-	 * @return The values entered to the text fields as an array of Strings
-	 */
-/*	public String[] returnTextFieldValues(){
-		String[] fieldValues = {"", "", "", "", ""};
-		
-		fieldValues[0] = txtDbName.getText();
-		fieldValues[1] = txtUsername.getText();
-		fieldValues[2] = txtPassword.getText();
-		fieldValues[3] = txtDbURL.getText();
-		
-		if(txtPortNo.getText().equals("Leave Blank for Default") || txtPortNo.getText().equals("")){
-			fieldValues[4] = "default";
-		}
-		else{
-			fieldValues[4] = txtPortNo.getText();
-		}
-		
-		return fieldValues;
-		
-	}*/
-	
-
 }

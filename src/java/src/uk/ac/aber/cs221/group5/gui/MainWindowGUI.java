@@ -42,6 +42,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 
+import uk.ac.aber.cs221.group5.logic.DbStatus;
 import uk.ac.aber.cs221.group5.logic.Task;
 import uk.ac.aber.cs221.group5.logic.TaskStatuses;
 import uk.ac.aber.cs221.group5.logic.TaskList;
@@ -57,6 +58,7 @@ public class MainWindowGUI {
 	private JTextField txtStartDate;
 	private JTextField txtEndDate;
 	private JTable table;
+	private JLabel lblConnStatus;
 
 	/**
 	 * Launch the application.
@@ -297,12 +299,12 @@ public class MainWindowGUI {
 		gbc_lblNewLabel.gridy = 0;
 		connSettingsPanel.add(lblNewLabel, gbc_lblNewLabel);
 		
-		JLabel lblConnstatus = new JLabel("connStatus");
-		GridBagConstraints gbc_lblConnstatus = new GridBagConstraints();
-		gbc_lblConnstatus.insets = new Insets(0, 0, 5, 5);
-		gbc_lblConnstatus.gridx = 2;
-		gbc_lblConnstatus.gridy = 0;
-		connSettingsPanel.add(lblConnstatus, gbc_lblConnstatus);
+		JLabel lblConnStatus = new JLabel("connStatus");
+		GridBagConstraints gbc_lblConnStatus = new GridBagConstraints();
+		gbc_lblConnStatus.insets = new Insets(0, 0, 5, 5);
+		gbc_lblConnStatus.gridx = 2;
+		gbc_lblConnStatus.gridy = 0;
+		connSettingsPanel.add(lblConnStatus, gbc_lblConnStatus);
 		
 		JButton btnConnectionSettings = new JButton("Connection Settings");
 		btnConnectionSettings.addActionListener(new ActionListener() {
@@ -400,6 +402,10 @@ public class MainWindowGUI {
 			columnModel.getColumn(column).setPreferredWidth(minWidth);
 		}
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+	}
+	
+	public void setConnStatusLabel(DbStatus status){
+		lblConnStatus.setText(status.toString());
 	}
 
 }

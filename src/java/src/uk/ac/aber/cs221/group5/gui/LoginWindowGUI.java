@@ -23,6 +23,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Window;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class LoginWindowGUI {
 
@@ -79,9 +81,9 @@ public class LoginWindowGUI {
 		frmLogIn.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		frmLogIn.getContentPane().setLayout(gridBagLayout);
 		
 		JLabel lblEmail = new JLabel("Email:");
@@ -120,18 +122,31 @@ public class LoginWindowGUI {
 			}
 		});
 		GridBagConstraints gbc_btnLogin = new GridBagConstraints();
-		gbc_btnLogin.gridwidth = 2;
+		gbc_btnLogin.gridwidth = 5;
 		gbc_btnLogin.insets = new Insets(0, 0, 5, 5);
-		gbc_btnLogin.gridx = 2;
+		gbc_btnLogin.gridx = 0;
 		gbc_btnLogin.gridy = 3;
 		frmLogIn.getContentPane().add(btnLogin, gbc_btnLogin);
 		
+		JButton btnConnectionSettins = new JButton("Connection Settings");
+		btnConnectionSettins.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				ConnSettingsWindow connSettings = new ConnSettingsWindow();
+			}
+		});
+		GridBagConstraints gbc_btnConnectionSettins = new GridBagConstraints();
+		gbc_btnConnectionSettins.gridwidth = 5;
+		gbc_btnConnectionSettins.insets = new Insets(0, 0, 5, 5);
+		gbc_btnConnectionSettins.gridx = 0;
+		gbc_btnConnectionSettins.gridy = 4;
+		frmLogIn.getContentPane().add(btnConnectionSettins, gbc_btnConnectionSettins);
+		
 		JButton btnCancel = new JButton("Cancel");
 		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
-		gbc_btnCancel.gridwidth = 2;
-		gbc_btnCancel.insets = new Insets(0, 0, 0, 5);
-		gbc_btnCancel.gridx = 2;
-		gbc_btnCancel.gridy = 4;
+		gbc_btnCancel.gridwidth = 5;
+		gbc_btnCancel.gridx = 0;
+		gbc_btnCancel.gridy = 5;
 		frmLogIn.getContentPane().add(btnCancel, gbc_btnCancel);
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0){
