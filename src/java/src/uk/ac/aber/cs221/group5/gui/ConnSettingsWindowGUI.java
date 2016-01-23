@@ -12,14 +12,18 @@ import javax.swing.JButton;
 import java.awt.Insets;
 import javax.swing.JTextField;
 
+import uk.ac.aber.cs221.group5.logic.DbStatus;
+
 public class ConnSettingsWindowGUI {
 
-	private JFrame frmConnectionSettings;
+	private JFrame     frmConnectionSettings;
 	private JTextField txtDbURL;
 	private JTextField txtPortNo;
 	private JTextField txtDbName;
 	private JTextField txtUsername;
 	private JTextField txtPassword;
+	private JLabel     lblConnStatus;
+	private JLabel     lblLastSynced;
 
 	/**
 	 * Launch the application.
@@ -182,5 +186,15 @@ public class ConnSettingsWindowGUI {
 		gbc_btnConnect.gridy = 12;
 		frmConnectionSettings.getContentPane().add(btnConnect, gbc_btnConnect);
 	}
+	
+	public void setConnStatus(DbStatus status){
+		lblConnStatus.setText(status.toString());
+	}
+	
+	public void setLastSyncedLabel(int minutes){
+		Integer integerMinutes = (Integer)(minutes);
+		lblLastSynced.setText(integerMinutes.toString());
+	}
+	
 
 }
