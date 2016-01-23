@@ -174,12 +174,13 @@ public class Database {
 	
 	public void getTasks(String username){
 		
-		String templateQuery;
+		String taskQuery;
+		String elementQuery;
 		
 		if (username != ""){
-			templateQuery = "SELECT * FROM `tbl_tasks` WHERE TaskOwner='" + username + "';";
+			taskQuery = "SELECT * FROM `tbl_tasks` WHERE TaskOwner='" + username + "';";
 		} else {
-			templateQuery = "SELECT * FROM `tbl_tasks`";
+			taskQuery = "SELECT * FROM `tbl_tasks`";
 		}
 		
 		/*
@@ -189,7 +190,7 @@ public class Database {
 		Thread sqlExec = new Thread(new Runnable() {
 			
 			public void run() {
-				ResultSet tasksSet = executeSqlStatement(templateQuery);
+				ResultSet tasksSet = executeSqlStatement(taskQuery);
 				
 				if (tasksSet != null){
 					TaskList tasksList = resultSetToTaskList(tasksSet);
@@ -375,6 +376,62 @@ public class Database {
 		}
 		
 		return newList;
+	}
+	
+	private void updateTaskElements(TaskList allTasks){
+		int numOfTasks = allTasks.getListSize();
+		for (int i = 0; i < numOfTasks; i++) {
+			
+			Task currentTask = allTasks.getTask(i);
+			
+			//Clear to avoid duplicates
+			currentTask.clearAllElements();
+			
+			String sqlQuery = "SELECT * FROM tbl_elements WHERE TaskID = ";
+			sqlQuery = sqlQuery + currentTask.getID();
+
+			//This class runs in seperate threads pulling all task elements
+			class elementSync implements Runnable {
+				private String query;
+				private Task toUpdate;
+		
+				public elementSync(String query, Task currentTask) {
+					this.query = query;
+					this.toUpdate = currentTask;
+				}
+				
+				public void run(){
+					//Open connection and pull elements related to current task
+					ResultSet elements = executeSqlStatement(query);
+					
+					if (elements != null){
+						
+						try {
+							while (elements.next()){
+								//Iterate over all comments
+								int index = elements.getInt("Index");
+								String elementDesc = elements.getString("TaskDesc");
+								String elementComments = elements.getString("TaskComments");
+	
+								toUpdate.addElement(elementDesc, elementComments);
+							}
+							
+							elements.close();
+						} catch (SQLException e) {
+							System.err.println(e.getMessage());
+						}
+					} else {
+						throw new NullPointerException("Result set was null in getMembers");
+					}
+					
+					
+				}
+				
+			}
+			Thread execSql = new Thread(new elementSync(sqlQuery, currentTask));
+			execSql.start();
+		}
+		
 	}
 	
 	private void createRefreshTimer(int seconds, Database database) {

@@ -1,16 +1,16 @@
 package uk.ac.aber.cs221.group5.logic;
 
 public class Element {
-	String elementName;
+	String elementDesc;
 	String comment;
 	
-	public Element(String name, String comment){
-		this.elementName = name;
+	public Element(String description, String comment){
+		this.elementDesc = description;
 		this.comment = comment;	//If the element has no comment, this is an empty String
 	}
 	
 	public String getName(){
-		return this.elementName;
+		return this.elementDesc;
 	}
 	
 	public String getComment(){
