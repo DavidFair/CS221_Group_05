@@ -307,6 +307,11 @@ public class MainWindowGUI {
 		connSettingsPanel.add(lblConnstatus, gbc_lblConnstatus);
 		
 		JButton btnConnectionSettings = new JButton("Connection Settings");
+		btnConnectionSettings.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ConnSettingsWindow connSettings = new ConnSettingsWindow();
+			}
+		});
 		GridBagConstraints gbc_btnConnectionSettings = new GridBagConstraints();
 		gbc_btnConnectionSettings.insets = new Insets(0, 0, 0, 5);
 		gbc_btnConnectionSettings.gridx = 2;
