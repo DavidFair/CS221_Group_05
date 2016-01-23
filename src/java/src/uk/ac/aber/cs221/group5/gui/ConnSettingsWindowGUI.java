@@ -13,6 +13,9 @@ import java.awt.Insets;
 import javax.swing.JTextField;
 
 import uk.ac.aber.cs221.group5.logic.DbStatus;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 public class ConnSettingsWindowGUI {
 
@@ -25,27 +28,13 @@ public class ConnSettingsWindowGUI {
 	private JLabel     lblConnStatus;
 	private JLabel     lblLastSynced;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ConnSettingsWindowGUI window = new ConnSettingsWindowGUI();
-					window.frmConnectionSettings.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
 	 */
 	public ConnSettingsWindowGUI() {
 		initialize();
+		frmConnectionSettings.setVisible(true);
 	}
 
 	/**
@@ -171,6 +160,12 @@ public class ConnSettingsWindowGUI {
 		txtPortNo.setColumns(10);
 		
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				frmConnectionSettings.dispose();	//Just close the window without saving any settings
+			}
+		});
 		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
 		gbc_btnCancel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnCancel.anchor = GridBagConstraints.SOUTH;
@@ -180,6 +175,23 @@ public class ConnSettingsWindowGUI {
 		frmConnectionSettings.getContentPane().add(btnCancel, gbc_btnCancel);
 		
 		JButton btnConnect = new JButton("Connect");
+		btnConnect.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				ConnSettingsWindow saveWindow = new ConnSettingsWindow();
+				String dbName = txtDbName.getText();
+				String username = txtUsername.getText();
+				String password = txtPassword.getText();
+				String dbURL = txtDbURL.getText();
+				String portNo = txtPortNo.getText();
+				try {
+					saveWindow.saveConnSettings("connSaveFile.txt", dbName, username, password, dbURL, portNo);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		GridBagConstraints gbc_btnConnect = new GridBagConstraints();
 		gbc_btnConnect.insets = new Insets(0, 0, 0, 5);
 		gbc_btnConnect.gridx = 5;
@@ -195,6 +207,29 @@ public class ConnSettingsWindowGUI {
 		Integer integerMinutes = (Integer)(minutes);
 		lblLastSynced.setText("Last Synced " + integerMinutes.toString() + "Minutes Ago");
 	}
+	
+	/**
+	 * Passes back the values from the text fields so they can be saved
+	 * @return The values entered to the text fields as an array of Strings
+	 */
+/*	public String[] returnTextFieldValues(){
+		String[] fieldValues = {"", "", "", "", ""};
+		
+		fieldValues[0] = txtDbName.getText();
+		fieldValues[1] = txtUsername.getText();
+		fieldValues[2] = txtPassword.getText();
+		fieldValues[3] = txtDbURL.getText();
+		
+		if(txtPortNo.getText().equals("Leave Blank for Default") || txtPortNo.getText().equals("")){
+			fieldValues[4] = "default";
+		}
+		else{
+			fieldValues[4] = txtPortNo.getText();
+		}
+		
+		return fieldValues;
+		
+	}*/
 	
 
 }
