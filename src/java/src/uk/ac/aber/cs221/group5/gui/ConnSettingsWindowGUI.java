@@ -16,6 +16,8 @@ import uk.ac.aber.cs221.group5.logic.DbStatus;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class ConnSettingsWindowGUI {
 
@@ -149,6 +151,12 @@ public class ConnSettingsWindowGUI {
 		frmConnectionSettings.getContentPane().add(lblPortNo, gbc_lblPortNo);
 		
 		txtPortNo = new JTextField();
+		txtPortNo.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				txtPortNo.setText("");
+			}
+		});
 		txtPortNo.setText("Leave Blank for Default");
 		GridBagConstraints gbc_txtPortNo = new GridBagConstraints();
 		gbc_txtPortNo.gridwidth = 2;

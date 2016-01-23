@@ -43,7 +43,7 @@ public class MainWindow extends WindowCommon {
 		LoginWindow loginWindow = new LoginWindow();
 		loginWindow.passMemberList(memberList);
 		loginWindow.createWindow();
-		mainWindow.childWindow.makeFrameVisible();
+
 		
 	}
 	

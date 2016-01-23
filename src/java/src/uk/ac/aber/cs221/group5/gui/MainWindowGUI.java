@@ -50,7 +50,7 @@ import java.awt.event.ActionEvent;
 
 public class MainWindowGUI {
 
-	private JFrame frame;
+	private JFrame frmMainWindow;
 	private JTextField txtTaskName;
 	private JTextField txtStatus;
 	private JTextField txtAssigned;
@@ -78,7 +78,7 @@ public class MainWindowGUI {
 			
 			//Set window visible
 			public void run() {
-				toSet.frame.setVisible(true);
+				toSet.frmMainWindow.setVisible(false);
 			}
 		}
 		EventQueue.invokeLater(new SetVisible(this));
@@ -96,10 +96,7 @@ public class MainWindowGUI {
 	public MainWindowGUI() {
 		initialize();
 	}
-	
-	public void makeFrameVisible(){
-		frame.setVisible(true);
-	}
+
 
 	/**
 	 * Initialize the contents of the frame. Draws the components of the 'Main' Window.
@@ -109,16 +106,17 @@ public class MainWindowGUI {
 	 * @since 1.0 Initial Development
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setResizable(false);
-		frame.setBounds(100, 100, 926, 686);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmMainWindow = new JFrame();
+		frmMainWindow.setTitle("Main Window");
+		frmMainWindow.setResizable(false);
+		frmMainWindow.setBounds(100, 100, 926, 686);
+		frmMainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		frame.getContentPane().setLayout(gridBagLayout);
+		frmMainWindow.getContentPane().setLayout(gridBagLayout);
 		
 		JPanel quickViewPanel = new JPanel();
 		quickViewPanel.setBorder(new TitledBorder(null, "Quick View", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -127,7 +125,7 @@ public class MainWindowGUI {
 		gbc_quickViewPanel.fill = GridBagConstraints.BOTH;
 		gbc_quickViewPanel.gridx = 0;
 		gbc_quickViewPanel.gridy = 0;
-		frame.getContentPane().add(quickViewPanel, gbc_quickViewPanel);
+		frmMainWindow.getContentPane().add(quickViewPanel, gbc_quickViewPanel);
 		GridBagLayout gbl_quickViewPanel = new GridBagLayout();
 		gbl_quickViewPanel.columnWidths = new int[]{0, 0, 0, 0};
 		gbl_quickViewPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -284,7 +282,7 @@ public class MainWindowGUI {
 		gbc_connSettingsPanel.anchor = GridBagConstraints.NORTH;
 		gbc_connSettingsPanel.gridx = 1;
 		gbc_connSettingsPanel.gridy = 0;
-		frame.getContentPane().add(connSettingsPanel, gbc_connSettingsPanel);
+		frmMainWindow.getContentPane().add(connSettingsPanel, gbc_connSettingsPanel);
 		GridBagLayout gbl_connSettingsPanel = new GridBagLayout();
 		gbl_connSettingsPanel.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
 		gbl_connSettingsPanel.rowHeights = new int[]{0, 0, 0};
@@ -326,7 +324,7 @@ public class MainWindowGUI {
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 1;
-		frame.getContentPane().add(panel, gbc_panel);
+		frmMainWindow.getContentPane().add(panel, gbc_panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{0, 0};
 		gbl_panel.rowHeights = new int[]{0, 0};
@@ -385,7 +383,8 @@ public class MainWindowGUI {
 					task.getStart(), task.getEnd()});
 		}
 		//Updates to show the contents of the table
-		frame.repaint();
+		frmMainWindow.repaint();
+		frmMainWindow.setVisible(false);
 	}
 	
 	

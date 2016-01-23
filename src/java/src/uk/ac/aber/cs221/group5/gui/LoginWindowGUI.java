@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Frame;
+
 import javax.swing.JTextField;
 
 import uk.ac.aber.cs221.group5.logic.MemberList;
@@ -105,6 +107,11 @@ public class LoginWindowGUI {
 			public void actionPerformed(ActionEvent arg0){
 				String enteredEmail = txtEmailField.getText();
 				if(memberList.memberExists(enteredEmail)){
+					for(Frame frame : JFrame.getFrames()){
+						if(frame.getTitle().equals("Main Window")){
+							frame.setVisible(true);
+						}
+					}
 					frmLogIn.dispose();
 				}
 				else{
