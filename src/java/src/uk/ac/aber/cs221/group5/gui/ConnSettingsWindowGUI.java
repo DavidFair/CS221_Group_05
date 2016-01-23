@@ -193,7 +193,7 @@ public class ConnSettingsWindowGUI {
 	
 	public void setLastSyncedLabel(int minutes){
 		Integer integerMinutes = (Integer)(minutes);
-		lblLastSynced.setText(integerMinutes.toString());
+		lblLastSynced.setText("Last Synced " + integerMinutes.toString() + "Minutes Ago");
 	}
 	
 
