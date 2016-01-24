@@ -23,7 +23,8 @@ $debug = false;
 ** Global Constants
 */
 define("APP_NAME",  "TaskerMAN");
-define("APP_VER",   "Alpha 1.0");
+define("APP_VER",   "Beta Version 1");
+define("APP_DESC",  APP_NAME . " Task Managing Software");
 define("GROUP",     "Group 5");
 define("COPYRIGHT", "Aberystwyth University");
 
@@ -41,17 +42,6 @@ ini_set("log_errors", 1);
 
 // Disable errors caused by Aberystwyth University servers
 error_reporting(E_ALL ^ E_NOTICE);
-
-/*
-** Database Array
-*/
-$db_config = array
-(
-    "hostname"  =>  "db.dcs.aber.ac.uk",
-    "dbname"    =>  "csgp_5_15_16",
-    "username"  =>  "csgpadm_5",
-    "password"  =>  "906BnQjD",
-);
 
 /*
 ** Path Array

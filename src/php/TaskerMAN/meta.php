@@ -1,12 +1,7 @@
-<?php
-//======================================================================
-// Metadata
-//======================================================================
-?>
 <!-- Metadata -->
 <meta charset = "utf-8" />
-<meta name = "author" content = "Group 5 - Aberystwyth University" />
-<meta name = "description" content = "TaskerMan Task Managing Software" />
+<meta name = "author" content = "<?php echo GROUP . ' ' . COPYRIGHT; ?>" />
+<meta name = "description" content ="<?php echo APP_DESC; ?>" />
 <!-- Includes -->
-<link href = "css/style.css" rel = "stylesheet" />
+<link href="css/style.css" rel="stylesheet" />
 <!-- Scripts -->
