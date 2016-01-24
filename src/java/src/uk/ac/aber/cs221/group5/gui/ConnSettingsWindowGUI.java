@@ -46,7 +46,7 @@ public class ConnSettingsWindowGUI {
 		frmConnectionSettings = new JFrame();
 		frmConnectionSettings.setTitle("Connection Settings");
 		frmConnectionSettings.setBounds(100, 100, 450, 460);
-		frmConnectionSettings.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmConnectionSettings.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
