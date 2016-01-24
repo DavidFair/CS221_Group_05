@@ -21,5 +21,9 @@ public class TaskList {
 	public int getListSize(){
 		return this.list.size();
 	}
+	
+	public void changeTask(int taskPos, Task newTask){
+		this.list.set(taskPos, newTask);
+	}
 }
 

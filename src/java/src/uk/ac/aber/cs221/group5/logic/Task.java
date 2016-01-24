@@ -51,7 +51,7 @@ public class Task {
 	}
 	
 	public void setStatus(String newStatus){
-		this.status.valueOf(newStatus);
+		this.status = this.status.valueOf(newStatus);
 	}
 	
 	public void addElement(String elementName, String elementComment){

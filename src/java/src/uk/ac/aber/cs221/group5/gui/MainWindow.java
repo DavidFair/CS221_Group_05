@@ -5,8 +5,10 @@ package uk.ac.aber.cs221.group5.gui;
 
 import java.awt.Frame;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -154,7 +156,7 @@ public class MainWindow extends WindowCommon {
 		BufferedReader read = new BufferedReader(fileReader);
 		int numOfTasks = 0;
 		String taskID           = null;
-		ArrayList<String[]> elements = new ArrayList<String[]>();
+		String elements         = null;
 		String taskName         = null;
 		TaskStatuses taskStatus = null;
 		String assigned         = null;
@@ -166,17 +168,36 @@ public class MainWindow extends WindowCommon {
 		//Load data and create Task objects
 		for(int loopCount = 0; loopCount < numOfTasks; loopCount++){
 			taskID     = read.readLine();
-			//Skip over elements in this method - they are loaded when the user wants to view them
-			read.readLine();
+			elements   = read.readLine();
 			taskName   = read.readLine();
 			taskStatus = TaskStatuses.valueOf(TaskStatuses.class, read.readLine());
 			assigned   = read.readLine();
 			startDate  = read.readLine();
 			endDate    = read.readLine();
-			Task task = new Task(taskID, taskName, startDate, endDate, assigned, taskStatus);
+			Task task  = new Task(taskID, taskName, startDate, endDate, assigned, taskStatus);
 			this.taskList.addTask(task);
 		}
 		this.childWindow.populateTable(taskList);
+	}
+	
+	public void saveChange(String filename) throws IOException{
+		ArrayList<String> elements = this.getUneditedElements(filename);
+		FileWriter fileWriter = new FileWriter(filename);
+		BufferedWriter write = new BufferedWriter(fileWriter);
+		int numOfTasks = this.taskList.getListSize();
+		write.write(numOfTasks+"\n");
+		for(int loopCount = 0; loopCount < numOfTasks; loopCount++){
+			Task writeTask = this.taskList.getTask(loopCount);
+			write.write(writeTask.getID()+"\n");
+			write.write(elements.get(loopCount)+"\n");
+			write.write(writeTask.getName()+"\n");
+			write.write(writeTask.getStatus()+"\n");
+			write.write(writeTask.getMembers()+"\n");
+			write.write(writeTask.getStart()+"\n");
+			write.write(writeTask.getEnd()+"\n");
+		}
+		write.close();
+		fileWriter.close();
 	}
 	
 	public void updateGUITable(int rowNo, String newStatus) throws IOException{
@@ -185,11 +206,12 @@ public class MainWindow extends WindowCommon {
 				frame.dispose();
 			}
 		}
-		TaskList taskList = new TaskList();
 		this.childWindow = new MainWindowGUI();
 		this.loadTasks("taskSaveFile.txt");
 		Task editedTask = this.taskList.getTask(rowNo);
 		editedTask.setStatus(newStatus);
+		this.taskList.changeTask(rowNo, editedTask);  //Updates the Task List with the new Status
+		this.saveChange("taskSaveFile.txt");
 		this.childWindow.updateTable(rowNo, newStatus);
 		this.childWindow.setVisible(true);
 	}
@@ -275,5 +297,26 @@ public class MainWindow extends WindowCommon {
 		}
 		
 		return fileLine;
+	}
+	
+	//Returns a single Task's elements without any editing
+	private ArrayList<String> getUneditedElements(String filename) throws NumberFormatException, IOException{
+		ArrayList<String> elements = new ArrayList<String>();
+		FileReader fileReader = new FileReader(filename);
+		BufferedReader read = new BufferedReader(fileReader);
+		int numTasks = Integer.parseInt(read.readLine());
+		//Skip to the first Tasks's element(s)
+		read.readLine();
+		//read.readLine();
+		for(int elementCount = 0; elementCount < numTasks; elementCount++){
+			elements.add(read.readLine());
+			//Skip over the rest of the Task data - we don't care about that here
+			for(int i = 0; i < 6; i++){
+				read.readLine();
+			}
+		}
+		read.close();
+		fileReader.close();		
+		return elements;
 	}
 }
