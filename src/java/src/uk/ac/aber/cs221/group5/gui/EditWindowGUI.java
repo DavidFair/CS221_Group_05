@@ -21,6 +21,9 @@ import java.awt.Window.Type;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 public class EditWindowGUI {
 
@@ -31,12 +34,14 @@ public class EditWindowGUI {
 	private JTextField txtStartDate;
 	private JTextField txtExpectedEndDate;
 	private JTable table;
+	private int rowNo;	//The index of the row selected in the Main Window table when this window was spawned
 
 
 	/**
 	 * Create the application.
 	 */
-	public EditWindowGUI() {
+	public EditWindowGUI(int row) {
+		this.rowNo = row;
 		initialize();
 	}
 	
@@ -45,7 +50,7 @@ public class EditWindowGUI {
 
 			@Override
 			public void run() {
-				EditWindowGUI window = new EditWindowGUI();
+				EditWindowGUI window = new EditWindowGUI(rowNo);
 			}
 			
 		});
@@ -199,6 +204,20 @@ public class EditWindowGUI {
 		frmEditTask.getContentPane().add(btnCancel, gbc_btnCancel);
 		
 		JButton btnSave = new JButton("Save");
+		btnSave.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				MainWindow main = new MainWindow();	//This object is only used to update the table in the Main Window GUI
+													// and does not spawn a new GUI.
+				try {
+					main.updateGUITable(rowNo, (String)cmbTaskStatus.getSelectedItem());
+					frmEditTask.dispose();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		GridBagConstraints gbc_btnSave = new GridBagConstraints();
 		gbc_btnSave.insets = new Insets(0, 0, 0, 5);
 		gbc_btnSave.gridx = 3;

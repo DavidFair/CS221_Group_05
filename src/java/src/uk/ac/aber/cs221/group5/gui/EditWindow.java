@@ -5,15 +5,17 @@ import uk.ac.aber.cs221.group5.logic.TaskStatuses;
 public class EditWindow extends WindowCommon{
 	
 	private EditWindowGUI childWindow;
+	private int rowNo;	//The index of the row selected in the Main Window table when this window was spawned
 	
-	public EditWindow(){
+	public EditWindow(int row){
 		super();
+		this.rowNo = row;
 	}
 
 	@Override
 	public void createWindow() {
 		// TODO Auto-generated method stub
-		childWindow = new EditWindowGUI();
+		childWindow = new EditWindowGUI(rowNo);
 		setupWindowLaunch(this);
 		
 	}

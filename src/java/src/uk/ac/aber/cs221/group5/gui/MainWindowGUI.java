@@ -8,6 +8,7 @@
 package uk.ac.aber.cs221.group5.gui;
 
 import java.awt.EventQueue;
+import java.awt.Frame;
 
 import javax.swing.JFrame;
 import java.awt.GridBagLayout;
@@ -268,7 +269,7 @@ public class MainWindowGUI {
 			public void actionPerformed(ActionEvent arg0) {
 				int row = table.getSelectedRow();
 				if(row > -1){
-					EditWindow editWindow = new EditWindow();
+					EditWindow editWindow = new EditWindow(table.getSelectedRow());
 					editWindow.createWindow();
 					editWindow.setFields(txtTaskName.getText(), TaskStatuses.valueOf(TaskStatuses.class, txtStatus.getText()), 
 							txtAssigned.getText(), txtStartDate.getText(), 
@@ -411,6 +412,20 @@ public class MainWindowGUI {
 	
 	public void setConnStatusLabel(DbStatus status){
 		lblConnStatus.setText(status.toString());
+	}
+	
+	/**
+	 * Applies saved changes to the table of Tasks after a Task has been edited
+	 * @param rowNo The row of the Task that has been edited in the table
+	 * @param newStatus The enum value that the Task's status has been changed to
+	 */
+	public void updateTable(int rowNo, String newStatus){
+		DefaultTableModel model = (DefaultTableModel)(table.getModel());
+		model.setValueAt(newStatus, rowNo, 2);
+	}
+	
+	public void setVisible(boolean b){
+		this.frmMainWindow.setVisible(b);
 	}
 
 }

@@ -174,10 +174,28 @@ public class MainWindow extends WindowCommon {
 			startDate  = read.readLine();
 			endDate    = read.readLine();
 			Task task = new Task(taskID, taskName, startDate, endDate, assigned, taskStatus);
-			taskList.addTask(task);
+			this.taskList.addTask(task);
 		}
-		childWindow.populateTable(taskList);
+		this.childWindow.populateTable(taskList);
 	}
+	
+	public void updateGUITable(int rowNo, String newStatus) throws IOException{
+		for(Frame frame : Frame.getFrames()){
+			if(frame.getTitle().equals("Main Window")){
+				frame.dispose();
+			}
+		}
+		TaskList taskList = new TaskList();
+		this.childWindow = new MainWindowGUI();
+		this.loadTasks("taskSaveFile.txt");
+		Task editedTask = this.taskList.getTask(rowNo);
+		editedTask.setStatus(newStatus);
+		this.childWindow.updateTable(rowNo, newStatus);
+		this.childWindow.setVisible(true);
+	}
+	
+	
+////Methods to deal with loading Task Elements
 	
 	public ArrayList<String[]> getElements(String filename, int tableIndex) throws IOException{
 		ArrayList<String[]> elements = new ArrayList<String[]>();

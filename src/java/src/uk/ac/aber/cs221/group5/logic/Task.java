@@ -50,6 +50,10 @@ public class Task {
 		return this.status.toString();
 	}
 	
+	public void setStatus(String newStatus){
+		this.status.valueOf(newStatus);
+	}
+	
 	public void addElement(String elementName, String elementComment){
 		Element newElement = new Element(elementName, elementComment);
 		taskElements.add(newElement);
