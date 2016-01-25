@@ -6,7 +6,6 @@ package uk.ac.aber.cs221.group5.gui;
 import java.awt.Frame;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,8 +17,6 @@ import uk.ac.aber.cs221.group5.logic.TaskList;
 import uk.ac.aber.cs221.group5.logic.TaskStatuses;
 
 import uk.ac.aber.cs221.group5.logic.DbStatus;
-import uk.ac.aber.cs221.group5.logic.MemberList;
-import uk.ac.aber.cs221.group5.logic.TaskList;
 
 
 /**

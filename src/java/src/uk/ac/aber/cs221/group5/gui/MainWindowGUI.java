@@ -8,8 +8,6 @@
 package uk.ac.aber.cs221.group5.gui;
 
 import java.awt.EventQueue;
-import java.awt.Frame;
-
 import javax.swing.JFrame;
 import java.awt.GridBagLayout;
 import javax.swing.JPanel;
@@ -21,22 +19,14 @@ import javax.swing.JOptionPane;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.JTextPane;
-import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import java.awt.Color;
 import java.awt.Component;
 
 import javax.swing.JButton;
-import javax.swing.border.LineBorder;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
