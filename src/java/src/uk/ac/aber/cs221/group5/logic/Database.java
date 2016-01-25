@@ -193,7 +193,7 @@ public class Database {
 			}
 			
 			public void run() {
-				ResultSet tasksSet = executeSqlStatement(taskQuery);
+				ResultSet tasksSet = executeSqlStatement(sqlQuery);
 				
 				if (tasksSet != null){
 					//Convert SQL result to Task List
