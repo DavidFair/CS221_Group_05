@@ -419,6 +419,11 @@ public class Database {
 								int index = elements.getInt("Index");
 								String elementDesc = elements.getString("TaskDesc");
 								String elementComments = elements.getString("TaskComments");
+								
+								//Remove pipes and chars from element desc and comments
+								elementDesc = elementDesc.replace(",", "");
+								elementComments = elementComments.replace("|", "");
+								
 
 								currentTask.addElement(elementDesc, elementComments);
 							}
