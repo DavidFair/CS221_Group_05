@@ -175,8 +175,6 @@ public class Database {
 	public void getTasks(String username){
 		
 		String taskQuery;
-		String elementQuery;
-		
 		if (username != ""){
 			taskQuery = "SELECT * FROM `tbl_tasks` WHERE TaskOwner='" + username + "';";
 		} else {
@@ -193,12 +191,14 @@ public class Database {
 				ResultSet tasksSet = executeSqlStatement(taskQuery);
 				
 				if (tasksSet != null){
+					//Convert SQL result to Task List
 					TaskList tasksList = resultSetToTaskList(tasksSet);
 					
-					//TODO need to pass forward instead of back
-					//caller.
+					//Update the copy held by the main window
 					hostWindow.updateTasks(tasksList);
-					//Create timer to refresh on success
+					
+					//Update the task elements
+					updateTaskElements(tasksList);
 					try {
 						tasksSet.close();
 					} catch (SQLException e) {
@@ -379,43 +379,43 @@ public class Database {
 	}
 	
 	private void updateTaskElements(TaskList allTasks){
-		int numOfTasks = allTasks.getListSize();
-		for (int i = 0; i < numOfTasks; i++) {
-			
-			Task currentTask = allTasks.getTask(i);
-			
-			//Clear to avoid duplicates
-			currentTask.clearAllElements();
-			
-			String sqlQuery = "SELECT * FROM tbl_elements WHERE TaskID = ";
-			sqlQuery = sqlQuery + currentTask.getID();
 
-			//This class runs in seperate threads pulling all task elements
-			class elementSync implements Runnable {
-				private String query;
-				private Task toUpdate;
-		
-				public elementSync(String query, Task currentTask) {
-					this.query = query;
-					this.toUpdate = currentTask;
-				}
-				
-				public void run(){
-					//Open connection and pull elements related to current task
-					ResultSet elements = executeSqlStatement(query);
-					
-					if (elements != null){
-						
+		// This class runs in seperate threads pulling all task elements
+		class elementSync implements Runnable {
+			private TaskList listOfTasks;
+
+			public elementSync(TaskList allTasks) {
+				this.listOfTasks = allTasks;
+			}
+
+			public void run() {
+				// Get the number of tasks we need to collect elements for
+
+				int numOfTasks = listOfTasks.getListSize();
+				for (int i = 0; i < numOfTasks; i++) {
+
+					Task currentTask = allTasks.getTask(i);
+
+					// Clear current task to avoid duplicates
+					currentTask.clearAllElements();
+
+					String sqlQuery = "SELECT * FROM tbl_elements WHERE TaskID = ";
+					sqlQuery = sqlQuery + currentTask.getID();
+
+					ResultSet elements = executeSqlStatement(sqlQuery);
+
+					if (elements != null) {
+
 						try {
-							while (elements.next()){
-								//Iterate over all comments
+							while (elements.next()) {
+								// Iterate over all comments
 								int index = elements.getInt("Index");
 								String elementDesc = elements.getString("TaskDesc");
 								String elementComments = elements.getString("TaskComments");
-	
-								toUpdate.addElement(elementDesc, elementComments);
+
+								currentTask.addElement(elementDesc, elementComments);
 							}
-							
+
 							elements.close();
 						} catch (SQLException e) {
 							System.err.println(e.getMessage());
@@ -423,15 +423,17 @@ public class Database {
 					} else {
 						throw new NullPointerException("Result set was null in getMembers");
 					}
-					
-					
+
 				}
-				
+
 			}
-			Thread execSql = new Thread(new elementSync(sqlQuery, currentTask));
-			execSql.start();
-		}
+
+		} //End of anon inner class
 		
+
+		Thread execSql = new Thread(new elementSync(allTasks));
+		execSql.start();
+
 	}
 	
 	private void createRefreshTimer(int seconds, Database database) {
