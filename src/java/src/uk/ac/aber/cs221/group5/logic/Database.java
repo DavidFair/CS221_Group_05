@@ -10,6 +10,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.mysql.fabric.xmlrpc.base.Data;
+import com.mysql.fabric.xmlrpc.base.Member;
 
 import uk.ac.aber.cs221.group5.gui.LoginWindow;
 import uk.ac.aber.cs221.group5.gui.MainWindow;
@@ -91,9 +92,8 @@ public class Database {
 	 */
 	public void saveUserName(String filePath, MemberList allUsers){
 		//TODO implement save user name in DB
+		System.out.println("Save username called");
 	}
-	
-	
 	
 	
 	public boolean connect(){
@@ -199,11 +199,13 @@ public class Database {
 					//Convert SQL result to Task List
 					TaskList tasksList = resultSetToTaskList(tasksSet);
 					
-					//Update the copy held by the main window
-					hostWindow.updateTasks(tasksList);
-					
 					//Update the task elements
 					updateTaskElements(tasksList);
+					
+					//Update the copy held by the main window
+					hostWindow.settaskList(tasksList);
+					
+
 					try {
 						tasksSet.close();
 					} catch (SQLException e) {
@@ -229,14 +231,14 @@ public class Database {
 	
 
 	public void getMembers(){
-		
-
-		
-		/*
-		 * Creates a new thread to avoid the
-		 * main execution thread getting stuck
-		 */
-		Thread sqlExec = new Thread(new Runnable() {
+				
+		class MemberSync implements Runnable {
+			
+			private Database parentDB;
+			
+			public MemberSync(Database parentDatabase){
+				this.parentDB = parentDatabase;
+			}
 			
 			public void run() {
 				ResultSet members = executeSqlStatement("Select * FROM tbl_users");
@@ -244,9 +246,9 @@ public class Database {
 				if (members != null){
 					MemberList newMemberList = resultSetToMemberList(members);
 					
-					hostWindow.updateUsers(newMemberList);
+					hostWindow.setmemberList(newMemberList);
 					
-					//Create timer to refresh on success
+					parentDB.saveUserName(usersPath, newMemberList);
 					
 					try {
 						members.close();
@@ -257,7 +259,9 @@ public class Database {
 					throw new NullPointerException("Result set was null in getMembers");
 				}
 			}
-		});
+		}
+		//Create new thread an exec it
+		Thread sqlExec = new Thread(new MemberSync(this));
 		sqlExec.start();
 
 		createRefreshTimer(REFRESH_SEC_DELAY, this);

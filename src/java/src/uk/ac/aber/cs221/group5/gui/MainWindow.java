@@ -77,19 +77,6 @@ public class MainWindow extends WindowCommon {
 		return false;
 	}
 		
-	public void updateUsers(MemberList newUserList){
-		//TODO implement updateUsers
-		
-		//Here for initial development 
-		System.out.println("Update users called");
-	}
-	
-	public void updateTasks(TaskList newTaskList){
-		//TODO implement updateTasks
-		
-		//Here for initial development
-		System.out.println("Update tasks called");
-	}
 	
 	public void setConnStatus(DbStatus connStatus){
 		//TODO implement setConnStatus
