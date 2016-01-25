@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.mysql.fabric.xmlrpc.base.Data;
+
 import uk.ac.aber.cs221.group5.gui.LoginWindow;
 import uk.ac.aber.cs221.group5.gui.MainWindow;
 
@@ -439,6 +441,12 @@ public class Database {
 	private void createRefreshTimer(int seconds, Database database) {
 
 		class RefreshTask extends TimerTask {
+			
+			Database parentDB;
+			
+			public RefreshTask(Database parentDB){
+				this.parentDB = parentDB;
+			}
 
 			@Override
 			public void run() {
@@ -463,7 +471,7 @@ public class Database {
 		}
 		
 		connTimer = new Timer();
-		connTimer.schedule(new RefreshTask(), seconds * 1000);
+		connTimer.schedule(new RefreshTask(database), seconds * 1000);
 
 	}
 		
