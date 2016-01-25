@@ -36,6 +36,23 @@ public class MainWindow extends WindowCommon {
 	private TaskList taskList = new TaskList();
 	private MemberList memberList = new MemberList();
 	
+	public TaskList getTaskList(){
+		return this.taskList;
+	}
+	
+	public void settaskList (TaskList list) {
+		this.taskList = list;
+	}
+		
+	public MemberList getMemberList(){
+		return this.memberList;
+	}
+	public void setmemberList (MemberList list){
+		this.memberList = list;
+		
+	}
+	
+	
 	public static void main(String args[]) throws InterruptedException, NumberFormatException, IOException{
 		TaskList taskList = new TaskList();
 		MemberList memberList = new MemberList();
