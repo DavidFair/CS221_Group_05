@@ -95,6 +95,7 @@ public class MainWindow extends WindowCommon {
 		//Load the tasks into the Task List
 		try {
 			loadTasks("taskSaveFile.txt");
+			this.childWindow.populateTable(this.taskList);
 		} catch (IOException e1) {
 			System.out.println("Failed to load Task File");
 			//At this point, need to re-configure task file
@@ -178,7 +179,6 @@ public class MainWindow extends WindowCommon {
 			Task task  = new Task(taskID, taskName, startDate, endDate, assigned, taskStatus);
 			this.taskList.addTask(task);
 		}
-		this.childWindow.populateTable(taskList);
 	}
 	
 	public void saveChange(String filename) throws IOException{
@@ -191,6 +191,31 @@ public class MainWindow extends WindowCommon {
 			Task writeTask = this.taskList.getTask(loopCount);
 			write.write(writeTask.getID()+"\n");
 			write.write(elements.get(loopCount)+"\n");
+			write.write(writeTask.getName()+"\n");
+			write.write(writeTask.getStatus()+"\n");
+			write.write(writeTask.getMembers()+"\n");
+			write.write(writeTask.getStart()+"\n");
+			write.write(writeTask.getEnd()+"\n");
+		}
+		write.close();
+		fileWriter.close();
+	}
+	
+	/**
+	 * Writes updated Task Element Comments to the local Task save file
+	 * @param filename The name of the local Task save file
+	 * @param newElements An ArrayList of the updated Task Elements
+	 * @throws IOException
+	 */
+	public void updateElements(String filename, ArrayList<String[]> newElements) throws IOException{
+		FileWriter fileWriter = new FileWriter(filename);
+		BufferedWriter write  = new BufferedWriter(fileWriter);
+		int numOfTasks = newElements.size();
+		write.write(numOfTasks+"\n");
+		for(int taskCount = 0; taskCount < numOfTasks; taskCount++){
+			Task writeTask = this.taskList.getTask(taskCount);
+			write.write(writeTask.getID()+"\n");
+			write.write(newElements.get(taskCount)[0]+","+newElements.get(taskCount)[1]+"|"+"\n");
 			write.write(writeTask.getName()+"\n");
 			write.write(writeTask.getStatus()+"\n");
 			write.write(writeTask.getMembers()+"\n");
@@ -215,6 +240,10 @@ public class MainWindow extends WindowCommon {
 		this.saveChange("taskSaveFile.txt");
 		this.childWindow.updateTable(rowNo, newStatus);
 		this.childWindow.setVisible(true);
+	}
+	
+	public int getNumTask(){
+		return this.taskList.getListSize();
 	}
 	
 	

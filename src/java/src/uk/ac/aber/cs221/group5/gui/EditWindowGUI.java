@@ -234,6 +234,15 @@ public class EditWindowGUI {
 				MainWindow main = new MainWindow();	//This object is only used to update the table in the Main Window GUI
 													// and does not spawn a new GUI.
 				try {
+					main.loadTasks("taskSaveFile.txt");
+					
+					for(int rowCount = 0; rowCount < table.getRowCount(); rowCount++){
+						String[] element = {"", ""};
+						element = taskElements.get(rowCount);
+						element[1] = (String) table.getValueAt(rowCount, 1);
+						taskElements.set(rowCount, element);
+					}
+					main.updateElements("taskSaveFile.txt", taskElements);
 					main.updateGUITable(rowNo, (String)cmbTaskStatus.getSelectedItem());
 					frmEditTask.dispose();
 				} catch (IOException e) {
