@@ -24,17 +24,12 @@ $pdo = Database::connect();
 class Database
 {
     // TaskerSRV
-    /* private static $hostname = "db.dcs.aber.ac.uk";
+    private static $hostname = "db.dcs.aber.ac.uk";
     private static $dbName = "csgp_5_15_16";
     private static $username = "csgpadm_5";
-    private static $password = "906BnQjD"; */
+    private static $password = "906BnQjD";
 
     // Developer's MySQL
-    private static $hostname = "db.dcs.aber.ac.uk";
-    private static $dbName = "ole4";
-    private static $username = "ole4";
-    private static $password = "minicoopers123";
-
 
     /**
      * Database Establish Function utilising PDO for MySQL

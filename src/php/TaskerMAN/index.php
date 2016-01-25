@@ -2,7 +2,7 @@
 /**
  * TODO Insert PHPDoc comment here
  * TODO Develop PHPUnit / custom code tests for login sequence
- * @author OLiver Earl, Liam Fitzgerald
+ * @author Oliver Earl, Liam Fitzgerald, Tim Anderson, Maurice Corriette
  * @resources http://phpro.org/tutorials/Basic-Login-Authentication-with-PHP-and-MySQL.html
  * @resources https://www.reddit.com/r/PHP/comments/luprk/how_do_you_sanitize_input/
  *
