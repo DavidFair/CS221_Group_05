@@ -6,7 +6,6 @@ package uk.ac.aber.cs221.group5.gui;
 import java.awt.Frame;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,8 +17,6 @@ import uk.ac.aber.cs221.group5.logic.TaskList;
 import uk.ac.aber.cs221.group5.logic.TaskStatuses;
 
 import uk.ac.aber.cs221.group5.logic.DbStatus;
-import uk.ac.aber.cs221.group5.logic.MemberList;
-import uk.ac.aber.cs221.group5.logic.TaskList;
 
 
 /**
@@ -35,6 +32,23 @@ public class MainWindow extends WindowCommon {
 
 	private TaskList taskList = new TaskList();
 	private MemberList memberList = new MemberList();
+	
+	public TaskList getTaskList(){
+		return this.taskList;
+	}
+	
+	public void settaskList (TaskList list) {
+		this.taskList = list;
+	}
+		
+	public MemberList getMemberList(){
+		return this.memberList;
+	}
+	public void setmemberList (MemberList list){
+		this.memberList = list;
+		
+	}
+	
 	
 	public static void main(String args[]) throws InterruptedException, NumberFormatException, IOException{
 		TaskList taskList = new TaskList();
@@ -60,19 +74,6 @@ public class MainWindow extends WindowCommon {
 		return false;
 	}
 		
-	public void updateUsers(MemberList newUserList){
-		//TODO implement updateUsers
-		
-		//Here for initial development 
-		System.out.println("Update users called");
-	}
-	
-	public void updateTasks(TaskList newTaskList){
-		//TODO implement updateTasks
-		
-		//Here for initial development
-		System.out.println("Update tasks called");
-	}
 	
 	public void setConnStatus(DbStatus connStatus){
 		//TODO implement setConnStatus

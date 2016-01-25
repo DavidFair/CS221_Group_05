@@ -1,6 +1,9 @@
 package uk.ac.aber.cs221.group5.logic;
 
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -9,9 +12,6 @@ import java.sql.Statement;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.mysql.fabric.xmlrpc.base.Data;
-
-import uk.ac.aber.cs221.group5.gui.LoginWindow;
 import uk.ac.aber.cs221.group5.gui.MainWindow;
 
 
@@ -88,12 +88,21 @@ public class Database {
 	 * Saves a list of all user names to a local file
 	 * @param filePath Path of file to be saved
 	 * @param allUsers A MemberList containing all users to be saved
+	 * @throws IOException 
 	 */
-	public void saveUserName(String filePath, MemberList allUsers){
+	public void saveUserName(String filePath, MemberList allUsers) throws IOException{
 		//TODO implement save user name in DB
+		FileWriter fileWriter = new FileWriter(filePath);
+		BufferedWriter write = new BufferedWriter(fileWriter);
+		int numOfTasks = allUsers.getLength();
+		write.write(numOfTasks+"\n");
+		for(int loopCount = 0; loopCount < numOfTasks; loopCount++){
+			Members writeTask = allUsers.getMember(loopCount);
+			write.write(writeTask.getEmail()+"\n");
+			write.write(writeTask.getName()+"\n");
+		}
+		 write.close();
 	}
-	
-	
 	
 	
 	public boolean connect(){
@@ -199,11 +208,13 @@ public class Database {
 					//Convert SQL result to Task List
 					TaskList tasksList = resultSetToTaskList(tasksSet);
 					
-					//Update the copy held by the main window
-					hostWindow.updateTasks(tasksList);
-					
 					//Update the task elements
 					updateTaskElements(tasksList);
+					
+					//Update the copy held by the main window
+					hostWindow.settaskList(tasksList);
+					
+
 					try {
 						tasksSet.close();
 					} catch (SQLException e) {
@@ -229,14 +240,14 @@ public class Database {
 	
 
 	public void getMembers(){
-		
-
-		
-		/*
-		 * Creates a new thread to avoid the
-		 * main execution thread getting stuck
-		 */
-		Thread sqlExec = new Thread(new Runnable() {
+				
+		class MemberSync implements Runnable {
+			
+			private Database parentDB;
+			
+			public MemberSync(Database parentDatabase){
+				this.parentDB = parentDatabase;
+			}
 			
 			public void run() {
 				ResultSet members = executeSqlStatement("Select * FROM tbl_users");
@@ -244,9 +255,14 @@ public class Database {
 				if (members != null){
 					MemberList newMemberList = resultSetToMemberList(members);
 					
-					hostWindow.updateUsers(newMemberList);
+					hostWindow.setmemberList(newMemberList);
 					
-					//Create timer to refresh on success
+					try {
+						parentDB.saveUserName(usersPath, newMemberList);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					
 					try {
 						members.close();
@@ -257,7 +273,9 @@ public class Database {
 					throw new NullPointerException("Result set was null in getMembers");
 				}
 			}
-		});
+		}
+		//Create new thread an exec it
+		Thread sqlExec = new Thread(new MemberSync(this));
 		sqlExec.start();
 
 		createRefreshTimer(REFRESH_SEC_DELAY, this);
@@ -419,6 +437,11 @@ public class Database {
 								int index = elements.getInt("Index");
 								String elementDesc = elements.getString("TaskDesc");
 								String elementComments = elements.getString("TaskComments");
+								
+								//Remove pipes and chars from element desc and comments
+								elementDesc = elementDesc.replace(",", "");
+								elementComments = elementComments.replace("|", "");
+								
 
 								currentTask.addElement(elementDesc, elementComments);
 							}

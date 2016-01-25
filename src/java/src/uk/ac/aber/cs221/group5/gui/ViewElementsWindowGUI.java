@@ -1,9 +1,5 @@
 package uk.ac.aber.cs221.group5.gui;
 
-import java.awt.Component;
-import java.awt.EventQueue;
-import java.awt.Frame;
-
 import javax.swing.JFrame;
 import java.awt.GridBagLayout;
 import javax.swing.JScrollPane;
@@ -14,7 +10,6 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Insets;
-import java.awt.Window.Type;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
