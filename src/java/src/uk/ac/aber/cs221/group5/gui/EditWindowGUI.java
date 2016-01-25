@@ -10,7 +10,10 @@ import java.awt.Insets;
 import javax.swing.SwingConstants;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.html.parser.Element;
 
+import uk.ac.aber.cs221.group5.logic.Task;
+import uk.ac.aber.cs221.group5.logic.TaskList;
 import uk.ac.aber.cs221.group5.logic.TaskStatuses;
 
 import javax.swing.JTextField;
@@ -235,14 +238,20 @@ public class EditWindowGUI {
 													// and does not spawn a new GUI.
 				try {
 					main.loadTasks("taskSaveFile.txt");
-					
-					for(int rowCount = 0; rowCount < table.getRowCount(); rowCount++){
-						String[] element = {"", ""};
-						element = taskElements.get(rowCount);
-						element[1] = (String) table.getValueAt(rowCount, 1);
-						taskElements.set(rowCount, element);
+/*					ArrayList<String[]> editedTasks = new ArrayList<String[]>();
+					for(int taskCount = 0; taskCount < main.getNumTask(); taskCount++){
+						for(int rowCount = 0; rowCount < table.getRowCount(); rowCount++){
+							String editTask[] = {"", ""};
+							editTask[0] = (String) table.getValueAt(rowCount, 0);
+							editTask[1] = (String) table.getValueAt(rowCount, 1);
+							editedTasks.add(editTask);
+						}
+					}*/
+					TaskList list = main.getTaskList();
+					for(int taskNo = 0; taskNo < list.getListSize(); taskNo++){
+						
 					}
-					main.updateElements("taskSaveFile.txt", taskElements);
+					main.updateElements("taskSaveFile.txt", editedTasks);
 					main.updateGUITable(rowNo, (String)cmbTaskStatus.getSelectedItem());
 					frmEditTask.dispose();
 				} catch (IOException e) {

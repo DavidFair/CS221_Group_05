@@ -66,4 +66,8 @@ public class Task {
 	public Element getElement(int index){
 		return taskElements.get(index);
 	}
+	
+	public int getNumElements(){
+		return this.taskElements.size();
+	}
 }
