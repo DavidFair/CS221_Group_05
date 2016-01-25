@@ -251,7 +251,7 @@ public class EditWindowGUI {
 					for(int taskNo = 0; taskNo < list.getListSize(); taskNo++){
 						
 					}
-					main.updateElements("taskSaveFile.txt", editedTasks);
+					//main.updateElements("taskSaveFile.txt", editedTasks);
 					main.updateGUITable(rowNo, (String)cmbTaskStatus.getSelectedItem());
 					frmEditTask.dispose();
 				} catch (IOException e) {

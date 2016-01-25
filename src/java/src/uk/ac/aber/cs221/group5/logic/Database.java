@@ -91,11 +91,16 @@ public class Database {
 	 * @throws IOException 
 	 */
 	public void saveUserName(String filePath, MemberList allUsers) throws IOException{
-		//TODO implement save user name in DB
-		FileWriter fileWriter = new FileWriter(filePath);
+		final String saveFileName = "members.txt";
+		
+		String fullFilePath = filePath + saveFileName;
+		
+		FileWriter fileWriter = new FileWriter(fullFilePath);
 		BufferedWriter write = new BufferedWriter(fileWriter);
+		
 		int numOfTasks = allUsers.getLength();
 		write.write(numOfTasks+"\n");
+		
 		for(int loopCount = 0; loopCount < numOfTasks; loopCount++){
 			Members writeTask = allUsers.getMember(loopCount);
 			write.write(writeTask.getEmail()+"\n");
@@ -323,6 +328,11 @@ public class Database {
 	 */
 	private ResultSet executeSqlStatement(String query){
 		Statement sqlStatementObject = null;
+		
+		if (connection == null){
+			throw new NullPointerException("Connection was not opened or has been closed");
+		}
+		
 		try{
 			sqlStatementObject = connection.createStatement();
 		} catch (SQLException e) {
