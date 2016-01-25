@@ -183,11 +183,14 @@ public class Database {
 			taskQuery = "SELECT * FROM `tbl_tasks`";
 		}
 		
-		/*
-		 * Creates a new thread to avoid the
-		 * main execution thread getting stuck
-		 */
-		Thread sqlExec = new Thread(new Runnable() {
+
+		class TaskSync implements Runnable {
+			
+			String sqlQuery;
+			
+			public TaskSync(String query){
+				this.sqlQuery = query;
+			}
 			
 			public void run() {
 				ResultSet tasksSet = executeSqlStatement(taskQuery);
@@ -210,10 +213,12 @@ public class Database {
 					throw new NullPointerException("Result set was null in getTasks");
 				}
 			}
-		});
+		}
 		
 		//Set status to sync
 		currentStatus = DbStatus.SYNCHRONIZING;
+		
+		Thread sqlExec = new Thread(new TaskSync(taskQuery));
 		sqlExec.start();
 		
 
@@ -383,10 +388,10 @@ public class Database {
 	private void updateTaskElements(TaskList allTasks){
 
 		// This class runs in seperate threads pulling all task elements
-		class elementSync implements Runnable {
+		class ElementSync implements Runnable {
 			private TaskList listOfTasks;
 
-			public elementSync(TaskList allTasks) {
+			public ElementSync(TaskList allTasks) {
 				this.listOfTasks = allTasks;
 			}
 
@@ -433,7 +438,7 @@ public class Database {
 		} //End of anon inner class
 		
 
-		Thread execSql = new Thread(new elementSync(allTasks));
+		Thread execSql = new Thread(new ElementSync(allTasks));
 		execSql.start();
 
 	}
