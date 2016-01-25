@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.SwingConstants;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
 import uk.ac.aber.cs221.group5.logic.TaskStatuses;
@@ -198,13 +199,20 @@ public class EditWindowGUI {
 		frmEditTask.getContentPane().add(scrollPane, gbc_scrollPane);
 		
 		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Element Name", "Element Comment"
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if(table.getSelectedRow() > -1){
+					
+				}
+				table.getModel().isCellEditable(table.getSelectedRow(), table.getSelectedColumn());
 			}
-		));
+		});
+		table.setModel(new EditTableModel(new Object[][] {
+		},
+		new String[] {
+			"Element Name", "Element Comment"
+		}));
 		scrollPane.setViewportView(table);
 		
 		JButton btnCancel = new JButton("Cancel");
@@ -258,11 +266,61 @@ public class EditWindowGUI {
 		elements = main.getElements("taskSaveFile.txt", tableIndex);
 		
 		for(String[] pair : elements){
-			DefaultTableModel model = (DefaultTableModel)(table.getModel());
+			EditTableModel model = (EditTableModel) table.getModel();
 			model.addRow(new Object[]{pair[0], pair[1]});
 		}
 		this.frmEditTask.repaint();
 		
 	}
+	
+////INNER CLASSSES
+	private class EditTableModel extends AbstractTableModel{
+		private String[] headers = {"", ""};
+		
+		public EditTableModel(Object[][] objects, String[] strings) {
+			this.headers = strings;
+		}
+		
+		//This DefaultTableModel is used for general Table Model methods (getColumnCount etc.)
+		DefaultTableModel model = new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+					"Element Name", "Element Comment"
+				});
+			
+		@Override
+		public int getColumnCount() {
+			return model.getColumnCount();
+		}
 
+		public void addRow(Object[] objects) {
+			model.addRow(objects);
+			
+		}
+
+		@Override
+		public int getRowCount() {
+			return model.getRowCount();
+		}
+
+		@Override
+		public Object getValueAt(int rowIndex, int columnIndex) {
+			return model.getValueAt(rowIndex, columnIndex);
+		}
+		
+		@Override
+		public boolean isCellEditable(int rowIndex, int columnIndex){
+			if(columnIndex == 1){
+				return true;
+			}
+			return false;
+		}
+		
+		@Override
+		public String getColumnName(int column){
+			return headers[column];
+		}
+		
+	}
 }
