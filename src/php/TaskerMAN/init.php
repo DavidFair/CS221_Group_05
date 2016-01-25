@@ -14,7 +14,7 @@
 
 // Session Location
 // TODO Change this to a more suitable location when we have a working server
-session_save_path("/tmp");
+session_save_path("tmp");
 session_start();
 
 // Configuration file
@@ -35,7 +35,7 @@ if (!($debug))
 
 /**
  *
- * Error Handling Function
+ * Error Handling Function - The reason we have this is because debugging in PHP is a massive pain in the ass
  *
  **/
 function errorHandler($ex,$errorType,$logfile,$currentTime)

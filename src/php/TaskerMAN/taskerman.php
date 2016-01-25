@@ -55,6 +55,7 @@ if (!isset($_SESSION['login_auth']))
     <?php include('footer.php'); ?>
 </div>
 <!-- Modal Windows -->
+
 <!-- View Task -->
 <div id="openView" class="modalWindow">
     <div>
@@ -86,6 +87,7 @@ if (!isset($_SESSION['login_auth']))
         </fieldset>
     </div>
 </div>
+
 <!-- Add Task -->
 <div id="addView" class="modalWindow">
     <div>
@@ -121,5 +123,8 @@ if (!isset($_SESSION['login_auth']))
         </fieldset>
     </div>
 </div>
+
+<!-- Delete Task -->
+
 </body>
 </html>

@@ -14,7 +14,7 @@ function loginValidate()
         return false;
     }
     // Length too long check
-    if (email.length > 20)
+    if (email.length > 40)
     {
         alert ("This email address is too long. Please specify a different email address.");
         return false;
