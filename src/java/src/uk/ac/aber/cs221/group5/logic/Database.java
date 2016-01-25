@@ -396,7 +396,7 @@ public class Database {
 				int numOfTasks = listOfTasks.getListSize();
 				for (int i = 0; i < numOfTasks; i++) {
 
-					Task currentTask = allTasks.getTask(i);
+					Task currentTask = listOfTasks.getTask(i);
 
 					// Clear current task to avoid duplicates
 					currentTask.clearAllElements();
@@ -444,8 +444,8 @@ public class Database {
 			
 			Database parentDB;
 			
-			public RefreshTask(Database parentDB){
-				this.parentDB = parentDB;
+			public RefreshTask(Database db){
+				this.parentDB = db;
 			}
 
 			@Override
@@ -453,13 +453,13 @@ public class Database {
 				// This will be run when timer fires
 				// First check if we are connected and not busy
 
-				if (database.getConnStatus() != DbStatus.CONNECTED) {
+				if (parentDB.getConnStatus() != DbStatus.CONNECTED) {
 					// Give up
 					return;
 				}
-				database.getMembers();
+				parentDB.getMembers();
 				// Get all tasks
-				database.getTasks("");
+				parentDB.getTasks("");
 				System.out.println("Fired refresh");
 				// TODO Call external method to update held state
 			}
