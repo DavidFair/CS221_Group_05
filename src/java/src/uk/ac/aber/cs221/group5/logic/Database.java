@@ -1,6 +1,9 @@
 package uk.ac.aber.cs221.group5.logic;
 
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -89,10 +92,20 @@ public class Database {
 	 * Saves a list of all user names to a local file
 	 * @param filePath Path of file to be saved
 	 * @param allUsers A MemberList containing all users to be saved
+	 * @throws IOException 
 	 */
-	public void saveUserName(String filePath, MemberList allUsers){
+	public void saveUserName(String filePath, MemberList allUsers) throws IOException{
 		//TODO implement save user name in DB
-		System.out.println("Save username called");
+		FileWriter fileWriter = new FileWriter(filePath);
+		BufferedWriter write = new BufferedWriter(fileWriter);
+		int numOfTasks = allUsers.getLength();
+		write.write(numOfTasks+"\n");
+		for(int loopCount = 0; loopCount < numOfTasks; loopCount++){
+			Members writeTask = allUsers.getMember(loopCount);
+			write.write(writeTask.getEmail()+"\n");
+			write.write(writeTask.getName()+"\n");
+		}
+		 write.close();
 	}
 	
 	
@@ -248,7 +261,12 @@ public class Database {
 					
 					hostWindow.setmemberList(newMemberList);
 					
-					parentDB.saveUserName(usersPath, newMemberList);
+					try {
+						parentDB.saveUserName(usersPath, newMemberList);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					
 					try {
 						members.close();
