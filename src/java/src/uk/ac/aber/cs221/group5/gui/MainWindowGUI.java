@@ -271,7 +271,7 @@ public class MainWindowGUI {
 				if(row > -1){
 					EditWindow editWindow = new EditWindow(table.getSelectedRow());
 					editWindow.createWindow();
-					editWindow.setFields(txtTaskName.getText(), TaskStatuses.valueOf(TaskStatuses.class, txtStatus.getText()), 
+					editWindow.setFields(txtTaskName.getText(), TaskStatuses.valueOf(txtStatus.getText()), 
 							txtAssigned.getText(), txtStartDate.getText(), 
 							txtEndDate.getText());
 					

@@ -1,5 +1,7 @@
 package uk.ac.aber.cs221.group5.gui;
 
+import java.io.IOException;
+
 import uk.ac.aber.cs221.group5.logic.TaskStatuses;
 
 public class EditWindow extends WindowCommon{
@@ -15,7 +17,12 @@ public class EditWindow extends WindowCommon{
 	@Override
 	public void createWindow() {
 		// TODO Auto-generated method stub
-		childWindow = new EditWindowGUI(rowNo);
+		try {
+			childWindow = new EditWindowGUI(rowNo);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		setupWindowLaunch(this);
 		
 	}

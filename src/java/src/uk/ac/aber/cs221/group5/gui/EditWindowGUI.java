@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 
 import uk.ac.aber.cs221.group5.logic.TaskStatuses;
 
@@ -24,6 +25,7 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class EditWindowGUI {
 
@@ -39,10 +41,12 @@ public class EditWindowGUI {
 
 	/**
 	 * Create the application.
+	 * @throws IOException 
 	 */
-	public EditWindowGUI(int row) {
+	public EditWindowGUI(int row) throws IOException {
 		this.rowNo = row;
 		initialize();
+		this.populateTable(rowNo);
 	}
 	
 	public void launchWindow(){
@@ -50,7 +54,12 @@ public class EditWindowGUI {
 
 			@Override
 			public void run() {
-				EditWindowGUI window = new EditWindowGUI(rowNo);
+				try {
+					EditWindowGUI window = new EditWindowGUI(rowNo);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
 		});
@@ -189,6 +198,13 @@ public class EditWindowGUI {
 		frmEditTask.getContentPane().add(scrollPane, gbc_scrollPane);
 		
 		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Element Name", "Element Comment"
+			}
+		));
 		scrollPane.setViewportView(table);
 		
 		JButton btnCancel = new JButton("Cancel");
@@ -233,6 +249,20 @@ public class EditWindowGUI {
 		txtStartDate.setText(start);
 		txtExpectedEndDate.setText(end);
 		frmEditTask.setVisible(true);
+	}
+	
+	private void populateTable(int tableIndex) throws IOException{
+		int selectionIndex;	//The index in the table that was selected in main window
+		ArrayList<String[]> elements = new ArrayList<String[]>();
+		MainWindow main = new MainWindow();	//Used for loading elements and will not spawn a GUI
+		elements = main.getElements("taskSaveFile.txt", tableIndex);
+		
+		for(String[] pair : elements){
+			DefaultTableModel model = (DefaultTableModel)(table.getModel());
+			model.addRow(new Object[]{pair[0], pair[1]});
+		}
+		this.frmEditTask.repaint();
+		
 	}
 
 }
