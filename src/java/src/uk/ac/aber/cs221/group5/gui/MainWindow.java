@@ -11,8 +11,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.mysql.fabric.xmlrpc.base.Data;
-
 import uk.ac.aber.cs221.group5.logic.MemberList;
 import uk.ac.aber.cs221.group5.logic.Task;
 import uk.ac.aber.cs221.group5.logic.TaskList;
@@ -161,16 +159,17 @@ public class MainWindow extends WindowCommon {
 	
 	public TaskList getTaskList(){
 		return this.taskList;
+		//TODO check if table is displaying
 	}
 	
-	public void settaskList (TaskList list) {
+	public void setTaskList (TaskList list) {
 		this.taskList = list;
 	}
 		
 	public MemberList getMemberList(){
 		return this.memberList;
 	}
-	public void setmemberList (MemberList list){
+	public void setMemberList (MemberList list){
 		this.memberList = list;
 		
 	}
@@ -201,6 +200,8 @@ public class MainWindow extends WindowCommon {
 			Task task  = new Task(taskID, taskName, startDate, endDate, assigned, taskStatus);
 			this.taskList.addTask(task);
 		}
+		
+		read.close();
 	}
 	
 	public void saveChange(String filename) throws IOException{
@@ -257,7 +258,9 @@ public class MainWindow extends WindowCommon {
 		this.childWindow = new MainWindowGUI();
 		this.loadTasks("taskSaveFile.txt");
 		Task editedTask = this.taskList.getTask(rowNo);
-		editedTask.setStatus(newStatus);
+		
+		TaskStatuses enumStatus = TaskStatuses.valueOf(newStatus);
+		editedTask.setStatus(enumStatus);
 		this.taskList.changeTask(rowNo, editedTask);  //Updates the Task List with the new Status
 		this.saveChange("taskSaveFile.txt");
 		this.childWindow.updateTable(rowNo, newStatus);

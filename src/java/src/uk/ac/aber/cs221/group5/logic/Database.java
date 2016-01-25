@@ -36,12 +36,12 @@ import uk.ac.aber.cs221.group5.gui.MainWindow;
 //This is currently a skeleton class to allow SQL to be created
 public class Database {
 	
-	private String URL;
-	private String portNo;
+	private String dbURL;
+	private String dbPortNo;
 	private String dbName;
 	private String dbUsername;
 	private String dbPassword;
-	private Connection connection;
+	private Connection dbConnection;
 	
 	private Timer connTimer;
 	private Timer latencyTimer;
@@ -61,7 +61,7 @@ public class Database {
 	 */
 	public Database(String usersFilePath, MainWindow parentWindow){
 		//Leave blank so default port is used
-		this.portNo = "";
+		this.dbPortNo = "";
 		this.connTimer = null;
 		this.currentStatus = DbStatus.DISCONNECTED;
 		
@@ -124,21 +124,24 @@ public class Database {
 	public boolean connect(String hostName, String portNo, String dbUser, String dbPass, String dbName){
 		this.dbUsername = dbUser;
 		this.dbPassword = dbPass;
+		this.dbName = dbName;
+		this.dbPortNo = portNo;
+		this.dbURL = hostName;
 		
 		//Create appropriate connection string
 		final String urlPrepend = "jdbc:mysql://";
 		//Append connection parameters - such as automatically reconnecting
 		final String urlAppend = "?autoReconnect=true";
 		
-		this.URL = urlPrepend + hostName + portNo + "/" + dbName + urlAppend;
+		this.dbURL = urlPrepend + this.dbURL + this.dbPortNo + "/" + this.dbName + urlAppend;
 		
 		try {
-			connection = DriverManager.getConnection(URL, dbUsername, dbPassword);
+			dbConnection = DriverManager.getConnection(dbURL, dbUsername, dbPassword);
 		} catch (SQLException e) {
 			System.err.println("Could not establish connection to DB in connect method");
 			//For use debugging
 			//Thread.dumpStack();
-			System.err.println("Full connection string was: " + this.URL);
+			System.err.println("Full connection string was: " + this.dbURL);
 			
 			//Reset state
 			currentStatus = DbStatus.DISCONNECTED;
@@ -159,9 +162,9 @@ public class Database {
 		}
 
 		
-		if (connection != null){
+		if (dbConnection != null){
 			try {
-				connection.close();
+				dbConnection.close();
 			} catch (SQLException e) {
 				System.err.println("Could not close JDBC connection");
 				//For debugging
@@ -174,7 +177,7 @@ public class Database {
 		}
 		
 		//Release current connection
-		connection = null;
+		dbConnection = null;
 		
 		//Set status
 		currentStatus = DbStatus.DISCONNECTED;
@@ -221,7 +224,7 @@ public class Database {
 					updateTaskElements(tasksList);
 					
 					//Update the copy held by the main window
-					hostWindow.settaskList(tasksList);
+					hostWindow.setTaskList(tasksList);
 					
 
 					try {
@@ -264,7 +267,7 @@ public class Database {
 				if (members != null){
 					MemberList newMemberList = resultSetToMemberList(members);
 					
-					hostWindow.setmemberList(newMemberList);
+					hostWindow.setMemberList(newMemberList);
 					
 					try {
 						parentDB.saveUserName(usersPath, newMemberList);
@@ -329,12 +332,12 @@ public class Database {
 	private ResultSet executeSqlStatement(String query){
 		Statement sqlStatementObject = null;
 		
-		if (connection == null){
+		if (dbConnection == null){
 			throw new NullPointerException("Connection was not opened or has been closed");
 		}
 		
 		try{
-			sqlStatementObject = connection.createStatement();
+			sqlStatementObject = dbConnection.createStatement();
 		} catch (SQLException e) {
 			System.err.println("Could not create SQL statement");
 			//To use when debugging

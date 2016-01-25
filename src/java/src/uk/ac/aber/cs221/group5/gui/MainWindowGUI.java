@@ -51,13 +51,6 @@ public class MainWindowGUI {
 	private JTable table;
 	private JLabel lblConnStatus;
 
-	/**
-	 * Launch the application.
-	 * 
-	 * @author Joshua Doyle
-	 * @version 1.0
-	 * @since 1.0 Initial Development
-	 */
 	public void launchWindow() {
 		
 		//Create inner class which implements runnable

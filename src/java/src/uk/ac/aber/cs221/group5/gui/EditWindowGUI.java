@@ -10,15 +10,11 @@ import java.awt.Insets;
 import javax.swing.SwingConstants;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.html.parser.Element;
-
-import uk.ac.aber.cs221.group5.logic.Task;
 import uk.ac.aber.cs221.group5.logic.TaskList;
 import uk.ac.aber.cs221.group5.logic.TaskStatuses;
 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
-import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;

@@ -1,10 +1,6 @@
 package uk.ac.aber.cs221.group5.gui;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
-import java.awt.GridLayout;
-import javax.swing.JPanel;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;

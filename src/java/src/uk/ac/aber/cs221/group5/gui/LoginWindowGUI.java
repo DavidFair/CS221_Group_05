@@ -3,11 +3,9 @@ package uk.ac.aber.cs221.group5.gui;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import java.awt.Font;
 import java.awt.Frame;
 
 import javax.swing.JTextField;
@@ -17,15 +15,12 @@ import uk.ac.aber.cs221.group5.logic.MemberList;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
-import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
