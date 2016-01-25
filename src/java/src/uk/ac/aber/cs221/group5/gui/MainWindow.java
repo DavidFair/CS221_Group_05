@@ -11,11 +11,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import com.mysql.fabric.xmlrpc.base.Data;
+
 import uk.ac.aber.cs221.group5.logic.MemberList;
 import uk.ac.aber.cs221.group5.logic.Task;
 import uk.ac.aber.cs221.group5.logic.TaskList;
 import uk.ac.aber.cs221.group5.logic.TaskStatuses;
-
+import uk.ac.aber.cs221.group5.logic.Database;
 import uk.ac.aber.cs221.group5.logic.DbStatus;
 
 
@@ -29,25 +31,13 @@ public class MainWindow extends WindowCommon {
 	
 	private MainWindowGUI childWindow;
 	
-
 	private TaskList taskList = new TaskList();
 	private MemberList memberList = new MemberList();
 	
-	public TaskList getTaskList(){
-		return this.taskList;
-	}
-	
-	public void settaskList (TaskList list) {
-		this.taskList = list;
-	}
-		
-	public MemberList getMemberList(){
-		return this.memberList;
-	}
-	public void setmemberList (MemberList list){
-		this.memberList = list;
-		
-	}
+	private static Database databaseObj;
+
+	//Use current directory of java applet
+	private final static String FILE_PATH = "./";
 	
 	
 	public static void main(String args[]) throws InterruptedException, NumberFormatException, IOException{
@@ -56,15 +46,26 @@ public class MainWindow extends WindowCommon {
 		
 		memberList.loadMembers("memberSaveFile.txt");
 		
+				
 		MainWindow mainWindow = new MainWindow();
 		if(!mainWindow.doesGUIExist()){
 			mainWindow.createWindow();
 		}
+		
+		databaseObj.connect();
+		databaseObj.getMembers();
+		databaseObj.getTasks();
+		
 		LoginWindow loginWindow = new LoginWindow();
 		loginWindow.passMemberList(memberList);
 		loginWindow.createWindow();	
+		
+		
+		
 	}
 	
+
+		
 	private boolean doesGUIExist(){
 		for(Frame frame : Frame.getFrames()){
 			if(frame.getTitle().equals("Main Window")){
@@ -79,12 +80,17 @@ public class MainWindow extends WindowCommon {
 		//TODO implement setConnStatus
 	}
 	
-	//GUI Methods Below
 	
 
 	public MainWindow(){
 		//Setup common window features
 		super();
+		//Update DB to interface with new main window
+		if (databaseObj != null){
+			databaseObj.updateHostWindow(this);
+		} else {
+			databaseObj = new Database(FILE_PATH, this);
+		}
 	}
 	
 	public void createWindow(){
@@ -151,6 +157,22 @@ public class MainWindow extends WindowCommon {
 	public void displayWarning(String warnText) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public TaskList getTaskList(){
+		return this.taskList;
+	}
+	
+	public void settaskList (TaskList list) {
+		this.taskList = list;
+	}
+		
+	public MemberList getMemberList(){
+		return this.memberList;
+	}
+	public void setmemberList (MemberList list){
+		this.memberList = list;
+		
 	}
 	
 	public void loadTasks(String filename) throws IOException{

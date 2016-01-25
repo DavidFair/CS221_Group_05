@@ -61,9 +61,9 @@ public class Database {
 	 */
 	public Database(String usersFilePath, MainWindow parentWindow){
 		//Leave blank so default port is used
-		portNo = "";
-		connTimer = null;
-		currentStatus = DbStatus.DISCONNECTED;
+		this.portNo = "";
+		this.connTimer = null;
+		this.currentStatus = DbStatus.DISCONNECTED;
 		
 		/* First load JDBC connector */
 		//Try to load driver else exit with error code
@@ -111,12 +111,14 @@ public class Database {
 		return connect("db.dcs.aber.ac.uk", "", "csgpadm_5", "906BnQjD", "csgp_5_15_16");
 	}
 
-	
+	public void updateHostWindow(MainWindow newWindow){
+		this.hostWindow = newWindow;
+	}
 	
 	
 	public boolean connect(String hostName, String portNo, String dbUser, String dbPass, String dbName){
-		dbUsername = dbUser;
-		dbPassword = dbPass;
+		this.dbUsername = dbUser;
+		this.dbPassword = dbPass;
 		
 		//Create appropriate connection string
 		final String urlPrepend = "jdbc:mysql://";
@@ -181,7 +183,9 @@ public class Database {
 	}
 	
 	
-	
+	public void getTasks(){
+		getTasks("");
+	}
 	
 	public void getTasks(String username){
 		
