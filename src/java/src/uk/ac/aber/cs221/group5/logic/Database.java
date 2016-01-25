@@ -174,12 +174,11 @@ public class Database {
 	
 	public void getTasks(String username){
 		
-		String templateQuery;
-		
+		String taskQuery;
 		if (username != ""){
-			templateQuery = "SELECT * FROM `tbl_tasks` WHERE TaskOwner='" + username + "';";
+			taskQuery = "SELECT * FROM `tbl_tasks` WHERE TaskOwner='" + username + "';";
 		} else {
-			templateQuery = "SELECT * FROM `tbl_tasks`";
+			taskQuery = "SELECT * FROM `tbl_tasks`";
 		}
 		
 		/*
@@ -189,15 +188,17 @@ public class Database {
 		Thread sqlExec = new Thread(new Runnable() {
 			
 			public void run() {
-				ResultSet tasksSet = executeSqlStatement(templateQuery);
+				ResultSet tasksSet = executeSqlStatement(taskQuery);
 				
 				if (tasksSet != null){
+					//Convert SQL result to Task List
 					TaskList tasksList = resultSetToTaskList(tasksSet);
 					
-					//TODO need to pass forward instead of back
-					//caller.
+					//Update the copy held by the main window
 					hostWindow.updateTasks(tasksList);
-					//Create timer to refresh on success
+					
+					//Update the task elements
+					updateTaskElements(tasksList);
 					try {
 						tasksSet.close();
 					} catch (SQLException e) {
@@ -375,6 +376,64 @@ public class Database {
 		}
 		
 		return newList;
+	}
+	
+	private void updateTaskElements(TaskList allTasks){
+
+		// This class runs in seperate threads pulling all task elements
+		class elementSync implements Runnable {
+			private TaskList listOfTasks;
+
+			public elementSync(TaskList allTasks) {
+				this.listOfTasks = allTasks;
+			}
+
+			public void run() {
+				// Get the number of tasks we need to collect elements for
+
+				int numOfTasks = listOfTasks.getListSize();
+				for (int i = 0; i < numOfTasks; i++) {
+
+					Task currentTask = allTasks.getTask(i);
+
+					// Clear current task to avoid duplicates
+					currentTask.clearAllElements();
+
+					String sqlQuery = "SELECT * FROM tbl_elements WHERE TaskID = ";
+					sqlQuery = sqlQuery + currentTask.getID();
+
+					ResultSet elements = executeSqlStatement(sqlQuery);
+
+					if (elements != null) {
+
+						try {
+							while (elements.next()) {
+								// Iterate over all comments
+								int index = elements.getInt("Index");
+								String elementDesc = elements.getString("TaskDesc");
+								String elementComments = elements.getString("TaskComments");
+
+								currentTask.addElement(elementDesc, elementComments);
+							}
+
+							elements.close();
+						} catch (SQLException e) {
+							System.err.println(e.getMessage());
+						}
+					} else {
+						throw new NullPointerException("Result set was null in getMembers");
+					}
+
+				}
+
+			}
+
+		} //End of anon inner class
+		
+
+		Thread execSql = new Thread(new elementSync(allTasks));
+		execSql.start();
+
 	}
 	
 	private void createRefreshTimer(int seconds, Database database) {

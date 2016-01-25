@@ -3,11 +3,11 @@ package uk.ac.aber.cs221.group5.logic;
 import java.util.ArrayList;
 
 public class Task {
-	String taskID;
-	String taskName;
-	String taskStart;
-	String taskEnd;
-	String taskMembers;
+	private String taskID;
+	private String taskName;
+	private String taskStart;
+	private String taskEnd;
+	private String taskMembers;
 	
 	TaskStatuses status;
 	
@@ -57,6 +57,10 @@ public class Task {
 	public void addElement(String elementName, String elementComment){
 		Element newElement = new Element(elementName, elementComment);
 		taskElements.add(newElement);
+	}
+	
+	public void clearAllElements(){
+		taskElements.clear();
 	}
 	
 	public Element getElement(int index){
