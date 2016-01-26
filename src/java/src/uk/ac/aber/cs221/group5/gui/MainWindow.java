@@ -36,7 +36,7 @@ public class MainWindow extends WindowCommon {
 	private static Database databaseObj;
 	
 	private static final String DB_CONFIG_PATH = "connSaveFile.txt";
-	private static final String MEMBERS_SAVE_PATH = "membersSaveFile.txt";
+	private static final String MEMBERS_SAVE_PATH = "memberSaveFile.txt";
 	private static final String TASK_SAVE_PATH = "taskSaveFile.txt";
 
 
@@ -127,11 +127,11 @@ public class MainWindow extends WindowCommon {
 			
 			databaseObj.connect(url, dbPort, dbUsername, dbPassword, dbName);
 		
-		} catch (FileNotFoundException e) {
+		} catch (Exception e) {
 			ConnSettingsWindow connWindow = new ConnSettingsWindow();
-		}
+		} 
 		
-		readConfigToDb(dbFile);
+		
 		
 		
 	}
