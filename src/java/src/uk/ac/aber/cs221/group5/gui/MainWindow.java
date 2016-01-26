@@ -37,14 +37,25 @@ public class MainWindow extends WindowCommon {
 		return this.taskList;
 	}
 	
-	public void settaskList (TaskList list) {
+	public void setTaskList (TaskList list) {
+		for(Frame frame : Frame.getFrames()){
+			if(frame.getTitle().equals("Edit Window")){
+				//Do nothing now and pull data from DB when Edit Window is closed 
+			}
+		}
 		this.taskList = list;
 	}
 		
 	public MemberList getMemberList(){
 		return this.memberList;
 	}
-	public void setmemberList (MemberList list){
+	
+	public void setMemberList (MemberList list){
+		for(Frame frame : Frame.getFrames()){
+			if(frame.getTitle().equals("Edit Window")){
+				//Do nothing now and pull data from DB when Edit Window is closed 
+			}
+		}
 		this.memberList = list;
 		
 	}
