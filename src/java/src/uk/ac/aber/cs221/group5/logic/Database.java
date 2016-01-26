@@ -514,6 +514,10 @@ public class Database {
 								String elementDesc = elements.getString("TaskDesc");
 								String elementComments = elements.getString("TaskComments");
 								
+								if (elementComments == null){
+									elementComments = "";
+								}
+								
 								//Remove pipes and chars from element desc and comments
 								elementDesc = elementDesc.replace(",", "");
 								elementComments = elementComments.replace("|", "");
@@ -591,7 +595,8 @@ public class Database {
 		latencyTimer = new Timer();
 		
 		class LatencyAlert extends TimerTask{
-						
+
+			
 			@Override
 			public void run() {
 				hostWindow.setConnStatus(currentStatus);
@@ -610,9 +615,9 @@ public class Database {
 			
 		}
 		
-		Thread latencyTimer = new Thread(new LatencyAlert());
-		latencyTimer.start();
+		latencyTimer.schedule(new LatencyAlert(), SYNC_ALRT_DELAY*1000);
 		
 	}
+	
 	
 }
