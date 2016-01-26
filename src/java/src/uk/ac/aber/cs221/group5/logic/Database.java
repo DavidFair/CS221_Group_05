@@ -169,7 +169,8 @@ public class Database {
 					parentDb.getTasks();
 					
 				} catch (SQLException e) {
-					
+					parentWindow.displayError("Could not connect to database. "
+							+ "Please check connection settings", "Connection Error");
 					// For use debugging
 					// Thread.dumpStack();
 					//System.err.println("Full connection string was: " + url);
