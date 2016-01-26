@@ -148,12 +148,15 @@ public class Database {
 			private String uName;
 			private String pWord;
 			private Database parentDb;
+			private MainWindow parentWindow;
 
-			public ConnectThread(String url, String uName, String pWord, Database parentDB) {
+			public ConnectThread(String url, String uName, String pWord, 
+					Database parentDB, MainWindow hostWindow) {
 				this.url = url;
 				this.uName = uName;
 				this.pWord = pWord;
 				this.parentDb = parentDB;
+				this.parentWindow = hostWindow;
 			}
 
 			public void run() {
@@ -166,10 +169,10 @@ public class Database {
 					parentDb.getTasks();
 					
 				} catch (SQLException e) {
-					System.err.println("Could not establish connection to DB in connect method");
+					
 					// For use debugging
 					// Thread.dumpStack();
-					System.err.println("Full connection string was: " + url);
+					//System.err.println("Full connection string was: " + url);
 
 					// Reset state
 					parentDb.currentStatus = DbStatus.DISCONNECTED;
@@ -178,9 +181,10 @@ public class Database {
 			}
 
 		}
+ 
 
 		this.connTime = System.currentTimeMillis();
-		Thread connectDb = new Thread(new ConnectThread(dbURL, dbUser, dbPass, this));
+		Thread connectDb = new Thread(new ConnectThread(connectionUrl, dbUser, dbPass, this, hostWindow));
 
 		connectDb.start();
 
