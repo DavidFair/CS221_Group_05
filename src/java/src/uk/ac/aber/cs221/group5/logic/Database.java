@@ -262,6 +262,7 @@ public class Database {
 
 					hostWindow.settaskList(tasksList);
 
+					currentStatus = DbStatus.CONNECTED;
 
 					try {
 						tasksSet.close();
@@ -279,6 +280,9 @@ public class Database {
 		
 		Thread sqlExec = new Thread(new TaskSync(taskQuery));
 		sqlExec.start();
+		
+		//Setup latency timer to detect lag
+		setupLatencyTimer();
 		
 
 		createRefreshTimer(REFRESH_SEC_DELAY, this );
@@ -310,6 +314,7 @@ public class Database {
 
 					parentDB.saveUserName(usersPath, newMemberList);
 
+					currentStatus = DbStatus.CONNECTED;
 					
 					try {
 						members.close();
@@ -322,8 +327,11 @@ public class Database {
 			}
 		}
 		//Create new thread an exec it
+		currentStatus = DbStatus.SYNCHRONIZING;
 		Thread sqlExec = new Thread(new MemberSync(this));
 		sqlExec.start();
+		
+		setupLatencyTimer();
 
 		createRefreshTimer(REFRESH_SEC_DELAY, this);
 
@@ -523,14 +531,20 @@ public class Database {
 					}
 
 				}
+				
+				//Finished getting task elements
+				
 
 			}
 
 		} //End of anon inner class
 		
+		currentStatus = DbStatus.SYNCHRONIZING;
 
 		Thread execSql = new Thread(new ElementSync(allTasks));
 		execSql.start();
+		
+		setupLatencyTimer();
 
 	}
 	
@@ -577,10 +591,10 @@ public class Database {
 		latencyTimer = new Timer();
 		
 		class LatencyAlert extends TimerTask{
-
+						
 			@Override
 			public void run() {
-				//hostWindow.whatever(currentStatus)
+				hostWindow.setConnStatus(currentStatus);
 				
 				if (currentStatus == DbStatus.SYNCHRONIZING){
 					//Still syncing create timer to check again
@@ -596,6 +610,8 @@ public class Database {
 			
 		}
 		
+		Thread latencyTimer = new Thread(new LatencyAlert());
+		latencyTimer.start();
 		
 	}
 	
