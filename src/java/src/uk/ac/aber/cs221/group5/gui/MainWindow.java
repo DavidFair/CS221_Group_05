@@ -123,8 +123,6 @@ public class MainWindow extends WindowCommon {
 			String url;
 			String dbPort; 
 		
-			int dbTasks = Integer.parseInt(read.readLine());
-		
 		    dbName = read.readLine();
 			dbUsername = read.readLine();
 			dbPassword = read.readLine();
@@ -137,12 +135,8 @@ public class MainWindow extends WindowCommon {
 			
 		
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Could not connect to database. Check Connection Settings.", "Connection Error", JOptionPane.ERROR_MESSAGE);
+			//Display Error
 		} 
-		
-		
-		
-		
 	}
 		
 		
@@ -234,8 +228,8 @@ public class MainWindow extends WindowCommon {
 	 * @see uk.ac.aber.cs221.group5.logic.WindowInterface#displayError(java.lang.String)
 	 */
 	@Override
-	public void displayError(String errorText) {
-		// TODO Auto-generated method stub
+	public void displayError(String errorText, String errorType) {
+		JOptionPane.showMessageDialog(null, errorText, errorType, JOptionPane.ERROR_MESSAGE);
 
 	}
 

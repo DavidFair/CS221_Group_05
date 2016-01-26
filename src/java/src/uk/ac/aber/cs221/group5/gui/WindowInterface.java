@@ -36,7 +36,7 @@ public interface WindowInterface {
 	 * Displays a dialog box with an error message
 	 * @param errorText
 	 */
-	public void displayError(String errorText);
+	public void displayError(String errorText, String errorType);
 	
 	/**
 	 * Displays a dialog box with a warning message
