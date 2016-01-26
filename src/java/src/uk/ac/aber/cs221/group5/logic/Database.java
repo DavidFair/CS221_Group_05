@@ -93,14 +93,12 @@ public class Database {
 	 * @throws IOException 
 	 */
 	public void saveUserName(String filePath, MemberList allUsers) {
-		final String saveFileName = "members.txt";
 		
-		String fullFilePath = filePath + saveFileName;
 		
 		FileWriter fileWriter;
 		
 		try {
-			fileWriter = new FileWriter(fullFilePath);
+			fileWriter = new FileWriter(filePath);
 			BufferedWriter write = new BufferedWriter(fileWriter);
 			
 			int numOfTasks = allUsers.getLength();

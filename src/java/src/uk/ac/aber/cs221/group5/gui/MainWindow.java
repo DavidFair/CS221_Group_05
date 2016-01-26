@@ -33,12 +33,12 @@ public class MainWindow extends WindowCommon {
 	private TaskList taskList = new TaskList();
 	private MemberList memberList = new MemberList();
 	
-	private String dbUrl;
-	private String dbName;
-	private String dbPass;
-	private String dbUser;
-	private String dbPort;
+	private static Database databaseObj;
 	
+	private static final String DB_CONFIG_PATH = "connSaveFile.txt";
+	private static final String MEMBERS_SAVE_PATH = "membersSaveFile.txt";
+	private static final String TASK_SAVE_PATH = "taskSaveFile.txt";
+
 
 	public TaskList getTaskList(){
 		return this.taskList;
@@ -50,7 +50,7 @@ public class MainWindow extends WindowCommon {
 		this.taskList = list;
 		
 		try {
-			saveChange("taskSaveFile.txt");
+			saveChange(TASK_SAVE_PATH);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -64,41 +64,35 @@ public class MainWindow extends WindowCommon {
 	}
 
 	public void setmemberList (MemberList list){
-		this.memberList = list;
-		try {
-			saveChange("taskSaveFile.txt");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	
+
+			this.memberList = list;
+			try {
+				saveChange(TASK_SAVE_PATH);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+
 		
 	}
 
-	private static Database databaseObj;
 
-	//Use current directory of java applet
-	private final static String FILE_PATH = "./";	
+
 	
 	public static void main(String args[]) throws InterruptedException, NumberFormatException, IOException{
 		TaskList taskList = new TaskList();
 		MemberList memberList = new MemberList();
-		
+
+		memberList.loadMembers(MEMBERS_SAVE_PATH);
+	
 		MainWindow mainWindow = new MainWindow();
 		if(!mainWindow.doesGUIExist()){
 			mainWindow.createWindow();
 		}
 		
-		databaseObj.connect();
-		databaseObj.getTasks();
-		databaseObj.getMembers();
-		mainWindow.saveChange("taskSaveFile.txt");
-		
-		try{
-			memberList.loadMembers("memberSaveFile.txt");
-		}catch(NumberFormatException e){
-			
-		}
+
+		readConfigToDb(DB_CONFIG_PATH);
 		
 		LoginWindow loginWindow = new LoginWindow();
 		loginWindow.passMemberList(memberList);
@@ -109,36 +103,36 @@ public class MainWindow extends WindowCommon {
 
 
 	
-	private void readConfigToDb(String dbFile) throws IOException{
+	private static void readConfigToDb(String dbFile) throws IOException{
 		FileReader fileReader;
 		try {
 			fileReader = new FileReader(dbFile);
 			BufferedReader read = new BufferedReader(fileReader);
-			int dbTasks = 0;
+
 			String dbName;
 			String dbUsername;
 			String dbPassword;
 			String url;
 			String dbPort; 
 		
-			dbTasks = Integer.parseInt(read.readLine());
+			int dbTasks = Integer.parseInt(read.readLine());
 		
 		    dbName = read.readLine();
-			this.dbName = dbName;
 			dbUsername = read.readLine();
-			this.dbUser = dbUsername;
 			dbPassword = read.readLine();
-			this.dbPass = dbPassword;
 			url = read.readLine();
-			this.dbUrl = url;
 			dbPort = read.readLine();
-			this.dbPort = dbPort;
+			
 			read.close();
+			
+			databaseObj.connect(url, dbPort, dbUsername, dbPassword, dbName);
 		
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ConnSettingsWindow connWindow = new ConnSettingsWindow();
 		}
+		
+		readConfigToDb(dbFile);
+		
 		
 	}
 		
@@ -168,7 +162,7 @@ public class MainWindow extends WindowCommon {
 		if (databaseObj != null){
 			databaseObj.updateHostWindow(this);
 		} else {
-			databaseObj = new Database(FILE_PATH, this);
+			databaseObj = new Database(MEMBERS_SAVE_PATH, this);
 		}
 	}
 	
@@ -179,8 +173,8 @@ public class MainWindow extends WindowCommon {
 		
 		//Load the tasks into the Task List
 		try {
-			saveChange("taskSaveFile.txt");
-			loadTasks("taskSaveFile.txt");
+			saveChange(TASK_SAVE_PATH);
+			loadTasks(TASK_SAVE_PATH);
 			this.childWindow.populateTable(this.taskList);
 		} catch (IOException e1) {
 			System.out.println("Failed to load Task File");
@@ -190,7 +184,7 @@ public class MainWindow extends WindowCommon {
 		
 		//Load the members into the Member List
 		try {
-			memberList.loadMembers("memberSaveFile.txt");
+			memberList.loadMembers(MEMBERS_SAVE_PATH);
 		} catch (NumberFormatException | IOException e) {
 			System.out.println("Failed to load member save file");
 			e.printStackTrace();
@@ -356,13 +350,13 @@ public class MainWindow extends WindowCommon {
 			}
 		}
 		this.childWindow = new MainWindowGUI();
-		this.loadTasks("taskSaveFile.txt");
+		this.loadTasks(TASK_SAVE_PATH);
 		Task editedTask = this.taskList.getTask(rowNo);
 		
 		TaskStatuses enumStatus = TaskStatuses.valueOf(newStatus);
 		editedTask.setStatus(enumStatus);
 		this.taskList.changeTask(rowNo, editedTask);  //Updates the Task List with the new Status
-		this.saveChange("taskSaveFile.txt");
+		this.saveChange(TASK_SAVE_PATH);
 		this.childWindow.updateTable(rowNo, newStatus);
 		this.childWindow.setVisible(true);
 	}

@@ -16,7 +16,7 @@ public class ConnSettingsWindow {
 		}
 	}
 	
-	public void createWindow(){
+	private void createWindow(){
 		childWindow = new ConnSettingsWindowGUI();
 		ConnSettingsWindow window = new ConnSettingsWindow();
 		if(!window.doesGUIExist()){

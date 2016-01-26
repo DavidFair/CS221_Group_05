@@ -37,6 +37,8 @@ public class EditWindowGUI {
 	private JTextField txtExpectedEndDate;
 	private JTable table;
 	private int rowNo;	//The index of the row selected in the Main Window table when this window was spawned
+	
+	private static final String TASK_SAVE_PATH = "taskSaveFile.txt";
 
 
 	/**
@@ -233,7 +235,7 @@ public class EditWindowGUI {
 				MainWindow main = new MainWindow();	//This object is only used to update the table in the Main Window GUI
 													// and does not spawn a new GUI.
 				try {
-					main.loadTasks("taskSaveFile.txt");
+					main.loadTasks(TASK_SAVE_PATH);
 /*					ArrayList<String[]> editedTasks = new ArrayList<String[]>();
 					for(int taskCount = 0; taskCount < main.getNumTask(); taskCount++){
 						for(int rowCount = 0; rowCount < table.getRowCount(); rowCount++){
@@ -277,7 +279,7 @@ public class EditWindowGUI {
 		int selectionIndex;	//The index in the table that was selected in main window
 		ArrayList<String[]> elements = new ArrayList<String[]>();
 		MainWindow main = new MainWindow();	//Used for loading elements and will not spawn a GUI
-		main.loadTasks("taskSaveFile.txt");
+		main.loadTasks(TASK_SAVE_PATH);
 		elements = main.getElements(tableIndex);
 		
 		for(String[] pair : elements){
@@ -290,7 +292,7 @@ public class EditWindowGUI {
 	
 	private void updateLocalFiles(){
 		MainWindow main = new MainWindow();
-		main.updateLocalFiles("taskSaveFile.txt");
+		main.updateLocalFiles(TASK_SAVE_PATH);
 	}
 	
 ////INNER CLASSSES

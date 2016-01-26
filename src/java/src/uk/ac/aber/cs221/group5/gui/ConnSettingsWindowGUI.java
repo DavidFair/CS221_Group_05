@@ -25,6 +25,8 @@ public class ConnSettingsWindowGUI {
 	private JTextField txtPassword;
 	private JLabel     lblConnStatus;
 	private JLabel     lblLastSynced;
+	
+	private static final String DB_CONFIG_PATH = "connSaveFile.txt";
 
 
 	/**
@@ -192,7 +194,7 @@ public class ConnSettingsWindowGUI {
 				String dbURL = txtDbURL.getText();
 				String portNo = txtPortNo.getText();
 				try {
-					saveWindow.saveConnSettings("connSaveFile.txt", dbName, username, password, dbURL, portNo);
+					saveWindow.saveConnSettings(DB_CONFIG_PATH, dbName, username, password, dbURL, portNo);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
