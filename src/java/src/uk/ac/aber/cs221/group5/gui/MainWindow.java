@@ -37,15 +37,17 @@ public class MainWindow extends WindowCommon {
 		return this.taskList;
 	}
 	
-	public void settaskList (TaskList list) {
+	public void settaskList (TaskList list) throws IOException {
 		this.taskList = list;
+		saveChange("taskSaveFile.txt");
 	}
 		
 	public MemberList getMemberList(){
 		return this.memberList;
 	}
-	public void setmemberList (MemberList list){
+	public void setmemberList (MemberList list) throws IOException{
 		this.memberList = list;
+		saveChange("taskSaveFile.txt");
 		
 	}
 	

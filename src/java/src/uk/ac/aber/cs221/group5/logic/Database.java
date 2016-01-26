@@ -212,7 +212,12 @@ public class Database {
 					updateTaskElements(tasksList);
 					
 					//Update the copy held by the main window
-					hostWindow.settaskList(tasksList);
+					try {
+						hostWindow.settaskList(tasksList);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					
 
 					try {
@@ -255,7 +260,12 @@ public class Database {
 				if (members != null){
 					MemberList newMemberList = resultSetToMemberList(members);
 					
-					hostWindow.setmemberList(newMemberList);
+					try {
+						hostWindow.setmemberList(newMemberList);
+					} catch (IOException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
 					
 					try {
 						parentDB.saveUserName(usersPath, newMemberList);
