@@ -107,26 +107,24 @@ public class MainWindow extends WindowCommon {
 		FileReader fileReader;
 		try {
 			fileReader = new FileReader(dbFile);
-			
-		
 			BufferedReader read = new BufferedReader(fileReader);
 			int dbTasks = 0;
-			String url;
 			String dbName;
-			String dbPassword;
 			String dbUsername;
+			String dbPassword;
+			String url;
 			String dbPort; 
 		
 			dbTasks = Integer.parseInt(read.readLine());
 		
-		    url = read.readLine();
-			this.dbUrl = url;
-			dbName = read.readLine();
+		    dbName = read.readLine();
 			this.dbName = dbName;
-			dbPassword = read.readLine();
-			this.dbPass = dbPassword;
 			dbUsername = read.readLine();
 			this.dbUser = dbUsername;
+			dbPassword = read.readLine();
+			this.dbPass = dbPassword;
+			url = read.readLine();
+			this.dbUrl = url;
 			dbPort = read.readLine();
 			this.dbPort = dbPort;
 			read.close();
@@ -135,7 +133,9 @@ public class MainWindow extends WindowCommon {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
+		
 		
 		//TODO read config in here
 		
