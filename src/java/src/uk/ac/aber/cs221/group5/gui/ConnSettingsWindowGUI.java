@@ -199,13 +199,15 @@ public class ConnSettingsWindowGUI {
 				if(dbName.equals("") || username.equals("") || password.equals("") || dbURL.equals("")){
 					JOptionPane.showMessageDialog(null, "Make sure all fields are filled in.", "Connection Error", JOptionPane.ERROR_MESSAGE);
 				}
+				else{
 				try {
 					saveWindow.saveConnSettings(DB_CONFIG_PATH, dbName, username, password, dbURL, portNo);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					frmConnectionSettings.dispose();
 				}
-				frmConnectionSettings.dispose();
 			}
 		});
 		GridBagConstraints gbc_btnConnect = new GridBagConstraints();
