@@ -90,11 +90,7 @@ public class MainWindow extends WindowCommon {
 		LoginWindow loginWindow = new LoginWindow();
 		loginWindow.passMemberList(memberList);
 		loginWindow.createWindow();	
-	}
-<<<<<<< HEAD
-			
-=======
-	
+	}	
 
 	private void readConfigToDb(){
 		String url;
@@ -108,7 +104,6 @@ public class MainWindow extends WindowCommon {
 		//databaseObj.connect(url, dbPort, dbUsername, dbPassword, dbName);
 	}
 		
->>>>>>> Threaded the connect method and added stub config read method
 	private boolean doesGUIExist(){
 		for(Frame frame : Frame.getFrames()){
 			if(frame.getTitle().equals("Main Window")){
