@@ -10,10 +10,8 @@ public class ConnSettingsWindow {
 	private ConnSettingsWindowGUI childWindow;
 	
 	public ConnSettingsWindow(){
-		//Only spawns a new GUI if one does not already exist.
-		if(!this.doesGUIExist()){
-			this.createWindow();
-		}
+		this.createWindow();
+		
 	}
 	
 	private void createWindow(){

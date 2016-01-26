@@ -207,6 +207,8 @@ public class ConnSettingsWindowGUI {
 						e.printStackTrace();
 					}
 					frmConnectionSettings.dispose();
+					frmConnectionSettings = null;
+					
 				}
 			}
 		});
