@@ -178,6 +178,7 @@ public class MainWindow extends WindowCommon {
 		
 		//Load the tasks into the Task List
 		try {
+			saveChange("taskSaveFile.txt");
 			loadTasks("taskSaveFile.txt");
 			this.childWindow.populateTable(this.taskList);
 		} catch (IOException e1) {
@@ -293,13 +294,13 @@ public class MainWindow extends WindowCommon {
 		for(int loopCount = 0; loopCount < numOfTasks; loopCount++){
 			Task writeTask = this.taskList.getTask(loopCount);
 			elements = writeTask.getAllElementPairs();
-			write.write(writeTask.getID()+"\n");
+			write.write(writeTask.getID());
 			//Elements
 			for(int i = 0; i < writeTask.getNumElements(); i++){
 				String[] elementPair = {"", ""};
 				elementPair = elements.get(i);
 				write.write(elementPair[0]+",");
-				write.write(elementPair[1]+"|");
+				write.write(elementPair[1]+"\n");
 			}
 			write.write("\n");
 			write.write(writeTask.getName()+"\n");

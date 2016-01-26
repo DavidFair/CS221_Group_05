@@ -1,13 +1,11 @@
 2
 2
-Currently still in progress, researching Punit|
 Test One
 Abandoned
 example@example.com
 2015-10-10
 2016-10-10
 3
-Completed and handed in to project manager,|
 Project Plan
 Completed
 daf5@aber.ac.uk
