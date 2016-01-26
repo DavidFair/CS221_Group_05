@@ -83,9 +83,6 @@ if (!isset($_SESSION['login_auth']))
 
     <!-- Add Task -->
     <?php include('taskAdd.php'); ?>
-
-    <!-- Delete Task -->
-    <?php include('taskDelete.php'); ?>
     </body>
     </html>
 <?php

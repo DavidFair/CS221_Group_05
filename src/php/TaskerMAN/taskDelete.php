@@ -10,16 +10,23 @@ if (!($_SESSION['login_auth']))
 }
 
 // Sanitise the input, this could easily be dirty
-if (filter_var($_POST['id'],FILTER_SANITIZE_NUMBER_INT))
+if (filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT))
 {
     // With this done we should still use prepared statements
     try
     {
-        $stmt = $pdo->prepare("DELETE FROM :tbltasks WHERE :id = :filteredID");
-        
+        // SQL Delete
+        $stmt = $pdo->prepare("DELETE FROM tbl_tasks WHERE TaskID = :filteredID");
+        $stmt->bindParam(':filteredID',$_GET['id']);
+        $stmt->execute();
+        // Alert user and redirect
+        echo '<script>alert("Task Deleted");</script>';
+        header('Location: taskerman.php');
+
     } catch (PDOException $ex)
     {
-
+        errorHandler($ex->getMessage(),"Fatal Database Error",LOGFILE,timePrint());
+        header('Location: taskerman.php');
     }
 }
 else

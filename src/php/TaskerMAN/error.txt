@@ -1,0 +1,37 @@
+[26-Jan-2016 10:34:35 Europe/London] PHP Warning:  include(taskDelete.php): failed to open stream: No such file or directory in /ceri/homes1/o/ole4/public_html/taskerman/latest/taskerman.php on line 92
+[26-Jan-2016 10:34:35 Europe/London] PHP Warning:  include(): Failed opening 'taskDelete.php' for inclusion (include_path='.:/usr/share/php5:/usr/share/php') in /ceri/homes1/o/ole4/public_html/taskerman/latest/taskerman.php on line 92
+[26-Jan-2016 10:34:40 Europe/London] PHP Fatal error:  Call to a member function prepare() on null in /ceri/homes1/o/ole4/public_html/taskerman/latest/index.php on line 97
+[26-Jan-2016 10:34:55 Europe/London] PHP Fatal error:  Call to a member function prepare() on null in /ceri/homes1/o/ole4/public_html/taskerman/latest/index.php on line 97
+[26-Jan-2016 10:43:22 Europe/London] PHP Fatal error:  Call to a member function prepare() on null in /ceri/homes1/o/ole4/public_html/taskerman/latest/index.php on line 97
+[26-Jan-2016 10:43:31 Europe/London] PHP Fatal error:  Call to a member function prepare() on null in /ceri/homes1/o/ole4/public_html/taskerman/latest/index.php on line 97
+[26-Jan-2016 10:52:41 Europe/London] PHP Fatal error:  Call to a member function prepare() on null in /ceri/homes1/o/ole4/public_html/taskerman/latest/index.php on line 38
+[26-Jan-2016 10:52:47 Europe/London] PHP Fatal error:  Call to a member function prepare() on null in /ceri/homes1/o/ole4/public_html/taskerman/latest/index.php on line 38
+[26-Jan-2016 10:54:49 Europe/London] PHP Fatal error:  Call to a member function prepare() on null in /ceri/homes1/o/ole4/public_html/taskerman/latest/index.php on line 38
+
+26-01-2016 1453805736 PDO Database Error exception 'PDOException' with message 'SQLSTATE[HY000] [2002] No such file or directory' in /ceri/homes1/o/ole4/public_html/taskerman/latest/connect.php:37
+Stack trace:
+#0 /ceri/homes1/o/ole4/public_html/taskerman/latest/connect.php(37): PDO->__construct('mysql:host=;dbn...', NULL, NULL)
+#1 /ceri/homes1/o/ole4/public_html/taskerman/latest/connect.php(22): connect()
+#2 /ceri/homes1/o/ole4/public_html/taskerman/latest/init.php(24): require_once('/ceri/homes1/o/...')
+#3 /ceri/homes1/o/ole4/public_html/taskerman/latest/index.php(10): require('/ceri/homes1/o/...')
+#4 {main}
+
+26-01-2016 1453805743 PDO Database Error exception 'PDOException' with message 'SQLSTATE[HY000] [2002] No such file or directory' in /ceri/homes1/o/ole4/public_html/taskerman/latest/connect.php:37
+Stack trace:
+#0 /ceri/homes1/o/ole4/public_html/taskerman/latest/connect.php(37): PDO->__construct('mysql:host=;dbn...', NULL, NULL)
+#1 /ceri/homes1/o/ole4/public_html/taskerman/latest/connect.php(22): connect()
+#2 /ceri/homes1/o/ole4/public_html/taskerman/latest/init.php(24): require_once('/ceri/homes1/o/...')
+#3 /ceri/homes1/o/ole4/public_html/taskerman/latest/index.php(10): require('/ceri/homes1/o/...')
+#4 {main}
+
+26-01-2016 1453805794 PDO Database Error exception 'PDOException' with message 'SQLSTATE[HY000] [2002] No such file or directory' in /ceri/homes1/o/ole4/public_html/taskerman/latest/connect.php:37
+Stack trace:
+#0 /ceri/homes1/o/ole4/public_html/taskerman/latest/connect.php(37): PDO->__construct('mysql:host=;dbn...', NULL, NULL)
+#1 /ceri/homes1/o/ole4/public_html/taskerman/latest/connect.php(22): connect()
+#2 /ceri/homes1/o/ole4/public_html/taskerman/latest/init.php(24): require_once('/ceri/homes1/o/...')
+#3 /ceri/homes1/o/ole4/public_html/taskerman/latest/index.php(10): require('/ceri/homes1/o/...')
+#4 {main}
+[26-Jan-2016 11:00:02 Europe/London] PHP Fatal error:  Call to a member function prepare() on null in /ceri/homes1/o/ole4/public_html/taskerman/latest/index.php on line 38
+[26-Jan-2016 12:08:12 Europe/London] PHP Warning:  include(taskDelete.php): failed to open stream: No such file or directory in /ceri/homes1/o/ole4/public_html/taskerman/latest/taskerman.php on line 77
+[26-Jan-2016 12:08:12 Europe/London] PHP Warning:  include(): Failed opening 'taskDelete.php' for inclusion (include_path='.:/usr/share/php5:/usr/share/php') in /ceri/homes1/o/ole4/public_html/taskerman/latest/taskerman.php on line 77
+[26-Jan-2016 17:01:05 Europe/London] PHP Warning:  Cannot modify header information - headers already sent by (output started at /ceri/homes1/o/ole4/public_html/taskerman/latest/taskAdd.php:34) in /ceri/homes1/o/ole4/public_html/taskerman/latest/taskDelete.php on line 24
