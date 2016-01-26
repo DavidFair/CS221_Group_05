@@ -88,13 +88,8 @@ public class MainWindow extends WindowCommon {
 		LoginWindow loginWindow = new LoginWindow();
 		loginWindow.passMemberList(memberList);
 		loginWindow.createWindow();	
-		
-		
-		
 	}
-	
-
-		
+			
 	private boolean doesGUIExist(){
 		for(Frame frame : Frame.getFrames()){
 			if(frame.getTitle().equals("Main Window")){
@@ -104,13 +99,10 @@ public class MainWindow extends WindowCommon {
 		return false;
 	}
 		
-	
 	public void setConnStatus(DbStatus connStatus){
 		//TODO implement setConnStatus
 	}
 	
-	
-
 	public MainWindow(){
 		//Setup common window features
 		super();
