@@ -64,15 +64,13 @@ public class MainWindow extends WindowCommon {
 	}
 
 	public void setmemberList (MemberList list){
-		
-
-			this.memberList = list;
-			try {
-				saveChange("taskSaveFile.txt");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		this.memberList = list;
+		try {
+			saveChange("taskSaveFile.txt");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	
 		
 	}
@@ -92,6 +90,9 @@ public class MainWindow extends WindowCommon {
 		}
 		
 		databaseObj.connect();
+		databaseObj.getTasks();
+		databaseObj.getMembers();
+		mainWindow.saveChange("taskSaveFile.txt");
 		
 		try{
 			memberList.loadMembers("memberSaveFile.txt");
@@ -279,6 +280,11 @@ public class MainWindow extends WindowCommon {
 			startDate  = read.readLine();
 			endDate    = read.readLine();
 			Task task  = new Task(taskID, taskName, startDate, endDate, assigned, taskStatus);
+			ArrayList<String[]> taskElements = getElementsLocal(filename, loopCount);
+			for(int elementCount = 0; elementCount < taskElements.size(); elementCount++){
+				String[] elementPair = {"", ""};
+				task.addElement(elementPair[0], elementPair[1]);
+			}
 			this.taskList.addTask(task);
 		}
 		
@@ -287,12 +293,13 @@ public class MainWindow extends WindowCommon {
 	
 	public void saveChange(String filename) throws IOException{
 		ArrayList<String[]> elements;
+		Task writeTask;
 		FileWriter fileWriter = new FileWriter(filename);
 		BufferedWriter write = new BufferedWriter(fileWriter);
 		int numOfTasks = this.taskList.getListSize();
 		write.write(numOfTasks+"\n");
 		for(int loopCount = 0; loopCount < numOfTasks; loopCount++){
-			Task writeTask = this.taskList.getTask(loopCount);
+			writeTask = this.taskList.getTask(loopCount);
 			elements = writeTask.getAllElementPairs();
 			write.write(writeTask.getID());
 			//Elements
