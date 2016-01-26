@@ -39,6 +39,7 @@ import uk.ac.aber.cs221.group5.logic.TaskStatuses;
 import uk.ac.aber.cs221.group5.logic.TaskList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ListSelectionModel;
 
 public class MainWindowGUI {
 
@@ -331,6 +332,8 @@ public class MainWindowGUI {
 		panel.add(scrollPane, gbc_scrollPane);
 		
 		table = new JTable();
+		table.setCellSelectionEnabled(true);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
