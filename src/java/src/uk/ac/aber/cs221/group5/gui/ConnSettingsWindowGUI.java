@@ -69,23 +69,23 @@ public class ConnSettingsWindowGUI {
 		gbc_lblLastSynced.gridy = 2;
 		frmConnectionSettings.getContentPane().add(lblLastSynced, gbc_lblLastSynced);
 		
-		JLabel lblDbName = new JLabel("Database Name");
-		GridBagConstraints gbc_lblDbName = new GridBagConstraints();
-		gbc_lblDbName.anchor = GridBagConstraints.EAST;
-		gbc_lblDbName.insets = new Insets(0, 0, 5, 5);
-		gbc_lblDbName.gridx = 2;
-		gbc_lblDbName.gridy = 4;
-		frmConnectionSettings.getContentPane().add(lblDbName, gbc_lblDbName);
+		JLabel lblDbURL = new JLabel("Database URL");
+		GridBagConstraints gbc_lblDbURL = new GridBagConstraints();
+		gbc_lblDbURL.anchor = GridBagConstraints.NORTHEAST;
+		gbc_lblDbURL.insets = new Insets(0, 0, 5, 5);
+		gbc_lblDbURL.gridx = 2;
+		gbc_lblDbURL.gridy = 4;
+		frmConnectionSettings.getContentPane().add(lblDbURL, gbc_lblDbURL);
 		
-		txtDbName = new JTextField();
-		GridBagConstraints gbc_txtDbName = new GridBagConstraints();
-		gbc_txtDbName.gridwidth = 2;
-		gbc_txtDbName.insets = new Insets(0, 0, 5, 5);
-		gbc_txtDbName.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtDbName.gridx = 4;
-		gbc_txtDbName.gridy = 4;
-		frmConnectionSettings.getContentPane().add(txtDbName, gbc_txtDbName);
-		txtDbName.setColumns(10);
+		txtDbURL = new JTextField();
+		GridBagConstraints gbc_txtDbURL = new GridBagConstraints();
+		gbc_txtDbURL.gridwidth = 2;
+		gbc_txtDbURL.insets = new Insets(0, 0, 5, 5);
+		gbc_txtDbURL.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtDbURL.gridx = 4;
+		gbc_txtDbURL.gridy = 4;
+		frmConnectionSettings.getContentPane().add(txtDbURL, gbc_txtDbURL);
+		txtDbURL.setColumns(10);
 		
 		JLabel lblUsername = new JLabel("Username");
 		GridBagConstraints gbc_lblUsername = new GridBagConstraints();
@@ -123,23 +123,23 @@ public class ConnSettingsWindowGUI {
 		frmConnectionSettings.getContentPane().add(txtPassword, gbc_txtPassword);
 		txtPassword.setColumns(10);
 		
-		JLabel lblDbURL = new JLabel("Database URL");
-		GridBagConstraints gbc_lblDbURL = new GridBagConstraints();
-		gbc_lblDbURL.anchor = GridBagConstraints.NORTHEAST;
-		gbc_lblDbURL.insets = new Insets(0, 0, 5, 5);
-		gbc_lblDbURL.gridx = 2;
-		gbc_lblDbURL.gridy = 9;
-		frmConnectionSettings.getContentPane().add(lblDbURL, gbc_lblDbURL);
+		JLabel lblDbName = new JLabel("Database Name");
+		GridBagConstraints gbc_lblDbName = new GridBagConstraints();
+		gbc_lblDbName.anchor = GridBagConstraints.EAST;
+		gbc_lblDbName.insets = new Insets(0, 0, 5, 5);
+		gbc_lblDbName.gridx = 2;
+		gbc_lblDbName.gridy = 9;
+		frmConnectionSettings.getContentPane().add(lblDbName, gbc_lblDbName);
 		
-		txtDbURL = new JTextField();
-		GridBagConstraints gbc_txtDbURL = new GridBagConstraints();
-		gbc_txtDbURL.gridwidth = 2;
-		gbc_txtDbURL.insets = new Insets(0, 0, 5, 5);
-		gbc_txtDbURL.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtDbURL.gridx = 4;
-		gbc_txtDbURL.gridy = 9;
-		frmConnectionSettings.getContentPane().add(txtDbURL, gbc_txtDbURL);
-		txtDbURL.setColumns(10);
+		txtDbName = new JTextField();
+		GridBagConstraints gbc_txtDbName = new GridBagConstraints();
+		gbc_txtDbName.gridwidth = 2;
+		gbc_txtDbName.insets = new Insets(0, 0, 5, 5);
+		gbc_txtDbName.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtDbName.gridx = 4;
+		gbc_txtDbName.gridy = 9;
+		frmConnectionSettings.getContentPane().add(txtDbName, gbc_txtDbName);
+		txtDbName.setColumns(10);
 		
 		JLabel lblPortNo = new JLabel("Port Number");
 		GridBagConstraints gbc_lblPortNo = new GridBagConstraints();
