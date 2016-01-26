@@ -280,10 +280,14 @@ public class MainWindow extends WindowCommon {
 			startDate  = read.readLine();
 			endDate    = read.readLine();
 			Task task  = new Task(taskID, taskName, startDate, endDate, assigned, taskStatus);
-			ArrayList<String[]> taskElements = getElementsLocal(filename, loopCount);
-			for(int elementCount = 0; elementCount < taskElements.size(); elementCount++){
-				String[] elementPair = {"", ""};
+			String elementPair[] = {"", ""};
+			elementPair[0] = elements.substring(0, elements.indexOf(","));
+			elementPair[1] = elements.substring(elements.indexOf(",")+1, elements.indexOf("|"));
+			while(elementPair != null){
 				task.addElement(elementPair[0], elementPair[1]);
+				removePair(elements);
+				elementPair[0] = elements.substring(0, elements.indexOf(","));
+				elementPair[1] = elements.substring(elements.indexOf(",")+1, elements.indexOf("|"));
 			}
 			this.taskList.addTask(task);
 		}
@@ -301,13 +305,13 @@ public class MainWindow extends WindowCommon {
 		for(int loopCount = 0; loopCount < numOfTasks; loopCount++){
 			writeTask = this.taskList.getTask(loopCount);
 			elements = writeTask.getAllElementPairs();
-			write.write(writeTask.getID());
+			write.write(writeTask.getID()+"\n");
 			//Elements
 			for(int i = 0; i < writeTask.getNumElements(); i++){
 				String[] elementPair = {"", ""};
 				elementPair = elements.get(i);
 				write.write(elementPair[0]+",");
-				write.write(elementPair[1]+"\n");
+				write.write(elementPair[1]+"|");
 			}
 			write.write("\n");
 			write.write(writeTask.getName()+"\n");
