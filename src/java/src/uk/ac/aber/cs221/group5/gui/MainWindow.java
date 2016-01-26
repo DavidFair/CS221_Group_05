@@ -238,7 +238,7 @@ public class MainWindow extends WindowCommon {
 	 */
 	@Override
 	public void displayWarning(String warnText) {
-		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, warnText, "Warning", JOptionPane.WARNING_MESSAGE);
 
 	}
 	
@@ -271,31 +271,35 @@ public class MainWindow extends WindowCommon {
 		String startDate        = null;
 		String endDate          = null;
 		
-		//First read in the number of tasks
-		numOfTasks = Integer.parseInt(read.readLine());
-		//Load data and create Task objects
-		for(int loopCount = 0; loopCount < numOfTasks; loopCount++){
-			taskID     = read.readLine();
-			elements   = read.readLine();
-			taskName   = read.readLine();
-			taskStatus = TaskStatuses.valueOf(TaskStatuses.class, read.readLine());
-			assigned   = read.readLine();
-			startDate  = read.readLine();
-			endDate    = read.readLine();
-			Task task  = new Task(taskID, taskName, startDate, endDate, assigned, taskStatus);
-			String elementPair[] = {"", ""};
-			elementPair[0] = elements.substring(0, elements.indexOf(","));
-			elementPair[1] = elements.substring(elements.indexOf(",")+1, elements.indexOf("|"));
-			while(elementPair != null){
-				task.addElement(elementPair[0], elementPair[1]);
-				removePair(elements);
+		try{
+			//First read in the number of tasks
+			numOfTasks = Integer.parseInt(read.readLine());
+			//Load data and create Task objects
+			for(int loopCount = 0; loopCount < numOfTasks; loopCount++){
+				taskID     = read.readLine();
+				elements   = read.readLine();
+				taskName   = read.readLine();
+				taskStatus = TaskStatuses.valueOf(TaskStatuses.class, read.readLine());
+				assigned   = read.readLine();
+				startDate  = read.readLine();
+				endDate    = read.readLine();
+				Task task  = new Task(taskID, taskName, startDate, endDate, assigned, taskStatus);
+				String elementPair[] = {"", ""};
 				elementPair[0] = elements.substring(0, elements.indexOf(","));
 				elementPair[1] = elements.substring(elements.indexOf(",")+1, elements.indexOf("|"));
+				while(elementPair != null){
+					task.addElement(elementPair[0], elementPair[1]);
+					removePair(elements);
+					elementPair[0] = elements.substring(0, elements.indexOf(","));
+					elementPair[1] = elements.substring(elements.indexOf(",")+1, elements.indexOf("|"));
+				}
+				this.taskList.addTask(task);
 			}
-			this.taskList.addTask(task);
+			
+			read.close();
+		}catch(Exception e){
+			this.displayError("Error loading Task file.", "Loading Error");
 		}
-		
-		read.close();
 	}
 	
 	public void saveChange(String filename) throws IOException{

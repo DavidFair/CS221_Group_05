@@ -5,6 +5,8 @@
 
 package uk.ac.aber.cs221.group5.gui;
 
+import javax.swing.JOptionPane;
+
 import uk.ac.aber.cs221.group5.logic.MemberList;
 
 /**
@@ -71,7 +73,7 @@ public class LoginWindow extends WindowCommon{
 
 	@Override
 	public void displayWarning(String warnText) {
-		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, warnText, "Warning", JOptionPane.WARNING_MESSAGE);
 		
 	}
 
