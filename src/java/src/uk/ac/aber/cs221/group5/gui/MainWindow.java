@@ -285,15 +285,23 @@ public class MainWindow extends WindowCommon {
 	}
 	
 	public void saveChange(String filename) throws IOException{
-		ArrayList<String> elements = this.getUneditedElements(filename);
+		ArrayList<String[]> elements;
 		FileWriter fileWriter = new FileWriter(filename);
 		BufferedWriter write = new BufferedWriter(fileWriter);
 		int numOfTasks = this.taskList.getListSize();
 		write.write(numOfTasks+"\n");
 		for(int loopCount = 0; loopCount < numOfTasks; loopCount++){
 			Task writeTask = this.taskList.getTask(loopCount);
+			elements = writeTask.getAllElementPairs();
 			write.write(writeTask.getID()+"\n");
-			write.write(elements.get(loopCount)+"\n");
+			//Elements
+			for(int i = 0; i < writeTask.getNumElements(); i++){
+				String[] elementPair = {"", ""};
+				elementPair = elements.get(i);
+				write.write(elementPair[0]+",");
+				write.write(elementPair[1]+"|");
+			}
+			write.write("\n");
 			write.write(writeTask.getName()+"\n");
 			write.write(writeTask.getStatus()+"\n");
 			write.write(writeTask.getMembers()+"\n");
