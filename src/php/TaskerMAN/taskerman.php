@@ -79,10 +79,10 @@ if (!isset($_SESSION['login_auth']))
 
     <!-- Modal Windows -->
     <!-- View Task -->
-    <?php include('taskView.php'); ?>
+<!--    --><?php include('taskView.php'); ?>
 
     <!-- Add Task -->
-    <?php include('taskAdd.php'); ?>
+<!--    --><?php include('taskAdd.php'); ?>
     </body>
     </html>
 <?php
