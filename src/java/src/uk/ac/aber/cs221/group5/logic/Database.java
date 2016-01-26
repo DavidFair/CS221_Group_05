@@ -92,23 +92,31 @@ public class Database {
 	 * @param allUsers A MemberList containing all users to be saved
 	 * @throws IOException 
 	 */
-	public void saveUserName(String filePath, MemberList allUsers) throws IOException{
+	public void saveUserName(String filePath, MemberList allUsers) {
 		final String saveFileName = "members.txt";
 		
 		String fullFilePath = filePath + saveFileName;
 		
-		FileWriter fileWriter = new FileWriter(fullFilePath);
-		BufferedWriter write = new BufferedWriter(fileWriter);
+		FileWriter fileWriter;
 		
-		int numOfTasks = allUsers.getLength();
-		write.write(numOfTasks+"\n");
-		
-		for(int loopCount = 0; loopCount < numOfTasks; loopCount++){
-			Members writeTask = allUsers.getMember(loopCount);
-			write.write(writeTask.getEmail()+"\n");
-			write.write(writeTask.getName()+"\n");
+		try {
+			fileWriter = new FileWriter(fullFilePath);
+			BufferedWriter write = new BufferedWriter(fileWriter);
+			
+			int numOfTasks = allUsers.getLength();
+			write.write(numOfTasks+"\n");
+			
+			for(int loopCount = 0; loopCount < numOfTasks; loopCount++){
+				Members writeTask = allUsers.getMember(loopCount);
+				write.write(writeTask.getEmail()+"\n");
+				write.write(writeTask.getName()+"\n");
+			}
+			 write.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		 write.close();
+
 	}
 	
 	
@@ -155,6 +163,11 @@ public class Database {
 				try {
 					dbConnection = DriverManager.getConnection(url, uName, pWord);
 					parentDb.currentStatus = DbStatus.CONNECTED;
+					
+					//Now sync
+					parentDb.getMembers();
+					parentDb.getTasks();
+					
 				} catch (SQLException e) {
 					System.err.println("Could not establish connection to DB in connect method");
 					// For use debugging
@@ -247,14 +260,8 @@ public class Database {
 					
 					//Update the copy held by the main window
 
-					try {
-						hostWindow.settaskList(tasksList);
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					hostWindow.settaskList(tasksList);
 
-					
 
 					try {
 						tasksSet.close();
@@ -298,20 +305,11 @@ public class Database {
 				if (members != null){
 					MemberList newMemberList = resultSetToMemberList(members);
 					
-					try {
-						hostWindow.setmemberList(newMemberList);
-					} catch (IOException e2) {
-						// TODO Auto-generated catch block
-						e2.printStackTrace();
-					}
-
+					hostWindow.setmemberList(newMemberList);
 					
-					try {
-						parentDB.saveUserName(usersPath, newMemberList);
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+
+					parentDB.saveUserName(usersPath, newMemberList);
+
 					
 					try {
 						members.close();
