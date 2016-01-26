@@ -61,6 +61,10 @@ if (isset($_POST['login']))
     <!DOCTYPE HTML>
     <html lang="en">
     <head>
+        <!-- App doesn't work in older versions of IE -->
+        <!--[if IE]>
+        <meta HTTP-EQUIV="REFRESH" content="0; url=http://www.mozilla.com/firefox">
+        <![endif]-->
         <?php include('meta.php'); ?>
         <title>Login - <?php echo APP_NAME . ' ' . APP_VER; ?></title>
     </head>

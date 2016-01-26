@@ -2,7 +2,7 @@
 /**
  * TODO Insert PHPDoc comment here
  * TODO PHPUnit tests for various sequences
- * @author OLiver Earl
+ * @author Oliver Earl
  */
 require('init.php');
 // If the user isn't logged in, redirect them back to the login page
@@ -45,11 +45,11 @@ if (!isset($_SESSION['login_auth']))
                 // Print
                 while($row = $stmt->fetch(PDO::FETCH_ASSOC))
                 {
+                    $taskID = $row['TaskID']; // helps prevent some code repetition; primary key
                     echo '<tr>'; ?>
                     <td>
-                        <!-- TODO Checkbox for tasks -->
-                        <form id="taskidgoeshere" method="POST" target="taskerman.php">
-                            <input name="taskidgoeshere" type="checkbox">
+                        <form id="<?php echo $taskID; ?>" method="POST" target="taskerman.php">
+                            <input name="<?php echo $taskID; ?>" type="checkbox">
                         </form>
                     </td> <?php
 
