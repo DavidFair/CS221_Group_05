@@ -211,7 +211,7 @@ public class MainWindow extends WindowCommon {
 
 	@Override
 	public void destroyWindow() {
-		// TODO Auto-generated method stub
+		databaseObj.closeDbConn();
 
 	}
 

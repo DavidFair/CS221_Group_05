@@ -205,6 +205,7 @@ public class ConnSettingsWindowGUI {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				frmConnectionSettings.dispose();
 			}
 		});
 		GridBagConstraints gbc_btnConnect = new GridBagConstraints();
