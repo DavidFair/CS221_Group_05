@@ -277,7 +277,7 @@ public class EditWindowGUI {
 		int selectionIndex;	//The index in the table that was selected in main window
 		ArrayList<String[]> elements = new ArrayList<String[]>();
 		MainWindow main = new MainWindow();	//Used for loading elements and will not spawn a GUI
-		elements = main.getElements("taskSaveFile.txt", tableIndex);
+		elements = main.getElements(tableIndex);
 		
 		for(String[] pair : elements){
 			EditTableModel model = (EditTableModel) table.getModel();

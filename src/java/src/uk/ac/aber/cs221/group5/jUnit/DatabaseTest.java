@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import uk.ac.aber.cs221.group5.gui.MainWindow;
 import uk.ac.aber.cs221.group5.logic.Database;
+import uk.ac.aber.cs221.group5.logic.DbStatus;
 
 public class DatabaseTest {
 	
@@ -56,19 +57,28 @@ public class DatabaseTest {
 	
 	@Test
 	public void testConnection(){
-		boolean isConnected;
-		isConnected = testClass.connect(dbURL, dbPort, dbUsername, dbPassword, dbName);
+		testClass.connect(dbURL, dbPort, dbUsername, dbPassword, dbName);
+		boolean connectionSuccess = false;
 		
-		assertTrue("Database failed to connect", isConnected);
+		if (testClass.getConnStatus() == DbStatus.CONNECTED){	
+			connectionSuccess = true;
+		}
+		
+		assertTrue("Database failed to connect", connectionSuccess);
 		
 	}
 	
 	@Test
 	public void testBlankConnect(){
-		boolean isConnected;
-		isConnected = testClass.connect();
+		testClass.connect();
 		
-		assertTrue("Blank connection failed", isConnected);
+		boolean connectionSuccess = false;
+		
+		if (testClass.getConnStatus() == DbStatus.CONNECTED){	
+			connectionSuccess = true;
+		}
+		
+		assertTrue("Blank connection failed", connectionSuccess);
 	}
 	
 	@Test

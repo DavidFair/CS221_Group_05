@@ -11,6 +11,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.xml.bind.helpers.ValidationEventImpl;
+
 import uk.ac.aber.cs221.group5.logic.MemberList;
 import uk.ac.aber.cs221.group5.logic.Task;
 import uk.ac.aber.cs221.group5.logic.TaskList;
@@ -89,7 +91,24 @@ public class MainWindow extends WindowCommon {
 		loginWindow.passMemberList(memberList);
 		loginWindow.createWindow();	
 	}
+<<<<<<< HEAD
 			
+=======
+	
+
+	private void readConfigToDb(){
+		String url;
+		String dbName;
+		String dbPassword;
+		String dbUsername;
+		String dbPort; //Can be blank
+		
+		//TODO read config in here
+		
+		//databaseObj.connect(url, dbPort, dbUsername, dbPassword, dbName);
+	}
+		
+>>>>>>> Threaded the connect method and added stub config read method
 	private boolean doesGUIExist(){
 		for(Frame frame : Frame.getFrames()){
 			if(frame.getTitle().equals("Main Window")){
@@ -297,7 +316,21 @@ public class MainWindow extends WindowCommon {
 	
 ////Methods to deal with loading Task Elements
 	
-	public ArrayList<String[]> getElements(String filename, int tableIndex) throws IOException{
+	public ArrayList<String[]> getElements(int tableIndex){
+		ArrayList<String[]> elementPairs;
+		
+		Task selectedTask = taskList.getTask(tableIndex);
+		
+		elementPairs = selectedTask.getAllElementPairs();
+		if (elementPairs.size() == 0){
+			final String[] blankComment = {"No Elements", "No Comments"};
+			elementPairs.add(blankComment);
+		}
+		
+		return elementPairs;
+	}
+	
+	public ArrayList<String[]> getElementsLocal(String filename, int tableIndex) throws IOException{
 		ArrayList<String[]> elements = new ArrayList<String[]>();
 		int elementLine = (7 * tableIndex) + 1;	//Finds the line in the file where the element(s) for the selected task
 												// are located

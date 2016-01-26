@@ -67,7 +67,48 @@ public class Task {
 		return taskElements.get(index);
 	}
 	
+	public ArrayList<String[]> getAllElementPairs(){
+		ArrayList<String[]> allPairs = new ArrayList<String[]>();
+		
+		for (Element index : taskElements){
+			String name = index.getName();
+			String comment = index.getComment();
+
+			String[] elementPair = {name, comment};
+			allPairs.add(elementPair);
+		}
+		
+		return allPairs;
+	}
+	
 	public int getNumElements(){
 		return this.taskElements.size();
 	}
+	
+	
+	public class Element {
+		String elementDesc;
+		String comment;
+		
+		public Element(String description, String comment){
+			this.elementDesc = description;
+			this.comment = comment;	//If the element has no comment, this is an empty String
+		}
+		
+		
+		
+		public String getName(){
+			return this.elementDesc;
+		}
+		
+		public String getComment(){
+			return this.comment;
+		}
+		
+		public void setComment(String newComment){
+			this.comment = newComment;
+		}
+	}
+
+	
 }

@@ -12,6 +12,8 @@ import java.sql.Statement;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.mysql.fabric.xmlrpc.base.Data;
+
 import uk.ac.aber.cs221.group5.gui.MainWindow;
 
 
@@ -110,10 +112,11 @@ public class Database {
 	}
 	
 	
-	public boolean connect(){
+	public void connect(){
 		//XXX Remove when config reading is implemented
+		//TODO Re purpose to reconnect function
 		//Currently hardcoded until a method which reads from config calls connect
-		return connect("db.dcs.aber.ac.uk", "", "csgpadm_5", "906BnQjD", "csgp_5_15_16");
+		connect("db.dcs.aber.ac.uk", "", "csgpadm_5", "906BnQjD", "csgp_5_15_16");
 	}
 
 	public void updateHostWindow(MainWindow newWindow){
@@ -121,35 +124,54 @@ public class Database {
 	}
 	
 	
-	public boolean connect(String hostName, String portNo, String dbUser, String dbPass, String dbName){
+	public void connect(String hostName, String portNo, String dbUser, String dbPass, String dbName) {
 		this.dbUsername = dbUser;
 		this.dbPassword = dbPass;
 		this.dbName = dbName;
 		this.dbPortNo = portNo;
-		this.dbURL = hostName;
-		
-		//Create appropriate connection string
+
+		// Create appropriate connection string
 		final String urlPrepend = "jdbc:mysql://";
-		//Append connection parameters - such as automatically reconnecting
+		// Append connection parameters - such as automatically reconnecting
 		final String urlAppend = "?autoReconnect=true";
-		
-		this.dbURL = urlPrepend + this.dbURL + this.dbPortNo + "/" + this.dbName + urlAppend;
-		
-		try {
-			dbConnection = DriverManager.getConnection(dbURL, dbUsername, dbPassword);
-		} catch (SQLException e) {
-			System.err.println("Could not establish connection to DB in connect method");
-			//For use debugging
-			//Thread.dumpStack();
-			System.err.println("Full connection string was: " + this.dbURL);
-			
-			//Reset state
-			currentStatus = DbStatus.DISCONNECTED;
-			return false;
+
+		this.dbURL = urlPrepend + hostName + this.dbPortNo + "/" + this.dbName + urlAppend;
+
+		class ConnectThread implements Runnable {
+
+			private String url;
+			private String uName;
+			private String pWord;
+			private Database parentDb;
+
+			public ConnectThread(String url, String uName, String pWord, Database parentDB) {
+				this.url = url;
+				this.uName = uName;
+				this.pWord = pWord;
+				this.parentDb = parentDB;
+			}
+
+			public void run() {
+				try {
+					dbConnection = DriverManager.getConnection(url, uName, pWord);
+					parentDb.currentStatus = DbStatus.CONNECTED;
+				} catch (SQLException e) {
+					System.err.println("Could not establish connection to DB in connect method");
+					// For use debugging
+					// Thread.dumpStack();
+					System.err.println("Full connection string was: " + url);
+
+					// Reset state
+					parentDb.currentStatus = DbStatus.DISCONNECTED;
+				}
+
+			}
+
 		}
-		
-		currentStatus = DbStatus.CONNECTED;
-		return true;
+
+		Thread connectDb = new Thread(new ConnectThread(dbURL, dbUser, dbPass, this));
+		connectDb.start();
+
 	}
 	
 	
@@ -240,7 +262,7 @@ public class Database {
 						System.err.println(e.getMessage());
 					}
 				} else {
-					throw new NullPointerException("Result set was null in getTasks");
+					System.err.println("No results returned in TaskSync- Attempting to reconnect the DB");
 				}
 			}
 		}
@@ -259,7 +281,9 @@ public class Database {
 	
 
 	public void getMembers(){
-				
+		
+		
+		
 		class MemberSync implements Runnable {
 			
 			private Database parentDB;
@@ -295,7 +319,7 @@ public class Database {
 						System.err.println(e.getMessage());
 					}
 				} else {
-					throw new NullPointerException("Result set was null in getMembers");
+					System.err.println("No results returned in getMembers - Attempting to reconnect the DB");
 				}
 			}
 		}
@@ -346,7 +370,7 @@ public class Database {
 		Statement sqlStatementObject = null;
 		
 		if (dbConnection == null){
-			throw new NullPointerException("Connection was not opened or has been closed");
+			return null;
 		}
 		
 		try{
@@ -499,10 +523,10 @@ public class Database {
 	private void createRefreshTimer(int seconds, Database database) {
 
 		class RefreshTask extends TimerTask {
-			
+
 			Database parentDB;
-			
-			public RefreshTask(Database db){
+
+			public RefreshTask(Database db) {
 				this.parentDB = db;
 			}
 
@@ -511,23 +535,25 @@ public class Database {
 				// This will be run when timer fires
 				// First check if we are connected and not busy
 
-				if (parentDB.getConnStatus() != DbStatus.CONNECTED) {
-					// Give up
-					return;
-				}
-				parentDB.getMembers();
-				// Get all tasks
-				parentDB.getTasks("");
-				System.out.println("Fired refresh");
-				// TODO Call external method to update held state
-			}
+				if (parentDB.getConnStatus() == DbStatus.CONNECTED) {
+					parentDB.getMembers();
+					// Get all tasks
+					parentDB.getTasks("");
+					System.out.println("Fired refresh");
+					// TODO Call external method to update held state
 
+				} else if (parentDB.getConnStatus() == DbStatus.DISCONNECTED) {
+					// Attempt to reconnect
+					parentDB.connect();
+				}
+
+			}
 		}
-		
-		if (connTimer != null){
+
+		if (connTimer != null) {
 			connTimer.cancel();
 		}
-		
+
 		connTimer = new Timer();
 		connTimer.schedule(new RefreshTask(database), seconds * 1000);
 
