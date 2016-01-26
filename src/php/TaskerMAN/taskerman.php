@@ -26,6 +26,7 @@ if (!isset($_SESSION['login_auth']))
         <table id="name">
             <thead>
             <tr>
+                <th>Options</th>
                 <th>Task ID</th>
                 <th>Task Name</th>
                 <th>Start Date</th>
@@ -48,9 +49,15 @@ if (!isset($_SESSION['login_auth']))
                     $taskID = $row['TaskID']; // helps prevent some code repetition; primary key
                     echo '<tr>'; ?>
                     <td>
-                        <form id="<?php echo $taskID; ?>" method="POST" target="taskerman.php">
-                            <input name="<?php echo $taskID; ?>" type="checkbox">
-                        </form>
+                        <!--form id="<?php /*echo $taskID; */?>" method="POST" target="taskerman.php">
+                            <input name="<?php /*echo $taskID; */?>" type="checkbox">
+                        </form>-->
+                        <select onChange="window.location.href=this.value">
+                            <option value="Options"></option>
+                            <option value="taskerman.php?id=<?php echo $taskID; ?>#openView">View</option>
+                            <option value="taskerman.php?id=<?php echo $taskID; ?>#editView">Edit</option>
+                            <option value="taskDelete.php?id=<?php echo $taskID; ?>">Delete</option>
+                        </select>
                     </td> <?php
 
                     echo '<td>'.$row['TaskID'].'</td>';
