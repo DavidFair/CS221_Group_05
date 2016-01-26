@@ -14,6 +14,7 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.Window.Type;
 
 public class ConnSettingsWindowGUI {
 
@@ -52,7 +53,7 @@ public class ConnSettingsWindowGUI {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		frmConnectionSettings.getContentPane().setLayout(gridBagLayout);
 		
-		JLabel lblConnStatus = new JLabel("connStatus");
+		lblConnStatus = new JLabel("connStatus");
 		GridBagConstraints gbc_lblConnStatus = new GridBagConstraints();
 		gbc_lblConnStatus.insets = new Insets(0, 0, 5, 5);
 		gbc_lblConnStatus.gridwidth = 6;
@@ -60,7 +61,7 @@ public class ConnSettingsWindowGUI {
 		gbc_lblConnStatus.gridy = 1;
 		frmConnectionSettings.getContentPane().add(lblConnStatus, gbc_lblConnStatus);
 		
-		JLabel lblLastSynced = new JLabel("Last Synced mins Minutes Ago");
+		lblLastSynced = new JLabel("Last Synced mins Minutes Ago");
 		GridBagConstraints gbc_lblLastSynced = new GridBagConstraints();
 		gbc_lblLastSynced.insets = new Insets(0, 0, 5, 5);
 		gbc_lblLastSynced.gridwidth = 6;
@@ -209,7 +210,9 @@ public class ConnSettingsWindowGUI {
 	}
 	
 	public void setConnStatus(DbStatus status){
-		lblConnStatus.setText(status.toString());
+		MainWindow main = new MainWindow();
+		lblConnStatus.setText(main.getConnStatus().toString());
+		main.destroyWindow();
 	}
 	
 	public void setLastSyncedLabel(int minutes){

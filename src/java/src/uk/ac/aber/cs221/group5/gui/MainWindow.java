@@ -12,6 +12,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import uk.ac.aber.cs221.group5.logic.MemberList;
 import uk.ac.aber.cs221.group5.logic.Task;
 import uk.ac.aber.cs221.group5.logic.TaskList;
@@ -51,6 +53,12 @@ public class MainWindow extends WindowCommon {
 		
 		try {
 			saveChange(TASK_SAVE_PATH);
+			for(Frame frame : Frame.getFrames()){
+				if(frame.getTitle().equals("Main Window")){
+					frame.dispose();
+				}
+			}
+			this.createWindow();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -129,7 +137,7 @@ public class MainWindow extends WindowCommon {
 			
 		
 		} catch (Exception e) {
-			ConnSettingsWindow connWindow = new ConnSettingsWindow();
+			JOptionPane.showMessageDialog(null, "Could not connect to database. Check Connection Settings.", "Connection Error", JOptionPane.ERROR_MESSAGE);
 		} 
 		
 		
@@ -154,6 +162,10 @@ public class MainWindow extends WindowCommon {
 		
 	public void setConnStatus(DbStatus connStatus){
 		this.childWindow.setConnStatusLabel(connStatus);
+	}
+	
+	public DbStatus getConnStatus(){
+		return databaseObj.getConnStatus();
 	}
 	
 	public MainWindow(){
@@ -362,6 +374,11 @@ public class MainWindow extends WindowCommon {
 		this.saveChange(TASK_SAVE_PATH);
 		this.childWindow.updateTable(rowNo, newStatus);
 		this.childWindow.setVisible(true);
+		for(Frame frame : Frame.getFrames()){
+			if(frame.getTitle().equals("Connection Settings")){
+				frame.dispose();
+			}
+		}
 	}
 	
 	public int getNumTask(){

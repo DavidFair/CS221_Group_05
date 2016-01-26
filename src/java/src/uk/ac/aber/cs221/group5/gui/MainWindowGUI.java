@@ -8,6 +8,8 @@
 package uk.ac.aber.cs221.group5.gui;
 
 import java.awt.EventQueue;
+import java.awt.Frame;
+
 import javax.swing.JFrame;
 import java.awt.GridBagLayout;
 import javax.swing.JPanel;

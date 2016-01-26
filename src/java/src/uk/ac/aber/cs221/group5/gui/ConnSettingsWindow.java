@@ -18,10 +18,6 @@ public class ConnSettingsWindow {
 	
 	private void createWindow(){
 		childWindow = new ConnSettingsWindowGUI();
-		ConnSettingsWindow window = new ConnSettingsWindow();
-		if(!window.doesGUIExist()){
-			window.createWindow();
-		}
 	}
 	
 	public void saveConnSettings(String filename, String dbName, String username, String password, 
