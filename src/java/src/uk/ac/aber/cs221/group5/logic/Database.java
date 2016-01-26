@@ -119,10 +119,8 @@ public class Database {
 	
 	
 	public void connect(){
-		//XXX Remove when config reading is implemented
-		//TODO Re purpose to reconnect function
-		//Currently hardcoded until a method which reads from config calls connect
-		connect("db.dcs.aber.ac.uk", "", "csgpadm_5", "906BnQjD", "csgp_5_15_16");
+		//Attempt to reconnect with existing db settings
+		connect(dbURL, dbPortNo, dbUsername, dbPassword, dbName);
 	}
 
 	public void updateHostWindow(MainWindow newWindow){
@@ -135,13 +133,14 @@ public class Database {
 		this.dbPassword = dbPass;
 		this.dbName = dbName;
 		this.dbPortNo = portNo;
+		this.dbURL = hostName;
 
 		// Create appropriate connection string
 		final String urlPrepend = "jdbc:mysql://";
 		// Append connection parameters - such as automatically reconnecting
 		final String urlAppend = "?autoReconnect=true";
 
-		this.dbURL = urlPrepend + hostName + this.dbPortNo + "/" + this.dbName + urlAppend;
+		String connectionUrl = urlPrepend + hostName + this.dbPortNo + "/" + this.dbName + urlAppend;
 
 		class ConnectThread implements Runnable {
 
@@ -179,8 +178,10 @@ public class Database {
 			}
 
 		}
+
 		this.connTime = System.currentTimeMillis();
 		Thread connectDb = new Thread(new ConnectThread(dbURL, dbUser, dbPass, this));
+
 		connectDb.start();
 
 	}
