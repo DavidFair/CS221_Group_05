@@ -313,6 +313,10 @@ public class MainWindow extends WindowCommon {
 		return this.taskList.getListSize();
 	}
 	
+	public void updateLocalFiles(String taskFile){
+		databaseObj.getTasks("");
+	}
+	
 	
 ////Methods to deal with loading Task Elements
 	

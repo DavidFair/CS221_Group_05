@@ -287,6 +287,11 @@ public class EditWindowGUI {
 		
 	}
 	
+	private void updateLocalFiles(){
+		MainWindow main = new MainWindow();
+		main.updateLocalFiles("taskSaveFile.txt");
+	}
+	
 ////INNER CLASSSES
 	private class EditTableModel extends AbstractTableModel{
 		private String[] headers = {"", ""};
