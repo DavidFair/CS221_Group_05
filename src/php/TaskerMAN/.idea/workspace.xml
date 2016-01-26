@@ -38,8 +38,8 @@
       <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="5.730769">
-              <caret line="64" column="59" selection-start-line="64" selection-start-column="59" selection-end-line="64" selection-end-column="59" />
+            <state vertical-scroll-proportion="-11.269231">
+              <caret line="25" column="1" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
               <folding>
                 <marker date="1453806628922" expanded="true" signature="804:848" placeholder="SELECT * FRO... tbl_users" />
                 <marker date="1453806628922" expanded="true" signature="1690:1724" placeholder="..." />
@@ -58,17 +58,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="taskerman.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="taskerman.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/taskerman.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-25.0">
-              <caret line="91" column="15" selection-start-line="91" selection-start-column="15" selection-end-line="91" selection-end-column="15" />
+            <state vertical-scroll-proportion="-0.3708381">
+              <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
               <folding>
-                <marker date="1453806669194" expanded="true" signature="1067:1106" placeholder="SELECT * FRO... tbl_tasks" />
-                <marker date="1453806669194" expanded="true" signature="1936:2035" placeholder="..." />
-                <marker date="1453806669194" expanded="true" signature="2177:2181" placeholder="..." />
-                <marker date="1453806669194" expanded="true" signature="2177:2194" placeholder="..." />
+                <marker date="1453808799722" expanded="true" signature="1051:1090" placeholder="SELECT * FRO... tbl_tasks" />
+                <marker date="1453808799722" expanded="true" signature="1868:1967" placeholder="..." />
+                <marker date="1453808799722" expanded="true" signature="2109:2113" placeholder="..." />
+                <marker date="1453808799722" expanded="true" signature="2109:2126" placeholder="..." />
+                <marker date="1453808799722" expanded="true" signature="2674:2736" placeholder="SELECT First... tbl_users" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="taskDelete.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/taskDelete.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.65384614">
+              <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -103,18 +114,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="validation.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/validation.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
-              <folding>
-                <element signature="n#!!doc;n#loginValidate#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="config.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/config.php">
           <provider selected="true" editor-type-id="text-editor">
@@ -145,10 +144,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="connect.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="connect.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/connect.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7072331">
+            <state vertical-scroll-proportion="-24.192308">
               <caret line="37" column="70" selection-start-line="37" selection-start-column="70" selection-end-line="37" selection-end-column="70" />
               <folding>
                 <element signature="e#6#488#0#PHP" expanded="true" />
@@ -184,6 +183,7 @@
         <option value="$PROJECT_DIR$/connect.php" />
         <option value="$PROJECT_DIR$/resources/config.php" />
         <option value="$PROJECT_DIR$/index.php" />
+        <option value="$PROJECT_DIR$/taskDelete.php" />
         <option value="$PROJECT_DIR$/taskerman.php" />
       </list>
     </option>
@@ -395,14 +395,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="20" selection-start-line="30" selection-start-column="20" selection-end-line="30" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/validation.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -457,10 +449,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1453806669194" expanded="true" signature="1067:1106" placeholder="SELECT * FRO... tbl_tasks" />
-            <marker date="1453806669194" expanded="true" signature="1936:2035" placeholder="..." />
-            <marker date="1453806669194" expanded="true" signature="2177:2181" placeholder="..." />
-            <marker date="1453806669194" expanded="true" signature="2177:2194" placeholder="..." />
+            <marker date="1453808799722" expanded="true" signature="1051:1090" placeholder="SELECT * FRO... tbl_tasks" />
+            <marker date="1453808799722" expanded="true" signature="1868:1967" placeholder="..." />
+            <marker date="1453808799722" expanded="true" signature="2109:2113" placeholder="..." />
+            <marker date="1453808799722" expanded="true" signature="2109:2126" placeholder="..." />
+            <marker date="1453808799722" expanded="true" signature="2674:2736" placeholder="SELECT First... tbl_users" />
           </folding>
         </state>
       </provider>
@@ -551,10 +544,11 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="49" column="9" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
           <folding>
-            <marker date="1453806669194" expanded="true" signature="1067:1106" placeholder="SELECT * FRO... tbl_tasks" />
-            <marker date="1453806669194" expanded="true" signature="1936:2035" placeholder="..." />
-            <marker date="1453806669194" expanded="true" signature="2177:2181" placeholder="..." />
-            <marker date="1453806669194" expanded="true" signature="2177:2194" placeholder="..." />
+            <marker date="1453808799722" expanded="true" signature="1051:1090" placeholder="SELECT * FRO... tbl_tasks" />
+            <marker date="1453808799722" expanded="true" signature="1868:1967" placeholder="..." />
+            <marker date="1453808799722" expanded="true" signature="2109:2113" placeholder="..." />
+            <marker date="1453808799722" expanded="true" signature="2109:2126" placeholder="..." />
+            <marker date="1453808799722" expanded="true" signature="2674:2736" placeholder="SELECT First... tbl_users" />
           </folding>
         </state>
       </provider>
@@ -935,10 +929,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/connect.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-24.192308">
+          <caret line="37" column="70" selection-start-line="37" selection-start-column="70" selection-end-line="37" selection-end-column="70" />
+          <folding>
+            <element signature="e#6#488#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/taskDelete.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.65384614">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="5.730769">
-          <caret line="64" column="59" selection-start-line="64" selection-start-column="59" selection-end-line="64" selection-end-column="59" />
+        <state vertical-scroll-proportion="-11.269231">
+          <caret line="25" column="1" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
           <folding>
             <marker date="1453806628922" expanded="true" signature="804:848" placeholder="SELECT * FRO... tbl_users" />
             <marker date="1453806628922" expanded="true" signature="1690:1724" placeholder="..." />
@@ -958,23 +970,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/taskerman.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-25.0">
-          <caret line="91" column="15" selection-start-line="91" selection-start-column="15" selection-end-line="91" selection-end-column="15" />
+        <state vertical-scroll-proportion="-0.3708381">
+          <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
           <folding>
-            <marker date="1453806669194" expanded="true" signature="1067:1106" placeholder="SELECT * FRO... tbl_tasks" />
-            <marker date="1453806669194" expanded="true" signature="1936:2035" placeholder="..." />
-            <marker date="1453806669194" expanded="true" signature="2177:2181" placeholder="..." />
-            <marker date="1453806669194" expanded="true" signature="2177:2194" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/connect.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7072331">
-          <caret line="37" column="70" selection-start-line="37" selection-start-column="70" selection-end-line="37" selection-end-column="70" />
-          <folding>
-            <element signature="e#6#488#0#PHP" expanded="true" />
+            <marker date="1453808799722" expanded="true" signature="1051:1090" placeholder="SELECT * FRO... tbl_tasks" />
+            <marker date="1453808799722" expanded="true" signature="1868:1967" placeholder="..." />
+            <marker date="1453808799722" expanded="true" signature="2109:2113" placeholder="..." />
+            <marker date="1453808799722" expanded="true" signature="2109:2126" placeholder="..." />
+            <marker date="1453808799722" expanded="true" signature="2674:2736" placeholder="SELECT First... tbl_users" />
           </folding>
         </state>
       </provider>
