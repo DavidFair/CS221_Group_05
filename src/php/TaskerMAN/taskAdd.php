@@ -3,14 +3,18 @@
         <a href="#close" title="Close" class="close">X</a>
         <?php echo'<h2>'.APP_NAME . ' ' . APP_VER . '</h2>';?>
         <fieldset>
+	  <form action"addEntry.php" method="post">	
             <legend>Add Task</legend>
             <div id="modalLeft">
-                <label for="taskName">Task Name:</label>
                 <input name="taskName" type="text" required />
                 <label for="taskAllocated">Allocated:</label>
                 <input name="taskAllocated" type="text" required />
                 <label for="assignedTaskMember">Allocated Task Member</label>
-                <!--TODO, this needs to be hooked into the db -->
+                <!--TODO, this needs to be hooked into the db
+		 
+		 insert into tbl_tasks(TaskID,TaskName,StartDate,EndDate,Status,TaskOwner)
+		 values('taskName','taskAllocated','assignedTaskMember', 'startDate', 'endDate');
+		 -->
                 <select>
                     <option value="email1">David Fairbrother</option>
                     <option value="email2">Joshua Doyale</option>
@@ -29,6 +33,7 @@
                 <input name="clear" class="modalButton" type="reset" value="Clear" />
             </div>
             <input name="taskToAdd" type="hidden" />
+	 </form>
         </fieldset>
     </div>
 </div>
