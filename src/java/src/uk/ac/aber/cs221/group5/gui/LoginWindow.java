@@ -66,7 +66,7 @@ public class LoginWindow extends WindowCommon{
 	}
 
 	@Override
-	public void displayError(String errorText) {
+	public void displayError(String errorText, String errorType) {
 		// TODO Auto-generated method stub
 		
 	}

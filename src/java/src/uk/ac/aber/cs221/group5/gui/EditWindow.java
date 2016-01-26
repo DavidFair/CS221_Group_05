@@ -40,7 +40,7 @@ public class EditWindow extends WindowCommon{
 	}
 
 	@Override
-	public void displayError(String errorText) {
+	public void displayError(String errorText, String errorType) {
 		// TODO Auto-generated method stub
 		
 	}
