@@ -3,11 +3,9 @@ package uk.ac.aber.cs221.group5.gui;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import java.awt.Font;
 import java.awt.Frame;
 
 import javax.swing.JTextField;
@@ -15,14 +13,14 @@ import javax.swing.JTextField;
 import uk.ac.aber.cs221.group5.logic.MemberList;
 
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
-import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
-import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.Window;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -108,16 +106,23 @@ public class LoginWindowGUI {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0){
 				String enteredEmail = txtEmailField.getText();
-				if(memberList.memberExists(enteredEmail)){
-					for(Frame frame : JFrame.getFrames()){
-						if(frame.getTitle().equals("Main Window")){
-							frame.setVisible(true);
+				String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
+				Pattern pattern = Pattern.compile(regex);
+				Matcher matcher = pattern.matcher(enteredEmail);
+				if(matcher.matches()==true) {
+					if(memberList.memberExists(enteredEmail)){
+						for(Frame frame : JFrame.getFrames()){
+							if(frame.getTitle().equals("Main Window")){
+								frame.setVisible(true);
+							}
 						}
+						frmLogIn.dispose();
+					}else {
+						JOptionPane.showMessageDialog(null, "Error: Login Failed - Check your email was entered correctly", "InfoBox: Login Error", JOptionPane.ERROR_MESSAGE);
 					}
-					frmLogIn.dispose();
 				}
 				else{
-					JOptionPane.showMessageDialog(null, "Error: Login Failed - Check your email was entered correctly", "InfoBox: Login Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Error: Login Failed - Invalid Email Entered", "InfoBox: Login Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

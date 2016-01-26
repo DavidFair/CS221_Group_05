@@ -50,8 +50,8 @@ public class Task {
 		return this.status.toString();
 	}
 	
-	public void setStatus(String newStatus){
-		this.status = this.status.valueOf(newStatus);
+	public void setStatus(TaskStatuses newStatus){
+		this.status = newStatus;
 	}
 	
 	public void addElement(String elementName, String elementComment){
@@ -65,5 +65,9 @@ public class Task {
 	
 	public Element getElement(int index){
 		return taskElements.get(index);
+	}
+	
+	public int getNumElements(){
+		return this.taskElements.size();
 	}
 }
