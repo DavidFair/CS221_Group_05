@@ -20,7 +20,7 @@ session_start();
 // Configuration file
 require_once('resources/config.php');
 
-// Establish database connection
+// Database connection
 require_once('connect.php');
 
 // Don't suppress errors when in debug mode

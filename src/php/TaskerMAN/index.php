@@ -24,16 +24,37 @@ if ($_SESSION['login_auth'])
 // Check if the user has attempted to login
 if (isset($_POST['login']))
 {
-    if (login($_POST['email'],$pdo))
+    if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))
     {
-        // Email matches database user
-        $_SESSION['login_auth'] = true;
-        header('Location: taskerman.php');
+        // Email is clean, safe to use
+        $stmt = $pdo->prepare("SELECT * FROM tbl_users WHERE Email = :email");
+        $stmt->bindParam(':email', $_POST['email']);
+        $stmt->execute();
+
+        // Retrieve output from database and check
+        $output = $stmt->fetch(PDO::FETCH_NUM);
+
+        if ($output > 0)
+        {
+            $_SESSION['login_auth'] = true;
+            $_SESSION['email'] = $_POST['email'];
+            header('Location: taskerman.php');
+        }
+        else
+        {
+            // No match in db
+            $_SESSION['login_auth'] = false;
+            $_SESSION['authFailed'] = false;
+            header('Location: index.php');
+        }
     }
     else
     {
+        // Dirty input
+        // TODO Refactor login, smells bad / code repetition
         $_SESSION['login_auth'] = false;
-        $authFailed = true;
+        $_SESSION{'authFailed'} = false;
+        header('Location; index.php');
     }
 }
 ?>
@@ -57,7 +78,7 @@ if (isset($_POST['login']))
                     <input name="login" type="hidden" />
                     <input name="submit" type="submit" value="Login" />
                 </fieldset>
-                <?php if ($authFailed)
+                <?php if ($_SESSION['authFailed'] = false)
                 echo '<strong>Login unsuccessful.</strong>';
                 ?>
             </form>
@@ -80,13 +101,14 @@ if (isset($_POST['login']))
     </html>
 <?php
 
-function login($email, $db)
+// TODO Reimplement dedicated login
+/*function login($email, $pdo)
 {
     // First sanitise the email input and ensure it's safe
     if (filter_var($email, FILTER_VALIDATE_EMAIL))
     {
         // Safe - check against database
-        $result = $db->prepare("SELECT * FROM tbl_users WHERE Email = :email");
+        $result = $pdo->prepare("SELECT * FROM tbl_users WHERE Email = :email");
         $result->bindParam(':email', $email);
         $result->execute();
 
@@ -99,7 +121,7 @@ function login($email, $db)
     }
     // Bad input or email not found in database
     return false;
-}
+}*/
 
 function logout()
 {
