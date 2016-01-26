@@ -126,6 +126,7 @@ public class MainWindow extends WindowCommon {
 			read.close();
 			
 			databaseObj.connect(url, dbPort, dbUsername, dbPassword, dbName);
+			
 		
 		} catch (Exception e) {
 			ConnSettingsWindow connWindow = new ConnSettingsWindow();
@@ -152,7 +153,7 @@ public class MainWindow extends WindowCommon {
 	}
 		
 	public void setConnStatus(DbStatus connStatus){
-		//TODO implement setConnStatus
+		this.childWindow.setConnStatusLabel(connStatus);
 	}
 	
 	public MainWindow(){
@@ -193,6 +194,8 @@ public class MainWindow extends WindowCommon {
 		//Ask parent to setup window for us and pass
 		//this class's methods for it to work on
 		setupWindowLaunch(this);
+		
+		childWindow.setConnStatusLabel(databaseObj.getConnStatus());
 	}
 	
 

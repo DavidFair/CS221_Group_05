@@ -40,6 +40,8 @@ import uk.ac.aber.cs221.group5.logic.TaskList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ListSelectionModel;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class MainWindowGUI {
 
@@ -289,7 +291,7 @@ public class MainWindowGUI {
 		gbc_lblNewLabel.gridy = 0;
 		connSettingsPanel.add(lblNewLabel, gbc_lblNewLabel);
 		
-		JLabel lblConnStatus = new JLabel("connStatus");
+		lblConnStatus = new JLabel("connStatus");
 		GridBagConstraints gbc_lblConnStatus = new GridBagConstraints();
 		gbc_lblConnStatus.insets = new Insets(0, 0, 5, 5);
 		gbc_lblConnStatus.gridx = 2;
@@ -369,6 +371,10 @@ public class MainWindowGUI {
 		});
 	}
 	
+	public void setConnStatusLabel(DbStatus status){
+		lblConnStatus.setText(status.toString());
+	}
+	
 	public void populateTable(TaskList taskList) throws NumberFormatException, IOException{
 		for(int loopCount = 0; loopCount < taskList.getListSize(); loopCount++){
 			Task task = taskList.getTask(loopCount);
@@ -396,9 +402,7 @@ public class MainWindowGUI {
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 	}
 	
-	public void setConnStatusLabel(DbStatus status){
-		lblConnStatus.setText(status.toString());
-	}
+	
 	
 	/**
 	 * Applies saved changes to the table of Tasks after a Task has been edited
