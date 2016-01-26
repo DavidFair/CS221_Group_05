@@ -67,6 +67,10 @@ public class Task {
 		return taskElements.get(index);
 	}
 	
+	public ArrayList<Element> getAllElements(){
+		return taskElements;
+	}
+	
 	public ArrayList<String[]> getAllElementPairs(){
 		ArrayList<String[]> allPairs = new ArrayList<String[]>();
 		

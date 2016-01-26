@@ -12,8 +12,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.xml.bind.helpers.ValidationEventImpl;
-
 import uk.ac.aber.cs221.group5.logic.MemberList;
 import uk.ac.aber.cs221.group5.logic.Task;
 import uk.ac.aber.cs221.group5.logic.TaskList;
@@ -47,29 +45,35 @@ public class MainWindow extends WindowCommon {
 	}
 	
 
-	public void settaskList (TaskList list) throws IOException {
-		for(Frame frame : Frame.getFrames()){
-			if(frame.getTitle().equals("Edit Window")){
-				//Do nothing now and pull data from DB when Edit Window is closed 
-			}
-		}
+	public void settaskList (TaskList list) {
+		
 		this.taskList = list;
-		saveChange("taskSaveFile.txt");
+		
+		try {
+			saveChange("taskSaveFile.txt");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 		
 	public MemberList getMemberList(){
 		return this.memberList;
 	}
 
-	public void setmemberList (MemberList list) throws IOException{
-		for(Frame frame : Frame.getFrames()){
-			if(frame.getTitle().equals("Edit Window")){
-				//Do nothing now and pull data from DB when Edit Window is closed 
-			}
-		}
+	public void setmemberList (MemberList list){
+		
 
-		this.memberList = list;
-		saveChange("taskSaveFile.txt");
+			this.memberList = list;
+			try {
+				saveChange("taskSaveFile.txt");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	
 		
 	}
 
@@ -91,8 +95,6 @@ public class MainWindow extends WindowCommon {
 		}
 		
 		databaseObj.connect();
-		databaseObj.getMembers();
-		databaseObj.getTasks();
 		
 		LoginWindow loginWindow = new LoginWindow();
 		loginWindow.passMemberList(memberList);
