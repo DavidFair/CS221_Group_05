@@ -3,6 +3,8 @@ package uk.ac.aber.cs221.group5.gui;
 import javax.swing.JFrame;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridBagConstraints;
 import javax.swing.JButton;
 import java.awt.Insets;
@@ -194,6 +196,9 @@ public class ConnSettingsWindowGUI {
 				String password = txtPassword.getText();
 				String dbURL = txtDbURL.getText();
 				String portNo = txtPortNo.getText();
+				if(dbName.equals("") || username.equals("") || password.equals("") || dbURL.equals("")){
+					JOptionPane.showMessageDialog(null, "Make sure all fields are filled in.", "Connection Error", JOptionPane.ERROR_MESSAGE);
+				}
 				try {
 					saveWindow.saveConnSettings(DB_CONFIG_PATH, dbName, username, password, dbURL, portNo);
 				} catch (IOException e) {
