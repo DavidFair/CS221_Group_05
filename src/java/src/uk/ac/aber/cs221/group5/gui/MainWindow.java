@@ -86,15 +86,18 @@ public class MainWindow extends WindowCommon {
 		TaskList taskList = new TaskList();
 		MemberList memberList = new MemberList();
 		
-		memberList.loadMembers("memberSaveFile.txt");
-		
-				
 		MainWindow mainWindow = new MainWindow();
 		if(!mainWindow.doesGUIExist()){
 			mainWindow.createWindow();
 		}
 		
 		databaseObj.connect();
+		
+		try{
+			memberList.loadMembers("memberSaveFile.txt");
+		}catch(NumberFormatException e){
+			
+		}
 		
 		LoginWindow loginWindow = new LoginWindow();
 		loginWindow.passMemberList(memberList);
