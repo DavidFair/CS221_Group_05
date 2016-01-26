@@ -6,6 +6,7 @@ package uk.ac.aber.cs221.group5.gui;
 import java.awt.Frame;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -33,6 +34,12 @@ public class MainWindow extends WindowCommon {
 	
 	private TaskList taskList = new TaskList();
 	private MemberList memberList = new MemberList();
+	
+	private String dbUrl;
+	private String dbName;
+	private String dbPass;
+	private String dbUser;
+	private String dbPort;
 	
 
 	public TaskList getTaskList(){
@@ -91,24 +98,49 @@ public class MainWindow extends WindowCommon {
 		loginWindow.passMemberList(memberList);
 		loginWindow.createWindow();	
 	}
-<<<<<<< HEAD
-			
-=======
-	
 
-	private void readConfigToDb(){
-		String url;
-		String dbName;
-		String dbPassword;
-		String dbUsername;
-		String dbPort; //Can be blank
+
+	
+	private void readConfigToDb(String dbFile) throws IOException{
+		FileReader fileReader;
+		try {
+			fileReader = new FileReader(dbFile);
+			
+		
+			BufferedReader read = new BufferedReader(fileReader);
+			int dbTasks = 0;
+			String url;
+			String dbName;
+			String dbPassword;
+			String dbUsername;
+			String dbPort; 
+		
+			dbTasks = Integer.parseInt(read.readLine());
+		
+		    url = read.readLine();
+			this.dbUrl = url;
+			dbName = read.readLine();
+			this.dbName = dbName;
+			dbPassword = read.readLine();
+			this.dbPass = dbPassword;
+			dbUsername = read.readLine();
+			this.dbUser = dbUsername;
+			dbPort = read.readLine();
+			this.dbPort = dbPort;
+			read.close();
+		
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 		
 		//TODO read config in here
 		
 		//databaseObj.connect(url, dbPort, dbUsername, dbPassword, dbName);
-	}
+	
 		
->>>>>>> Threaded the connect method and added stub config read method
+
 	private boolean doesGUIExist(){
 		for(Frame frame : Frame.getFrames()){
 			if(frame.getTitle().equals("Main Window")){
