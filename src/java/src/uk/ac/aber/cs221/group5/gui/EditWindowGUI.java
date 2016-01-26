@@ -277,6 +277,7 @@ public class EditWindowGUI {
 		int selectionIndex;	//The index in the table that was selected in main window
 		ArrayList<String[]> elements = new ArrayList<String[]>();
 		MainWindow main = new MainWindow();	//Used for loading elements and will not spawn a GUI
+		main.loadTasks("taskSaveFile.txt");
 		elements = main.getElements(tableIndex);
 		
 		for(String[] pair : elements){
@@ -285,6 +286,11 @@ public class EditWindowGUI {
 		}
 		this.frmEditTask.repaint();
 		
+	}
+	
+	private void updateLocalFiles(){
+		MainWindow main = new MainWindow();
+		main.updateLocalFiles("taskSaveFile.txt");
 	}
 	
 ////INNER CLASSSES

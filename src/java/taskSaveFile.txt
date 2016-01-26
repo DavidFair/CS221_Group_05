@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2
 2
 Currently still in progress, researching Punit|
@@ -13,3 +14,5 @@ Completed
 daf5@aber.ac.uk
 2015-10-19
 2015-10-26
+=======
+>>>>>>> ad3a1bc29c8de1d9e4e99c9d1b4030fc8c4ed14f

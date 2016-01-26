@@ -97,7 +97,9 @@ public class MainWindow extends WindowCommon {
 		LoginWindow loginWindow = new LoginWindow();
 		loginWindow.passMemberList(memberList);
 		loginWindow.createWindow();	
+
 	}
+
 
 
 	
@@ -138,8 +140,7 @@ public class MainWindow extends WindowCommon {
 		//TODO read config in here
 		
 		//databaseObj.connect(url, dbPort, dbUsername, dbPassword, dbName);
-	
-		
+
 
 	private boolean doesGUIExist(){
 		for(Frame frame : Frame.getFrames()){
@@ -343,6 +344,10 @@ public class MainWindow extends WindowCommon {
 	
 	public int getNumTask(){
 		return this.taskList.getListSize();
+	}
+	
+	public void updateLocalFiles(String taskFile){
+		databaseObj.getTasks("");
 	}
 	
 	

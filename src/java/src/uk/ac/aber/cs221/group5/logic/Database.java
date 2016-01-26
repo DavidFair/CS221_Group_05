@@ -331,6 +331,22 @@ public class Database {
 
 	}
 	
+	public void startAutoSync(){
+		createRefreshTimer(REFRESH_SEC_DELAY, this);
+	}
+	
+	public void stopAutoSync(){
+		
+		if (connTimer == null){
+			return;
+		}
+		
+		connTimer.cancel();
+		connTimer = null;
+		
+	}
+	
+	
 	/**
 	 * Takes a statement object and SQL query and executes the query. 
 	 * Returns the query result as a ResultSet object
