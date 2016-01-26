@@ -67,15 +67,14 @@ if (isset($_POST['login']))
     <body>
     <main id="login_container">
         <h1>Welcome to <?php echo APP_NAME . ' ' . APP_VER; ?></h1>
-        <div id="login">
             <script src="js/validation.js"></script>
             <form name="login" action="index.php" method="POST"
                   onsubmit="return loginValidate()">
-                <fieldset>
+                <fieldset id="login_box">
                     <legend>Login: </legend>
                     <input name="email" type="email" placeholder="Email"
-                           required />
-                    <input name="login" type="hidden" />
+                           required /><br/>
+                    <div id="login"><input name="login" type="hidden" /></div>
                     <input name="submit" type="submit" value="Login" />
                 </fieldset>
                 <?php if ($_SESSION['authFailed'] = false)

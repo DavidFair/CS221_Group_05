@@ -1,3 +1,7 @@
+.button {
+    background-color: silver;
+}
+
 .close {
     background: #bccbdc;
     border-radius: 12px;
@@ -22,16 +26,20 @@
 }
 
 .container {
-    border: 1px solid black;
+    border-radius: 25px;
+    padding: 5px;
+    border-width: 5px;
+    border-style: double;
     background-color: #fff;
-    margin: 0 auto;
+    margin: auto;
     max-width: 50em;
+    border-color: #6600CC;
+    background: silver;
+
+
 }
 
 footer {
-    border: 1px solid black;
-    background: #999;
-    color: #fff;
     padding: 2em 1.5em;
     vertical-align: center;
 }
@@ -47,12 +55,9 @@ h2 {
 }
 
 header {
-    border: 1px solid black;
-    background: #999;
-    color: #fff;
+    color: white;
     height: 50px;
     padding: 1.5em;
-
     vertical-align: middle;
 }
 
@@ -63,20 +68,21 @@ html body {
     font-family: "Helvetica Neue", Helvetica, sans-serif;
 }
 
-input {
-    border: solid 1px black;
-    display: block;
-    font-size: 11px;
-    margin: 2px 0 20px 10px;
-    padding: 4px 2px;
-    width: 70px;
-}
-
 .modalButton {
     display: inline;
     padding: 0px;
     text-align: center;
     width: 70px;
+}
+
+#email{
+    border: solid 1px black;
+    display: block;
+    font-size: 11px;
+    margin: 5px 0 20px 10px;
+    position: center;
+    padding: 4px 2px;
+    width: 500px;
 }
 
 #leftnav {
@@ -101,31 +107,43 @@ input {
 }
 
 #login {
-    background-color: #ccc;
-    border-color: #808080;
-    border-style: solid;
-    border-width: 1px;
-    margin-left: 35%;
-    margin-right: 35%;
-    padding-top: 1%;
+
+    border-radius: 25px;
+    border-width: 10px;
+    padding-top: 1px;
     padding-bottom: 1%;
-    position: relative;
-    text-align: center;
-    width: 200px;
+    padding-right: 6%;
+    position: center;
+    width: 350px;
+}
+
+#login_box {
+    border-radius: 25px;
+    padding: 5px;
+    border-width: 5px;
+    border-style: double;
+    border-color: #6600CC;
+    width: 35%;
+    padding-left: 25px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #login_container {
-    background-color: #999;
-    border-radius: 1%;
-    border-width: 4px;
-    border-style: solid;
-    height: 150%;
+    border-radius: 25px;
+    border-width: 15px;
+    padding: 20px;
+    height: 10%;
     left: 25%;
     margin-top: 12%;
     padding-bottom: 2%;
     position: relative;
     text-align: center;
     width: 50%;
+    color: #FFFFFF;
+    border-color: #6600CC;
+    float: center;
+
 }
 
 main {
@@ -179,13 +197,16 @@ nav {
 }
 
 .nav li {
+    color: white;
     display: inline-block;
-    margin: 0 1em 0 0;
+    padding: 4px 8px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
 }
 
 .nav a {
-    background-color: #fff;
-    color: #000;
+    color: white;
     display: inline-block;
     padding: 0;
     text-decoration: none;
@@ -204,10 +225,15 @@ nav {
     float: right;
 }
 
+#submit{
+    background-color: #4CAF50;}
+
 table {
     margin-bottom: 20px;
     max-width: 100%;
     text-align: center;
     vertical-align: middle;
     width: 100%;
+    color: white;
+
 }

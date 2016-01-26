@@ -45,7 +45,14 @@ if (!isset($_SESSION['login_auth']))
                 // Print
                 while($row = $stmt->fetch(PDO::FETCH_ASSOC))
                 {
-                    echo '<tr>';
+                    echo '<tr>'; ?>
+                    <td>
+                        <!-- TODO Checkbox for tasks -->
+                        <form id="taskidgoeshere" method="POST" target="taskerman.php">
+                            <input name="taskidgoeshere" type="checkbox">
+                        </form>
+                    </td> <?php
+
                     echo '<td>'.$row['TaskID'].'</td>';
                     echo '<td>'.$row['TaskName'].'</td>';
                     echo '<td>'.$row['StartDate'].'</td>';
