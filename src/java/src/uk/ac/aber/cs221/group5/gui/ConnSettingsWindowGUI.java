@@ -202,6 +202,7 @@ public class ConnSettingsWindowGUI {
 				else{
 				try {
 					saveWindow.saveConnSettings(DB_CONFIG_PATH, dbName, username, password, dbURL, portNo);
+<<<<<<< HEAD
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -209,6 +210,14 @@ public class ConnSettingsWindowGUI {
 					frmConnectionSettings.dispose();
 					frmConnectionSettings = null;
 					
+=======
+					
+					//Create a throwaway main window to access static database object underneath
+					MainWindow.callConnectOnDb(dbURL, portNo, username, password, dbName);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+>>>>>>> Added db connection logic to connection settings window
 				}
 			}
 		});

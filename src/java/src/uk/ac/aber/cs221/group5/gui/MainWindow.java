@@ -133,7 +133,7 @@ public class MainWindow extends WindowCommon {
 			
 			read.close();
 			
-			databaseObj.connect(url, dbPort, dbUsername, dbPassword, dbName);
+			callConnectOnDb(url, dbPort, dbUsername, dbPassword, dbName);
 			
 		
 		} catch (Exception e) {
@@ -141,6 +141,10 @@ public class MainWindow extends WindowCommon {
 		} 
 	}
 		
+	
+	public static void callConnectOnDb(String url, String dbPort, String dbUsername, String dbPassword, String dbName){
+		databaseObj.connect(url, dbPort, dbUsername, dbPassword, dbName);
+	}
 		
 		//TODO read config in here
 		
