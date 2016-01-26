@@ -49,11 +49,8 @@ if (!isset($_SESSION['login_auth']))
                     $taskID = $row['TaskID']; // helps prevent some code repetition; primary key
                     echo '<tr>'; ?>
                     <td>
-                        <!--form id="<?php /*echo $taskID; */?>" method="POST" target="taskerman.php">
-                            <input name="<?php /*echo $taskID; */?>" type="checkbox">
-                        </form>-->
                         <select onChange="window.location.href=this.value">
-                            <option value="Options"></option>
+                            <option value="taskerman.php"> </option>
                             <option value="taskerman.php?id=<?php echo $taskID; ?>#openView">View</option>
                             <option value="taskerman.php?id=<?php echo $taskID; ?>#editView">Edit</option>
                             <option value="taskDelete.php?id=<?php echo $taskID; ?>">Delete</option>
