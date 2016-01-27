@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.Window.Type;
+import java.awt.Font;
 
 public class ConnSettingsWindowGUI {
 
@@ -56,6 +57,7 @@ public class ConnSettingsWindowGUI {
 		frmConnectionSettings.getContentPane().setLayout(gridBagLayout);
 		
 		lblConnStatus = new JLabel("connStatus");
+		lblConnStatus.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblConnStatus = new GridBagConstraints();
 		gbc_lblConnStatus.insets = new Insets(0, 0, 5, 5);
 		gbc_lblConnStatus.gridwidth = 6;
@@ -64,6 +66,7 @@ public class ConnSettingsWindowGUI {
 		frmConnectionSettings.getContentPane().add(lblConnStatus, gbc_lblConnStatus);
 		
 		lblLastSynced = new JLabel("Last Synced mins Minutes Ago");
+		lblLastSynced.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblLastSynced = new GridBagConstraints();
 		gbc_lblLastSynced.insets = new Insets(0, 0, 5, 5);
 		gbc_lblLastSynced.gridwidth = 6;
@@ -72,6 +75,7 @@ public class ConnSettingsWindowGUI {
 		frmConnectionSettings.getContentPane().add(lblLastSynced, gbc_lblLastSynced);
 		
 		JLabel lblDbURL = new JLabel("Database URL");
+		lblDbURL.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblDbURL = new GridBagConstraints();
 		gbc_lblDbURL.anchor = GridBagConstraints.NORTHEAST;
 		gbc_lblDbURL.insets = new Insets(0, 0, 5, 5);
@@ -80,6 +84,7 @@ public class ConnSettingsWindowGUI {
 		frmConnectionSettings.getContentPane().add(lblDbURL, gbc_lblDbURL);
 		
 		txtDbURL = new JTextField();
+		txtDbURL.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_txtDbURL = new GridBagConstraints();
 		gbc_txtDbURL.gridwidth = 2;
 		gbc_txtDbURL.insets = new Insets(0, 0, 5, 5);
@@ -90,6 +95,7 @@ public class ConnSettingsWindowGUI {
 		txtDbURL.setColumns(10);
 		
 		JLabel lblUsername = new JLabel("Username");
+		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblUsername = new GridBagConstraints();
 		gbc_lblUsername.anchor = GridBagConstraints.EAST;
 		gbc_lblUsername.insets = new Insets(0, 0, 5, 5);
@@ -98,6 +104,7 @@ public class ConnSettingsWindowGUI {
 		frmConnectionSettings.getContentPane().add(lblUsername, gbc_lblUsername);
 		
 		txtUsername = new JTextField();
+		txtUsername.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_txtUsername = new GridBagConstraints();
 		gbc_txtUsername.gridwidth = 2;
 		gbc_txtUsername.insets = new Insets(0, 0, 5, 5);
@@ -108,6 +115,7 @@ public class ConnSettingsWindowGUI {
 		txtUsername.setColumns(10);
 		
 		JLabel lblPassword = new JLabel("Password");
+		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblPassword = new GridBagConstraints();
 		gbc_lblPassword.anchor = GridBagConstraints.EAST;
 		gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
@@ -116,6 +124,7 @@ public class ConnSettingsWindowGUI {
 		frmConnectionSettings.getContentPane().add(lblPassword, gbc_lblPassword);
 		
 		txtPassword = new JTextField();
+		txtPassword.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_txtPassword = new GridBagConstraints();
 		gbc_txtPassword.gridwidth = 2;
 		gbc_txtPassword.insets = new Insets(0, 0, 5, 5);
@@ -126,6 +135,7 @@ public class ConnSettingsWindowGUI {
 		txtPassword.setColumns(10);
 		
 		JLabel lblDbName = new JLabel("Database Name");
+		lblDbName.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblDbName = new GridBagConstraints();
 		gbc_lblDbName.anchor = GridBagConstraints.EAST;
 		gbc_lblDbName.insets = new Insets(0, 0, 5, 5);
@@ -134,6 +144,7 @@ public class ConnSettingsWindowGUI {
 		frmConnectionSettings.getContentPane().add(lblDbName, gbc_lblDbName);
 		
 		txtDbName = new JTextField();
+		txtDbName.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_txtDbName = new GridBagConstraints();
 		gbc_txtDbName.gridwidth = 2;
 		gbc_txtDbName.insets = new Insets(0, 0, 5, 5);
@@ -144,6 +155,7 @@ public class ConnSettingsWindowGUI {
 		txtDbName.setColumns(10);
 		
 		JLabel lblPortNo = new JLabel("Port Number");
+		lblPortNo.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblPortNo = new GridBagConstraints();
 		gbc_lblPortNo.anchor = GridBagConstraints.SOUTHEAST;
 		gbc_lblPortNo.insets = new Insets(0, 0, 5, 5);
@@ -152,6 +164,7 @@ public class ConnSettingsWindowGUI {
 		frmConnectionSettings.getContentPane().add(lblPortNo, gbc_lblPortNo);
 		
 		txtPortNo = new JTextField();
+		txtPortNo.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtPortNo.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent arg0) {
@@ -169,6 +182,7 @@ public class ConnSettingsWindowGUI {
 		txtPortNo.setColumns(10);
 		
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnCancel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -184,6 +198,7 @@ public class ConnSettingsWindowGUI {
 		frmConnectionSettings.getContentPane().add(btnCancel, gbc_btnCancel);
 		
 		JButton btnConnect = new JButton("Connect");
+		btnConnect.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnConnect.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
