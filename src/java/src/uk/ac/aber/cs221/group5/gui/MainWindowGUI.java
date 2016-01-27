@@ -416,10 +416,6 @@ public class MainWindowGUI {
 		model.setValueAt(newStatus, rowNo, 2);
 	}
 	
-	public void refreshTable(){
-		table.repaint();
-	}
-	
 	public void setVisible(boolean b){
 		this.frmMainWindow.setVisible(b);
 	}
