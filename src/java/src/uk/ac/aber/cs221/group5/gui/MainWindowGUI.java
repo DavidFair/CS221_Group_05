@@ -44,6 +44,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.ListSelectionModel;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.WindowFocusListener;
+import java.awt.event.WindowEvent;
 
 public class MainWindowGUI {
 
@@ -98,6 +100,14 @@ public class MainWindowGUI {
 	 */
 	private void initialize() {
 		frmMainWindow = new JFrame();
+		frmMainWindow.addWindowFocusListener(new WindowFocusListener() {
+			public void windowGainedFocus(WindowEvent arg0) {
+				MainWindow main = new MainWindow();
+				setConnStatusLabel(main.getConnStatus());
+			}
+			public void windowLostFocus(WindowEvent e) {
+			}
+		});
 		frmMainWindow.setTitle("Main Window");
 		frmMainWindow.setResizable(false);
 		frmMainWindow.setBounds(100, 100, 926, 686);
