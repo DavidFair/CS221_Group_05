@@ -318,7 +318,7 @@ public class MainWindow extends WindowCommon {
 					while (elementPair != null) {
 						task.addElement(elementPair[0], elementPair[1], elementIndex.toString());
 						elements = removePair(elements);
-						if(elements.equals(",|")){
+						if(elements.trim().equals("|")){
 							newList.addTask(task);
 							elementPair = null;
 						}
