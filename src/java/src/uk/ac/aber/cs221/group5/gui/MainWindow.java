@@ -146,10 +146,6 @@ public class MainWindow extends WindowCommon {
 		databaseObj.connect(url, dbPort, dbUsername, dbPassword, dbName);
 	}
 		
-		//TODO read config in here
-		
-		//databaseObj.connect(url, dbPort, dbUsername, dbPassword, dbName);
-
 
 	private boolean doesGUIExist(){
 		for(Frame frame : Frame.getFrames()){

@@ -187,8 +187,10 @@ public class ConnSettingsWindowGUI {
 		btnConnect.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				//A new ConnSettingsWindow Object that is used just for saving the connection settings. This is
-				// created without spawning a new GUI because of the doesGUIExit method within the ConnSettingsWindow
+				// A new ConnSettingsWindow Object that is used just for saving
+				// the connection settings. This is
+				// created without spawning a new GUI because of the doesGUIExit
+				// method within the ConnSettingsWindow
 				// Class.
 				ConnSettingsWindow saveWindow = new ConnSettingsWindow();
 				String dbName = txtDbName.getText();
@@ -196,28 +198,20 @@ public class ConnSettingsWindowGUI {
 				String password = txtPassword.getText();
 				String dbURL = txtDbURL.getText();
 				String portNo = txtPortNo.getText();
-				if(dbName.equals("") || username.equals("") || password.equals("") || dbURL.equals("")){
-					JOptionPane.showMessageDialog(null, "Make sure all fields are filled in.", "Connection Error", JOptionPane.ERROR_MESSAGE);
-				}
-				else{
-				try {
-					saveWindow.saveConnSettings(DB_CONFIG_PATH, dbName, username, password, dbURL, portNo);
-<<<<<<< HEAD
+				if (dbName.equals("") || username.equals("") || password.equals("") || dbURL.equals("")) {
+					JOptionPane.showMessageDialog(null, "Make sure all fields are filled in.", "Connection Error",
+							JOptionPane.ERROR_MESSAGE);
+				} else {
+					try {
+						saveWindow.saveConnSettings(DB_CONFIG_PATH, dbName, username, password, dbURL, portNo);
+
+						// Create a throwaway main window to access static
+						// database object underneath
+						MainWindow.callConnectOnDb(dbURL, portNo, username, password, dbName);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					frmConnectionSettings.dispose();
-					frmConnectionSettings = null;
-					
-=======
-					
-					//Create a throwaway main window to access static database object underneath
-					MainWindow.callConnectOnDb(dbURL, portNo, username, password, dbName);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
->>>>>>> Added db connection logic to connection settings window
 				}
 			}
 		});
@@ -227,6 +221,7 @@ public class ConnSettingsWindowGUI {
 		gbc_btnConnect.gridy = 12;
 		frmConnectionSettings.getContentPane().add(btnConnect, gbc_btnConnect);
 	}
+	
 	
 	public void setConnStatus(DbStatus status){
 		MainWindow main = new MainWindow();
