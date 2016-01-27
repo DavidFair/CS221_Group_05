@@ -106,6 +106,12 @@ public class LoginWindowGUI {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0){
 				String enteredEmail = txtEmailField.getText();
+				
+				if (enteredEmail == ""){
+					JOptionPane.showMessageDialog(null, "Error: Login Failed - Please Enter an email address");
+					return;
+				}
+				
 				String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
 				Pattern pattern = Pattern.compile(regex);
 				Matcher matcher = pattern.matcher(enteredEmail);
