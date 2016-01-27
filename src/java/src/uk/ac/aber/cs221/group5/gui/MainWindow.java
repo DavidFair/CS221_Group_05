@@ -297,20 +297,24 @@ public class MainWindow extends WindowCommon {
 				startDate  = read.readLine();
 				endDate    = read.readLine();
 				Task task  = new Task(taskID, taskName, startDate, endDate, assigned, taskStatus);
-				String elementPair[] = {"", ""};
-				elementPair[0] = elements.substring(0, elements.indexOf(","));
-				elementPair[1] = elements.substring(elements.indexOf(",")+1, elements.indexOf("|"));
-				while(elementPair != null){
-					task.addElement(elementPair[0], elementPair[1]);
-					removePair(elements);
+				if(elements == ",|"){
+					String elementPair[] = {"", ""};
 					elementPair[0] = elements.substring(0, elements.indexOf(","));
 					elementPair[1] = elements.substring(elements.indexOf(",")+1, elements.indexOf("|"));
+					while(elementPair != null){
+						task.addElement(elementPair[0], elementPair[1]);
+						removePair(elements);
+						elementPair[0] = elements.substring(0, elements.indexOf(","));
+						elementPair[1] = elements.substring(elements.indexOf(",")+1, elements.indexOf("|"));
+					}
 				}
-				this.taskList.addTask(task);
+				else{
+					this.taskList.addTask(task);
 			}
 			
-			read.close();
-		}catch(Exception e){
+				read.close();
+			}
+		} catch (Exception e) {
 			this.displayError("Error loading Task file.", "Loading Error");
 		}
 	}
