@@ -234,7 +234,7 @@ public class ConnSettingsWindowGUI {
 			lblLastSynced.setText("");
 		}
 		else{
-			lblLastSynced.setText("Last Synced " + toString() + "Minutes Ago");
+			lblLastSynced.setText("Last Synced " + minutes + "Minutes Ago");
 		}
 	}
 	
