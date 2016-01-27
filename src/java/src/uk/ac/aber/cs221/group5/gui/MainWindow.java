@@ -177,6 +177,7 @@ public class MainWindow extends WindowCommon {
 			} else {
 				// If disconnected load then save
 				loadTasks(TASK_SAVE_PATH);
+				this.childWindow.populateTable(this.taskList);
 			}
 		} catch (FileNotFoundException e) {
 			this.displayWarning("Tasks not found locally, you need to connect to database for tasks");
