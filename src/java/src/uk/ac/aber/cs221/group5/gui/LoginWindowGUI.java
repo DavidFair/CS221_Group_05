@@ -76,7 +76,7 @@ public class LoginWindowGUI {
 		frmLogIn.setTitle("Log In");
 		frmLogIn.setResizable(false);
 		frmLogIn.setBounds(100, 100, 296, 233);
-		frmLogIn.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frmLogIn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
