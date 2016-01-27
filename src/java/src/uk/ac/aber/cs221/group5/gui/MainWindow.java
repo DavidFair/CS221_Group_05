@@ -40,7 +40,9 @@ public class MainWindow extends WindowCommon {
 	private static final String DB_CONFIG_PATH = "connSaveFile.txt";
 	private static final String MEMBERS_SAVE_PATH = "memberSaveFile.txt";
 	private static final String TASK_SAVE_PATH = "taskSaveFile.txt";
-
+	
+	private long connTime;	//The time when CLI last synced with the Database
+	
 
 	public TaskList getTaskList(){
 		return this.taskList;
@@ -161,6 +163,11 @@ public class MainWindow extends WindowCommon {
 	public DbStatus getConnStatus(){
 		return databaseObj.getConnStatus();
 	}
+	
+	public long getConnTime(){
+		return this.connTime;
+	}
+	
 	
 	public MainWindow(){
 		//Setup common window features
@@ -503,5 +510,10 @@ public class MainWindow extends WindowCommon {
 		read.close();
 		fileReader.close();		
 		return elements;
+	}
+	
+	//Gets the System time from the Database of when it was last connected
+	private void setConnTime(){
+		databaseObj.getConnTime();
 	}
 }

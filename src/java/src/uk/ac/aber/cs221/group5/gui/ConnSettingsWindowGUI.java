@@ -225,9 +225,13 @@ public class ConnSettingsWindowGUI {
 		main.destroyWindow();
 	}
 	
-	public void setLastSyncedLabel(int minutes){
-		Integer integerMinutes = (Integer)(minutes);
-		lblLastSynced.setText("Last Synced " + integerMinutes.toString() + "Minutes Ago");
+	public void setLastSyncedLabel(float minutes){
+		if(lblConnStatus.getText().equals("DISCONNECTED")){
+			lblLastSynced.setText("");
+		}
+		else{
+			lblLastSynced.setText("Last Synced " + toString() + "Minutes Ago");
+		}
 	}
 	
 }

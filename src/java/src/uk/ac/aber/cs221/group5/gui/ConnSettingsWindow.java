@@ -5,6 +5,8 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import uk.ac.aber.cs221.group5.logic.DbStatus;
+
 public class ConnSettingsWindow {
 	
 	private ConnSettingsWindowGUI childWindow;
@@ -16,6 +18,9 @@ public class ConnSettingsWindow {
 	
 	private void createWindow(){
 		childWindow = new ConnSettingsWindowGUI();
+		MainWindow main = new MainWindow();	//Just used to get the DB Conn Status & Conn Time and will then exit
+		this.setConnStatus(main.getConnStatus());
+		this.setLastSyncLabel(main.getConnTime());
 	}
 	
 	public void saveConnSettings(String filename, String dbName, String username, String password, 
@@ -52,6 +57,27 @@ public class ConnSettingsWindow {
 			}
 		}
 		return false;
+	}
+	
+	public void setConnStatus(DbStatus status){
+		this.childWindow.setConnStatus(status);
+	}
+	
+	/**
+	 * Calculates the time since CLI was last synced with the Database
+	 * @param connTime The time, in millis, when the Database was last synced
+	 */
+	public void setLastSyncLabel(long connTime){
+		long currentTime = System.currentTimeMillis();
+		long timeDifferenceMillis = currentTime - connTime;
+		float timeDifferenceMinutes = 0;
+		final int conversionFactor = 60000;
+		
+		//Convert to millis to minutes
+		timeDifferenceMinutes = timeDifferenceMillis / conversionFactor;
+		
+		//Display result
+		this.childWindow.setLastSyncedLabel(timeDifferenceMinutes);
 	}
 
 }

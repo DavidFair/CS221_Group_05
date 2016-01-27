@@ -51,6 +51,8 @@ public class Database {
 	private String usersPath;
 	private MainWindow hostWindow;
 	
+	private long connTime;	//The system time when the Database last connected
+	
 	//How often the DB attempts to update program information
 	private static final int REFRESH_SEC_DELAY = 60;
 	private static final int SYNC_ALRT_DELAY = 1;
@@ -177,7 +179,7 @@ public class Database {
 			}
 
 		}
-
+		this.connTime = System.currentTimeMillis();
 		Thread connectDb = new Thread(new ConnectThread(dbURL, dbUser, dbPass, this));
 		connectDb.start();
 
@@ -347,6 +349,10 @@ public class Database {
 		connTimer.cancel();
 		connTimer = null;
 		
+	}
+	
+	public long getConnTime(){
+		return this.connTime;
 	}
 	
 	
