@@ -192,7 +192,7 @@ public class ConnSettingsWindowGUI {
 				// created without spawning a new GUI because of the doesGUIExit
 				// method within the ConnSettingsWindow
 				// Class.
-				ConnSettingsWindow saveWindow = new ConnSettingsWindow();
+				ConnSettingsWindow saveWindow = new ConnSettingsWindow(false);
 				String dbName = txtDbName.getText();
 				String username = txtUsername.getText();
 				String password = txtPassword.getText();

@@ -269,7 +269,7 @@ public class Database {
 					
 					//Update the copy held by the main window
 
-					hostWindow.settaskList(tasksList);
+					hostWindow.setTaskList(tasksList);
 
 					currentStatus = DbStatus.CONNECTED;
 

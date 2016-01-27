@@ -303,7 +303,7 @@ public class MainWindowGUI {
 		JButton btnConnectionSettings = new JButton("Connection Settings");
 		btnConnectionSettings.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ConnSettingsWindow connSettings = new ConnSettingsWindow();
+				ConnSettingsWindow connSettings = new ConnSettingsWindow(true);
 			}
 		});
 		GridBagConstraints gbc_btnConnectionSettings = new GridBagConstraints();

@@ -137,7 +137,7 @@ public class LoginWindowGUI {
 		btnConnectionSettins.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				ConnSettingsWindow connSettings = new ConnSettingsWindow();
+				ConnSettingsWindow connSettings = new ConnSettingsWindow(true);
 			}
 		});
 		GridBagConstraints gbc_btnConnectionSettins = new GridBagConstraints();

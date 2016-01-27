@@ -51,7 +51,7 @@ public class MainWindow extends WindowCommon {
 	}
 	
 
-	public void settaskList (TaskList list) {
+	public void setTaskList (TaskList list) {
 		
 		this.taskList = list;
 		

@@ -11,9 +11,10 @@ public class ConnSettingsWindow {
 	
 	private ConnSettingsWindowGUI childWindow;
 	
-	public ConnSettingsWindow(){
-		this.createWindow();
-		
+	public ConnSettingsWindow(boolean createNewWindow){
+		if (createNewWindow){
+			this.createWindow();
+		}
 	}
 	
 	private void createWindow(){
