@@ -47,11 +47,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="taskView.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="taskView.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/taskView.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.1923077">
-              <caret line="25" column="9" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
+            <state vertical-scroll-proportion="0.16491228">
+              <caret line="57" column="28" selection-start-line="57" selection-start-column="28" selection-end-line="57" selection-end-column="28" />
               <folding>
                 <marker date="1453899908472" expanded="true" signature="278:324" placeholder="SELECT * fro... tbl_tasks" />
                 <marker date="1453899908472" expanded="true" signature="2433:2478" placeholder="SELECT * FRO... tbl_elements" />
@@ -63,7 +63,7 @@
       <file leaf-file-name="connect.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/connect.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-25.0">
+            <state vertical-scroll-proportion="-24.384615">
               <caret line="39" column="20" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
               <folding>
                 <element signature="e#6#488#0#PHP" expanded="true" />
@@ -88,12 +88,12 @@
       <file leaf-file-name="taskerman.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/taskerman.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.8846154">
-              <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+            <state vertical-scroll-proportion="-7.1923075">
+              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding>
-                <marker date="1453898506819" expanded="true" signature="1277:1279" placeholder="SELECT * FRO... tbl_tasks" />
-                <marker date="1453898506819" expanded="true" signature="1277:1316" placeholder="SELECT * FRO... tbl_tasks" />
-                <marker date="1453898506819" expanded="true" signature="3500:3562" placeholder="SELECT First... tbl_users" />
+                <marker date="1453901285756" expanded="true" signature="1332:1334" placeholder="SELECT * FRO... tbl_tasks" />
+                <marker date="1453901285756" expanded="true" signature="1332:1371" placeholder="SELECT * FRO... tbl_tasks" />
+                <marker date="1453901285756" expanded="true" signature="3555:3617" placeholder="SELECT First... tbl_users" />
               </folding>
             </state>
           </provider>
@@ -119,11 +119,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.25786924">
-              <caret line="149" column="1" selection-start-line="149" selection-start-column="1" selection-end-line="149" selection-end-column="1" />
+            <state vertical-scroll-proportion="-26.436363">
+              <caret line="141" column="26" selection-start-line="141" selection-start-column="26" selection-end-line="141" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -176,9 +176,9 @@
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/resources/config.php" />
         <option value="$PROJECT_DIR$/init.php" />
-        <option value="$PROJECT_DIR$/taskerman.php" />
         <option value="$PROJECT_DIR$/taskView.php" />
         <option value="$PROJECT_DIR$/css/style.css" />
+        <option value="$PROJECT_DIR$/taskerman.php" />
       </list>
     </option>
   </component>
@@ -192,8 +192,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP 5.5" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="510" />
-    <option name="y" value="23" />
+    <option name="x" value="7" />
+    <option name="y" value="7" />
     <option name="width" value="1920" />
     <option name="height" value="1019" />
   </component>
@@ -346,7 +346,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="510" y="23" width="1920" height="1019" extended-state="0" />
+    <frame x="7" y="7" width="1920" height="1019" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.05777311" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -420,9 +420,9 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1453898506819" expanded="true" signature="1277:1279" placeholder="SELECT * FRO... tbl_tasks" />
-            <marker date="1453898506819" expanded="true" signature="1277:1316" placeholder="SELECT * FRO... tbl_tasks" />
-            <marker date="1453898506819" expanded="true" signature="3500:3562" placeholder="SELECT First... tbl_users" />
+            <marker date="1453901285756" expanded="true" signature="1332:1334" placeholder="SELECT * FRO... tbl_tasks" />
+            <marker date="1453901285756" expanded="true" signature="1332:1371" placeholder="SELECT * FRO... tbl_tasks" />
+            <marker date="1453901285756" expanded="true" signature="3555:3617" placeholder="SELECT First... tbl_users" />
           </folding>
         </state>
       </provider>
@@ -502,9 +502,9 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="49" column="9" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
           <folding>
-            <marker date="1453898506819" expanded="true" signature="1277:1279" placeholder="SELECT * FRO... tbl_tasks" />
-            <marker date="1453898506819" expanded="true" signature="1277:1316" placeholder="SELECT * FRO... tbl_tasks" />
-            <marker date="1453898506819" expanded="true" signature="3500:3562" placeholder="SELECT First... tbl_users" />
+            <marker date="1453901285756" expanded="true" signature="1332:1334" placeholder="SELECT * FRO... tbl_tasks" />
+            <marker date="1453901285756" expanded="true" signature="1332:1371" placeholder="SELECT * FRO... tbl_tasks" />
+            <marker date="1453901285756" expanded="true" signature="3555:3617" placeholder="SELECT First... tbl_users" />
           </folding>
         </state>
       </provider>
@@ -787,14 +787,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/init.php">
+    <entry file="file://$PROJECT_DIR$/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-18.961538">
-          <caret line="48" column="22" selection-start-line="48" selection-start-column="22" selection-end-line="48" selection-end-column="22" />
-          <folding>
-            <marker date="1453896938986" expanded="true" signature="1089:1207" placeholder="..." />
-            <marker date="1453896938986" expanded="true" signature="1093:1207" placeholder="..." />
-          </folding>
+        <state vertical-scroll-proportion="-26.436363">
+          <caret line="141" column="26" selection-start-line="141" selection-start-column="26" selection-end-line="141" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -810,7 +807,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/connect.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-25.0">
+        <state vertical-scroll-proportion="-24.384615">
           <caret line="39" column="20" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
           <folding>
             <element signature="e#6#488#0#PHP" expanded="true" />
@@ -818,34 +815,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/init.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-18.961538">
+          <caret line="48" column="22" selection-start-line="48" selection-start-column="22" selection-end-line="48" selection-end-column="22" />
+          <folding>
+            <marker date="1453896938986" expanded="true" signature="1089:1207" placeholder="..." />
+            <marker date="1453896938986" expanded="true" signature="1093:1207" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/taskerman.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.8846154">
-          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+        <state vertical-scroll-proportion="-7.1923075">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding>
-            <marker date="1453898506819" expanded="true" signature="1277:1279" placeholder="SELECT * FRO... tbl_tasks" />
-            <marker date="1453898506819" expanded="true" signature="1277:1316" placeholder="SELECT * FRO... tbl_tasks" />
-            <marker date="1453898506819" expanded="true" signature="3500:3562" placeholder="SELECT First... tbl_users" />
+            <marker date="1453901285756" expanded="true" signature="1332:1334" placeholder="SELECT * FRO... tbl_tasks" />
+            <marker date="1453901285756" expanded="true" signature="1332:1371" placeholder="SELECT * FRO... tbl_tasks" />
+            <marker date="1453901285756" expanded="true" signature="3555:3617" placeholder="SELECT First... tbl_users" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/taskView.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.1923077">
-          <caret line="25" column="9" selection-start-line="25" selection-start-column="9" selection-end-line="25" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.16491228">
+          <caret line="57" column="28" selection-start-line="57" selection-start-column="28" selection-end-line="57" selection-end-column="28" />
           <folding>
             <marker date="1453899908472" expanded="true" signature="278:324" placeholder="SELECT * fro... tbl_tasks" />
             <marker date="1453899908472" expanded="true" signature="2433:2478" placeholder="SELECT * FRO... tbl_elements" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25786924">
-          <caret line="149" column="1" selection-start-line="149" selection-start-column="1" selection-end-line="149" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
