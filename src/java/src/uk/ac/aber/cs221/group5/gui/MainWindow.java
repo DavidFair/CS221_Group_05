@@ -312,10 +312,12 @@ public class MainWindow extends WindowCommon {
 					this.taskList.addTask(task);
 			}
 			
-				read.close();
 			}
+			read.close();
 		} catch (Exception e) {
 			this.displayError("Error loading Task file.", "Loading Error");
+			e.printStackTrace();
+			read.close();
 		}
 	}
 	
