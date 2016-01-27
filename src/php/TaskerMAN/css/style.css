@@ -1,13 +1,15 @@
+/*
+This resource proved extremely useful for the development of CSS3/HTML5 modal windows without scripting languages
+http://www.webdesignerdepot.com/2012/10/creating-a-modal-window-with-html5-and-css3/
+*/
 .button {
     background-color: silver;
 }
 
 .close {
     background: #bccbdc;
-    border-radius: 12px;
-    box-shadow: 1px 1px 3px #000;
-    color: #fff;
-    font-weight: bold;
+    border-radius: 15px;
+    color: #000;
     line-height: 25px;
     position: absolute;
     right: -12px;
@@ -16,9 +18,7 @@
     top: -10px;
     width: 25px;
     -moz-border-radius: 12px;
-    -moz-box-shadow: 1px 1px 3px #000;
     -webkit-border-radius: 12px;
-    -webkit-box-shadow: 1px 1px 3px #000;
 }
 
 .close:hover {
@@ -26,17 +26,14 @@
 }
 
 .container {
+    background-color: silver;
+    border-color: #6600CC;
     border-radius: 25px;
-    padding: 5px;
     border-width: 5px;
     border-style: double;
-    background-color: #fff;
     margin: auto;
     max-width: 50em;
-    border-color: #6600CC;
-    background: silver;
-
-
+    padding: 5px;
 }
 
 footer {
@@ -46,7 +43,8 @@ footer {
 
 h1 {
     font-weight: lighter;
-    text-shadow: 1px 1px #000;
+    text-align: center;
+    text-shadow: 2px 2px #000;
 }
 
 h2 {
@@ -70,7 +68,7 @@ html body {
 
 .modalButton {
     display: inline;
-    padding: 0px;
+    padding: 0;
     text-align: center;
     width: 70px;
 }
@@ -151,12 +149,12 @@ main {
     padding: 2em 3em;
 }
 
-#modalLeft {
+.modalLeft {
     float: left;
     width: 180px;
 }
 
-#modalRight {
+.modalRight {
     float: right;
     width: 180px;
 }
@@ -201,7 +199,6 @@ nav {
     display: inline-block;
     padding: 4px 8px;
     text-align: center;
-    display: inline-block;
     font-size: 16px;
 }
 
@@ -221,7 +218,7 @@ nav {
     text-indent: 15%;
 }
 
-#rightnav {
+.rightNav {
     float: right;
 }
 

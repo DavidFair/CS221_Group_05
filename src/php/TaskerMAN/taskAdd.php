@@ -3,9 +3,9 @@
         <a href="#close" title="Close" class="close">X</a>
         <?php echo'<h2>'.APP_NAME . ' ' . APP_VER . '</h2>';?>
         <fieldset>
-	  <form action"addEntry.php" method="post">	
-            <legend>Add Task</legend>
-            <div id="modalLeft">
+
+	  <form action="addEntry.php" method="post">
+            <div class="modalLeft">
                 <input name="taskName" type="text" required />
                 <label for="taskAllocated">Allocated:</label>
                 <input name="taskAllocated" type="text" required />
@@ -24,7 +24,7 @@
                 <label for="endDate">End Date:</label>
                 <input name="endDate" type="date" required />
             </div>
-            <div id="modalRight">
+            <div class="modalRight">
                 <label for="taskDescription">Task Description:</label>
                 <textarea name="taskDescription" rows=8 cols=20 required>
                 </textarea>

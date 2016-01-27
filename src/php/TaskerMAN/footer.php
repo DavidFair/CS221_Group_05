@@ -1,5 +1,5 @@
 <footer>
-<div id="rightnav">
+<div class="rightNav">
     <a href="http://validator.w3.org/check?uri=referer">
         <img src="img/w3c-html.png" alt="Valid HTML5!" />
     </a>

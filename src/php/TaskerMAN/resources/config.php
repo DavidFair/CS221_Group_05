@@ -23,7 +23,7 @@ $debug = false;
 ** Global Constants
 */
 define("APP_NAME",  "TaskerMAN");
-define("APP_VER",   "Beta Version 1");
+define("APP_VER",   "0.1");
 define("APP_DESC",  APP_NAME . " Task Managing Software");
 define("GROUP",     "Group 5");
 define("COPYRIGHT", "Aberystwyth University");

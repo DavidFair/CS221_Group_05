@@ -71,21 +71,22 @@ if (isset($_POST['login']))
     <body>
     <main id="login_container">
         <h1>Welcome to <?php echo APP_NAME . ' ' . APP_VER; ?></h1>
-            <script src="js/validation.js"></script>
-            <form name="login" action="index.php" method="POST"
-                  onsubmit="return loginValidate()">
-                <fieldset id="login_box">
-                    <legend>Login: </legend>
-                    <input name="email" type="email" placeholder="Email"
-                           required /><br/>
-                    <div id="login"><input name="login" type="hidden" /></div>
-                    <input name="submit" type="submit" value="Login" />
-                </fieldset>
-                <?php if ($_SESSION['authFailed'] = false)
+        <script src="js/validation.js"></script>
+        <form name="login" action="index.php" method="POST"
+              onsubmit="return loginValidate()">
+            <fieldset id="login_box">
+                <legend>Login: </legend>
+                <input name="email" type="email" placeholder="Email"
+                       required /><br/>
+                <div id="login"><input name="login" type="hidden" /></div>
+                <input name="submit" type="submit" value="Login" />
+            </fieldset>
+            <?php if ($_SESSION['authFailed'] = false)
+            {
                 echo '<strong>Login unsuccessful.</strong>';
-                ?>
-            </form>
-        </div>
+            }
+            ?>
+        </form>
         <?php if($debug)
         { ?>
             <h2>DISCLAIMER</h2>

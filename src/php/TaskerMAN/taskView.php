@@ -1,4 +1,5 @@
 <?php
+
 // First sanitise the input
 if (isset($_GET['id']))
 {
@@ -25,27 +26,28 @@ if (isset($_GET['id']))
     <div>
         <a href="#close" title="Close" class="close">X</a>
         <fieldset>
-            <legend>View Task</legend>
-            <div id="modalLeft">
+            <div class="modalLeft">
                 <label for="taskID">Task ID</label>
                 <input name="taskID" type="text" value="<?php echo $output['TaskID']; ?>" readonly />
 
                 <label for="taskName">Task Name</label>
-                <input name="taskName" type="text" readonly />
+                <input name="taskName" type="text"  value="<?php echo $output['TaskName']; ?>" readonly />
 
-                <label for="taskAllocated">Task Allocated</label>
-                <input name="taskAllocated" type="text" readonly />
+                <label for="taskStatus">Status</label>
+                <input name="taskStatus" type="text"
+                       value="<?php echo convertStatus($output['TaskName']); ?>" readonly />
 
                 <label for="assignedTaskMember">Allocated Task Member</label>
-                <input name="assignedTaskMember" type="text" readonly />
+                <input name="assignedTaskMember" type="text"
+                       value="<?php echo retrieveNames($output['TaskOwner'],$pdo); ?>" readonly />
 
                 <label for="startDate">Start Date</label>
-                <input name="startDate" type="text" readonly />
+                <input name="startDate" type="text" value="<?php echo $output['StartDate']; ?>" readonly />
 
                 <label for="endDate">Start Date</label>
-                <input name="endDate" type="text" readonly />
+                <input name="endDate" type="text" value="<?php echo $output['EndDate']; ?>" readonly />
             </div>
-            <div id="modalRight">
+            <div class="modalRight">
                 <label for="taskDescription">Task Description</label>
                 <textarea name="taskDescription" rows=8 cols=20 readonly>
                 </textarea>

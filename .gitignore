@@ -74,4 +74,11 @@ local.properties
  
 # PDT-specific
 .buildpath
+
+######################
+# phpStorm
+######################
+
+workspace.xml
+
 ####--------------------End of java git ignore-----------------------
