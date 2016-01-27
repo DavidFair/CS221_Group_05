@@ -185,17 +185,21 @@ public class MainWindow extends WindowCommon {
 		//Get a new child window for super class
 		childWindow = new MainWindowGUI();
 		
-		//Update local files with Task files from TaskerSRV if we are connected
-		if(databaseObj.getConnStatus().equals("CONNECTED")){
-			try {
+		// Update local files with Task files from TaskerSRV if we are connected
+		try {
+			if (databaseObj.getConnStatus() == DbStatus.CONNECTED) {
 				saveChange(TASK_SAVE_PATH);
 				loadTasks(TASK_SAVE_PATH);
 				this.childWindow.populateTable(this.taskList);
-			} catch (IOException e1) {
-				System.out.println("Failed to load Task File");
-				//At this point, need to re-configure task file
-				e1.printStackTrace();
+			} else {
+				// If disconnected load then save
+				loadTasks(TASK_SAVE_PATH);
+				saveChange(TASK_SAVE_PATH);
 			}
+		} catch (IOException e1) {
+			System.out.println("Failed to load Task File");
+			// At this point, need to re-configure task file
+			e1.printStackTrace();
 		}
 		
 		//Load the members into the Member List
