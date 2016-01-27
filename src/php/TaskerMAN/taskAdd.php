@@ -11,7 +11,7 @@
                 <input name="taskAllocated" type="text" required />
                 <label for="assignedTaskMember">Allocated Task Member</label>
                 <!--TODO, this needs to be hooked into the db
-		 
+
 		 insert into tbl_tasks(TaskID,TaskName,StartDate,EndDate,Status,TaskOwner)
 		 values('taskName','taskAllocated','assignedTaskMember', 'startDate', 'endDate');
 		 -->

@@ -69,3 +69,63 @@ function timePrint()
     // Return
     return $date;
 }
+
+function convertStatus($retrievedInteger)
+{
+    switch($retrievedInteger)
+    {
+        case 0:
+            return 'Abandoned';
+            break;
+        case 1:
+            return 'Allocated';
+            break;
+        case 2:
+            return 'Completed';
+            break;
+        default:
+            return 'Unknown';
+    }
+}
+
+function retrieveNames($email, $database)
+{
+    try
+    {
+        $stmt = $database->prepare("SELECT FirstName, LastName from tbl_users WHERE Email = :email");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+
+        // Retrieve output and check
+        $output = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (isset($output['FirstName']) & isset($output['LastName'])) // Smelly
+        {
+            $fullName = $output['FirstName'] . ' ' . $output['LastName'];
+            return $fullName;
+        }
+        else
+        {
+            return $email;
+        }
+    } catch (PDOException $ex)
+    {
+        errorHandler($ex->getMessage(),"Fatal Database Error",LOGFILE,timePrint());
+        return $email;
+    }
+}
+
+function convertIsManager(managerInteger)
+{
+    switch(managerInteger)
+    {
+        case: 0
+            return 'No';
+            break;
+        case: 1
+            return 'Yes';
+            break;
+        default:
+            return: 'Unknown';
+    }
+}

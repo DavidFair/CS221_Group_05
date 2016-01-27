@@ -30,7 +30,7 @@ if (!isset($_SESSION['login_auth']))
         <!-- Header -->
         <?php include('header.php'); ?>
         <!-- Main -->
-        <table id="name">
+        <table id="tasks">
             <thead>
             <tr>
                 <th>Options</th>
@@ -86,55 +86,9 @@ if (!isset($_SESSION['login_auth']))
 
     <!-- Modal Windows -->
     <!-- View Task -->
-<!--    --><?php include('taskView.php'); ?>
+    <?php include('taskView.php'); ?>
 
     <!-- Add Task -->
-<!--    --><?php include('taskAdd.php'); ?>
+    <?php include('taskAdd.php'); ?>
     </body>
     </html>
-<?php
-
-function convertStatus($retrievedInteger)
-{
-    switch($retrievedInteger)
-    {
-        case 0:
-            return 'Abandoned';
-            break;
-        case 1:
-            return 'Allocated';
-            break;
-        case 2:
-            return 'Completed';
-            break;
-        default:
-            return 'Unknown';
-    }
-}
-
-function retrieveNames($email, $database)
-{
-    try
-    {
-        $stmt = $database->prepare("SELECT FirstName, LastName from tbl_users WHERE Email = :email");
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
-
-        // Retrieve output and check
-        $output = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if (isset($output['FirstName']) & isset($output['LastName'])) // Smelly
-        {
-            $fullName = $output['FirstName'] . ' ' . $output['LastName'];
-            return $fullName;
-        }
-        else
-        {
-            return $email;
-        }
-    } catch (PDOException $ex)
-    {
-        errorHandler($ex->getMessage(),"Fatal Database Error",LOGFILE,timePrint());
-        return $email;
-    }
-}
