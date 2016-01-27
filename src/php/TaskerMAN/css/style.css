@@ -203,8 +203,16 @@ table {
     display: inline;
     padding: 0;
     text-align: center;
-    width: 70px;
-	
+    width: 50%;
+    color: #FFFFFF;
+    border-color: #6600CC;
+
+}
+
+main {
+    background: 0;
+    padding: 2em 3em;
+
 }
 
 .modalTable {

@@ -19,7 +19,7 @@ if (!isset($_SESSION['login_auth']))
     </head>
     <body>
 
-    <?php //TODO REMOVE THIS EASTER EGG
+    <?php //It's an easter egg. We don't care if marquee isn't HTML5 compliant. It's glorious.
     if ($debug)
     { ?>
         <marquee><img class="nigel" src="img/nigel.jpg" alt="We're debugging right now!">Debug Mode!</marquee>
