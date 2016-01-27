@@ -204,30 +204,54 @@ public class Database {
 	}
 	
 	
-	public void setElementComment(Element element, String newComment){
+	public void setElementComments(Task updatedTask){
 		
 		
 		class ElementSync implements Runnable {
 			
-			Element elementObj;
-			String elementComment;
+			Task taskObj;
 			
-			public ElementSync(Element element, String comment){
-				this.elementObj = element;
-				this.elementComment = comment;
+			public ElementSync(Task task){
+				this.taskObj = task;
 			}
 			
 			public void run() {
-				String index = elementObj.getIndex();
 				
-				String query = "UPDATE `tbl_elements` SET `TaskComments`='" 
-						+ elementComment + " WHERE `Index`='" + index + "';";
-				executeSqlStatement(query);
+				for (Element elementObj: taskObj.getAllElements()){
+					String index = elementObj.getIndex();
+				
+					String query = "UPDATE `tbl_elements` SET `TaskComments`='" 
+						+ elementObj.getComment() + " WHERE `Index`='" + index + "';";
+					executeSqlStatement(query);
+				}
 			}
 		}
 		
-		Thread syncElement = new Thread(new ElementSync(element, newComment));
+		Thread syncElement = new Thread(new ElementSync(updatedTask));
 		syncElement.start();
+		
+	}
+	
+	public void setTaskStatus(Task updatedTask){
+		
+		class StatusSync implements Runnable{
+
+			private Task updatedTask;
+			
+			public StatusSync() {
+				// TODO Auto-generated constructor stub
+			}
+			
+			@Override
+			public void run() {
+				
+				
+			}
+			
+			
+			
+		}
+		
 		
 	}
 	

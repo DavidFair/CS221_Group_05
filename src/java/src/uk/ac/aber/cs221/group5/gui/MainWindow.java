@@ -41,7 +41,7 @@ public class MainWindow extends WindowCommon {
 	private static final String MEMBERS_SAVE_PATH = "memberSaveFile.txt";
 	private static final String TASK_SAVE_PATH = "taskSaveFile.txt";
 
-	private long connTime; // The time when CLI last synced with the Database
+	private static long connTime; // The time when CLI last synced with the Database
 
 	public TaskList getTaskList() {
 		return this.taskList;
@@ -49,6 +49,7 @@ public class MainWindow extends WindowCommon {
 
 	public void setTaskList(TaskList list) {
 
+		connTime = System.currentTimeMillis();
 		this.taskList = list;
 
 		try {
@@ -72,6 +73,8 @@ public class MainWindow extends WindowCommon {
 	}
 
 	public void setmemberList(MemberList list) {
+		connTime = System.currentTimeMillis();
+		
 		this.memberList = list;
 		try {
 			saveChange(TASK_SAVE_PATH);

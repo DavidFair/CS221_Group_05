@@ -251,8 +251,9 @@ public class ConnSettingsWindowGUI {
 	public void setLastSyncedLabel(float minutes){
 		if(lblConnStatus.getText().equals("DISCONNECTED")){
 			lblLastSynced.setText("");
-		}
-		else{
+		} else if (minutes == 0){
+			lblLastSynced.setText("Has Not Synced to Database");
+		}else{
 			lblLastSynced.setText("Last Synced " + String.format("%.1f", minutes) + "Minutes Ago");
 		}
 	}

@@ -76,6 +76,10 @@ public class ConnSettingsWindow {
 		//Convert to millis to minutes
 		timeDifferenceMinutes = timeDifferenceMillis / conversionFactor;
 		
+		if (connTime == 0){
+			timeDifferenceMillis = 0;
+		}
+		
 		//Display result
 		this.childWindow.setLastSyncedLabel(timeDifferenceMinutes);
 	}
