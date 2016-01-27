@@ -43,3 +43,5 @@ Stack trace:
 [27-Jan-2016 13:22:14 Europe/London] PHP Warning:  Unknown: Failed to write session data (files). Please verify that the current setting of session.save_path is correct (tmp) in Unknown on line 0
 
 27-01-2016 1453907385 Fatal Database Error SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`csgp_5_15_16`.`tbl_elements`, CONSTRAINT `TaskRef` FOREIGN KEY (`TaskID`) REFERENCES `tbl_tasks` (`TaskID`) ON DELETE NO ACTION ON UPDATE NO ACTION)
+
+27-01-2016 1453908473 Fatal Database Error SQLSTATE[23000]: Integrity constraint violation: 1451 Cannot delete or update a parent row: a foreign key constraint fails (`csgp_5_15_16`.`tbl_elements`, CONSTRAINT `TaskRef` FOREIGN KEY (`TaskID`) REFERENCES `tbl_tasks` (`TaskID`) ON DELETE NO ACTION ON UPDATE NO ACTION)

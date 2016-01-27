@@ -27,24 +27,24 @@ if (isset($_GET['id']))
         <a href="taskerman.php" title="Close" class="close">X</a>
         <fieldset id="info_box">
             <div class="modal">
-                <label for="taskID">Task ID</label>
+                <label for="taskID" id="titles">Task ID</label>
                 <input name="taskID" type="text" value="<?php echo $output['TaskID']; ?>" readonly id="viewInput" /><br/>
 
-                <label for="taskName">Task Name</label>
+                <label for="taskName" id="titles">Task Name</label>
                 <input name="taskName" type="text"  value="<?php echo $output['TaskName']; ?>" readonly id="viewInput" /><br/>
 
-                <label for="taskStatus">Status</label>
+                <label for="taskStatus" id="titles">Status</label>
                 <input name="taskStatus" type="text"
                        value="<?php echo convertStatus($output['TaskName']); ?>" readonly id="viewInput" /><br/>
 
-                <label for="assignedTaskMember">Allocated Task Member</label>
+                <label for="assignedTaskMember" id="titles">Allocated Task Member</label>
                 <input name="assignedTaskMember" type="text"
                        value="<?php echo retrieveNames($output['TaskOwner'],$pdo); ?>" readonly id="viewInput" /><br/>
 
-                <label for="startDate">Start Date</label>
+                <label for="startDate" id="titles">Start Date</label>
                 <input name="startDate" type="text" value="<?php echo $output['StartDate']; ?>" readonly id="viewInput" /><br/>
 
-                <label for="endDate">End Date</label>
+                <label for="endDate" id="titles">End Date</label>
                 <input name="endDate" type="text" value="<?php echo $output['EndDate']; ?>" readonly id="viewInput" /><br/>
             </div>
             <div class="modal">

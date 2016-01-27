@@ -74,10 +74,23 @@ All <div> id CSS
 #submit{
     background-color: #4CAF50;}
 
-#viewInput{
-	display:inline-block;
-	float: right;
+#titles{
+	float: left;
+	text-align: justify;
+	vertical-align:middle;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 	}
+	
+#viewInput{
+	float: right;
+	text-align: justify;
+	vertical-align:middle;
+	-moz-box-sizing: border-box;
+	padding-left:12px;
+	box-sizing: border-box;
+	}
+	
 
 /*
 All type CSS
@@ -115,11 +128,6 @@ html body {
     margin: 0;
     padding: 0;
     font-family: "Helvetica Neue", Helvetica, sans-serif;
-}
-
-label{
-	float: left;
-	display:inline-block;
 }
 
 main {
