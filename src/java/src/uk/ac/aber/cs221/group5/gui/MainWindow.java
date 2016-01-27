@@ -549,7 +549,7 @@ public class MainWindow extends WindowCommon {
 			for (int charCount = 0; charCount < fileLine.indexOf('|'); charCount++) {
 				fileLineChar[charCount] = ' ';
 			}
-			fileLine = fileLineChar.toString();
+			fileLine = String.copyValueOf(fileLineChar);
 			fileLine.trim();
 		}
 
