@@ -24,33 +24,69 @@ if (isset($_GET['id']))
 ?>
 <div id="openView" class="modalWindow">
     <div>
-        <a href="#close" title="Close" class="close">X</a>
+        <a href="taskerman.php" title="Close" class="close">X</a>
         <fieldset>
-            <div class="modalLeft">
+            <div class="modal">
                 <label for="taskID">Task ID</label>
-                <input name="taskID" type="text" value="<?php echo $output['TaskID']; ?>" readonly />
+                <input name="taskID" type="text" value="<?php echo $output['TaskID']; ?>" readonly /><br/>
 
                 <label for="taskName">Task Name</label>
-                <input name="taskName" type="text"  value="<?php echo $output['TaskName']; ?>" readonly />
+                <input name="taskName" type="text"  value="<?php echo $output['TaskName']; ?>" readonly /><br/>
 
                 <label for="taskStatus">Status</label>
                 <input name="taskStatus" type="text"
-                       value="<?php echo convertStatus($output['TaskName']); ?>" readonly />
+                       value="<?php echo convertStatus($output['TaskName']); ?>" readonly /><br/>
 
                 <label for="assignedTaskMember">Allocated Task Member</label>
                 <input name="assignedTaskMember" type="text"
-                       value="<?php echo retrieveNames($output['TaskOwner'],$pdo); ?>" readonly />
+                       value="<?php echo retrieveNames($output['TaskOwner'],$pdo); ?>" readonly /><br/>
 
                 <label for="startDate">Start Date</label>
-                <input name="startDate" type="text" value="<?php echo $output['StartDate']; ?>" readonly />
+                <input name="startDate" type="text" value="<?php echo $output['StartDate']; ?>" readonly /><br/>
 
                 <label for="endDate">Start Date</label>
-                <input name="endDate" type="text" value="<?php echo $output['EndDate']; ?>" readonly />
+                <input name="endDate" type="text" value="<?php echo $output['EndDate']; ?>" readonly /><br/>
             </div>
-            <div class="modalRight">
-                <label for="taskDescription">Task Description</label>
-                <textarea name="taskDescription" rows=8 cols=20 readonly>
-                </textarea>
+            <div class="modal">
+                <table class="modal">
+                    <thead>
+                    <tr>
+                        <th>Element ID</th>
+                        <th>Description</th>
+                        <th>Comments</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    // Retrieve element data
+                    try
+                    {
+                        $stmt = $pdo->prepare("SELECT * FROM tbl_elements WHERE TaskID = :id");
+                        $stmt->bindParam(':id',$taskID);
+                        $stmt->execute();
+
+                        // Print
+                        while($row = $stmt->fetch(PDO::FETCH_ASSOC))
+                        {
+                            echo '<tr>';
+                            echo '<td>'.$row['Index'].'</td>';
+                            echo '<td>'.$row['TaskDesc'].'</td>';
+                            echo '<td>'.$row['TaskComments'].'</td>';
+                            echo '</tr>';
+                        }
+                    } catch (PDOException $ex)
+                    {
+                        // Handle error first
+                        errorHandler($ex->getMessage(),"Fatal Database Error",LOGFILE,timePrint());
+                        // Generate static objects
+                        ?>
+                        <tr>
+                            <td>Test</td>
+                            <td>Test</td>
+                        </tr>
+                    <?php } ?>
+                    </tbody>
+                </table>
             </div>
         </fieldset>
     </div>

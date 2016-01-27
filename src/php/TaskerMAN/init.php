@@ -35,7 +35,7 @@ if (!($debug))
 
 /**
  *
- * Error Handling Function - The reason we have this is because debugging in PHP is a massive pain in the ass
+ * Error Handling Function - The reason we have this is because debugging in PHP is a massive pain in the behind
  *
  **/
 function errorHandler($ex,$errorType,$logfile,$currentTime)
@@ -45,9 +45,15 @@ function errorHandler($ex,$errorType,$logfile,$currentTime)
         $ex . "\n";
     // Print to logfile
     file_put_contents($logfile, $toPrint, FILE_APPEND);
-    // Echo out user friendly message - DON'T PRINT THE EXCEPTION! CHECK THE LOG
     echo '<p>' . $errorType . '</p><br/>';
-    echo '<p><em>The administrator has been informed.</em></p>';
+    if ($debug = true)
+    {
+        echo '<p><em>' . $ex . '</em></p>';
+    }
+    else
+    {
+        echo '<p><em>Check the log for more details.</em></p>';
+    }
     echo '<hr/>';
 }
 

@@ -18,6 +18,13 @@ if (!isset($_SESSION['login_auth']))
         <title><?php echo APP_NAME . ' ' . APP_VER; ?></title>
     </head>
     <body>
+
+    <?php //TODO REMOVE THIS EASTER EGG
+    if ($debug)
+    { ?>
+        <marquee><img class="nigel" src="img/nigel.jpg" alt="We're debugging right now!">Debug Mode!</marquee>
+    <?php } ?>
+
     <!-- Container -->
     <div class="container">
         <!-- Header -->

@@ -17,7 +17,7 @@
 */
 
 // Is this version of the program in development mode?
-$debug = false;
+$debug = true;
 
 /*
 ** Global Constants

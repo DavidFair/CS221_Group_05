@@ -149,14 +149,15 @@ main {
     padding: 2em 3em;
 }
 
-.modalLeft {
-    float: left;
-    width: 180px;
+.nigel {
+    height: 50px;
+    width: 50px;
 }
 
-.modalRight {
-    float: right;
-    width: 180px;
+.modal {
+    float: left;
+    width: 100%;
+    color: black;
 }
 
 .modalWindow {
@@ -233,4 +234,11 @@ table {
     width: 100%;
     color: white;
 
+}
+
+.modalTable {
+    text-decoration-color: black;
+    text-align: center;
+    position: absolute;
+    vertical-align: center;
 }
