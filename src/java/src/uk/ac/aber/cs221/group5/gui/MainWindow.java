@@ -15,6 +15,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+import javax.swing.text.html.parser.Element;
 
 import uk.ac.aber.cs221.group5.logic.MemberList;
 import uk.ac.aber.cs221.group5.logic.Task;
@@ -226,6 +227,10 @@ public class MainWindow extends WindowCommon {
 		databaseObj.closeDbConn();
 
 	}
+	
+	public void passElement(Task updatedTask){
+		databaseObj.setElementComment(updatedTask);
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -296,6 +301,7 @@ public class MainWindow extends WindowCommon {
 			// First read in the number of tasks
 			numOfTasks = Integer.parseInt(read.readLine());
 			// Load data and create Task objects
+			Integer elementIndex = 0;
 			for (int loopCount = 0; loopCount < numOfTasks; loopCount++) {
 				taskID = read.readLine();
 				elements = read.readLine();
@@ -309,7 +315,6 @@ public class MainWindow extends WindowCommon {
 					String elementPair[] = { "", "" };
 					elementPair[0] = elements.substring(0, elements.indexOf(","));
 					elementPair[1] = elements.substring(elements.indexOf(",") + 1, elements.indexOf("|"));
-					Integer elementIndex = 0;
 					while (elementPair != null) {
 						task.addElement(elementPair[0], elementPair[1], elementIndex.toString());
 						removePair(elements);

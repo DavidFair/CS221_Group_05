@@ -10,6 +10,9 @@ import java.awt.Insets;
 import javax.swing.SwingConstants;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.html.parser.Element;
+
+import uk.ac.aber.cs221.group5.logic.Task;
 import uk.ac.aber.cs221.group5.logic.TaskList;
 import uk.ac.aber.cs221.group5.logic.TaskStatuses;
 
@@ -263,30 +266,35 @@ public class EditWindowGUI {
 			public void mouseClicked(MouseEvent arg0) {
 				MainWindow main = new MainWindow();	//This object is only used to update the table in the Main Window GUI
 													// and does not spawn a new GUI.
-				try {
-					main.loadTasks(TASK_SAVE_PATH);
-/*					ArrayList<String[]> editedTasks = new ArrayList<String[]>();
-					for(int taskCount = 0; taskCount < main.getNumTask(); taskCount++){
-						for(int rowCount = 0; rowCount < table.getRowCount(); rowCount++){
-							String editTask[] = {"", ""};
-							editTask[0] = (String) table.getValueAt(rowCount, 0);
-							editTask[1] = (String) table.getValueAt(rowCount, 1);
-							editedTasks.add(editTask);
-						}
-					}*/
-					TaskList list = main.getTaskList();
-					for(int taskNo = 0; taskNo < list.getListSize(); taskNo++){
-						
-					}
-					//main.updateElements(TASK_SAVE_PATH, editedTasks);
-					main.updateGUITable(rowNo, (String)cmbTaskStatus.getSelectedItem());
-					//Resume auto-sync
-					main.setAutoTimer(true);
-					frmEditTask.dispose();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				try{
+					main.updateLocalFiles(TASK_SAVE_PATH);
+				}catch(Exception e){
+					main.displayError("Could not downlad Task data.", "Connection Error");
 				}
+				//Send updated Element Comments to Database
+				if(table.getValueAt(0, 0) == "No Elements"){
+					
+				}
+				else{
+					try {
+						main.loadTasks(TASK_SAVE_PATH);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					TaskList updatedTaskList = new TaskList();
+					updatedTaskList = main.getTaskList();
+					Task updatedTask = updatedTaskList.getTask(rowNo);
+					for(int tableRow = 0; tableRow < table.getRowCount(); tableRow++){
+						for(uk.ac.aber.cs221.group5.logic.Task.Element element : updatedTask.getAllElements()){
+							element.setComment((String)table.getValueAt(tableRow, 1));
+						}
+					}
+					main.passElement(updatedTask);
+				}
+				//Resume auto-sync
+				main.setAutoTimer(true);
+				frmEditTask.dispose();
 			}
 		});
 		GridBagConstraints gbc_btnSave = new GridBagConstraints();
