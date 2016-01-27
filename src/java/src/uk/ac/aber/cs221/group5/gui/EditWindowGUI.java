@@ -47,6 +47,10 @@ public class EditWindowGUI {
 	 */
 	public EditWindowGUI(int row) throws IOException {
 		this.rowNo = row;
+		//MainWindow Object used to interface with the Database
+		MainWindow main = new MainWindow();
+		//Stop the auto-sync from firing while a Task is being Edited
+		main.setAutoTimer(false);
 		initialize();
 		this.populateTable(rowNo);
 	}
@@ -227,6 +231,8 @@ public class EditWindowGUI {
 				}catch(Exception e){
 					main.displayError("Could not downlad Task data.", "Connection Error");
 				}
+				//Resume auto-syn
+				main.setAutoTimer(true);
 				frmEditTask.dispose();
 			}
 		});
@@ -259,6 +265,8 @@ public class EditWindowGUI {
 					}
 					//main.updateElements(TASK_SAVE_PATH, editedTasks);
 					main.updateGUITable(rowNo, (String)cmbTaskStatus.getSelectedItem());
+					//Resume auto-sync
+					main.setAutoTimer(true);
 					frmEditTask.dispose();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block

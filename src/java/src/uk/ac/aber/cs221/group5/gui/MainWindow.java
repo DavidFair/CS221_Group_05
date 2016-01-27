@@ -145,6 +145,16 @@ public class MainWindow extends WindowCommon {
 			this.childWindow.setConnStatusLabel(connStatus);
 		}
 	}
+	
+	public void setAutoTimer(boolean timerState){
+		if(timerState){
+			databaseObj.startAutoSync();
+		}
+		else{
+			databaseObj.stopAutoSync();
+		}
+		
+	}
 
 	public DbStatus getConnStatus() {
 		return databaseObj.getConnStatus();
