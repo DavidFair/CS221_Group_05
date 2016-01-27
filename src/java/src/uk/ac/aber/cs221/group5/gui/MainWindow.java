@@ -229,7 +229,7 @@ public class MainWindow extends WindowCommon {
 	}
 	
 	public void passElement(Task updatedTask){
-		databaseObj.setElementComment(updatedTask);
+		databaseObj.setElementComments(updatedTask);
 	}
 
 	/*
