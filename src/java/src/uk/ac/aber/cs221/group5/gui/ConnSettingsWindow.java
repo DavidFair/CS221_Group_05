@@ -71,9 +71,8 @@ public class ConnSettingsWindow {
 	public void setLastSyncLabel(long connTime){
 		long currentTime = System.currentTimeMillis();
 		long timeDifferenceMillis = currentTime - connTime;
-		float timeDifferenceMinutes = 0;
+		long timeDifferenceMinutes = 0;
 		final int conversionFactor = 60000;
-		
 		//Convert to millis to minutes
 		timeDifferenceMinutes = timeDifferenceMillis / conversionFactor;
 		
