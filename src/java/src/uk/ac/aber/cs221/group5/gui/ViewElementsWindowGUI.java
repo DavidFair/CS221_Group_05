@@ -14,6 +14,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.awt.Font;
 
 public class ViewElementsWindowGUI {
 
@@ -58,6 +59,7 @@ public class ViewElementsWindowGUI {
 		frmViewTaskElements.getContentPane().add(scrollPane, gbc_scrollPane);
 		
 		table = new JTable();
+		table.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
@@ -75,6 +77,7 @@ public class ViewElementsWindowGUI {
 		scrollPane.setViewportView(table);
 		
 		JButton btnClose = new JButton("Close");
+		btnClose.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnClose.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
