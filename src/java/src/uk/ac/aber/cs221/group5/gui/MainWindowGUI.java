@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
 import java.io.IOException;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -114,7 +115,15 @@ public class MainWindowGUI {
 		frmMainWindow.setTitle("Main Window");
 		frmMainWindow.setResizable(false);
 		frmMainWindow.setBounds(100, 100, 926, 686);
-		frmMainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmMainWindow.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		frmMainWindow.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent event) {
+				MainWindow main = new MainWindow();
+				main.destroyWindow();
+				System.exit(0);
+			}
+		});
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0};
