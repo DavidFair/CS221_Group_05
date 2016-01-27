@@ -300,11 +300,13 @@ public class MainWindow extends WindowCommon {
 					String elementPair[] = {"", ""};
 					elementPair[0] = elements.substring(0, elements.indexOf(","));
 					elementPair[1] = elements.substring(elements.indexOf(",")+1, elements.indexOf("|"));
+					Integer elementIndex = 0;
 					while(elementPair != null){
-						//task.addElement(elementPair[0], elementPair[1]);
+						task.addElement(elementPair[0], elementPair[1], elementIndex.toString());
 						removePair(elements);
 						elementPair[0] = elements.substring(0, elements.indexOf(","));
 						elementPair[1] = elements.substring(elements.indexOf(",")+1, elements.indexOf("|"));
+						elementIndex++;
 					}
 				}
 				else{
