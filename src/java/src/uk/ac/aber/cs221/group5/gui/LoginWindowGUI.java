@@ -23,6 +23,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Font;
 
 public class LoginWindowGUI {
 
@@ -85,6 +86,7 @@ public class LoginWindowGUI {
 		frmLogIn.getContentPane().setLayout(gridBagLayout);
 		
 		JLabel lblEmail = new JLabel("Email:");
+		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
 		gbc_lblEmail.insets = new Insets(0, 0, 5, 5);
 		gbc_lblEmail.gridx = 1;
@@ -92,6 +94,7 @@ public class LoginWindowGUI {
 		frmLogIn.getContentPane().add(lblEmail, gbc_lblEmail);
 		
 		txtEmailField = new JTextField();
+		txtEmailField.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_txtEmailField = new GridBagConstraints();
 		gbc_txtEmailField.gridwidth = 2;
 		gbc_txtEmailField.insets = new Insets(0, 0, 5, 5);
@@ -103,6 +106,7 @@ public class LoginWindowGUI {
 		txtEmailField.setColumns(10);
 		
 		JButton btnLogin = new JButton("Log In");
+		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0){
 				String enteredEmail = txtEmailField.getText();
@@ -140,6 +144,7 @@ public class LoginWindowGUI {
 		frmLogIn.getContentPane().add(btnLogin, gbc_btnLogin);
 		
 		JButton btnConnectionSettins = new JButton("Connection Settings");
+		btnConnectionSettins.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnConnectionSettins.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -154,6 +159,7 @@ public class LoginWindowGUI {
 		frmLogIn.getContentPane().add(btnConnectionSettins, gbc_btnConnectionSettins);
 		
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
 		gbc_btnCancel.gridwidth = 5;
 		gbc_btnCancel.gridx = 0;
