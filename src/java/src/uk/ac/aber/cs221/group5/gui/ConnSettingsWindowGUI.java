@@ -211,6 +211,7 @@ public class ConnSettingsWindowGUI {
 						// Create a throwaway main window to access static
 						// database object underneath
 						MainWindow.callConnectOnDb(dbURL, portNo, username, password, dbName);
+						frmConnectionSettings.dispose();
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
