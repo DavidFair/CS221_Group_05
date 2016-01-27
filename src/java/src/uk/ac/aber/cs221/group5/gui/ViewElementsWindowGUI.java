@@ -6,6 +6,10 @@ import javax.swing.JScrollPane;
 import java.awt.GridBagConstraints;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import uk.ac.aber.cs221.group5.logic.Task;
+import uk.ac.aber.cs221.group5.logic.Task.Element;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -98,16 +102,14 @@ public class ViewElementsWindowGUI {
 	}
 	
 	private void populateTable(int tableIndex) throws IOException{
-		int selectionIndex;	//The index in the table that was selected in main window
-		ArrayList<String[]> elements = new ArrayList<String[]>();
 		MainWindow main = new MainWindow();	//Used for loading elements and will not spawn a GUI
 		main.loadTasks("taskSaveFile.txt");
-		elements = main.getElements(tableIndex);
-		
-		for(String[] pair : elements){
+		Task displayTask = main.getTaskList().getTask(selectedRow);
+		for(int tableRow = 0; tableRow < displayTask.getNumElements(); tableRow++){
+			Element displayElement = displayTask.getElement(tableRow);
 			DefaultTableModel model = (DefaultTableModel)(table.getModel());
-			model.addRow(new Object[]{pair[0], pair[1]});
+			model.addRow(new Object[]{displayElement.getName(), displayElement.getComment()});
 		}
-		
+		table.repaint();
 	}
 }

@@ -311,21 +311,27 @@ public class MainWindow extends WindowCommon {
 				startDate = read.readLine();
 				endDate = read.readLine();
 				Task task = new Task(taskID, taskName, startDate, endDate, assigned, taskStatus);
-				if (elements == ",|") {
+				if (elements != ",|") {
 					String elementPair[] = { "", "" };
 					elementPair[0] = elements.substring(0, elements.indexOf(","));
 					elementPair[1] = elements.substring(elements.indexOf(",") + 1, elements.indexOf("|"));
 					while (elementPair != null) {
 						task.addElement(elementPair[0], elementPair[1], elementIndex.toString());
-						removePair(elements);
-						elementPair[0] = elements.substring(0, elements.indexOf(","));
-						elementPair[1] = elements.substring(elements.indexOf(",") + 1, elements.indexOf("|"));
-						elementIndex++;
+						elements = removePair(elements);
+						if(elements.equals(",|")){
+							newList.addTask(task);
+							elementPair = null;
+						}
+						else{
+//						elementPair[0] = elements.substring(0, elements.indexOf(","));
+//						elementPair[1] = elements.substring(elements.indexOf(",") + 1, elements.indexOf("|"));
+//						elementIndex++;
+						}
 					}
 				} else {
-					newList.addTask(task);
+					
 				}
-
+				newList.addTask(task);
 			}
 			read.close();
 			this.taskList = newList;
@@ -338,7 +344,7 @@ public class MainWindow extends WindowCommon {
 	}
 
 	public void saveChange(String filename) throws IOException {
-		ArrayList<String[]> elements;
+		ArrayList<uk.ac.aber.cs221.group5.logic.Task.Element> elements;
 		Task writeTask;
 		FileWriter fileWriter = new FileWriter(filename);
 		BufferedWriter write = new BufferedWriter(fileWriter);
@@ -347,18 +353,17 @@ public class MainWindow extends WindowCommon {
 		write.write(numOfTasks + "\n");
 		for (int loopCount = 0; loopCount < numOfTasks; loopCount++) {
 			writeTask = this.taskList.getTask(loopCount);
-			elements = writeTask.getAllElementPairs();
+			elements = writeTask.getAllElements();
 			write.write(writeTask.getID() + "\n");
 			// Elements
 			numOfElements = writeTask.getNumElements();
+			elements = writeTask.getAllElements();
 			if (numOfElements == 0) {
 				write.write(",|");
 			} else {
 				for (int i = 0; i < writeTask.getNumElements(); i++) {
-					String[] elementPair = { "", "" };
-					elementPair = elements.get(i);
-					write.write(elementPair[0] + ",");
-					write.write(elementPair[1] + "|");
+					uk.ac.aber.cs221.group5.logic.Task.Element writeElement = elements.get(i);
+					write.write(writeElement.getName()+","+writeElement.getComment()+"|");
 				}
 			}
 			write.write("\n");
@@ -535,13 +540,13 @@ public class MainWindow extends WindowCommon {
 		fileLineChar = fileLine.toCharArray();
 
 		// This evaluates True if there is only one element left in the line
-		if (fileLine.indexOf('|') == fileLine.length() - 1) {
+		if (fileLine.charAt(0) == ',') {
 			// Signifies there are no more elements. Stops the seperateElement
 			// method from trying to seperate an element
 			// that does not exist
 			fileLine = ",|";
 		} else {
-			for (int charCount = 0; charCount <= fileLine.indexOf('|'); charCount++) {
+			for (int charCount = 0; charCount < fileLine.indexOf('|'); charCount++) {
 				fileLineChar[charCount] = ' ';
 			}
 			fileLine = fileLineChar.toString();
