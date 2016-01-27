@@ -79,6 +79,7 @@ local.properties
 # phpStorm
 ######################
 
+/.idea/
 workspace.xml
 error.txt
 /tmp/

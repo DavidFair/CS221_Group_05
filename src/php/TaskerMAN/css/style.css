@@ -209,17 +209,16 @@ table {
 
 .modalButton {
     display: inline;
-    padding: 0;
+    padding-left: 0;
     text-align: center;
     width: 50%;
     color: #FFFFFF;
+	background-color: silver;
     border-color: #6600CC;
-
-}
-
-main {
-    background: 0;
-    padding: 2em 3em;
+	border-radius: 20px;
+    border-width: 2px;
+	position: relative;
+	left: 100px;
 
 }
 
@@ -244,6 +243,7 @@ main {
     -moz-transition: opacity 400ms ease-in;
     -webkit-transition: opacity 400ms ease-in;
 	pointer-events: none;
+	
 }
 
 .modalWindow:target {
