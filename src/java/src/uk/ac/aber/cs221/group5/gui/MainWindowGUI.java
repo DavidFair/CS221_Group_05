@@ -147,6 +147,7 @@ public class MainWindowGUI {
 		quickViewPanel.add(lblTaskName, gbc_lblTaskName);
 		
 		txtTaskName = new JTextField();
+		txtTaskName.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtTaskName.setEditable(false);
 		GridBagConstraints gbc_txtTaskName = new GridBagConstraints();
 		gbc_txtTaskName.fill = GridBagConstraints.BOTH;
@@ -167,6 +168,7 @@ public class MainWindowGUI {
 		quickViewPanel.add(lblStatus, gbc_lblStatus);
 		
 		txtStatus = new JTextField();
+		txtStatus.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtStatus.setEditable(false);
 		GridBagConstraints gbc_txtStatus = new GridBagConstraints();
 		gbc_txtStatus.fill = GridBagConstraints.BOTH;
@@ -186,6 +188,7 @@ public class MainWindowGUI {
 		quickViewPanel.add(lblAssignedTaskMembers, gbc_lblAssignedTaskMembers);
 		
 		txtAssigned = new JTextField();
+		txtAssigned.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtAssigned.setEditable(false);
 		GridBagConstraints gbc_txtAssigned = new GridBagConstraints();
 		gbc_txtAssigned.fill = GridBagConstraints.BOTH;
@@ -205,6 +208,7 @@ public class MainWindowGUI {
 		quickViewPanel.add(lblStartDate, gbc_lblStartDate);
 		
 		txtStartDate = new JTextField();
+		txtStartDate.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtStartDate.setEditable(false);
 		GridBagConstraints gbc_txtStartDate = new GridBagConstraints();
 		gbc_txtStartDate.fill = GridBagConstraints.BOTH;
@@ -224,6 +228,7 @@ public class MainWindowGUI {
 		quickViewPanel.add(lblExpectedEndDate, gbc_lblExpectedEndDate);
 		
 		txtEndDate = new JTextField();
+		txtEndDate.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtEndDate.setEditable(false);
 		GridBagConstraints gbc_txtEndDate = new GridBagConstraints();
 		gbc_txtEndDate.fill = GridBagConstraints.BOTH;
