@@ -1,5 +1,5 @@
-csgp_5_15_16
 csgpadm_5
-906BnQjD
+csgpadm_5
+906BnQjd
 db.dcs.aber.ac.uk
 3306

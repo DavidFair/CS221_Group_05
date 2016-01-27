@@ -203,6 +203,9 @@ public class ConnSettingsWindowGUI {
 							JOptionPane.ERROR_MESSAGE);
 				} else {
 					try {
+						if(portNo.equals("Leave Blank for Default") || portNo.equals("")){
+							portNo = "3306";
+						}
 						saveWindow.saveConnSettings(DB_CONFIG_PATH, dbName, username, password, dbURL, portNo);
 
 						// Create a throwaway main window to access static
