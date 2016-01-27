@@ -140,7 +140,10 @@ public class Database {
 		final String urlPrepend = "jdbc:mysql://";
 		// Append connection parameters - such as automatically reconnecting
 		final String urlAppend = "?autoReconnect=true";
-
+		
+		if (portNo == ""){
+			this.dbPortNo = "3306";
+		}
 		String connectionUrl = urlPrepend + hostName + ":" + this.dbPortNo + "/" + this.dbName + urlAppend;
 
 		class ConnectThread implements Runnable {
@@ -197,6 +200,28 @@ public class Database {
 	
 	public void setElementComment(Element element, String newComment){
 		
+		
+		class ElementSync implements Runnable {
+			
+			Element elementObj;
+			String elementComment;
+			
+			public ElementSync(Element element, String comment){
+				this.elementObj = element;
+				this.elementComment = comment;
+			}
+			
+			public void run() {
+				String index = elementObj.getIndex();
+				
+				String query = "UPDATE `tbl_elements` SET `TaskComments`='" 
+						+ elementComment + " WHERE `Index`='" + index + "';";
+				executeSqlStatement(query);
+			}
+		}
+		
+		Thread syncElement = new Thread(new ElementSync(element, newComment));
+		syncElement.start();
 		
 	}
 	
