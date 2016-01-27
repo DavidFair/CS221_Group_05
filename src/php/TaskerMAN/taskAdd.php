@@ -10,13 +10,23 @@
                 <input name="taskName" type="text" required /><br/>
 				
                 <label for="taskAllocated">Allocated:</label>
-                <input name="taskAllocated" type="text" required /><br/>
+                <select name="taskAllocated">
+                    <option value="0">Abandoned</option>
+                    <option value="1">Allocated</option>
+                    <option value="2">Completed</option>
+                </select><br/>
 				
                 <label for="assignedTaskMember">Allocated Task Member</label>
-                <select name="taskMember">
-                    <option value="email1">David Fairbrother</option>
-                    <option value="email2">Joshua Doyale</option>
-                </select><br/>
+                <?php
+                $statement = $pdo->prepare("SELECT Email, FirstName, LastName FROM tbl_users ORDER BY FirstName");
+                $statement -> execute();
+                echo '<select name="taskMember">';
+                // Loop through and print
+                while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
+                    echo '<option value="' . $row['Email'] . '">' . $row['FirstName'] ." ". $row['LastName'] . '</option>';
+                }
+                echo '</select><br/>';
+                ?>
 				
                 <label for="startDate">Start Date:</label>
                 <input name="startDate" type="date" required /><br/>
