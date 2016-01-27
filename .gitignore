@@ -77,6 +77,13 @@ tmp/**/*
  
 # PDT-specific
 .buildpath
+
+#Save files
+connSaveFile.txt
+memberSaveFile.txt
+taskSaveFile.txt
+
+
 ####--------------------End of java git ignore-----------------------
 #####################
 # Visual Paradigm
