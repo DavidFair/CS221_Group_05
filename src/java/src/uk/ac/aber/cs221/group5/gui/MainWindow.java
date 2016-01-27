@@ -6,10 +6,12 @@ package uk.ac.aber.cs221.group5.gui;
 import java.awt.Frame;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -174,14 +176,6 @@ public class MainWindow extends WindowCommon {
 	}
 	
 	public void createWindow(){
-		//First load local copy into memory in case of disconnection from TaskerSRV
-		try {
-			loadTasks(TASK_SAVE_PATH);
-		} catch (IOException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		
 		//Get a new child window for super class
 		childWindow = new MainWindowGUI();
 		
@@ -194,20 +188,23 @@ public class MainWindow extends WindowCommon {
 			} else {
 				// If disconnected load then save
 				loadTasks(TASK_SAVE_PATH);
-				saveChange(TASK_SAVE_PATH);
 			}
-		} catch (IOException e1) {
-			System.out.println("Failed to load Task File");
-			// At this point, need to re-configure task file
-			e1.printStackTrace();
+		} catch (FileNotFoundException e){
+			this.displayWarning("Tasks not found locally, you need to connect to database for tasks");
+			blankFile(TASK_SAVE_PATH);
+		} catch (Exception e1) {
+			this.displayError("Task file corrupted - Please connect to database for tasks", 
+					"Task File Corruption");
+			blankFile(TASK_SAVE_PATH);
 		}
 		
 		//Load the members into the Member List
 		try {
 			memberList.loadMembers(MEMBERS_SAVE_PATH);
 		} catch (NumberFormatException | IOException e) {
-			System.out.println("Failed to load member save file");
-			e.printStackTrace();
+			this.displayError("Error loading member list, you need to connect to the database",
+					"Error Loading members");
+			blankFile(MEMBERS_SAVE_PATH);
 		}
 			
 		//Ask parent to setup window for us and pass
@@ -421,6 +418,20 @@ public class MainWindow extends WindowCommon {
 		}
 		
 		return elementPairs;
+	}
+	
+	private void blankFile(String filePath){
+		
+		try {
+			FileWriter blankFile = new FileWriter(filePath, false);
+			blankFile.append("");
+		} catch (IOException e) {
+			displayError("Cannot blank file " + filePath, "Error blanking file");
+			System.exit(200);
+		}
+		
+		
+		
 	}
 	
 	public ArrayList<String[]> getElementsLocal(String filename, int tableIndex) throws IOException{
