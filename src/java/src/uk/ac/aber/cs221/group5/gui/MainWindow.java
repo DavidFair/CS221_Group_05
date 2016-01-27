@@ -311,7 +311,7 @@ public class MainWindow extends WindowCommon {
 				startDate = read.readLine();
 				endDate = read.readLine();
 				Task task = new Task(taskID, taskName, startDate, endDate, assigned, taskStatus);
-				if (elements != ",|") {
+				if (!elements.equals(",|")) {
 					String elementPair[] = { "", "" };
 					elementPair[0] = elements.substring(0, elements.indexOf(","));
 					elementPair[1] = elements.substring(elements.indexOf(",") + 1, elements.indexOf("|"));
@@ -323,15 +323,12 @@ public class MainWindow extends WindowCommon {
 							elementPair = null;
 						}
 						else{
-//						elementPair[0] = elements.substring(0, elements.indexOf(","));
-//						elementPair[1] = elements.substring(elements.indexOf(",") + 1, elements.indexOf("|"));
-//						elementIndex++;
 						}
 					}
-				} else {
-					
+				} else{
+					newList.addTask(task);
 				}
-				newList.addTask(task);
+				
 			}
 			read.close();
 			this.taskList = newList;
