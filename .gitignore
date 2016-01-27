@@ -80,5 +80,7 @@ local.properties
 ######################
 
 workspace.xml
+error.txt
+/tmp/
 
 ####--------------------End of java git ignore-----------------------
