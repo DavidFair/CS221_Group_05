@@ -327,17 +327,24 @@ public class MainWindow extends WindowCommon {
 		FileWriter fileWriter = new FileWriter(filename);
 		BufferedWriter write = new BufferedWriter(fileWriter);
 		int numOfTasks = this.taskList.getListSize();
+		int numOfElements = 0;	//The number of Elements in a single Task
 		write.write(numOfTasks+"\n");
 		for(int loopCount = 0; loopCount < numOfTasks; loopCount++){
 			writeTask = this.taskList.getTask(loopCount);
 			elements = writeTask.getAllElementPairs();
 			write.write(writeTask.getID()+"\n");
 			//Elements
-			for(int i = 0; i < writeTask.getNumElements(); i++){
-				String[] elementPair = {"", ""};
-				elementPair = elements.get(i);
-				write.write(elementPair[0]+",");
-				write.write(elementPair[1]+"|");
+			numOfElements = writeTask.getNumElements();
+			if(numOfElements == 0){
+				write.write(",|");
+			}
+			else{
+				for(int i = 0; i < writeTask.getNumElements(); i++){
+					String[] elementPair = {"", ""};
+					elementPair = elements.get(i);
+					write.write(elementPair[0]+",");
+					write.write(elementPair[1]+"|");
+				}
 			}
 			write.write("\n");
 			write.write(writeTask.getName()+"\n");

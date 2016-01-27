@@ -303,8 +303,6 @@ public class Database {
 		
 	}
 
-	
-
 	public void getMembers(){
 		
 		System.out.println("Called getMembers");
