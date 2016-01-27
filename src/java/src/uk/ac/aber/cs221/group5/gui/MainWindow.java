@@ -58,7 +58,9 @@ public class MainWindow extends WindowCommon {
 					frame.dispose();
 				}
 			}
-			this.createWindow();
+			if(!this.doesGUIExist()){
+				this.createWindow();
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
