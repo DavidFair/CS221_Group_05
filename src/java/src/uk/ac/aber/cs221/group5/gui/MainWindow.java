@@ -272,6 +272,8 @@ public class MainWindow extends WindowCommon {
 	public void loadTasks(String filename) throws IOException{
 		FileReader fileReader = new FileReader(filename);
 		BufferedReader read = new BufferedReader(fileReader);
+		//New Task List to prevent loading the same Tasks multiple times.
+		TaskList newList = new TaskList();
 		int numOfTasks = 0;
 		String taskID           = null;
 		String elements         = null;
@@ -306,11 +308,12 @@ public class MainWindow extends WindowCommon {
 					}
 				}
 				else{
-					this.taskList.addTask(task);
+					newList.addTask(task);
 			}
 			
 			}
 			read.close();
+			this.taskList = newList;
 		} catch (Exception e) {
 			this.displayError("Error loading Task file.", "Loading Error");
 			e.printStackTrace();
