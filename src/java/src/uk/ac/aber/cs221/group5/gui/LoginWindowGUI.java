@@ -23,6 +23,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.Font;
 
 public class LoginWindowGUI {
@@ -77,7 +79,15 @@ public class LoginWindowGUI {
 		frmLogIn.setTitle("Log In");
 		frmLogIn.setResizable(false);
 		frmLogIn.setBounds(100, 100, 296, 233);
-		frmLogIn.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmLogIn.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		frmLogIn.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent event) {
+				MainWindow main = new MainWindow();
+				main.destroyWindow();
+				System.exit(0);
+			}
+		});
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
