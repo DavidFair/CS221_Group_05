@@ -46,6 +46,8 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.WindowFocusListener;
 import java.awt.event.WindowEvent;
+import java.awt.Window.Type;
+import java.awt.Font;
 
 public class MainWindowGUI {
 
@@ -100,6 +102,7 @@ public class MainWindowGUI {
 	 */
 	private void initialize() {
 		frmMainWindow = new JFrame();
+		frmMainWindow.setFont(new Font("Dialog", Font.PLAIN, 14));
 		frmMainWindow.addWindowFocusListener(new WindowFocusListener() {
 			public void windowGainedFocus(WindowEvent arg0) {
 				MainWindow main = new MainWindow();
@@ -135,6 +138,7 @@ public class MainWindowGUI {
 		quickViewPanel.setLayout(gbl_quickViewPanel);
 		
 		JLabel lblTaskName = new JLabel("Task Name:");
+		lblTaskName.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblTaskName = new GridBagConstraints();
 		gbc_lblTaskName.anchor = GridBagConstraints.WEST;
 		gbc_lblTaskName.insets = new Insets(0, 0, 5, 5);
@@ -145,7 +149,7 @@ public class MainWindowGUI {
 		txtTaskName = new JTextField();
 		txtTaskName.setEditable(false);
 		GridBagConstraints gbc_txtTaskName = new GridBagConstraints();
-		gbc_txtTaskName.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtTaskName.fill = GridBagConstraints.BOTH;
 		gbc_txtTaskName.insets = new Insets(0, 0, 5, 0);
 		gbc_txtTaskName.gridx = 2;
 		gbc_txtTaskName.gridy = 0;
@@ -153,6 +157,7 @@ public class MainWindowGUI {
 		txtTaskName.setColumns(10);
 		
 		JLabel lblStatus = new JLabel("Status:");
+		lblStatus.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblStatus.setHorizontalAlignment(SwingConstants.LEFT);
 		GridBagConstraints gbc_lblStatus = new GridBagConstraints();
 		gbc_lblStatus.anchor = GridBagConstraints.WEST;
@@ -164,7 +169,7 @@ public class MainWindowGUI {
 		txtStatus = new JTextField();
 		txtStatus.setEditable(false);
 		GridBagConstraints gbc_txtStatus = new GridBagConstraints();
-		gbc_txtStatus.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtStatus.fill = GridBagConstraints.BOTH;
 		gbc_txtStatus.insets = new Insets(0, 0, 5, 0);
 		gbc_txtStatus.gridx = 2;
 		gbc_txtStatus.gridy = 1;
@@ -172,6 +177,7 @@ public class MainWindowGUI {
 		txtStatus.setColumns(10);
 		
 		JLabel lblAssignedTaskMembers = new JLabel("Assigned Task Member(s):");
+		lblAssignedTaskMembers.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblAssignedTaskMembers = new GridBagConstraints();
 		gbc_lblAssignedTaskMembers.anchor = GridBagConstraints.WEST;
 		gbc_lblAssignedTaskMembers.insets = new Insets(0, 0, 5, 5);
@@ -182,7 +188,7 @@ public class MainWindowGUI {
 		txtAssigned = new JTextField();
 		txtAssigned.setEditable(false);
 		GridBagConstraints gbc_txtAssigned = new GridBagConstraints();
-		gbc_txtAssigned.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtAssigned.fill = GridBagConstraints.BOTH;
 		gbc_txtAssigned.insets = new Insets(0, 0, 5, 0);
 		gbc_txtAssigned.gridx = 2;
 		gbc_txtAssigned.gridy = 2;
@@ -190,6 +196,7 @@ public class MainWindowGUI {
 		txtAssigned.setColumns(10);
 		
 		JLabel lblStartDate = new JLabel("Start Date:");
+		lblStartDate.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblStartDate = new GridBagConstraints();
 		gbc_lblStartDate.anchor = GridBagConstraints.WEST;
 		gbc_lblStartDate.insets = new Insets(0, 0, 5, 5);
@@ -200,7 +207,7 @@ public class MainWindowGUI {
 		txtStartDate = new JTextField();
 		txtStartDate.setEditable(false);
 		GridBagConstraints gbc_txtStartDate = new GridBagConstraints();
-		gbc_txtStartDate.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtStartDate.fill = GridBagConstraints.BOTH;
 		gbc_txtStartDate.insets = new Insets(0, 0, 5, 0);
 		gbc_txtStartDate.gridx = 2;
 		gbc_txtStartDate.gridy = 3;
@@ -208,6 +215,7 @@ public class MainWindowGUI {
 		txtStartDate.setColumns(10);
 		
 		JLabel lblExpectedEndDate = new JLabel("Expected End Date:");
+		lblExpectedEndDate.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblExpectedEndDate = new GridBagConstraints();
 		gbc_lblExpectedEndDate.anchor = GridBagConstraints.WEST;
 		gbc_lblExpectedEndDate.insets = new Insets(0, 0, 5, 5);
@@ -218,7 +226,7 @@ public class MainWindowGUI {
 		txtEndDate = new JTextField();
 		txtEndDate.setEditable(false);
 		GridBagConstraints gbc_txtEndDate = new GridBagConstraints();
-		gbc_txtEndDate.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtEndDate.fill = GridBagConstraints.BOTH;
 		gbc_txtEndDate.insets = new Insets(0, 0, 5, 0);
 		gbc_txtEndDate.gridx = 2;
 		gbc_txtEndDate.gridy = 4;
@@ -226,6 +234,7 @@ public class MainWindowGUI {
 		txtEndDate.setColumns(10);
 		
 		JLabel lblTaskElements = new JLabel("Task Elements:");
+		lblTaskElements.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblTaskElements.setHorizontalAlignment(SwingConstants.RIGHT);
 		GridBagConstraints gbc_lblTaskElements = new GridBagConstraints();
 		gbc_lblTaskElements.anchor = GridBagConstraints.WEST;
@@ -235,6 +244,7 @@ public class MainWindowGUI {
 		quickViewPanel.add(lblTaskElements, gbc_lblTaskElements);
 		
 		JButton btnViewElements = new JButton("View");
+		btnViewElements.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_btnViewElements = new GridBagConstraints();
 		gbc_btnViewElements.insets = new Insets(0, 0, 5, 0);
 		gbc_btnViewElements.gridx = 2;
@@ -258,6 +268,7 @@ public class MainWindowGUI {
 		});
 		
 		JButton btnEdit = new JButton("Edit");
+		btnEdit.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_btnEdit = new GridBagConstraints();
 		gbc_btnEdit.insets = new Insets(0, 0, 0, 5);
 		gbc_btnEdit.gridx = 1;
@@ -297,6 +308,7 @@ public class MainWindowGUI {
 		connSettingsPanel.setLayout(gbl_connSettingsPanel);
 		
 		JLabel lblNewLabel = new JLabel("Status:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel.gridx = 0;
@@ -304,6 +316,7 @@ public class MainWindowGUI {
 		connSettingsPanel.add(lblNewLabel, gbc_lblNewLabel);
 		
 		lblConnStatus = new JLabel("connStatus");
+		lblConnStatus.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblConnStatus = new GridBagConstraints();
 		gbc_lblConnStatus.insets = new Insets(0, 0, 5, 5);
 		gbc_lblConnStatus.gridx = 2;
@@ -311,6 +324,7 @@ public class MainWindowGUI {
 		connSettingsPanel.add(lblConnStatus, gbc_lblConnStatus);
 		
 		JButton btnConnectionSettings = new JButton("Connection Settings");
+		btnConnectionSettings.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnConnectionSettings.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ConnSettingsWindow connSettings = new ConnSettingsWindow(true);
@@ -346,6 +360,7 @@ public class MainWindowGUI {
 		panel.add(scrollPane, gbc_scrollPane);
 		
 		table = new JTable();
+		table.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		table.setCellSelectionEnabled(true);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setModel(new DefaultTableModel(
@@ -381,7 +396,6 @@ public class MainWindowGUI {
 				}
 			}
 		});
-		frmMainWindow.setVisible(true);
 	}
 	
 	public void setConnStatusLabel(DbStatus status){
