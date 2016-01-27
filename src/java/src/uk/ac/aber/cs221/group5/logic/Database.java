@@ -12,6 +12,8 @@ import java.sql.Statement;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.mysql.fabric.xmlrpc.base.Data;
+
 import uk.ac.aber.cs221.group5.gui.MainWindow;
 import uk.ac.aber.cs221.group5.logic.Task.Element;
 
@@ -128,6 +130,9 @@ public class Database {
 		this.hostWindow = newWindow;
 	}
 	
+	public MainWindow getHostWindow(){
+		return this.hostWindow;
+	}
 	
 	public void connect(String hostName, String portNo, String dbUser, String dbPass, String dbName) {
 		this.dbUsername = dbUser;
@@ -174,7 +179,8 @@ public class Database {
 					
 				} catch (SQLException e) {
 					parentWindow.displayError("Could not connect to database. "
-							+ "Please check connection settings" + "\nError: " + e.getMessage(), "Connection Error");
+							+ "Please check connection settings" + "\nError: " + e.getCause(), "Connection Error");
+					
 					// For use debugging
 					// Thread.dumpStack();
 					//System.err.println(e.getMessage());
@@ -280,10 +286,12 @@ public class Database {
 
 		class TaskSync implements Runnable {
 			
-			String sqlQuery;
+			private Database dbObject;
+			private String sqlQuery;
 			
-			public TaskSync(String query){
+			public TaskSync(String query, Database parentDb){
 				this.sqlQuery = query;
+				this.dbObject = parentDb;
 			}
 			
 			public void run() {
@@ -299,7 +307,7 @@ public class Database {
 					
 					//Update the copy held by the main window
 
-					hostWindow.setTaskList(tasksList);
+					dbObject.getHostWindow().setTaskList(tasksList);
 
 					currentStatus = DbStatus.CONNECTED;
 
@@ -317,7 +325,7 @@ public class Database {
 		//Set status to sync
 		currentStatus = DbStatus.SYNCHRONIZING;
 		
-		Thread sqlExec = new Thread(new TaskSync(taskQuery));
+		Thread sqlExec = new Thread(new TaskSync(taskQuery, this));
 		sqlExec.start();
 		
 		//Setup latency timer to detect lag
@@ -346,7 +354,7 @@ public class Database {
 				if (members != null){
 					MemberList newMemberList = resultSetToMemberList(members);
 					
-					hostWindow.setmemberList(newMemberList);
+					parentDB.getHostWindow().setmemberList(newMemberList);
 					
 
 					parentDB.saveUserName(usersPath, newMemberList);
@@ -525,9 +533,11 @@ public class Database {
 		// This class runs in seperate threads pulling all task elements
 		class ElementSync implements Runnable {
 			private TaskList listOfTasks;
+			private Database dbObj;
 
-			public ElementSync(TaskList allTasks) {
+			public ElementSync(TaskList allTasks, Database parentDb) {
 				this.listOfTasks = allTasks;
+				this.dbObj = parentDb;
 			}
 
 			public void run() {
@@ -588,7 +598,7 @@ public class Database {
 		
 		currentStatus = DbStatus.SYNCHRONIZING;
 
-		Thread execSql = new Thread(new ElementSync(allTasks));
+		Thread execSql = new Thread(new ElementSync(allTasks, this));
 		execSql.start();
 		
 		setupLatencyTimer();
@@ -642,10 +652,16 @@ public class Database {
 		
 		class LatencyAlert extends TimerTask{
 
+			private Database dbObj;
+			
+			public LatencyAlert(Database parentDb){
+				this.dbObj = parentDb;
+			}
+			
 			
 			@Override
 			public void run() {
-				hostWindow.setConnStatus(currentStatus);
+				dbObj.getHostWindow().setConnStatus(currentStatus);
 				
 				if (currentStatus == DbStatus.SYNCHRONIZING){
 					//Still syncing create timer to check again
@@ -663,7 +679,7 @@ public class Database {
 		}
 		
 
-		latencyTimer.schedule(new LatencyAlert(), SYNC_ALRT_DELAY*1000);
+		latencyTimer.schedule(new LatencyAlert(this), SYNC_ALRT_DELAY*1000);
 		
 	}
 	
