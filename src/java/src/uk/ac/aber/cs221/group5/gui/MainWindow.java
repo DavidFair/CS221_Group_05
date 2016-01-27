@@ -318,6 +318,7 @@ public class MainWindow extends WindowCommon {
 			this.taskList = newList;
 		} catch (Exception e) {
 			this.displayError("Error loading Task file.", "Loading Error");
+			this.getTaskList();
 			e.printStackTrace();
 			read.close();
 		}
