@@ -185,8 +185,8 @@ public class MainWindow extends WindowCommon {
 		//Get a new child window for super class
 		childWindow = new MainWindowGUI();
 		
-		//Load the tasks into the Task List
-		if(!databaseObj.getConnStatus().equals("DISCONNECTED")){
+		//Update local files with Task files from TaskerSRV if we are connected
+		if(databaseObj.getConnStatus().equals("CONNECTED")){
 			try {
 				saveChange(TASK_SAVE_PATH);
 				loadTasks(TASK_SAVE_PATH);
