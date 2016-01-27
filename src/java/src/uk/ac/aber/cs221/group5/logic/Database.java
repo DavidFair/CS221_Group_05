@@ -238,6 +238,8 @@ public class Database {
 	
 	public void getTasks(String username){
 		
+		System.out.println("Called getTasks");
+		
 		String taskQuery;
 		if (username != ""){
 			taskQuery = "SELECT * FROM `tbl_tasks` WHERE TaskOwner='" + username + "';";
@@ -300,7 +302,7 @@ public class Database {
 
 	public void getMembers(){
 		
-		
+		System.out.println("Called getMembers");
 		
 		class MemberSync implements Runnable {
 			
