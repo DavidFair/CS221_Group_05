@@ -37,8 +37,8 @@
       <file leaf-file-name="taskAdd.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/taskAdd.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5554259">
-              <caret line="28" column="18" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="18" />
+            <state vertical-scroll-proportion="0.4562427">
+              <caret line="23" column="41" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
               <folding>
                 <marker date="1453914080510" expanded="true" signature="872:939" placeholder="SELECT Email..tbl_users..." />
               </folding>
@@ -693,8 +693,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/taskAdd.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5554259">
-          <caret line="28" column="18" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.4562427">
+          <caret line="23" column="41" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
           <folding>
             <marker date="1453914080510" expanded="true" signature="872:939" placeholder="SELECT Email..tbl_users..." />
           </folding>

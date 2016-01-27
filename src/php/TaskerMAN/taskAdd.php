@@ -33,11 +33,23 @@
 				
                 <label for="endDate">End Date:</label>
                 <input name="endDate" type="date" required /><br/>
-           
+                <script>
+                    var i = 1;
+                    function addTaskDesc(){
+                        i++;
+                        var div = document.createElement('div');
+                        div.innerHTML = 'Task Description :<br/><input type="text" name="taskDesc_'+i+'" ><input type="button" id="add_taskDesc()" onClick="addTaskDesc()" value="+" /><input type="button" value="-" onclick="removeTaskDesc(this)">';
+                        document.getElementById('taskDesc').appendChild(div);
+                    }
+                    function removeTaskDesc(div) {
+                        document.getElementById('taskDesc').removeChild( div.parentNode );
+                        i--;
+                    }
+                </script>
+                <div id="taskDesc">
                 <label for="taskDescription">Task Description:</label><br/>
-                <textarea name="taskDescription" rows=8 cols=20 required>
-                </textarea>
-                <br/>
+                    <input name="taskDesc_1" type="text" required /><input type="button" id="add_taskDesc()" onClick="addTaskDesc()" value="+" />
+                </div>
 				<input  name="submit" class="modalButton" type="submit" value="Submit" />
                 <input name="clear" class="modalButton" type="reset" value="Clear" />
             </div>
