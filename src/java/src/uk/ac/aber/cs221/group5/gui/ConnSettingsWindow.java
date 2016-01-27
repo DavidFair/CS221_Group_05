@@ -74,6 +74,8 @@ public class ConnSettingsWindow {
 		long timeDifferenceMinutes = 0;
 		final int conversionFactor = 60000;
 		//Convert to millis to minutes
+		
+		/////INTEGER DIVISION////
 		timeDifferenceMinutes = timeDifferenceMillis / conversionFactor;
 		
 		if (connTime == 0){

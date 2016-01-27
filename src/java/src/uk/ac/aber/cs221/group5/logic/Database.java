@@ -1,6 +1,5 @@
 package uk.ac.aber.cs221.group5.logic;
 
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,8 +16,6 @@ import com.mysql.fabric.xmlrpc.base.Data;
 import uk.ac.aber.cs221.group5.gui.MainWindow;
 import uk.ac.aber.cs221.group5.logic.Task.Element;
 
-
-
 /**
  * @(#)Database.java 0.1 2015-12-02
  * 
@@ -27,113 +24,113 @@ import uk.ac.aber.cs221.group5.logic.Task.Element;
  * 
  */
 
-
 /**
- * Implements a database class for communicating
- * to a TaskerSRV server
+ * Implements a database class for communicating to a TaskerSRV server
+ * 
  * @author David (daf5)
  *
  */
 
-
-//This is currently a skeleton class to allow SQL to be created
+// This is currently a skeleton class to allow SQL to be created
 public class Database {
-	
+
 	private String dbURL;
 	private String dbPortNo;
 	private String dbName;
 	private String dbUsername;
 	private String dbPassword;
 	private Connection dbConnection;
-	
+
 	private Timer connTimer;
 	private Timer latencyTimer;
-	
+
 	private DbStatus currentStatus;
-	
+
 	private String usersPath;
 	private MainWindow hostWindow;
-	
-	private long connTime;	//The system time when the Database last connected
-	
-	//How often the DB attempts to update program information
+
+	private long connTime; // The system time when the Database last connected
+
+	// How often the DB attempts to update program information
 	private static final int REFRESH_SEC_DELAY = 60;
 	private static final int SYNC_ALRT_DELAY = 1;
-	
+
 	/**
 	 * Creates a new database object and loads JDBC into memory
-	 * @param usersFilePath The location to save and load users to
+	 * 
+	 * @param usersFilePath
+	 *            The location to save and load users to
 	 */
-	public Database(String usersFilePath, MainWindow parentWindow){
-		//Leave blank so default port is used
+	public Database(String usersFilePath, MainWindow parentWindow) {
+		// Leave blank so default port is used
 		this.dbPortNo = "";
 		this.connTimer = null;
 		this.currentStatus = DbStatus.DISCONNECTED;
-		
+
 		/* First load JDBC connector */
-		//Try to load driver else exit with error code
-		try 
-		{
-			//This is recommended method in documentation
-			//As it dynamically loads the class into memory at run time
-			
+		// Try to load driver else exit with error code
+		try {
+			// This is recommended method in documentation
+			// As it dynamically loads the class into memory at run time
+
 			Class.forName("com.mysql.jdbc.Driver");
-			
-		} catch (ClassNotFoundException e){
+
+		} catch (ClassNotFoundException e) {
 			System.err.println("Unable to load MYSQL JDBC implementation class");
 			System.exit(1);
 		}
-		
+
 		this.usersPath = usersFilePath;
 		this.hostWindow = parentWindow;
-		
+
 	}
-	
+
 	/**
 	 * Saves a list of all user names to a local file
-	 * @param filePath Path of file to be saved
-	 * @param allUsers A MemberList containing all users to be saved
-	 * @throws IOException 
+	 * 
+	 * @param filePath
+	 *            Path of file to be saved
+	 * @param allUsers
+	 *            A MemberList containing all users to be saved
+	 * @throws IOException
 	 */
 	public void saveUserName(String filePath, MemberList allUsers) {
-		
-		
+
 		FileWriter fileWriter;
-		
+
 		try {
 			fileWriter = new FileWriter(filePath);
 			BufferedWriter write = new BufferedWriter(fileWriter);
-			
+
 			int numOfTasks = allUsers.getLength();
-			write.write(numOfTasks+"\n");
-			
-			for(int loopCount = 0; loopCount < numOfTasks; loopCount++){
+			write.write(numOfTasks + "\n");
+
+			for (int loopCount = 0; loopCount < numOfTasks; loopCount++) {
 				Members writeTask = allUsers.getMember(loopCount);
-				write.write(writeTask.getEmail()+"\n");
-				write.write(writeTask.getName()+"\n");
+				write.write(writeTask.getEmail() + "\n");
+				write.write(writeTask.getName() + "\n");
 			}
-			 write.close();
+			write.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
-	
-	
-	public void connect(){
-		//Attempt to reconnect with existing db settings
+
+	public void connect() {
+		// Attempt to reconnect with existing db settings
 		connect(dbURL, dbPortNo, dbUsername, dbPassword, dbName);
 	}
 
-	public void updateHostWindow(MainWindow newWindow){
+	public void updateHostWindow(MainWindow newWindow) {
 		this.hostWindow = newWindow;
 	}
-	
-	public MainWindow getHostWindow(){
+
+	public MainWindow getHostWindow() {
 		return this.hostWindow;
 	}
-	
+
 	public void connect(String hostName, String portNo, String dbUser, String dbPass, String dbName) {
 		this.dbUsername = dbUser;
 		this.dbPassword = dbPass;
@@ -145,8 +142,8 @@ public class Database {
 		final String urlPrepend = "jdbc:mysql://";
 		// Append connection parameters - such as automatically reconnecting
 		final String urlAppend = "?autoReconnect=true";
-		
-		if (portNo == ""){
+
+		if (portNo == "") {
 			this.dbPortNo = "3306";
 		}
 		String connectionUrl = urlPrepend + hostName + ":" + this.dbPortNo + "/" + this.dbName + urlAppend;
@@ -159,8 +156,7 @@ public class Database {
 			private Database parentDb;
 			private MainWindow parentWindow;
 
-			public ConnectThread(String url, String uName, String pWord, 
-					Database parentDB, MainWindow hostWindow) {
+			public ConnectThread(String url, String uName, String pWord, Database parentDB, MainWindow hostWindow) {
 				this.url = url;
 				this.uName = uName;
 				this.pWord = pWord;
@@ -172,20 +168,19 @@ public class Database {
 				try {
 					dbConnection = DriverManager.getConnection(url, uName, pWord);
 					parentDb.currentStatus = DbStatus.CONNECTED;
-					
-					//Now sync
+
+					// Now sync
 					parentDb.getMembers();
 					parentDb.getTasks();
-					
+
 				} catch (SQLException e) {
-					parentWindow.displayError("Could not connect to database. "
-							+ "Please check connection settings" + "\nError: " + e.getCause(), "Connection Error");
-					
+					parentWindow.displayError("Could not connect to database. " + "Please check connection settings"
+							+ "\nError: " + e.getCause(), "Connection Error");
+
 					// For use debugging
 					// Thread.dumpStack();
-					//System.err.println(e.getMessage());
-					//System.err.println("Full connection string was: " + url);
-
+					// System.err.println(e.getMessage());
+					// System.err.println("Full connection string was: " + url);
 
 					// Reset state
 					parentDb.currentStatus = DbStatus.DISCONNECTED;
@@ -194,7 +189,6 @@ public class Database {
 			}
 
 		}
- 
 
 		this.connTime = System.currentTimeMillis();
 		Thread connectDb = new Thread(new ConnectThread(connectionUrl, dbUser, dbPass, this, hostWindow));
@@ -202,134 +196,149 @@ public class Database {
 		connectDb.start();
 
 	}
-	
-	
-	public void setElementComments(Task updatedTask){
-		
-		
+
+	public void setElementComments(Task updatedTask) {
+
 		class ElementSync implements Runnable {
-			
+
 			Task taskObj;
-			
-			public ElementSync(Task task){
+
+			public ElementSync(Task task) {
 				this.taskObj = task;
 			}
-			
+
 			public void run() {
-				
-				for (Element elementObj: taskObj.getAllElements()){
+
+				for (Element elementObj : taskObj.getAllElements()) {
 					String index = elementObj.getIndex();
-				
-					String query = "UPDATE `tbl_elements` SET `TaskComments`='" 
-						+ elementObj.getComment() + " WHERE `Index`='" + index + "';";
+
+					String query = "UPDATE `tbl_elements` SET `TaskComments`='" + elementObj.getComment()
+							+ " WHERE `Index`='" + index + "';";
 					executeSqlStatement(query);
 				}
 			}
 		}
-		
+
 		Thread syncElement = new Thread(new ElementSync(updatedTask));
 		syncElement.start();
-		
+
 	}
-	
-	public void setTaskStatus(Task updatedTask){
-		
-		class StatusSync implements Runnable{
+
+	public void setTaskStatus(Task updatedTask) {
+
+		class StatusSync implements Runnable {
 
 			private Task updatedTask;
-			
-			public StatusSync() {
-				// TODO Auto-generated constructor stub
+
+			public StatusSync(Task taskToSync) {
+				this.updatedTask = taskToSync;
 			}
-			
+
 			@Override
 			public void run() {
-				
-				
+
+				String status = updatedTask.getStatus();
+				int statusNum;
+
+				switch (status) {
+				case "Abandoned":
+					statusNum = 0;
+					break;
+
+				case "Allocated":
+					statusNum = 1;
+					break;
+
+				case "Completed":
+					statusNum = 2;
+					break;
+
+				default:
+					throw new IndexOutOfBoundsException("Task status not recognised");
+				}
+
+				String query = "UPDATE `tbl_tasks` SET `Status`='" + statusNum + "' WHERE `TaskID`='"
+						+ updatedTask.getID() + "';";
+				executeSqlStatement(query);
+
 			}
-			
-			
-			
+
 		}
-		
-		
+
+		Thread execStatusSync = new Thread(new StatusSync(updatedTask));
+		execStatusSync.start();
+
 	}
-	
-	public void closeDbConn(){
-		
-		if (connTimer != null){
+
+	public void closeDbConn() {
+
+		if (connTimer != null) {
 			connTimer.cancel();
 			connTimer = null;
 		}
 
-		
-		if (dbConnection != null){
+		if (dbConnection != null) {
 			try {
 				dbConnection.close();
 			} catch (SQLException e) {
 				System.err.println("Could not close JDBC connection");
-				//For debugging
-				//e.printStackTrace();
-				
-				//Exit as we cannot close JDBC which means something is wrong
+				// For debugging
+				// e.printStackTrace();
+
+				// Exit as we cannot close JDBC which means something is wrong
 				System.exit(100);
-				
+
 			}
 		}
-		
-		//Release current connection
+
+		// Release current connection
 		dbConnection = null;
-		
-		//Set status
+
+		// Set status
 		currentStatus = DbStatus.DISCONNECTED;
-		
+
 	}
-	
-	
-	
-	public DbStatus getConnStatus(){
+
+	public DbStatus getConnStatus() {
 		return currentStatus;
 	}
-	
-	
-	public void getTasks(){
+
+	public void getTasks() {
 		getTasks("");
 	}
-	
-	public void getTasks(String username){
-		
+
+	public void getTasks(String username) {
+
 		System.out.println("Called getTasks");
-		
+
 		String taskQuery;
-		if (username != ""){
+		if (username != "") {
 			taskQuery = "SELECT * FROM `tbl_tasks` WHERE TaskOwner='" + username + "';";
 		} else {
 			taskQuery = "SELECT * FROM `tbl_tasks`";
 		}
-		
 
 		class TaskSync implements Runnable {
-			
+
 			private Database dbObject;
 			private String sqlQuery;
-			
-			public TaskSync(String query, Database parentDb){
+
+			public TaskSync(String query, Database parentDb) {
 				this.sqlQuery = query;
 				this.dbObject = parentDb;
 			}
-			
+
 			public void run() {
 				ResultSet tasksSet = executeSqlStatement(sqlQuery);
-				
-				
-				if (tasksSet != null){
-					//Convert SQL result to Task List
+
+				if (tasksSet != null) {
+					// Convert SQL result to Task List
 					TaskList tasksList = resultSetToTaskList(tasksSet);
-					
-					//Update the task elements
+
+					// Update the task elements
 					updateTaskElements(tasksList);
-					
-					//Update the copy held by the main window
+
+					// Update the copy held by the main window
 
 					dbObject.getHostWindow().setTaskList(tasksList);
 
@@ -345,46 +354,44 @@ public class Database {
 				}
 			}
 		}
-		
-		//Set status to sync
+
+		// Set status to sync
 		currentStatus = DbStatus.SYNCHRONIZING;
-		
+
 		Thread sqlExec = new Thread(new TaskSync(taskQuery, this));
 		sqlExec.start();
-		
-		//Setup latency timer to detect lag
-		setupLatencyTimer();
-		
 
-		createRefreshTimer(REFRESH_SEC_DELAY, this );
-		
+		// Setup latency timer to detect lag
+		setupLatencyTimer();
+
+		createRefreshTimer(REFRESH_SEC_DELAY, this);
+
 	}
 
-	public void getMembers(){
-		
+	public void getMembers() {
+
 		System.out.println("Called getMembers");
-		
+
 		class MemberSync implements Runnable {
-			
+
 			private Database parentDB;
-			
-			public MemberSync(Database parentDatabase){
+
+			public MemberSync(Database parentDatabase) {
 				this.parentDB = parentDatabase;
 			}
-			
+
 			public void run() {
 				ResultSet members = executeSqlStatement("Select * FROM tbl_users");
-				
-				if (members != null){
+
+				if (members != null) {
 					MemberList newMemberList = resultSetToMemberList(members);
-					
+
 					parentDB.getHostWindow().setmemberList(newMemberList);
-					
 
 					parentDB.saveUserName(usersPath, newMemberList);
 
 					currentStatus = DbStatus.CONNECTED;
-					
+
 					try {
 						members.close();
 					} catch (SQLException e) {
@@ -395,112 +402,116 @@ public class Database {
 				}
 			}
 		}
-		//Create new thread an exec it
+		// Create new thread an exec it
 		currentStatus = DbStatus.SYNCHRONIZING;
 		Thread sqlExec = new Thread(new MemberSync(this));
 		sqlExec.start();
-		
+
 		setupLatencyTimer();
 
 		createRefreshTimer(REFRESH_SEC_DELAY, this);
 
 	}
-	
-	public void startAutoSync(){
+
+	public void startAutoSync() {
 		createRefreshTimer(REFRESH_SEC_DELAY, this);
 	}
-	
-	public void stopAutoSync(){
-		
-		if (connTimer == null){
+
+	public void stopAutoSync() {
+
+		if (connTimer == null) {
 			return;
 		}
-		
+
 		connTimer.cancel();
 		connTimer = null;
-		
+
 	}
-	
-	public long getConnTime(){
+
+	public long getConnTime() {
 		return this.connTime;
 	}
-	
-	
+
 	/**
-	 * Takes a statement object and SQL query and executes the query. 
-	 * Returns the query result as a ResultSet object
-	 * @param statementToExec The Statement object to use 
-	 * @param query The SQL query to execute
+	 * Takes a statement object and SQL query and executes the query. Returns
+	 * the query result as a ResultSet object
+	 * 
+	 * @param statementToExec
+	 *            The Statement object to use
+	 * @param query
+	 *            The SQL query to execute
 	 * @return ResultSet containing result. If it fails null.
 	 */
-	private ResultSet executeSqlStatement(Statement statementToExec, String query){
-		
+	private ResultSet executeSqlStatement(Statement statementToExec, String query) {
+
 		ResultSet sqlOutput;
-		
-		try{
+
+		try {
 			sqlOutput = statementToExec.executeQuery(query);
-		} catch (SQLException e){
+		} catch (SQLException e) {
 			System.err.println("Sql query failed. Query used was:");
 			System.err.println(query);
-			
-			//Reset ResultSet to null
+
+			// Reset ResultSet to null
 			sqlOutput = null;
-			
-			//For debugging
-			//System.err.println("Stack trace");
-			//Thread.dumpStack();
+
+			// For debugging
+			// System.err.println("Stack trace");
+			// Thread.dumpStack();
 		}
-		
+
 		return sqlOutput;
 
 	}
-	
+
 	/**
 	 * Executes SQL query passed in by the parameter and returns a ResultSet
-	 * containing the returned data from the database 
-	 * @param query SQL query to execute on the database
+	 * containing the returned data from the database
+	 * 
+	 * @param query
+	 *            SQL query to execute on the database
 	 * @return ResultSet containing data if query succeeded. Null if it did not
 	 */
-	private ResultSet executeSqlStatement(String query){
+	private ResultSet executeSqlStatement(String query) {
 		Statement sqlStatementObject = null;
-		
-		if (dbConnection == null){
+
+		if (dbConnection == null) {
 			return null;
 		}
-		
-		try{
+
+		try {
 			sqlStatementObject = dbConnection.createStatement();
 		} catch (SQLException e) {
 			System.err.println("Could not create SQL statement");
-			//To use when debugging
-			//Thread.dumpStack();
-			
+			// To use when debugging
+			// Thread.dumpStack();
+
 		}
-		
-		//Pass resultSet straight through to caller
+
+		// Pass resultSet straight through to caller
 		return executeSqlStatement(sqlStatementObject, query);
-		
+
 	}
-	
-	private TaskList resultSetToTaskList(ResultSet toConvert){
+
+	private TaskList resultSetToTaskList(ResultSet toConvert) {
 		TaskList result = new TaskList();
-		
+
 		try {
-			while (toConvert.next()){
+			while (toConvert.next()) {
 				String id = toConvert.getString("TaskID");
 				String taskName = toConvert.getString("TaskName");
 				String startDate = toConvert.getString("StartDate");
 				String endDate = toConvert.getString("EndDate");
 				String owner = toConvert.getString("TaskOwner");
 				int status = toConvert.getInt("Status");
-				
-				//Convert status to enum in Java
+
+				// Convert status to enum in Java
 				TaskStatuses enumStatus = null;
 				switch (status) {
 				case 0:
 					enumStatus = TaskStatuses.Abandoned;
 					break;
-					
+
 				case 1:
 					enumStatus = TaskStatuses.Allocated;
 					break;
@@ -508,51 +519,49 @@ public class Database {
 					enumStatus = TaskStatuses.Completed;
 					break;
 				default:
-					//XXX Need to handle bad value for enum
+					// XXX Need to handle bad value for enum
 					break;
 				}
-				
-				//Create object and store
+
+				// Create object and store
 				Task newTask = new Task(id, taskName, startDate, endDate, owner, enumStatus);
 				result.addTask(newTask);
-				
-			} //End of while loop
+
+			} // End of while loop
 			return result;
-			
-		} catch (SQLException e){
-			//XXX Error handling
+
+		} catch (SQLException e) {
+			// XXX Error handling
 			System.err.println(e.getMessage());
 			return null;
-			
+
 		}
-		
 
 	}
-	
-	private MemberList resultSetToMemberList(ResultSet toConvert){
+
+	private MemberList resultSetToMemberList(ResultSet toConvert) {
 		MemberList newList = new MemberList();
-		
-		if (toConvert == null){
+
+		if (toConvert == null) {
 			throw new NullPointerException("Passed null result set in resultSetToMemberList");
 		}
-		
+
 		try {
-			while (toConvert.next()){
+			while (toConvert.next()) {
 				String name = toConvert.getString("FirstName") + " " + toConvert.getString("LastName");
 				String email = toConvert.getString("Email");
 				Members newMember = new Members(name, email);
 				newList.addMember(newMember);
 			}
-			
-			
+
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		}
-		
+
 		return newList;
 	}
-	
-	private void updateTaskElements(TaskList allTasks){
+
+	private void updateTaskElements(TaskList allTasks) {
 
 		// This class runs in seperate threads pulling all task elements
 		class ElementSync implements Runnable {
@@ -589,16 +598,15 @@ public class Database {
 								String elementDesc = elements.getString("TaskDesc");
 								String elementComments = elements.getString("TaskComments");
 								String elementId = elements.getString("Index");
-								
-								
-								if (elementComments == null){
+
+								if (elementComments == null) {
 									elementComments = "";
 								}
-								
-								//Remove pipes and chars from element desc and comments
+
+								// Remove pipes and chars from element desc and
+								// comments
 								elementDesc = elementDesc.replace(",", "");
 								elementComments = elementComments.replace("|", "");
-								
 
 								currentTask.addElement(elementDesc, elementComments, elementId);
 							}
@@ -612,23 +620,22 @@ public class Database {
 					}
 
 				}
-				
-				//Finished getting task elements
-				
+
+				// Finished getting task elements
 
 			}
 
-		} //End of anon inner class
-		
+		} // End of anon inner class
+
 		currentStatus = DbStatus.SYNCHRONIZING;
 
 		Thread execSql = new Thread(new ElementSync(allTasks, this));
 		execSql.start();
-		
+
 		setupLatencyTimer();
 
 	}
-	
+
 	private void createRefreshTimer(int seconds, Database database) {
 
 		class RefreshTask extends TimerTask {
@@ -667,45 +674,42 @@ public class Database {
 		connTimer.schedule(new RefreshTask(database), seconds * 1000);
 
 	}
-		
-	private void setupLatencyTimer(){
 
-		if (latencyTimer == null){
+	private void setupLatencyTimer() {
+
+		if (latencyTimer == null) {
 			latencyTimer = new Timer();
 		}
-		
-		class LatencyAlert extends TimerTask{
+
+		class LatencyAlert extends TimerTask {
 
 			private Database dbObj;
-			
-			public LatencyAlert(Database parentDb){
+
+			public LatencyAlert(Database parentDb) {
 				this.dbObj = parentDb;
 			}
-			
-			
+
 			@Override
 			public void run() {
 				dbObj.getHostWindow().setConnStatus(currentStatus);
-				
-				if (currentStatus == DbStatus.SYNCHRONIZING){
-					//Still syncing create timer to check again
+
+				if (currentStatus == DbStatus.SYNCHRONIZING) {
+					// Still syncing create timer to check again
 					setupLatencyTimer();
-				} else if (currentStatus == DbStatus.CONNECTED){
-					//Finished cancel any and all timers
+				} else if (currentStatus == DbStatus.CONNECTED) {
+					// Finished cancel any and all timers
 					latencyTimer.cancel();
 					latencyTimer = null;
-				} else if (currentStatus == DbStatus.DISCONNECTED){
-					//TODO disconnected logic
+				} else if (currentStatus == DbStatus.DISCONNECTED) {
+					// TODO disconnected logic
 				}
-				
-			}
-			
-		}
-		
 
-		latencyTimer.schedule(new LatencyAlert(this), SYNC_ALRT_DELAY*1000);
-		
+			}
+
+		}
+
+		latencyTimer.schedule(new LatencyAlert(this), SYNC_ALRT_DELAY * 1000);
+
 	}
-	
-	
+
 }
