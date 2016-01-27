@@ -26,6 +26,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.awt.Font;
 
 public class EditWindowGUI {
 
@@ -90,6 +91,7 @@ public class EditWindowGUI {
 		frmEditTask.getContentPane().setLayout(gridBagLayout);
 		
 		JLabel lblTaskName = new JLabel("Task Name:");
+		lblTaskName.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblTaskName.setHorizontalAlignment(SwingConstants.LEFT);
 		GridBagConstraints gbc_lblTaskName = new GridBagConstraints();
 		gbc_lblTaskName.insets = new Insets(0, 0, 5, 5);
@@ -99,6 +101,7 @@ public class EditWindowGUI {
 		frmEditTask.getContentPane().add(lblTaskName, gbc_lblTaskName);
 		
 		txtTaskName = new JTextField();
+		txtTaskName.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtTaskName.setEditable(false);
 		GridBagConstraints gbc_txtTaskName = new GridBagConstraints();
 		gbc_txtTaskName.gridwidth = 2;
@@ -110,6 +113,7 @@ public class EditWindowGUI {
 		txtTaskName.setColumns(10);
 		
 		JLabel lblTaskStatus = new JLabel("Task Status:");
+		lblTaskStatus.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblTaskStatus.setHorizontalAlignment(SwingConstants.LEFT);
 		GridBagConstraints gbc_lblTaskStatus = new GridBagConstraints();
 		gbc_lblTaskStatus.anchor = GridBagConstraints.WEST;
@@ -119,6 +123,7 @@ public class EditWindowGUI {
 		frmEditTask.getContentPane().add(lblTaskStatus, gbc_lblTaskStatus);
 		
 		cmbTaskStatus = new JComboBox();
+		cmbTaskStatus.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		cmbTaskStatus.setModel(new DefaultComboBoxModel(new String[] {"Allocated", "Abandoned", "Completed"}));
 		GridBagConstraints gbc_cmbTaskStatus = new GridBagConstraints();
 		gbc_cmbTaskStatus.gridwidth = 2;
@@ -129,6 +134,7 @@ public class EditWindowGUI {
 		frmEditTask.getContentPane().add(cmbTaskStatus, gbc_cmbTaskStatus);
 		
 		JLabel lblAssignedTaskMembers = new JLabel("Assigned Task Member(s):");
+		lblAssignedTaskMembers.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblAssignedTaskMembers.setHorizontalAlignment(SwingConstants.LEFT);
 		GridBagConstraints gbc_lblAssignedTaskMembers = new GridBagConstraints();
 		gbc_lblAssignedTaskMembers.anchor = GridBagConstraints.EAST;
@@ -138,6 +144,7 @@ public class EditWindowGUI {
 		frmEditTask.getContentPane().add(lblAssignedTaskMembers, gbc_lblAssignedTaskMembers);
 		
 		txtAssignedTaskMembers = new JTextField();
+		txtAssignedTaskMembers.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtAssignedTaskMembers.setEditable(false);
 		GridBagConstraints gbc_txtAssignedTaskMembers = new GridBagConstraints();
 		gbc_txtAssignedTaskMembers.gridwidth = 2;
@@ -149,6 +156,7 @@ public class EditWindowGUI {
 		txtAssignedTaskMembers.setColumns(10);
 		
 		JLabel lblStartDate = new JLabel("Start Date:");
+		lblStartDate.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblStartDate = new GridBagConstraints();
 		gbc_lblStartDate.insets = new Insets(0, 0, 5, 5);
 		gbc_lblStartDate.anchor = GridBagConstraints.WEST;
@@ -157,6 +165,7 @@ public class EditWindowGUI {
 		frmEditTask.getContentPane().add(lblStartDate, gbc_lblStartDate);
 		
 		txtStartDate = new JTextField();
+		txtStartDate.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtStartDate.setEditable(false);
 		GridBagConstraints gbc_txtStartDate = new GridBagConstraints();
 		gbc_txtStartDate.gridwidth = 2;
@@ -168,6 +177,7 @@ public class EditWindowGUI {
 		txtStartDate.setColumns(10);
 		
 		JLabel lblExpectedEndDate = new JLabel("Expected End Date:");
+		lblExpectedEndDate.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblExpectedEndDate = new GridBagConstraints();
 		gbc_lblExpectedEndDate.insets = new Insets(0, 0, 5, 5);
 		gbc_lblExpectedEndDate.anchor = GridBagConstraints.WEST;
@@ -176,6 +186,7 @@ public class EditWindowGUI {
 		frmEditTask.getContentPane().add(lblExpectedEndDate, gbc_lblExpectedEndDate);
 		
 		txtExpectedEndDate = new JTextField();
+		txtExpectedEndDate.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtExpectedEndDate.setEditable(false);
 		GridBagConstraints gbc_txtExpectedEndDate = new GridBagConstraints();
 		gbc_txtExpectedEndDate.gridwidth = 2;
@@ -187,6 +198,7 @@ public class EditWindowGUI {
 		txtExpectedEndDate.setColumns(10);
 		
 		JLabel lblTaskElements = new JLabel("Task Elements:");
+		lblTaskElements.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblTaskElements = new GridBagConstraints();
 		gbc_lblTaskElements.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTaskElements.anchor = GridBagConstraints.WEST;
@@ -204,6 +216,7 @@ public class EditWindowGUI {
 		frmEditTask.getContentPane().add(scrollPane, gbc_scrollPane);
 		
 		table = new JTable();
+		table.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -221,6 +234,7 @@ public class EditWindowGUI {
 		scrollPane.setViewportView(table);
 		
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//MainWindow used to sync with database - want to avoid syncing with database during editing
@@ -243,6 +257,7 @@ public class EditWindowGUI {
 		frmEditTask.getContentPane().add(btnCancel, gbc_btnCancel);
 		
 		JButton btnSave = new JButton("Save");
+		btnSave.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnSave.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
