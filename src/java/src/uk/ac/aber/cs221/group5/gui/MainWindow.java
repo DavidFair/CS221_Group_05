@@ -142,7 +142,9 @@ public class MainWindow extends WindowCommon {
 	}
 
 	public void setConnStatus(DbStatus connStatus) {
-		this.childWindow.setConnStatusLabel(connStatus);
+		if (childWindow!= null){
+			this.childWindow.setConnStatusLabel(connStatus);
+		}
 	}
 
 	public DbStatus getConnStatus() {
