@@ -74,22 +74,15 @@ public class MainWindow extends WindowCommon {
 	}
 
 	public void setmemberList (MemberList list){
-
 			this.memberList = list;
 			try {
 				saveChange(TASK_SAVE_PATH);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-
-
-		
+			}		
 	}
 
-
-
-	
 	public static void main(String args[]) throws InterruptedException, NumberFormatException, IOException{
 		TaskList taskList = new TaskList();
 		MemberList memberList = new MemberList();
@@ -181,19 +174,28 @@ public class MainWindow extends WindowCommon {
 	}
 	
 	public void createWindow(){
+		//First load local copy into memory in case of disconnection from TaskerSRV
+		try {
+			loadTasks(TASK_SAVE_PATH);
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		
 		//Get a new child window for super class
 		childWindow = new MainWindowGUI();
 		
 		//Load the tasks into the Task List
-		try {
-			saveChange(TASK_SAVE_PATH);
-			loadTasks(TASK_SAVE_PATH);
-			this.childWindow.populateTable(this.taskList);
-		} catch (IOException e1) {
-			System.out.println("Failed to load Task File");
-			//At this point, need to re-configure task file
-			e1.printStackTrace();
+		if(!databaseObj.getConnStatus().equals("DISCONNECTED")){
+			try {
+				saveChange(TASK_SAVE_PATH);
+				loadTasks(TASK_SAVE_PATH);
+				this.childWindow.populateTable(this.taskList);
+			} catch (IOException e1) {
+				System.out.println("Failed to load Task File");
+				//At this point, need to re-configure task file
+				e1.printStackTrace();
+			}
 		}
 		
 		//Load the members into the Member List
