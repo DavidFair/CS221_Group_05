@@ -371,6 +371,7 @@ public class MainWindowGUI {
 				}
 			}
 		});
+		frmMainWindow.setVisible(true);
 	}
 	
 	public void setConnStatusLabel(DbStatus status){

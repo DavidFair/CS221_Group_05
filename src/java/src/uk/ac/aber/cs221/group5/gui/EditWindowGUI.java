@@ -219,6 +219,14 @@ public class EditWindowGUI {
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				//MainWindow used to sync with database - want to avoid syncing with database during editing
+				// so we avoid editing tasks that have been deleted and encountering concurrency issues.
+				MainWindow main = new MainWindow();
+				try{
+					main.updateLocalFiles(TASK_SAVE_PATH);
+				}catch(Exception e){
+					main.displayError("Could not downlad Task data.", "Connection Error");
+				}
 				frmEditTask.dispose();
 			}
 		});
