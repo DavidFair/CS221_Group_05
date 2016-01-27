@@ -54,8 +54,8 @@ public class Task {
 		this.status = newStatus;
 	}
 	
-	public void addElement(String elementName, String elementComment){
-		Element newElement = new Element(elementName, elementComment);
+	public void addElement(String elementName, String elementComment, String index){
+		Element newElement = new Element(elementName, elementComment, index);
 		taskElements.add(newElement);
 	}
 	
@@ -93,10 +93,12 @@ public class Task {
 	public class Element {
 		String elementDesc;
 		String comment;
+		String index;
 		
-		public Element(String description, String comment){
+		public Element(String description, String comment, String elementIndex){
 			this.elementDesc = description;
 			this.comment = comment;	//If the element has no comment, this is an empty String
+			this.index = elementIndex;
 		}
 		
 		
@@ -107,6 +109,10 @@ public class Task {
 		
 		public String getComment(){
 			return this.comment;
+		}
+		
+		public String getIndex(){
+			return this.index;
 		}
 		
 		public void setComment(String newComment){

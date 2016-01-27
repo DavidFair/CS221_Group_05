@@ -13,6 +13,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import uk.ac.aber.cs221.group5.gui.MainWindow;
+import uk.ac.aber.cs221.group5.logic.Task.Element;
 
 
 
@@ -194,6 +195,10 @@ public class Database {
 	}
 	
 	
+	public void setElementComment(Element element, String newComment){
+		
+		
+	}
 	
 	public void closeDbConn(){
 		
@@ -526,6 +531,8 @@ public class Database {
 								int index = elements.getInt("Index");
 								String elementDesc = elements.getString("TaskDesc");
 								String elementComments = elements.getString("TaskComments");
+								String elementId = elements.getString("Index");
+								
 								
 								if (elementComments == null){
 									elementComments = "";
@@ -536,7 +543,7 @@ public class Database {
 								elementComments = elementComments.replace("|", "");
 								
 
-								currentTask.addElement(elementDesc, elementComments);
+								currentTask.addElement(elementDesc, elementComments, elementId);
 							}
 
 							elements.close();
