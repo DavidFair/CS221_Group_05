@@ -140,7 +140,7 @@ public class Database {
 		// Append connection parameters - such as automatically reconnecting
 		final String urlAppend = "?autoReconnect=true";
 
-		String connectionUrl = urlPrepend + hostName + this.dbPortNo + "/" + this.dbName + urlAppend;
+		String connectionUrl = urlPrepend + hostName + ":" + this.dbPortNo + "/" + this.dbName + urlAppend;
 
 		class ConnectThread implements Runnable {
 
@@ -170,10 +170,12 @@ public class Database {
 					
 				} catch (SQLException e) {
 					parentWindow.displayError("Could not connect to database. "
-							+ "Please check connection settings", "Connection Error");
+							+ "Please check connection settings" + "\nError: " + e.getMessage(), "Connection Error");
 					// For use debugging
 					// Thread.dumpStack();
+					//System.err.println(e.getMessage());
 					//System.err.println("Full connection string was: " + url);
+
 
 					// Reset state
 					parentDb.currentStatus = DbStatus.DISCONNECTED;
@@ -601,7 +603,10 @@ public class Database {
 	}
 		
 	private void setupLatencyTimer(){
-		latencyTimer = new Timer();
+
+		if (latencyTimer == null){
+			latencyTimer = new Timer();
+		}
 		
 		class LatencyAlert extends TimerTask{
 
@@ -616,6 +621,7 @@ public class Database {
 				} else if (currentStatus == DbStatus.CONNECTED){
 					//Finished cancel any and all timers
 					latencyTimer.cancel();
+					latencyTimer = null;
 				} else if (currentStatus == DbStatus.DISCONNECTED){
 					//TODO disconnected logic
 				}
@@ -624,6 +630,7 @@ public class Database {
 			
 		}
 		
+
 		latencyTimer.schedule(new LatencyAlert(), SYNC_ALRT_DELAY*1000);
 		
 	}
