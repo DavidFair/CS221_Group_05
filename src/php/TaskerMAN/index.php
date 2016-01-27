@@ -78,8 +78,8 @@ if (isset($_POST['login']))
                 <legend>Login: </legend>
                 <input name="email" type="email" placeholder="Email"
                        required /><br/>
-                <div id="login"><input name="login" type="hidden" /></div>
-                <input name="submit" type="submit" value="Login" />
+                <div id="login"><input name="login" type="hidden" />
+                <input name="submit" type="submit" value="Login" /></div>
             </fieldset>
             <?php if ($_SESSION['authFailed'] = false)
             {
