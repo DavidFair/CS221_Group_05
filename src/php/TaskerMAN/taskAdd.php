@@ -42,15 +42,16 @@
                     <br/>
 
                     <label for="add_taskStatus">Status</label>
-                    <select name="add_taskStatus" id="add_taskStatus">
+                    <select name="add_taskStatus" class="addInput" id="add_taskStatus">
                         <option value="0">Abandoned</option>
                         <option value="1">Allocated</option>
                         <option value="2">Completed</option>
-                    </select>
+                    </select><br/>
 
                     <label for="add_numberOfElements" class="titles">Number of Task Elements</label>
                     <input name="add_numberOfElements" class="addInput" type="text" id="add_numberOfElements" required />
-
+					<br/>
+					
                     <input name="submit" class="modalButton" type="submit" value="Submit" />
                     <input name="clear" class="modalButton" type="reset" value="Clear" />
 
