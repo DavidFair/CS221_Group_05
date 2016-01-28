@@ -15,7 +15,7 @@ import uk.ac.aber.cs221.group5.logic.MemberList;
  * such as creating and destroying the login window
  * 
  */
-public class LoginWindow extends WindowCommon{
+public class LoginWindow {
 
 	private LoginWindowGUI childWindow;
 	private MemberList memberList = new MemberList();

@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import uk.ac.aber.cs221.group5.logic.TaskStatuses;
 
-public class EditWindow extends WindowCommon{
+public class EditWindow {
 	
 	private EditWindowGUI childWindow;
 	private int rowNo;	//The index of the row selected in the Main Window table when this window was spawned

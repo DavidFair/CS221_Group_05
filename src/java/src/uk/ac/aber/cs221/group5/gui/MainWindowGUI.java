@@ -61,6 +61,8 @@ public class MainWindowGUI {
 	private JTable table;
 	private JLabel lblConnStatus;
 
+	private MainWindow main;
+	
 	public void launchWindow() {
 		
 		//Create inner class which implements runnable
@@ -89,7 +91,8 @@ public class MainWindowGUI {
 	 * @since 1.0 Initial Development
 	 * @see #initialize()
 	 */
-	public MainWindowGUI() {
+	public MainWindowGUI(MainWindow mainWindow) {
+		this.main = mainWindow;
 		initialize();
 	}
 
@@ -106,7 +109,6 @@ public class MainWindowGUI {
 		frmMainWindow.setFont(new Font("Dialog", Font.PLAIN, 14));
 		frmMainWindow.addWindowFocusListener(new WindowFocusListener() {
 			public void windowGainedFocus(WindowEvent arg0) {
-				MainWindow main = new MainWindow();
 				setConnStatusLabel(main.getConnStatus());
 			}
 			public void windowLostFocus(WindowEvent e) {
@@ -119,7 +121,6 @@ public class MainWindowGUI {
 		frmMainWindow.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent event) {
-				MainWindow main = new MainWindow();
 				main.destroyWindow();
 				System.exit(0);
 			}
@@ -427,8 +428,8 @@ public class MainWindowGUI {
 					task.getStart(), task.getEnd()});
 		}
 		//Updates to show the contents of the table
+		frmMainWindow.revalidate();
 		frmMainWindow.repaint();
-		frmMainWindow.setVisible(true);
 	}
 	
 	

@@ -29,8 +29,10 @@ import uk.ac.aber.cs221.group5.logic.DbStatus;
  *         creating and destroying the main window
  * 
  */
-public class MainWindow extends WindowCommon {
-	
+
+
+public class MainWindow {
+
 
 	private static MainWindowGUI childWindow;
 
@@ -57,18 +59,9 @@ public class MainWindow extends WindowCommon {
 
 		try {
 			saveChange(TASK_SAVE_PATH);
-			for (Frame frame : Frame.getFrames()) {
-				if (frame.getTitle().equals("Main Window")) {
-					
-					childWindow.populateTable(taskList);
-					frame.revalidate();
-					frame.repaint();
-					
+			childWindow.populateTable(taskList);
+			
 
-				}
-			}
-
-			this.createWindow();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -102,9 +95,12 @@ public class MainWindow extends WindowCommon {
 		if (!mainWindow.doesGUIExist()) {
 			mainWindow.createWindow();
 		}
-
+		
+		childWindow.setVisible(false);
+		
+		
 		readConfigToDb(DB_CONFIG_PATH);
-
+		
 		LoginWindow loginWindow = new LoginWindow();
 		loginWindow.passMemberList(memberList);
 		loginWindow.createWindow();
@@ -181,18 +177,22 @@ public class MainWindow extends WindowCommon {
 	public MainWindow() {
 		// Setup common window features
 		super();
-		// Update DB to interface with new main window
+
+	}
+	
+	public void attachMainWindowToDb(){
 		if (databaseObj != null) {
 			databaseObj.updateHostWindow(this);
 		} else {
 			databaseObj = new Database(MEMBERS_SAVE_PATH, this);
 		}
+		
 	}
 
 	
 	public void createWindow() {
 		// Get a new child window for super class
-		childWindow = new MainWindowGUI();
+		childWindow = new MainWindowGUI(this);
 
 		// Update local files with Task files from TaskerSRV if we are connected
 		try {
@@ -414,29 +414,6 @@ public class MainWindow extends WindowCommon {
 		fileWriter.close();
 	}
 
-	public void updateGUITable(int rowNo, String newStatus) throws IOException {
-		for (Frame frame : Frame.getFrames()) {
-			if (frame.getTitle().equals("Main Window")) {
-				frame.dispose();
-			}
-		}
-		this.childWindow = new MainWindowGUI();
-		this.loadTasks(TASK_SAVE_PATH);
-		Task editedTask = this.taskList.getTask(rowNo);
-
-		TaskStatuses enumStatus = TaskStatuses.valueOf(newStatus);
-		editedTask.setStatus(enumStatus);
-		this.taskList.changeTask(rowNo, editedTask); // Updates the Task List
-														// with the new Status
-		this.saveChange(TASK_SAVE_PATH);
-		this.childWindow.updateTable(rowNo, newStatus);
-		this.childWindow.setVisible(true);
-		for (Frame frame : Frame.getFrames()) {
-			if (frame.getTitle().equals("Connection Settings")) {
-				frame.dispose();
-			}
-		}
-	}
 
 	public int getNumTask() {
 		return this.taskList.getListSize();
