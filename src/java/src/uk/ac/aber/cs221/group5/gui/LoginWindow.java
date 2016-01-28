@@ -35,7 +35,7 @@ public class LoginWindow {
 	 * This method creates a new login window
 	 * and sets it to visible
 	 */
-	@Override
+	
 	public void createWindow() {
 		//Create new childWindow for super to work on
 		childWindow = new LoginWindowGUI();
@@ -43,35 +43,35 @@ public class LoginWindow {
 		//this class's methods for it to work on
 		childWindow.passMemberList(memberList);
 		
-		setupWindowLaunch(this);
+		//setupWindowLaunch(this);
 
 
 	}	
-	@Override
+	
 	public void callWindowLaunch() throws Exception {
 		childWindow.launchWindow();
 	}
 
 
-	@Override
+	
 	public void destroyWindow() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public void setTitleText(String newTitleText) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public void displayError(String errorText, String errorType) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public void displayWarning(String warnText) {
 		JOptionPane.showMessageDialog(null, warnText, "Warning", JOptionPane.WARNING_MESSAGE);
 		

@@ -14,7 +14,7 @@ public class EditWindow {
 		this.rowNo = row;
 	}
 
-	@Override
+	
 	public void createWindow() {
 		// TODO Auto-generated method stub
 		try {
@@ -23,35 +23,35 @@ public class EditWindow {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		setupWindowLaunch(this);
+		//setupWindowLaunch(this);
 		
 	}
 
-	@Override
+	
 	public void destroyWindow() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public void setTitleText(String newTitleText) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public void displayError(String errorText, String errorType) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public void displayWarning(String warnText) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
 	public void callWindowLaunch() throws Exception {
 		// TODO Auto-generated method stub
 		childWindow.launchWindow();

@@ -224,7 +224,7 @@ public class MainWindow {
 
 		// Ask parent to setup window for us and pass
 		// this class's methods for it to work on
-		setupWindowLaunch(this);
+		//setupWindowLaunch(this);
 
 		childWindow.setConnStatusLabel(databaseObj.getConnStatus());
 	}
@@ -233,7 +233,6 @@ public class MainWindow {
 		childWindow.launchWindow();
 	}
 
-	@Override
 	public void destroyWindow() {
 		databaseObj.closeDbConn();
 
@@ -250,7 +249,7 @@ public class MainWindow {
 	 * uk.ac.aber.cs221.group5.logic.WindowInterface#setTitleText(java.lang.
 	 * String)
 	 */
-	@Override
+	
 	public void setTitleText(String newTitleText) {
 		// TODO Auto-generated method stub
 
@@ -263,7 +262,7 @@ public class MainWindow {
 	 * uk.ac.aber.cs221.group5.logic.WindowInterface#displayError(java.lang.
 	 * String)
 	 */
-	@Override
+	
 	public void displayError(String errorText, String errorType) {
 		JOptionPane.showMessageDialog(null, errorText, errorType, JOptionPane.ERROR_MESSAGE);
 
@@ -276,7 +275,7 @@ public class MainWindow {
 	 * uk.ac.aber.cs221.group5.logic.WindowInterface#displayWarning(java.lang.
 	 * String)
 	 */
-	@Override
+	
 	public void displayWarning(String warnText) {
 		JOptionPane.showMessageDialog(null, warnText, "Warning", JOptionPane.WARNING_MESSAGE);
 
