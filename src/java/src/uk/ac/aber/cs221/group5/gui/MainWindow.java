@@ -300,7 +300,6 @@ public class MainWindow {
 		// New Task List to prevent loading the same Tasks multiple times.
 		TaskList newList = new TaskList();
 		int numOfTasks = 0;
-		int elementNum = 0;
 		String taskID = null;
 		String elementID = null;
 		String elements = null;
@@ -315,6 +314,7 @@ public class MainWindow {
 			numOfTasks = Integer.parseInt(read.readLine());
 			// Load data and create Task objects
 			for (int loopCount = 0; loopCount < numOfTasks; loopCount++) {
+				int elementNum = 0;
 				taskID = read.readLine();
 				elementID = read.readLine();
 				extractedElementIds = getElementIndexes(elementID);
@@ -352,6 +352,7 @@ public class MainWindow {
 			this.taskList = newList;
 		} catch (Exception e) {
 			read.close();
+			e.printStackTrace();
 			throw e;
 		}
 	}
@@ -555,9 +556,9 @@ public class MainWindow {
 	private ArrayList<String> getElementIndexes(String indexes){
 		ArrayList<String> extractedIndexes = new ArrayList<String>();
 		
-		for(int i = 0; i < indexes.length(); i++){
+		for(int i = 0; i < indexes.length(); i=i+2){
 			//This line takes the i'th Element ID from the line, effectively removing the seperators
-			extractedIndexes.add(indexes.substring(2*i, (2*i)+1));
+			extractedIndexes.add(indexes.substring(i, i+1));
 		}
 		
 		return extractedIndexes;
