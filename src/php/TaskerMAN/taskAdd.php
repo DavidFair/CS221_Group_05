@@ -50,8 +50,8 @@
 
                     <label for="add_numberOfElements" class="titles">Number of Task Elements</label>
                     <input name="add_numberOfElements" class="addInput" type="text" id="add_numberOfElements" required />
-					<br/>
-					
+                    <br/>
+
                     <input name="submit" class="modalButton" type="submit" value="Submit" />
                     <input name="clear" class="modalButton" type="reset" value="Clear" />
 

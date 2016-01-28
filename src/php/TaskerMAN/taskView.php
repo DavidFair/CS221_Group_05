@@ -24,11 +24,11 @@ if (isset($_GET['id']))
 ?>
 <div id="openView" class="modalWindow">
     <div>
-	
-        
+
+
         <div class="modal">
-		<fieldset class="info_box">
-				<a href="taskerman.php" title="Close" class="close">X</a>
+            <fieldset class="info_box">
+                <a href="taskerman.php" title="Close" class="close">X</a>
                 <label for="taskID" class="titles">Task ID</label>
                 <input name="taskID" id="taskID" type="text" value="<?php echo $output['TaskID']; ?>" readonly class="viewInput"/><br/>
 
@@ -48,7 +48,7 @@ if (isset($_GET['id']))
 
                 <label for="endDate" class="titles">End Date</label>
                 <input name="endDate" id="endDate" type="text" value="<?php echo $output['EndDate']; ?>" readonly class="viewInput" /><br/>
-			<hr/>
+                <hr/>
                 <table class="modal">
                     <thead>
                     <tr class="modalBottomTitles">
@@ -87,8 +87,8 @@ if (isset($_GET['id']))
                         </tr>
                     <?php } ?>
                     </tbody>
-                </table>            
-			</fieldset>
-		</div>
+                </table>
+            </fieldset>
+        </div>
     </div>
 </div>
