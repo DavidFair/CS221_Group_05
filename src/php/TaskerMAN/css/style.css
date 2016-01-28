@@ -7,6 +7,7 @@ http://www.webdesignerdepot.com/2012/10/creating-a-modal-window-with-html5-and-c
 All <div> id CSS
 */
 
+
 #email{
     border: solid 1px black;
     display: block;
@@ -16,11 +17,6 @@ All <div> id CSS
     padding: 4px 2px;
     width: 550px;
 }
-
-#info_box{
-	width:380px;
-	border:0px;
-	}
 
 #leftnav {
     float: left;
@@ -74,13 +70,6 @@ All <div> id CSS
 #submit{
     background-color: #4CAF50;}
 
-#titles{
-	float: left;
-	text-align: justify;
-	vertical-align:middle;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	}
 	
 
 
@@ -143,7 +132,18 @@ table {
 
 }
 
+/*
+All class CSS
+*/
 
+.addTask{
+	float: right;
+	text-align: justify;
+	vertical-align:middle;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	size: 5px;
+	}
 
 .close {
     background: #6600CC;
@@ -175,6 +175,19 @@ table {
     padding: 5px;
 }
 
+.info_box{
+	background: silver;
+	border-style: double;
+    margin: 10% auto;
+    padding: 5px 20px 13px 20px;
+    position: relative;
+    width: 400px;
+	border-radius: 25px;
+    border-width: 5px;
+	border-color:#6600CC;
+	bottom: 150px;
+	}
+
 .list-unstyled {
     list-style: none;
     padding-left: 0;
@@ -197,6 +210,7 @@ table {
     width: 100%;
     color: white;
 	display: inline;
+	
 }
 
 .modalBottomTitles{
@@ -220,9 +234,9 @@ table {
 	border-radius: 20px;
     border-width: 2px;
 	position: relative;
-	left: 100px;
-
-}
+	bottom: 0px;
+	
+	}
 
 .modalTable {
 
@@ -246,6 +260,7 @@ table {
     -webkit-transition: opacity 400ms ease-in;
 	pointer-events: none;
 	
+	
 }
 
 .modalWindow:target {
@@ -254,16 +269,12 @@ table {
 	
 }
 
-.modalWindow > div {
-    background: silver;
-	border-style: double;
+.modalWindow > div {border: 0px;
     margin: 10% auto;
     padding: 5px 20px 13px 20px;
     position: relative;
-    width: 400px;
 	border-radius: 25px;
-    border-width: 5px;
-	border-color:#6600CC;
+
 }
 
 .nav li {
@@ -294,6 +305,14 @@ table {
     float: right;
 }
 
+.titles{
+	float: left;
+	text-align: justify;
+	vertical-align:middle;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	}
+	
 .viewInput{
 	float: right;
 	text-align: justify;
@@ -305,4 +324,14 @@ table {
 	background-color: silver;
 	}
 	
+.addInput{
+	float: right;
+	text-align: justify;
+	vertical-align:middle;
+	-moz-box-sizing: border-box;
+	padding-left:12px;
+	box-sizing: border-box;
+	height: 17px;
+	
+	}
 

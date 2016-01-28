@@ -1,16 +1,16 @@
 <div id="addView" class="modalWindow">
     <div>
-        <a href="taskerman.php" title="Close" class="close">X</a>
+        
         <div class="modal">
             <script src="js/entryValidation.js"></script>
             <form action="taskAddGateway.php" method="POST" onsubmit="return validateEntry()">
-                <fieldset id="info_box">
-
-                    <label for="add_taskName">Task Name:</label>
-                    <input name="add_taskName" id="add_taskName" type="text" required />
+                <fieldset class="info_box">
+					<a href="taskerman.php" title="Close" class="close">X</a>
+                    <label for="add_taskName" class="titles">Task Name:</label>
+                    <input name="add_taskName" id="add_taskName" type="text" class="addInput" required />
                     <br/>
 
-                    <label for="add_taskAllocated">Allocated User:</label>
+                    <label for="add_taskAllocated" class="titles">Allocated User:</label>
                     <?php
                     // Fill users drop-down box using database query
                     try
@@ -18,7 +18,7 @@
                         $stmt = $pdo->prepare("SELECT Email FROM tbl_users");
                         $stmt->execute();
 
-                        echo '<select name="add_taskAllocated">';
+                        echo '<select name="add_taskAllocated" class="addInput">';
 
                         // Loop and print users as options
                         while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
@@ -34,16 +34,16 @@
                     } ?>
                     <br/>
 
-                    <label for="add_startDate">Start Date</label>
-                    <input name="add_startDate" type="date" id="add_startDate" required />
+                    <label for="add_startDate" class="titles">Start Date</label>
+                    <input name="add_startDate" type="date" id="add_startDate" class="addInput" required />
                     <br/>
 
-                    <label for="add_endDate">End Date</label>
-                    <input name="add_endDate" type="date" id="add_endDate" required />
+                    <label for="add_endDate" class="titles">End Date</label>
+                    <input name="add_endDate" type="date" id="add_endDate" class="addInput" required />
                     <br/>
 
-                    <label for="add_numberOfElements">Number of Task Elements</label>
-                    <input name="add_numberOfElements" type="text" id="add_numberOfElements" required />
+                    <label for="add_numberOfElements" class="titles">Number of Task Elements</label>
+                    <input name="add_numberOfElements" type="text" id="add_numberOfElements" class="addInput" required />
 
                     <input name="submit" class="modalButton" type="submit" value="Submit" />
                     <input name="clear" class="modalButton" type="reset" value="Clear" />
