@@ -291,6 +291,11 @@ then
 string="CREATE TABLE \`tbl_users\` ( \`Email\` VARCHAR(20) NOT NULL, \`FirstName\` VARCHAR(15) NOT NULL, \`LastName\` VARCHAR(15) NOT NULL, \`isManager\` INT NOT NULL, PRIMARY KEY (\`Email\`));"
   echo "Creating Users Table"
   do_query "$string"
+  
+ string="INSERT INTO \`tbl_users\` (\`Email\`, \`FirstName\`, \`LastName\`, \`isManager\`) VALUES ('manager@example.com', 'A', 'S', '1');"
+ echo "Adding manager@example to users table"
+ do_query "$string"
+  
 fi
   
 #Tasks Table
