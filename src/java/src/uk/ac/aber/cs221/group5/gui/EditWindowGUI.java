@@ -266,10 +266,6 @@ public class EditWindowGUI {
 					main.displayError("Could not download Task data.", "Connection Error");
 				}
 				//Send updated Element Comments to Database
-				if(table.getValueAt(0, 0) == "No Elements"){
-					
-				}
-				else{
 					try {
 						main.loadTasks(TASK_SAVE_PATH);
 					} catch (Exception e) {
@@ -278,12 +274,19 @@ public class EditWindowGUI {
 					}
 					TaskList updatedTaskList = main.getTaskList();
 					Task updatedTask = updatedTaskList.getTask(rowNo);
-					for(int tableRow = 0; tableRow < table.getRowCount(); tableRow++){
-						String updateComment = (String) table.getValueAt(tableRow, 1);
-						updatedTask.getElement(tableRow).setComment(updateComment);
+					if (table.getValueAt(0, 0) != "No Elements"){
+						for(int tableRow = 0; tableRow < table.getRowCount(); tableRow++){
+							String updateComment = (String) table.getValueAt(tableRow, 1);
+							updatedTask.getElement(tableRow).setComment(updateComment);
+						}
 					}
+					String newStatus = cmbTaskStatus.getSelectedItem().toString();
+					TaskStatuses enumNewStatus = TaskStatuses.valueOf(newStatus);
+					
+					updatedTask.setStatus(enumNewStatus);
+					
 					main.updateTask(updatedTask);
-				}
+				
 				//Resume auto-sync
 				main.setAutoTimer(true);
 				frmEditTask.dispose();

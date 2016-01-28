@@ -199,11 +199,11 @@ public class Database {
 
 	public void updateDbTask(Task updatedTask) {
 
-		class ElementSync implements Runnable {
+		class UpdateDb implements Runnable {
 
 			Task taskObj;
 
-			public ElementSync(Task task) {
+			public UpdateDb(Task task) {
 				this.taskObj = task;
 			}
 
@@ -248,7 +248,7 @@ public class Database {
 			}
 		}
 
-		Thread syncElement = new Thread(new ElementSync(updatedTask));
+		Thread syncElement = new Thread(new UpdateDb(updatedTask));
 		syncElement.start();
 
 	}
@@ -314,7 +314,7 @@ public class Database {
 			}
 
 			public void run() {
-				ResultSet tasksSet = executeSqlStatement(sqlQuery);
+				ResultSet tasksSet = executeSqlSelect(sqlQuery);
 
 				if (tasksSet != null) {
 					// Convert SQL result to Task List
@@ -366,7 +366,7 @@ public class Database {
 			}
 
 			public void run() {
-				ResultSet members = executeSqlStatement("Select * FROM tbl_users");
+				ResultSet members = executeSqlSelect("Select * FROM tbl_users");
 
 				if (members != null) {
 					MemberList newMemberList = resultSetToMemberList(members);
@@ -449,6 +449,20 @@ public class Database {
 
 	}
 
+	private void executeSqlStatement(String statementString){
+		
+		
+		try {
+			Statement statement = dbConnection.createStatement();
+			statement.executeUpdate(statementString);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			hostWindow.displayError("Error updating database, the error was :" 
+					+ e.getCause(), "Error updating DB");
+		}
+		
+	}
+	
 	/**
 	 * Executes SQL query passed in by the parameter and returns a ResultSet
 	 * containing the returned data from the database
@@ -457,7 +471,7 @@ public class Database {
 	 *            SQL query to execute on the database
 	 * @return ResultSet containing data if query succeeded. Null if it did not
 	 */
-	private ResultSet executeSqlStatement(String query) {
+	private ResultSet executeSqlSelect(String query) {
 		Statement sqlStatementObject = null;
 
 		if (dbConnection == null) {
@@ -559,7 +573,7 @@ public class Database {
 			String sqlQuery = "SELECT * FROM tbl_elements WHERE TaskID = ";
 			sqlQuery = sqlQuery + currentTask.getID();
 
-			ResultSet elements = executeSqlStatement(sqlQuery);
+			ResultSet elements = executeSqlSelect(sqlQuery);
 
 			if (elements != null) {
 
