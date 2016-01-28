@@ -44,7 +44,6 @@ public class ViewElementsWindowGUI {
 	 */
 	private void initialize() throws IOException {
 		frmViewTaskElements = new JFrame();
-		frmViewTaskElements.setResizable(false);
 		frmViewTaskElements.setTitle("View Task Elements");
 		frmViewTaskElements.setBounds(100, 100, 540, 647);
 		frmViewTaskElements.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -91,13 +90,10 @@ public class ViewElementsWindowGUI {
 				frmViewTaskElements.dispose();
 			}
 		});
-		btnClose.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		GridBagConstraints gbc_btnClose = new GridBagConstraints();
+		gbc_btnClose.gridwidth = 9;
 		gbc_btnClose.insets = new Insets(0, 0, 0, 5);
-		gbc_btnClose.gridx = 1;
+		gbc_btnClose.gridx = 0;
 		gbc_btnClose.gridy = 18;
 		frmViewTaskElements.getContentPane().add(btnClose, gbc_btnClose);
 		this.populateTable(selectedRow);
