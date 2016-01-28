@@ -282,13 +282,11 @@ public class EditWindowGUI {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					TaskList updatedTaskList = new TaskList();
-					updatedTaskList = main.getTaskList();
+					TaskList updatedTaskList = main.getTaskList();
 					Task updatedTask = updatedTaskList.getTask(rowNo);
 					for(int tableRow = 0; tableRow < table.getRowCount(); tableRow++){
-						for(uk.ac.aber.cs221.group5.logic.Task.Element element : updatedTask.getAllElements()){
-							element.setComment((String)table.getValueAt(tableRow, 1));
-						}
+						String updateComment = (String) table.getValueAt(tableRow, 1);
+						updatedTask.getElement(tableRow).setComment(updateComment);
 					}
 					main.passElement(updatedTask);
 				}

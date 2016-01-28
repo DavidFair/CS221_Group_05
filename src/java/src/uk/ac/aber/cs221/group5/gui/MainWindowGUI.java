@@ -417,15 +417,18 @@ public class MainWindowGUI {
 	}
 	
 	public void populateTable(TaskList taskList) throws NumberFormatException, IOException{
+		
+		DefaultTableModel model = (DefaultTableModel)(table.getModel());
+		model.setRowCount(0);
+		
 		for(int loopCount = 0; loopCount < taskList.getListSize(); loopCount++){
 			Task task = taskList.getTask(loopCount);
-			DefaultTableModel model = (DefaultTableModel)(table.getModel());
 			model.addRow(new Object[]{task.getID(), task.getName(), task.getStatus(), task.getMembers(),
 					task.getStart(), task.getEnd()});
 		}
 		//Updates to show the contents of the table
 		frmMainWindow.repaint();
-		frmMainWindow.setVisible(false);
+		frmMainWindow.setVisible(true);
 	}
 	
 	
