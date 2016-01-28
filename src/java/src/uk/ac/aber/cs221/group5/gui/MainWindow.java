@@ -208,7 +208,7 @@ public class MainWindow {
 			this.displayWarning("Tasks not found locally, you need to connect to database for tasks");
 			blankFile(TASK_SAVE_PATH);
 		} catch (Exception e1) {
-			this.displayError("Task file corrupted - Please connect to database for tasks", "Task File Corruption");
+			this.displayError("Task file empty - Please connect to database for tasks", "Task File empty");
 			blankFile(TASK_SAVE_PATH);
 		}
 
@@ -292,7 +292,7 @@ public class MainWindow {
 	 * }
 	 */
 
-	public void loadTasks(String filename) throws IOException {
+	public void loadTasks(String filename) throws Exception {
 		FileReader fileReader = new FileReader(filename);
 		BufferedReader read = new BufferedReader(fileReader);
 		// New Task List to prevent loading the same Tasks multiple times.
@@ -343,10 +343,8 @@ public class MainWindow {
 			read.close();
 			this.taskList = newList;
 		} catch (Exception e) {
-			this.displayError("Error loading Task file.", "Loading Error");
-			this.updateLocalFiles(TASK_SAVE_PATH);
-			e.printStackTrace();
 			read.close();
+			throw e;
 		}
 	}
 

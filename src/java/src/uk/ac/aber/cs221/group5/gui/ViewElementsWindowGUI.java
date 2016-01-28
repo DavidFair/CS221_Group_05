@@ -20,11 +20,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.Font;
 
+
 public class ViewElementsWindowGUI {
 
 	private JFrame frmViewTaskElements;
 	private JTable table;
 	private int selectedRow;
+	
+	private static final String TASK_SAVE_PATH = "taskSaveFile.txt";
 
 	/**
 	 * Create the application.
@@ -103,7 +106,20 @@ public class ViewElementsWindowGUI {
 	
 	private void populateTable(int tableIndex) throws IOException{
 		MainWindow main = new MainWindow();	//Used for loading elements and will not spawn a GUI
-		main.loadTasks("taskSaveFile.txt");
+		
+		
+		try {
+			main.loadTasks(TASK_SAVE_PATH);
+		} catch (Exception e) {
+			main.updateLocalFiles(TASK_SAVE_PATH);
+			try {
+				main.loadTasks(TASK_SAVE_PATH);
+			} catch (Exception e1) {
+
+				main.displayError("Could not show local tasks", "Error Loading");
+			}
+		}
+		
 		
 		Task displayTask = main.getTaskList().getTask(selectedRow);
 		

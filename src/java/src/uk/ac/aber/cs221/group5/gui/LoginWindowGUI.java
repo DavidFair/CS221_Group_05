@@ -46,7 +46,7 @@ public class LoginWindowGUI {
 	 * sets that to visible through the event queue
 	 * @throws Exception
 	 */
-	public void launchWindow() throws Exception {
+	public void launchWindow() {
 		
 		//Create inner class which implements runnable
 		class SetVisible implements Runnable {

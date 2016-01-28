@@ -43,12 +43,12 @@ public class LoginWindow {
 		//this class's methods for it to work on
 		childWindow.passMemberList(memberList);
 		
-		//setupWindowLaunch(this);
+		callWindowLaunch();
 
 
 	}	
 	
-	public void callWindowLaunch() throws Exception {
+	public void callWindowLaunch() {
 		childWindow.launchWindow();
 	}
 

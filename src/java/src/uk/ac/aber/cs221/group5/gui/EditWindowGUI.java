@@ -253,7 +253,7 @@ public class EditWindowGUI {
 				try{
 					main.updateLocalFiles(TASK_SAVE_PATH);
 				}catch(Exception e){
-					main.displayError("Could not downlad Task data.", "Connection Error");
+					main.displayError("Could not download Task data.", "Connection Error");
 				}
 				//Send updated Element Comments to Database
 				if(table.getValueAt(0, 0) == "No Elements"){
@@ -262,9 +262,9 @@ public class EditWindowGUI {
 				else{
 					try {
 						main.loadTasks(TASK_SAVE_PATH);
-					} catch (IOException e) {
+					} catch (Exception e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						main.displayError("Could not load task data", "Loading Error");
 					}
 					TaskList updatedTaskList = main.getTaskList();
 					Task updatedTask = updatedTaskList.getTask(rowNo);
@@ -299,7 +299,20 @@ public class EditWindowGUI {
 	private void populateTable(int tableIndex) throws IOException{
 		int selectionIndex;	//The index in the table that was selected in main window
 		ArrayList<String[]> elements = new ArrayList<String[]>();
-		main.loadTasks(TASK_SAVE_PATH);
+		
+		try {
+			main.loadTasks(TASK_SAVE_PATH);
+		} catch (Exception e) {
+			main.updateLocalFiles(TASK_SAVE_PATH);
+			try {
+				main.loadTasks(TASK_SAVE_PATH);
+			} catch (Exception e1) {
+
+				main.displayError("Could not show local tasks", "Error Loading");
+			}
+		}
+		
+		
 		elements = main.getElements(tableIndex);
 		
 		for(String[] pair : elements){
