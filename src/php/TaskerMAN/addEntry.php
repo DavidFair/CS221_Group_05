@@ -10,7 +10,10 @@ $status             = $_SESSION['add_taskStatus'];
 $taskAllocated      = $_SESSION['add_taskAllocated'];
 $numberOfElements   = $_SESSION['add_numberOfElements'];
 
-var_dump($_POST['taskDesc1']);
+echo 'this shouldnt work';
+var_dump($_POST['taskDesc_0']);#
+echo 'this should';
+var_dump($_POST['taskDesc_1']);
 echo '<hr/>';
 
 // Move post into session and sanitise
@@ -18,7 +21,7 @@ for ($i = 1; $i > $numberOfElements; $i++)
 {
     $_SESSION['taskDesc_'] = filter_var($_POST['taskDesc_'.$i],FILTER_SANITIZE_STRING);
     $_SESSION['taskComment_'.$i] = filter_var($_POST['taskComment_'.$i],FILTER_SANITIZE_STRING);
-    var_dump($_SESSION['taskDesc1']);
+    var_dump($_SESSION['taskDesc_1']);
 
 }
 
@@ -46,10 +49,10 @@ catch (PDOException $ex)
 // Add elements
 try
 {
-    var_dump($numberOfElements,$_SESSION['taskDesc1'],$_SESSION['taskDesc2'],$_SESSION['taskDesc3']);;
-    for ($j = 1; $j < $numberOfElements; $j++)
+    var_dump($numberOfElements,$_SESSION['taskDesc_1'],$_SESSION['taskDesc_2'],$_SESSION['taskDesc_3']);
+    for ($j = 1; $j > $numberOfElements; $j++)
     {
-        $stmt = $pdo->prepare("INSERT INTO tbl_elements (TaskDesc, TaskComments, TaskID) VALUES (:description, :comment, :taskid);");
+        $stmt = $pdo->prepare("INSERT INTO tbl_elements (TaskDesc, TaskComments, TaskID) VALUES (:description, :comment, :taskid)");
         $stmt->bindParam(':description',    $_SESSION['taskDesc_'.$j]);
         $stmt->bindParam(':comment',        $_SESSION['taskComment_'.$j]);
         $stmt->bindParam(':taskid',         $taskID);

@@ -1,14 +1,14 @@
 <div id="addElements" class="modalWindow">
     <div>
-        <a href="taskerman.php" title="Close" class="close">X</a>
         <div class="modal">
+            <a href="taskerman.php" title="Close" class="close">X</a>
             <script src="js/entryValidation.js"></script>
             <form action="addEntry.php" method="POST" onsubmit="return validateElements()">
-                <fieldset id="info_box">
+                <fieldset class="info_box">
                     <?php
                     // var_dump($_SESSION['add_numberOfElements']);
                     // echo '<input type="text" name="taskDesc_1" required />';
-                    for ($i = 1; $i < ($_SESSION['add_numberOfElements']+1); $i++)
+                    for ($i = 1; $i <= ($_SESSION['add_numberOfElements']); $i++)
                     {
 
                         // Print a box for task description and comment
