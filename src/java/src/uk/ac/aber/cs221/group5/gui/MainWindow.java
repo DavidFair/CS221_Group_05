@@ -92,14 +92,13 @@ public class MainWindow {
 		memberList.loadMembers(MEMBERS_SAVE_PATH);
 
 		MainWindow mainWindow = new MainWindow();
+		mainWindow.attachMainWindowToDb(mainWindow);
+		readConfigToDb(DB_CONFIG_PATH);
 		if (!mainWindow.doesGUIExist()) {
 			mainWindow.createWindow();
 		}
 		
 		childWindow.setVisible(false);
-		
-		
-		readConfigToDb(DB_CONFIG_PATH);
 		
 		LoginWindow loginWindow = new LoginWindow();
 		loginWindow.passMemberList(memberList);
@@ -128,10 +127,10 @@ public class MainWindow {
 			dbPort = read.readLine();
 
 			read.close();
-           
+			databaseObj.connect(url, dbPort, dbUsername, dbPassword, dbName);
 
 		} catch (Exception e) {
-			// Display Error
+			e.printStackTrace();
 		}
 	}
      
@@ -180,9 +179,9 @@ public class MainWindow {
 
 	}
 	
-	public void attachMainWindowToDb(){
+	public void attachMainWindowToDb(MainWindow main){
 		if (databaseObj != null) {
-			databaseObj.updateHostWindow(this);
+			databaseObj.updateHostWindow(main);
 		} else {
 			databaseObj = new Database(MEMBERS_SAVE_PATH, this);
 		}
