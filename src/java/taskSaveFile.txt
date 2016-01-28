@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 3
+=======
+5
+>>>>>>> 3a12ff8a413d53cd70dac087493cc79db45f1b90
 1
 Foo,Bar|Update css for IE as there is error,Fixed most issues but am struggling with Moda|
 Generic Task
@@ -20,3 +24,20 @@ Completed
 example@example.com
 2015-10-05
 2016-11-12
+<<<<<<< HEAD
+=======
+6
+,|
+ASd
+Completed
+example@example.com
+2015-10-10
+2015-10-10
+7
+,|
+asdsd
+Completed
+example@example.com
+2015-10-12
+2015-10-12
+>>>>>>> 3a12ff8a413d53cd70dac087493cc79db45f1b90

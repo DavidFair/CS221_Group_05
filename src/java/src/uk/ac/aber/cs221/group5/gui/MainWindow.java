@@ -30,9 +30,10 @@ import uk.ac.aber.cs221.group5.logic.DbStatus;
  * 
  */
 public class MainWindow extends WindowCommon {
-
-	private MainWindowGUI childWindow;
 	
+
+	private static MainWindowGUI childWindow;
+
 
 	private TaskList taskList = new TaskList();
 	private MemberList memberList = new MemberList();
@@ -58,7 +59,12 @@ public class MainWindow extends WindowCommon {
 			saveChange(TASK_SAVE_PATH);
 			for (Frame frame : Frame.getFrames()) {
 				if (frame.getTitle().equals("Main Window")) {
-					frame.dispose();
+					
+					childWindow.populateTable(taskList);
+					frame.revalidate();
+					frame.repaint();
+					
+
 				}
 			}
 
@@ -102,9 +108,11 @@ public class MainWindow extends WindowCommon {
 		LoginWindow loginWindow = new LoginWindow();
 		loginWindow.passMemberList(memberList);
 		loginWindow.createWindow();
-
+		
 	}
 
+
+	
 	private static void readConfigToDb(String dbFile) throws IOException {
 		FileReader fileReader;
 		try {
@@ -181,6 +189,7 @@ public class MainWindow extends WindowCommon {
 		}
 	}
 
+	
 	public void createWindow() {
 		// Get a new child window for super class
 		childWindow = new MainWindowGUI();

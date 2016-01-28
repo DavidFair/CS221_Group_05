@@ -213,7 +213,7 @@ public class Database {
 					String index = elementObj.getIndex();
 
 					String query = "UPDATE `tbl_elements` SET `TaskComments`='" + elementObj.getComment()
-							+ " WHERE `Index`='" + index + "';";
+							+ "' WHERE `Index`='" + index + "';";
 					executeSqlStatement(query);
 				}
 			}
