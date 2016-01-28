@@ -433,6 +433,7 @@ public class MainWindowGUI {
 	
 	public void setConnStatusLabel(DbStatus status){
 		lblConnStatus.setText(status.toString());
+		table.repaint();
 	}
 	
 	public void populateTable(TaskList taskList) throws NumberFormatException, IOException{

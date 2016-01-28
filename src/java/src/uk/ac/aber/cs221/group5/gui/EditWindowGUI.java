@@ -244,6 +244,7 @@ public class EditWindowGUI {
 				uk.ac.aber.cs221.group5.logic.Task.Element editElement = editTask.getElement(tableRow);
 				editElement.setComment(txtEditComment.getText());
 				try {
+					main.updateTask(editTask);
 					main.saveChange(TASK_SAVE_PATH);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
