@@ -17,7 +17,7 @@
                         $stmt = $pdo->prepare("SELECT Email FROM tbl_users");
                         $stmt->execute();
 
-                        echo '<select name="add_taskAllocated" id="add_taskAllocated" class="addInput>';
+                        echo '<select name="add_taskAllocated" id="add_taskAllocated" class="addInput">';
 
                         // Loop and print users as options
                         while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
