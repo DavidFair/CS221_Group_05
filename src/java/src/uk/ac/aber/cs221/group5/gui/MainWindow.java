@@ -128,7 +128,8 @@ public class MainWindow {
 
 			read.close();
 			
-
+          callConnectOnDb(url, dbPort, dbUsername, dbPassword, dbName);
+          
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
