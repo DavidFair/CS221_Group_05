@@ -32,6 +32,7 @@ import uk.ac.aber.cs221.group5.logic.DbStatus;
 public class MainWindow extends WindowCommon {
 
 	private MainWindowGUI childWindow;
+	
 
 	private TaskList taskList = new TaskList();
 	private MemberList memberList = new MemberList();
@@ -123,22 +124,23 @@ public class MainWindow extends WindowCommon {
 			dbPort = read.readLine();
 
 			read.close();
-
-			callConnectOnDb(url, dbPort, dbUsername, dbPassword, dbName);
+           
 
 		} catch (Exception e) {
 			// Display Error
 		}
 	}
-
+     
 	public static void callConnectOnDb(String url, String dbPort, String dbUsername, String dbPassword, String dbName) {
 		databaseObj.connect(url, dbPort, dbUsername, dbPassword, dbName);
 	}
+	
+	
 
 	private boolean doesGUIExist() {
 		for (Frame frame : Frame.getFrames()) {
 			if (frame.getTitle().equals("Main Window")) {
-				return true;
+				return true;   
 			}
 		}
 		return false;
