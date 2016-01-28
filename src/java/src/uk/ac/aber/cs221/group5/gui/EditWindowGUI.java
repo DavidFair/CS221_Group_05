@@ -54,10 +54,11 @@ public class EditWindowGUI {
 		this.rowNo = row;
 
 		//Stop the auto-sync from firing while a Task is being Edited
+		this.main = mainWindow;
 		main.setAutoTimer(false);
 		initialize();
 		this.populateTable(rowNo);
-		this.main = mainWindow;
+
 	}
 	
 
