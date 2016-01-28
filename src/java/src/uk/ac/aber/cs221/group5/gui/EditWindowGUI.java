@@ -27,6 +27,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.Font;
@@ -72,7 +74,14 @@ public class EditWindowGUI {
 		frmEditTask.setAlwaysOnTop(true);
 		frmEditTask.setResizable(false);
 		frmEditTask.setBounds(100, 100, 520, 581);
-		frmEditTask.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frmEditTask.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		frmEditTask.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent event) {
+				main.setAutoTimer(true);
+				frmEditTask.dispose();
+			}
+		});
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
