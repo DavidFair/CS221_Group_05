@@ -18,7 +18,7 @@
                         $stmt = $pdo->prepare("SELECT Email FROM tbl_users");
                         $stmt->execute();
 
-                        echo '<select name="add_taskAllocated">';
+                        echo '<select name="add_taskAllocated" id="add_taskAllocated">';
 
                         // Loop and print users as options
                         while ($row = $stmt->fetch(PDO::FETCH_ASSOC))
@@ -41,6 +41,13 @@
                     <label for="add_endDate">End Date</label>
                     <input name="add_endDate" type="date" id="add_endDate" required />
                     <br/>
+
+                    <label for="add_taskStatus">Status</label>
+                    <select name="add_taskStatus" id="add_taskStatus">
+                        <option value="0">Abandoned</option>
+                        <option value="1">Allocated</option>
+                        <option value="2">Completed</option>
+                    </select>
 
                     <label for="add_numberOfElements">Number of Task Elements</label>
                     <input name="add_numberOfElements" type="text" id="add_numberOfElements" required />
