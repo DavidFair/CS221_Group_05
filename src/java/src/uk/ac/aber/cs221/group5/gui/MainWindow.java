@@ -238,8 +238,8 @@ public class MainWindow {
 
 	}
 	
-	public void passElement(Task updatedTask){
-		databaseObj.setElementComments(updatedTask);
+	public void updateTask(Task updatedTask){
+		databaseObj.updateDbTask(updatedTask);
 	}
 
 	/*

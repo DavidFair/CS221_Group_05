@@ -243,7 +243,7 @@ public class EditWindowGUI {
 				}catch(Exception e){
 					main.displayError("Could not downlad Task data.", "Connection Error");
 				}
-				//Resume auto-syn
+				//Resume auto-sync
 				main.setAutoTimer(true);
 				frmEditTask.dispose();
 			}
@@ -282,7 +282,7 @@ public class EditWindowGUI {
 						String updateComment = (String) table.getValueAt(tableRow, 1);
 						updatedTask.getElement(tableRow).setComment(updateComment);
 					}
-					main.passElement(updatedTask);
+					main.updateTask(updatedTask);
 				}
 				//Resume auto-sync
 				main.setAutoTimer(true);

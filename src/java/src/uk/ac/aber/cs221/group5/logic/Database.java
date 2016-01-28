@@ -197,7 +197,7 @@ public class Database {
 
 	}
 
-	public void setElementComments(Task updatedTask) {
+	public void updateDbTask(Task updatedTask) {
 
 		class ElementSync implements Runnable {
 
@@ -208,38 +208,12 @@ public class Database {
 			}
 
 			public void run() {
-
-				for (Element elementObj : taskObj.getAllElements()) {
-					String index = elementObj.getIndex();
-
-					String query = "UPDATE `tbl_elements` SET `TaskComments`='" + elementObj.getComment()
-							+ "' WHERE `Index`='" + index + "';";
-					executeSqlStatement(query);
-				}
-			}
-		}
-
-		Thread syncElement = new Thread(new ElementSync(updatedTask));
-		syncElement.start();
-
-	}
-
-	public void setTaskStatus(Task updatedTask) {
-
-		class StatusSync implements Runnable {
-
-			private Task updatedTask;
-
-			public StatusSync(Task taskToSync) {
-				this.updatedTask = taskToSync;
-			}
-
-			@Override
-			public void run() {
-
-				String status = updatedTask.getStatus();
+				
+				String status = taskObj.getStatus();
 				int statusNum;
 
+				
+				//Convert back to num for db
 				switch (status) {
 				case "Abandoned":
 					statusNum = 0;
@@ -256,19 +230,30 @@ public class Database {
 				default:
 					throw new IndexOutOfBoundsException("Task status not recognised");
 				}
-
+				
+				
+				//Update task status on DB
 				String query = "UPDATE `tbl_tasks` SET `Status`='" + statusNum + "' WHERE `TaskID`='"
 						+ updatedTask.getID() + "';";
 				executeSqlStatement(query);
+				
+				//Next update all elements
+				for (Element elementObj : taskObj.getAllElements()) {
+					String index = elementObj.getIndex();
 
+					query = "UPDATE `tbl_elements` SET `TaskComments`='" + elementObj.getComment()
+							+ "' WHERE `Index`='" + index + "';";
+					executeSqlStatement(query);
+				}
 			}
-
 		}
 
-		Thread execStatusSync = new Thread(new StatusSync(updatedTask));
-		execStatusSync.start();
+		Thread syncElement = new Thread(new ElementSync(updatedTask));
+		syncElement.start();
 
 	}
+
+
 
 	public void closeDbConn() {
 
