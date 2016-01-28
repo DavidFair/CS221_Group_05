@@ -296,10 +296,13 @@ public class MainWindow {
 	public void loadTasks(String filename) throws Exception {
 		FileReader fileReader = new FileReader(filename);
 		BufferedReader read = new BufferedReader(fileReader);
+		ArrayList<String> extractedElementIds = new ArrayList<String>();
 		// New Task List to prevent loading the same Tasks multiple times.
 		TaskList newList = new TaskList();
 		int numOfTasks = 0;
+		int elementNum = 0;
 		String taskID = null;
+		String elementID = null;
 		String elements = null;
 		String taskName = null;
 		TaskStatuses taskStatus = null;
@@ -311,9 +314,10 @@ public class MainWindow {
 			// First read in the number of tasks
 			numOfTasks = Integer.parseInt(read.readLine());
 			// Load data and create Task objects
-			Integer elementIndex = 1;
 			for (int loopCount = 0; loopCount < numOfTasks; loopCount++) {
 				taskID = read.readLine();
+				elementID = read.readLine();
+				extractedElementIds = getElementIndexes(elementID);
 				elements = read.readLine();
 				taskName = read.readLine();
 				taskStatus = TaskStatuses.valueOf(TaskStatuses.class, read.readLine());
@@ -330,7 +334,8 @@ public class MainWindow {
 							}
 							elementPair[0] = elements.substring(0, elements.indexOf(","));
 							elementPair[1] = elements.substring(elements.indexOf(",") + 1, elements.indexOf("|")); //Exception on this line
-							task.addElement(elementPair[0], elementPair[1], elementIndex.toString());
+							task.addElement(elementPair[0], elementPair[1], extractedElementIds.get(elementNum));
+							elementNum++;
 							elements = removePair(elements);
 						}
 						else{
@@ -367,8 +372,13 @@ public class MainWindow {
 			numOfElements = writeTask.getNumElements();
 			elements = writeTask.getAllElements();
 			if (numOfElements == 0) {
+				write.write("0\n");
 				write.write(",|");
 			} else {
+				for (int idCount = 0; idCount < writeTask.getNumElements(); idCount++){
+					write.write(writeTask.getElement(idCount).getIndex()+",");
+				}
+				write.write("\n");
 				for (int i = 0; i < writeTask.getNumElements(); i++) {
 					uk.ac.aber.cs221.group5.logic.Task.Element writeElement = elements.get(i);
 					write.write(writeElement.getName()+","+writeElement.getComment()+"|");
@@ -384,35 +394,6 @@ public class MainWindow {
 		write.close();
 		fileWriter.close();
 	}
-
-	/**
-	 * Writes updated Task Element Comments to the local Task save file
-	 * 
-	 * @param filename
-	 *            The name of the local Task save file
-	 * @param newElements
-	 *            An ArrayList of the updated Task Elements
-	 * @throws IOException
-	 */
-	public void updateElements(String filename, ArrayList<String[]> newElements) throws IOException {
-		FileWriter fileWriter = new FileWriter(filename);
-		BufferedWriter write = new BufferedWriter(fileWriter);
-		int numOfTasks = newElements.size();
-		write.write(numOfTasks + "\n");
-		for (int taskCount = 0; taskCount < numOfTasks; taskCount++) {
-			Task writeTask = this.taskList.getTask(taskCount);
-			write.write(writeTask.getID() + "\n");
-			write.write(newElements.get(taskCount)[0] + "," + newElements.get(taskCount)[1] + "|" + "\n");
-			write.write(writeTask.getName() + "\n");
-			write.write(writeTask.getStatus() + "\n");
-			write.write(writeTask.getMembers() + "\n");
-			write.write(writeTask.getStart() + "\n");
-			write.write(writeTask.getEnd() + "\n");
-		}
-		write.close();
-		fileWriter.close();
-	}
-
 
 	public int getNumTask() {
 		return this.taskList.getListSize();
@@ -568,5 +549,17 @@ public class MainWindow {
 	// Gets the System time from the Database of when it was last connected
 	private void setConnTime() {
 		databaseObj.getConnTime();
+	}
+	
+////Methods for dealing with Task Element IDs
+	private ArrayList<String> getElementIndexes(String indexes){
+		ArrayList<String> extractedIndexes = new ArrayList<String>();
+		
+		for(int i = 0; i < indexes.length(); i++){
+			//This line takes the i'th Element ID from the line, effectively removing the seperators
+			extractedIndexes.add(indexes.substring(2*i, (2*i)+1));
+		}
+		
+		return extractedIndexes;
 	}
 }
