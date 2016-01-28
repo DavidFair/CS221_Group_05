@@ -1,5 +1,12 @@
 <?php
 require_once('init.php');
+// Login check
+if (!($_SESSION['login_auth']))
+{
+    session_unset();
+    session_destroy();
+    header('Location: index.php');
+}
 
 // Receive posted information - it has been validated already
 // TODO add sanitisation

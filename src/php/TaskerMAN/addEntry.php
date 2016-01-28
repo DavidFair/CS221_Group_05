@@ -1,6 +1,15 @@
 <?php
 require_once('init.php');
 
+// Login check
+
+if (!($_SESSION['login_auth']))
+{
+    session_unset();
+    session_destroy();
+    header('Location: index.php');
+}
+
 // Task ID needs to be the newest ID available
 $taskID             = generateNewID($pdo);
 $taskName           = $_SESSION['add_taskName'];
@@ -10,18 +19,11 @@ $status             = $_SESSION['add_taskStatus'];
 $taskAllocated      = $_SESSION['add_taskAllocated'];
 $numberOfElements   = $_SESSION['add_numberOfElements'];
 
-echo 'this shouldnt work';
-var_dump($_POST['taskDesc_0']);#
-echo 'this should';
-var_dump($_POST['taskDesc_1']);
-echo '<hr/>';
-
 // Move post into session and sanitise
 for ($i = 1; $i > $numberOfElements; $i++)
 {
-    $_SESSION['taskDesc_'] = filter_var($_POST['taskDesc_'.$i],FILTER_SANITIZE_STRING);
+    $_SESSION['taskDesc_'.$i] = filter_var($_POST['taskDesc_'.$i],FILTER_SANITIZE_STRING);
     $_SESSION['taskComment_'.$i] = filter_var($_POST['taskComment_'.$i],FILTER_SANITIZE_STRING);
-    var_dump($_SESSION['taskDesc_1']);
 
 }
 
@@ -47,7 +49,6 @@ catch (PDOException $ex)
 // Add elements
 try
 {
-
     echo 'We get to here';
     var_dump($numberOfElements);
     for ($j = 1; $j <= $numberOfElements; $j++)
@@ -60,11 +61,14 @@ try
         var_dump($_POST['taskComment_1']);
         var_dump($_POST['taskComment_2']);*/
 
+
         $stmt = $pdo->prepare("INSERT INTO tbl_elements (TaskDesc, TaskComments, TaskID) VALUES (:description, :comment, :taskid)");
-        $stmt->bindParam(':description',    $_SESSION['taskDesc_'.$j]);
-        $stmt->bindParam(':comment',        $_SESSION['taskComment_'.$j]);
+        $stmt->bindParam(':description',    $_POST['taskDesc_'.$j]);
+        $stmt->bindParam(':comment',        $_POST['taskComment_'.$j]);
         $stmt->bindParam(':taskid',         $taskID);
         $stmt->execute();
+
+
     }
 }
 catch (PDOException $ex)
