@@ -28,30 +28,30 @@ if (isset($_GET['id']))
         <fieldset id="info_box">
             <div class="modal">
                 <label for="taskID" id="titles">Task ID</label>
-                <input name="taskID" type="text" value="<?php echo $output['TaskID']; ?>" readonly id="viewInput" /><br/>
+                <input name="taskID" id="taskID" type="text" value="<?php echo $output['TaskID']; ?>" readonly /><br/>
 
                 <label for="taskName" id="titles">Task Name</label>
-                <input name="taskName" type="text"  value="<?php echo $output['TaskName']; ?>" readonly id="viewInput" /><br/>
+                <input name="taskName" id="taskName" type="text" class="viewInput" value="<?php echo $output['TaskName']; ?>" readonly /><br/>
 
                 <label for="taskStatus" id="titles">Status</label>
-                <input name="taskStatus" type="text"
-                       value="<?php echo convertStatus($output['TaskName']); ?>" readonly id="viewInput" /><br/>
+                <input name="taskStatus" id="taskStatus" type="text" class="viewInput"
+                       value="<?php echo convertStatus($output['TaskName']); ?>" readonly  /><br/>
 
                 <label for="assignedTaskMember" id="titles">Allocated Task Member</label>
-                <input name="assignedTaskMember" type="text"
-                       value="<?php echo retrieveNames($output['TaskOwner'],$pdo); ?>" readonly id="viewInput" /><br/>
+                <input name="assignedTaskMember" id="assignedTaskMember" type="text" class="viewInput"
+                       value="<?php echo retrieveNames($output['TaskOwner'],$pdo); ?>" readonly/><br/>
 
                 <label for="startDate" id="titles">Start Date</label>
-                <input name="startDate" type="text" value="<?php echo $output['StartDate']; ?>" readonly id="viewInput" /><br/>
+                <input name="startDate" type="text" value="<?php echo $output['StartDate']; ?>" readonly id="startDate" class="viewInput" /><br/>
 
                 <label for="endDate" id="titles">End Date</label>
-                <input name="endDate" type="text" value="<?php echo $output['EndDate']; ?>" readonly id="viewInput" /><br/>
+                <input name="endDate" id="endDate" type="text" value="<?php echo $output['EndDate']; ?>" readonly class="viewInput" /><br/>
             </div>
             <div class="modal">
                 <table class="modal">
                     <thead>
                     <tr>
-                        <th>Element ID</th>
+                        <th>ID</th>
                         <th>Description</th>
                         <th>Comments</th>
                     </tr>

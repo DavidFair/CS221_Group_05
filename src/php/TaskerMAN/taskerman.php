@@ -61,7 +61,7 @@ if ($debug)
                 $taskID = $row['TaskID']; // helps prevent some code repetition; primary key
                 echo '<tr>'; ?>
                 <td>
-                    <select onChange="window.location.href=this.value">
+                    <select title="options" onChange="window.location.href=this.value">
                         <option value="taskerman.php"> </option>
                         <option value="taskerman.php?id=<?php echo $taskID; ?>#openView">View</option>
                         <option value="taskerman.php?id=<?php echo $taskID; ?>#editView">Edit</option>

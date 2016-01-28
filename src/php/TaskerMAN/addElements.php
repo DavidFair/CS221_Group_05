@@ -2,7 +2,7 @@
     <div>
         <a href="taskerman.php" title="Close" class="close">X</a>
         <div class="modal">
-            <script src="js/elementValidation.js"></script>
+            <script src="js/entryValidation.js"></script>
             <form action="addEntry.php" method="POST" onsubmit="return validateElements()">
                 <fieldset id="info_box">
                     <?php

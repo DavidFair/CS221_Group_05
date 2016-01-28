@@ -3,11 +3,11 @@
         <a href="taskerman.php" title="Close" class="close">X</a>
         <div class="modal">
             <script src="js/entryValidation.js"></script>
-            <form action="taskAddGateway.php" method="POST">
+            <form action="taskAddGateway.php" method="POST" onsubmit="return validateEntry()">
                 <fieldset id="info_box">
 
                     <label for="add_taskName">Task Name:</label>
-                    <input name="add_taskName" type="text" required />
+                    <input name="add_taskName" id="add_taskName" type="text" required />
                     <br/>
 
                     <label for="add_taskAllocated">Allocated User:</label>
@@ -35,15 +35,15 @@
                     <br/>
 
                     <label for="add_startDate">Start Date</label>
-                    <input name="add_startDate" type="date" required />
+                    <input name="add_startDate" type="date" id="add_startDate" required />
                     <br/>
 
                     <label for="add_endDate">End Date</label>
-                    <input name="add_endDate" type="date" required />
+                    <input name="add_endDate" type="date" id="add_endDate" required />
                     <br/>
 
-                    <label for="add_noOfElements">Number of Task Elements</label>
-                    <input name="add_numberOfElements" type="text" required />
+                    <label for="add_numberOfElements">Number of Task Elements</label>
+                    <input name="add_numberOfElements" type="text" id="add_numberOfElements" required />
 
                     <input name="submit" class="modalButton" type="submit" value="Submit" />
                     <input name="clear" class="modalButton" type="reset" value="Clear" />
