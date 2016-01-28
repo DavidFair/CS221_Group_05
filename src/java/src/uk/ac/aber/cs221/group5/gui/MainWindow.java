@@ -127,7 +127,7 @@ public class MainWindow {
 			dbPort = read.readLine();
 
 			read.close();
-			databaseObj.connect(url, dbPort, dbUsername, dbPassword, dbName);
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
