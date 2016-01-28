@@ -105,8 +105,7 @@ public class ViewElementsWindowGUI {
 	}
 	
 	private void populateTable(int tableIndex) throws IOException{
-		MainWindow main = new MainWindow();	//Used for loading elements and will not spawn a GUI
-		
+		MainWindow main = new MainWindow();	//Used for loading elements and will not spawn a GUI		
 		
 		try {
 			main.loadTasks(TASK_SAVE_PATH);
