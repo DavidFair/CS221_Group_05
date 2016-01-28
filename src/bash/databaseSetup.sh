@@ -297,7 +297,7 @@ fi
 
 if [ "$skipTasks" != TRUE ]
 then
-string="CREATE TABLE \`tbl_tasks\` ( \`TaskID\` INT NOT NULL AUTO_INCREMENT, \`TaskName\` VARCHAR(45) NOT NULL, \`StartDate\` DATE NOT NULL, \`EndDate\` VARCHAR(45) NOT NULL, \`Status\` INT NOT NULL, \`TaskOwner\` VARCHAR(20) NULL, PRIMARY KEY (\`TaskID\`), INDEX \`TaskOwner_idx\` (\`TaskOwner\` ASC), CONSTRAINT \`TaskAssigned\` FOREIGN KEY (\`TaskOwner\`) REFERENCES \`tbl_users\` (\`Email\`) ON DELETE NO ACTION ON UPDATE NO ACTION);"
+string="CREATE TABLE \`tbl_tasks\` ( \`TaskID\` INT NOT NULL AUTO_INCREMENT, \`TaskName\` VARCHAR(45) NOT NULL, \`StartDate\` DATE NOT NULL, \`EndDate\` DATE NOT NULL, \`Status\` INT NOT NULL, \`TaskOwner\` VARCHAR(20) NULL, PRIMARY KEY (\`TaskID\`), INDEX \`TaskOwner_idx\` (\`TaskOwner\` ASC), CONSTRAINT \`TaskAssigned\` FOREIGN KEY (\`TaskOwner\`) REFERENCES \`tbl_users\` (\`Email\`) ON DELETE NO ACTION ON UPDATE NO ACTION);"
 	echo "Creating Tasks Table"
 	do_query "$string"
 fi
