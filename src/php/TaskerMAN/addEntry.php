@@ -30,8 +30,6 @@ try
     $stmt->bindParam(':endDate',   $endDate);
     $stmt->bindParam(':status',    $status);
     $stmt->bindParam(':taskOwner', $taskAllocated);
-
-    var_dump($taskID, $taskName, $startDate, $endDate, $status, $taskAllocated);
     $stmt->execute();
 }
 catch (PDOException $ex)
@@ -44,20 +42,23 @@ try
 {
     echo 'We get to here';
     var_dump($numberOfElements);
-    for ($j = 1; $j < $numberOfElements; $j++)
+    for ($j = 1; $j <= $numberOfElements; $j++)
     {
         echo 'We got this far';
+/*      var_dump($_POST['taskDesc_0']);
+        var_dump($_POST['taskDesc_1']);
+        var_dump($_POST['taskDesc_2']);
+        var_dump($_POST['taskComment_0']);
+        var_dump($_POST['taskComment_1']);
+        var_dump($_POST['taskComment_2']);*/
+
 
         $stmt = $pdo->prepare("INSERT INTO tbl_elements (TaskDesc, TaskComments, TaskID) VALUES (:description, :comment, :taskid)");
         $stmt->bindParam(':description',    $_POST['taskDesc_'.$j]);
         $stmt->bindParam(':comment',        $_POST['taskComment_'.$j]);
         $stmt->bindParam(':taskid',         $taskID);
         $stmt->execute();
-        var_dump($_SESSION['taskDesc_1']);
-        var_dump($_SESSION['taskDesc_2']);
-        var_dump($_SESSION['taskDesc_3']);
-        var_dump($_SESSION['taskDesc_4']);
-        var_dump($_SESSION['taskDesc_5']);
+
 
     }
 }
@@ -66,6 +67,8 @@ catch (PDOException $ex)
     errorHandler($ex->getMessage(),"Fatal Database Error",LOGFILE,timePrint());
 }
 
+// Redirect
+header('Location: taskerman.php');
 
 function generateNewID($db)
 {
