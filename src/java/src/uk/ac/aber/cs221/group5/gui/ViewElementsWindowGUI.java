@@ -104,12 +104,17 @@ public class ViewElementsWindowGUI {
 	private void populateTable(int tableIndex) throws IOException{
 		MainWindow main = new MainWindow();	//Used for loading elements and will not spawn a GUI
 		main.loadTasks("taskSaveFile.txt");
+		
 		Task displayTask = main.getTaskList().getTask(selectedRow);
+		
+		DefaultTableModel model = (DefaultTableModel)(table.getModel());
+		model.setRowCount(0);
+		
 		for(int tableRow = 0; tableRow < displayTask.getNumElements(); tableRow++){
 			Element displayElement = displayTask.getElement(tableRow);
-			DefaultTableModel model = (DefaultTableModel)(table.getModel());
 			model.addRow(new Object[]{displayElement.getName(), displayElement.getComment()});
 		}
+		table.revalidate();
 		table.repaint();
 	}
 }

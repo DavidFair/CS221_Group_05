@@ -293,11 +293,17 @@ public class MainWindowGUI {
 			public void actionPerformed(ActionEvent arg0) {
 				int row = table.getSelectedRow();
 				if(row > -1){
-					EditWindow editWindow = new EditWindow(table.getSelectedRow());
-					editWindow.createWindow();
-					editWindow.setFields(txtTaskName.getText(), TaskStatuses.valueOf(txtStatus.getText()), 
-							txtAssigned.getText(), txtStartDate.getText(), 
-							txtEndDate.getText());
+					EditWindowGUI editWindow;
+					
+					try {
+						editWindow = new EditWindowGUI(table.getSelectedRow(), main);
+						editWindow.setFields(txtTaskName.getText(), TaskStatuses.valueOf(txtStatus.getText()), 
+								txtAssigned.getText(), txtStartDate.getText(), 
+								txtEndDate.getText());
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					
 				}
 				else{

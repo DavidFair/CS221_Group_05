@@ -42,6 +42,7 @@ public class EditWindowGUI {
 	private JTable table;
 	private int rowNo;	//The index of the row selected in the Main Window table when this window was spawned
 	
+	private MainWindow main;
 	private static final String TASK_SAVE_PATH = "taskSaveFile.txt";
 
 
@@ -49,31 +50,16 @@ public class EditWindowGUI {
 	 * Create the application.
 	 * @throws IOException 
 	 */
-	public EditWindowGUI(int row) throws IOException {
+	public EditWindowGUI(int row, MainWindow mainWindow) throws IOException {
 		this.rowNo = row;
-		//MainWindow Object used to interface with the Database
-		MainWindow main = new MainWindow();
+
 		//Stop the auto-sync from firing while a Task is being Edited
 		main.setAutoTimer(false);
 		initialize();
 		this.populateTable(rowNo);
+		this.main = mainWindow;
 	}
 	
-	public void launchWindow(){
-		EventQueue.invokeLater(new Runnable() {
-
-			@Override
-			public void run() {
-				try {
-					EditWindowGUI window = new EditWindowGUI(rowNo);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			
-		});
-	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -242,7 +228,6 @@ public class EditWindowGUI {
 			public void actionPerformed(ActionEvent arg0) {
 				//MainWindow used to sync with database - want to avoid syncing with database during editing
 				// so we avoid editing tasks that have been deleted and encountering concurrency issues.
-				MainWindow main = new MainWindow();
 				try{
 					main.updateLocalFiles(TASK_SAVE_PATH);
 				}catch(Exception e){
@@ -264,8 +249,7 @@ public class EditWindowGUI {
 		btnSave.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				MainWindow main = new MainWindow();	//This object is only used to update the table in the Main Window GUI
-													// and does not spawn a new GUI.
+				
 				try{
 					main.updateLocalFiles(TASK_SAVE_PATH);
 				}catch(Exception e){
@@ -315,7 +299,6 @@ public class EditWindowGUI {
 	private void populateTable(int tableIndex) throws IOException{
 		int selectionIndex;	//The index in the table that was selected in main window
 		ArrayList<String[]> elements = new ArrayList<String[]>();
-		MainWindow main = new MainWindow();	//Used for loading elements and will not spawn a GUI
 		main.loadTasks(TASK_SAVE_PATH);
 		elements = main.getElements(tableIndex);
 		
@@ -328,7 +311,6 @@ public class EditWindowGUI {
 	}
 	
 	private void updateLocalFiles(){
-		MainWindow main = new MainWindow();
 		main.updateLocalFiles(TASK_SAVE_PATH);
 	}
 	
