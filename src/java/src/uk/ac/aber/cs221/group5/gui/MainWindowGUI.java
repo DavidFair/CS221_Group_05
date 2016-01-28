@@ -15,6 +15,10 @@ import java.awt.GridBagLayout;
 import javax.swing.JPanel;
 import java.awt.GridBagConstraints;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.CellEditorListener;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -29,6 +33,7 @@ import javax.swing.UIManager;
 import java.awt.Color;
 import java.awt.Component;
 
+import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
@@ -401,6 +406,14 @@ public class MainWindowGUI {
 		table.getColumnModel().getColumn(3).setPreferredWidth(340);
 		table.getColumnModel().getColumn(4).setPreferredWidth(97);
 		table.getColumnModel().getColumn(5).setPreferredWidth(129);
+/*		table.getModel().addTableModelListener(new TableModelListener() {
+			@Override
+			public void tableChanged(TableModelEvent e) {
+				int row = table.getSelectedRow();
+				int col = table.getSelectedColumn();
+				table.setValueAt(table.getValueAt(row, col), row, col);
+			}
+		});*/
 		scrollPane.setViewportView(table);
 		
 		//Populate Quick View fields when a row from the table is selected

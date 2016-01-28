@@ -8,10 +8,13 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.SwingConstants;
+import javax.swing.event.CellEditorListener;
+import javax.swing.event.ChangeEvent;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableModel;
 import javax.swing.text.html.parser.Element;
 
@@ -27,6 +30,8 @@ import javax.swing.JButton;
 import java.awt.Window.Type;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
+import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -49,6 +54,8 @@ public class EditWindowGUI {
 	
 	private MainWindow main;
 	private static final String TASK_SAVE_PATH = "taskSaveFile.txt";
+	private JTextField txtEditComment;
+	private JTextField txtElementName;
 
 
 	/**
@@ -75,8 +82,7 @@ public class EditWindowGUI {
 		frmEditTask.setTitle("Edit Task");
 		frmEditTask.setType(Type.UTILITY);
 		frmEditTask.setAlwaysOnTop(true);
-		frmEditTask.setResizable(false);
-		frmEditTask.setBounds(100, 100, 520, 581);
+		frmEditTask.setBounds(100, 100, 629, 715);
 		frmEditTask.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frmEditTask.addWindowListener(new WindowAdapter() {
 			@Override
@@ -88,7 +94,7 @@ public class EditWindowGUI {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		frmEditTask.getContentPane().setLayout(gridBagLayout);
 		
@@ -128,7 +134,7 @@ public class EditWindowGUI {
 		cmbTaskStatus.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		cmbTaskStatus.setModel(new DefaultComboBoxModel(new String[] {"Allocated", "Abandoned", "Completed"}));
 		GridBagConstraints gbc_cmbTaskStatus = new GridBagConstraints();
-		gbc_cmbTaskStatus.gridwidth = 2;
+		gbc_cmbTaskStatus.gridwidth = 3;
 		gbc_cmbTaskStatus.insets = new Insets(0, 0, 5, 5);
 		gbc_cmbTaskStatus.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cmbTaskStatus.gridx = 2;
@@ -149,7 +155,7 @@ public class EditWindowGUI {
 		txtAssignedTaskMembers.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtAssignedTaskMembers.setEditable(false);
 		GridBagConstraints gbc_txtAssignedTaskMembers = new GridBagConstraints();
-		gbc_txtAssignedTaskMembers.gridwidth = 2;
+		gbc_txtAssignedTaskMembers.gridwidth = 3;
 		gbc_txtAssignedTaskMembers.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtAssignedTaskMembers.insets = new Insets(0, 0, 5, 5);
 		gbc_txtAssignedTaskMembers.gridx = 2;
@@ -170,7 +176,7 @@ public class EditWindowGUI {
 		txtStartDate.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtStartDate.setEditable(false);
 		GridBagConstraints gbc_txtStartDate = new GridBagConstraints();
-		gbc_txtStartDate.gridwidth = 2;
+		gbc_txtStartDate.gridwidth = 3;
 		gbc_txtStartDate.insets = new Insets(0, 0, 5, 5);
 		gbc_txtStartDate.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtStartDate.gridx = 2;
@@ -191,13 +197,74 @@ public class EditWindowGUI {
 		txtExpectedEndDate.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		txtExpectedEndDate.setEditable(false);
 		GridBagConstraints gbc_txtExpectedEndDate = new GridBagConstraints();
-		gbc_txtExpectedEndDate.gridwidth = 2;
+		gbc_txtExpectedEndDate.gridwidth = 3;
 		gbc_txtExpectedEndDate.insets = new Insets(0, 0, 5, 5);
 		gbc_txtExpectedEndDate.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtExpectedEndDate.gridx = 2;
 		gbc_txtExpectedEndDate.gridy = 5;
 		frmEditTask.getContentPane().add(txtExpectedEndDate, gbc_txtExpectedEndDate);
 		txtExpectedEndDate.setColumns(10);
+		
+		JLabel lblEditComment = new JLabel("Edit Comment:");
+		lblEditComment.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		GridBagConstraints gbc_lblEditComment = new GridBagConstraints();
+		gbc_lblEditComment.anchor = GridBagConstraints.WEST;
+		gbc_lblEditComment.insets = new Insets(0, 0, 5, 5);
+		gbc_lblEditComment.gridx = 1;
+		gbc_lblEditComment.gridy = 6;
+		frmEditTask.getContentPane().add(lblEditComment, gbc_lblEditComment);
+		
+		txtElementName = new JTextField();
+		txtElementName.setEditable(false);
+		GridBagConstraints gbc_txtElementName = new GridBagConstraints();
+		gbc_txtElementName.insets = new Insets(0, 0, 5, 5);
+		gbc_txtElementName.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtElementName.gridx = 2;
+		gbc_txtElementName.gridy = 6;
+		frmEditTask.getContentPane().add(txtElementName, gbc_txtElementName);
+		txtElementName.setColumns(10);
+		
+		txtEditComment = new JTextField();
+		GridBagConstraints gbc_txtEditComment = new GridBagConstraints();
+		gbc_txtEditComment.insets = new Insets(0, 0, 5, 5);
+		gbc_txtEditComment.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtEditComment.gridx = 3;
+		gbc_txtEditComment.gridy = 6;
+		frmEditTask.getContentPane().add(txtEditComment, gbc_txtEditComment);
+		txtEditComment.setColumns(10);
+		
+		JButton btnEdit = new JButton("Edit");
+		btnEdit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				int tableRow = table.getSelectedRow();
+				DefaultTableModel model = (DefaultTableModel) table.getModel();
+				TaskList list = main.getTaskList();
+				Task editTask = list.getTask(rowNo);
+				uk.ac.aber.cs221.group5.logic.Task.Element editElement = editTask.getElement(tableRow);
+				editElement.setComment(txtEditComment.getText());
+				try {
+					main.saveChange(TASK_SAVE_PATH);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				model.setRowCount(0);
+				txtElementName.setText("");
+				txtEditComment.setText("");
+				try {
+					populateTable(rowNo);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		GridBagConstraints gbc_btnEdit = new GridBagConstraints();
+		gbc_btnEdit.insets = new Insets(0, 0, 5, 0);
+		gbc_btnEdit.gridx = 4;
+		gbc_btnEdit.gridy = 6;
+		frmEditTask.getContentPane().add(btnEdit, gbc_btnEdit);
 		
 		JLabel lblTaskElements = new JLabel("Task Elements:");
 		lblTaskElements.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -211,7 +278,7 @@ public class EditWindowGUI {
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
-		gbc_scrollPane.gridwidth = 2;
+		gbc_scrollPane.gridwidth = 3;
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 2;
 		gbc_scrollPane.gridy = 7;
@@ -223,24 +290,17 @@ public class EditWindowGUI {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				if(table.getSelectedRow() > -1){
+					txtElementName.setText((String) table.getValueAt(table.getSelectedRow(), 0));
+					txtEditComment.setText((String)table.getValueAt(table.getSelectedRow(), 1));
 					
 				}
-				table.getModel().isCellEditable(table.getSelectedRow(), table.getSelectedColumn());
 			}
 		});
-		table.setModel(new EditTableModel(new Object[][] {
+		table.setModel(new DefaultTableModel(new Object[][] {
 		},
 		new String[] {
 			"Element Name", "Element Comment"
 		}));
-		table.getModel().addTableModelListener(new TableModelListener(){
-			public void tableChanged(TableModelEvent e){
-				int row = table.getSelectedRow();
-				int col = table.getSelectedColumn();
-				table.setValueAt(table.getValueAt(row, col), row, col);
-			
-			}
-		});
 		scrollPane.setViewportView(table);
 		
 		JButton btnCancel = new JButton("Cancel");
@@ -308,6 +368,8 @@ public class EditWindowGUI {
 		gbc_btnSave.gridx = 3;
 		gbc_btnSave.gridy = 8;
 		frmEditTask.getContentPane().add(btnSave, gbc_btnSave);
+		
+		
 	}
 	
 	public void setFields(String name, TaskStatuses status, String assigned, String start, String end){
@@ -320,7 +382,7 @@ public class EditWindowGUI {
 		frmEditTask.setVisible(true);
 	}
 	
-	private void populateTable(int tableIndex) throws IOException{
+	public void populateTable(int tableIndex) throws IOException{
 		int selectionIndex;	//The index in the table that was selected in main window
 		ArrayList<String[]> elements = new ArrayList<String[]>();
 		
@@ -340,8 +402,8 @@ public class EditWindowGUI {
 		elements = main.getElements(tableIndex);
 		
 		for(String[] pair : elements){
-			EditTableModel model = (EditTableModel) table.getModel();
-			model.addRow(new Object[]{pair[0], pair[1]});
+			TableModel model = table.getModel();
+			((DefaultTableModel) model).addRow(new Object[]{pair[0], pair[1]});
 		}
 		this.frmEditTask.repaint();
 		
@@ -349,56 +411,5 @@ public class EditWindowGUI {
 	
 	private void updateLocalFiles(){
 		main.updateLocalFiles(TASK_SAVE_PATH);
-	}
-	
-////INNER CLASSSES
-	private class EditTableModel extends AbstractTableModel{
-		private String[] headers = {"", ""};
-		
-		public EditTableModel(Object[][] objects, String[] strings) {
-			this.headers = strings;
-		}
-		
-		//This DefaultTableModel is used for general Table Model methods (getColumnCount etc.)
-		DefaultTableModel model = new DefaultTableModel(
-				new Object[][] {
-				},
-				new String[] {
-					"Element Name", "Element Comment"
-				});
-			
-		@Override
-		public int getColumnCount() {
-			return model.getColumnCount();
-		}
-
-		public void addRow(Object[] objects) {
-			model.addRow(objects);
-			
-		}
-
-		@Override
-		public int getRowCount() {
-			return model.getRowCount();
-		}
-
-		@Override
-		public Object getValueAt(int rowIndex, int columnIndex) {
-			return model.getValueAt(rowIndex, columnIndex);
-		}
-		
-		@Override
-		public boolean isCellEditable(int rowIndex, int columnIndex){
-			if(columnIndex == 1){
-				return true;
-			}
-			return false;
-		}
-		
-		@Override
-		public String getColumnName(int column){
-			return headers[column];
-		}
-		
 	}
 }
