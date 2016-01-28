@@ -15,6 +15,11 @@ if (filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT))
     // With this done we should still use prepared statements
     try
     {
+        // First find all elements pertaining to that ID and delete
+        $stmt = $pdo->prepare("DELETE FROM tbl_elements WHERE TaskID = :filteredID");
+        $stmt->bindParam('filteredID',$_GET['id']);
+        $stmt->execute();
+
         // SQL Delete
         $stmt = $pdo->prepare("DELETE FROM tbl_tasks WHERE TaskID = :filteredID");
         $stmt->bindParam(':filteredID',$_GET['id']);
