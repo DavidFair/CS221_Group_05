@@ -311,7 +311,7 @@ public class MainWindow {
 			// First read in the number of tasks
 			numOfTasks = Integer.parseInt(read.readLine());
 			// Load data and create Task objects
-			Integer elementIndex = 0;
+			Integer elementIndex = 1;
 			for (int loopCount = 0; loopCount < numOfTasks; loopCount++) {
 				taskID = read.readLine();
 				elements = read.readLine();

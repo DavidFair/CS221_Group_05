@@ -28,7 +28,7 @@ example@example.com
 2015-12-12
 2015-12-12
 9
-Element 1,Comment 1|Element 2,Comment 2|Element 3,Comment 3|
+,|
 MultipleElements
 Abandoned
 example@example.com
