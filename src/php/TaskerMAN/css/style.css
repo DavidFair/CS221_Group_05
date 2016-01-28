@@ -224,8 +224,6 @@ All class CSS
 	}
 
 .modalButton {
-    display: inline;
-    padding-left: 0;
     text-align: center;
     width: 50%;
     color: #FFFFFF;
@@ -234,7 +232,12 @@ All class CSS
 	border-radius: 20px;
     border-width: 2px;
 	position: relative;
-	bottom: 0px;
+	bottom: 5%;
+	top: 10px;
+	left: 20%;
+	right: 20%;
+	display: inline;
+	
 	
 	}
 
