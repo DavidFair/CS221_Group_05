@@ -130,7 +130,6 @@ public class ViewElementsWindowGUI {
 			Element displayElement = displayTask.getElement(tableRow);
 			model.addRow(new Object[]{displayElement.getName(), displayElement.getComment()});
 		}
-		table.revalidate();
-		table.repaint();
+		table.setVisible(true);
 	}
 }
