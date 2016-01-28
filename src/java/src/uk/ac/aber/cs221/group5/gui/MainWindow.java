@@ -103,7 +103,7 @@ public class MainWindow {
 		LoginWindow loginWindow = new LoginWindow();
 		loginWindow.passMemberList(memberList);
 		loginWindow.createWindow();
-		
+		loginWindow.setLabelGUI(databaseObj.getConnStatus());		
 	}
 
 

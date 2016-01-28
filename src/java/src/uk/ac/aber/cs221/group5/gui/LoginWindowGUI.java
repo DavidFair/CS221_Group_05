@@ -10,6 +10,7 @@ import java.awt.Frame;
 
 import javax.swing.JTextField;
 
+import uk.ac.aber.cs221.group5.logic.DbStatus;
 import uk.ac.aber.cs221.group5.logic.MemberList;
 
 import javax.swing.JButton;
@@ -28,11 +29,14 @@ import java.awt.event.WindowEvent;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class LoginWindowGUI {
 
 	private JFrame frmLogIn;
 	private JTextField txtEmailField;
+	private JLabel lblConnStatus;
 	private MemberList memberList;
 	
 	/**
@@ -79,8 +83,7 @@ public class LoginWindowGUI {
 	private void initialize() {		
 		frmLogIn = new JFrame();
 		frmLogIn.setTitle("Log In");
-		frmLogIn.setResizable(false);
-		frmLogIn.setBounds(100, 100, 296, 233);
+		frmLogIn.setBounds(100, 100, 298, 360);
 		frmLogIn.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frmLogIn.addWindowListener(new WindowAdapter() {
 			@Override
@@ -92,10 +95,24 @@ public class LoginWindowGUI {
 		});
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		frmLogIn.getContentPane().setLayout(gridBagLayout);
+		
+		JLabel lblSpacer2 = new JLabel(" ");
+		GridBagConstraints gbc_lblSpacer2 = new GridBagConstraints();
+		gbc_lblSpacer2.insets = new Insets(0, 0, 5, 5);
+		gbc_lblSpacer2.gridx = 3;
+		gbc_lblSpacer2.gridy = 0;
+		frmLogIn.getContentPane().add(lblSpacer2, gbc_lblSpacer2);
+		
+		JLabel lblSpacer3 = new JLabel(" ");
+		GridBagConstraints gbc_lblSpacer3 = new GridBagConstraints();
+		gbc_lblSpacer3.insets = new Insets(0, 0, 5, 5);
+		gbc_lblSpacer3.gridx = 0;
+		gbc_lblSpacer3.gridy = 1;
+		frmLogIn.getContentPane().add(lblSpacer3, gbc_lblSpacer3);
 		
 		JLabel lblEmail = new JLabel("Email:");
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -150,7 +167,7 @@ public class LoginWindowGUI {
 		});
 		GridBagConstraints gbc_btnLogin = new GridBagConstraints();
 		gbc_btnLogin.gridwidth = 5;
-		gbc_btnLogin.insets = new Insets(0, 0, 5, 5);
+		gbc_btnLogin.insets = new Insets(0, 0, 5, 0);
 		gbc_btnLogin.gridx = 0;
 		gbc_btnLogin.gridy = 3;
 		frmLogIn.getContentPane().add(btnLogin, gbc_btnLogin);
@@ -163,27 +180,47 @@ public class LoginWindowGUI {
 				ConnSettingsWindow connSettings = new ConnSettingsWindow(true);
 			}
 		});
+		
+		JLabel lblSpacer = new JLabel(" ");
+		GridBagConstraints gbc_lblSpacer = new GridBagConstraints();
+		gbc_lblSpacer.gridwidth = 15;
+		gbc_lblSpacer.insets = new Insets(0, 0, 5, 5);
+		gbc_lblSpacer.gridx = 0;
+		gbc_lblSpacer.gridy = 4;
+		frmLogIn.getContentPane().add(lblSpacer, gbc_lblSpacer);
+		
+		lblConnStatus = new JLabel("connStatus");
+		lblConnStatus.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		GridBagConstraints gbc_lblConnStatus = new GridBagConstraints();
+		gbc_lblConnStatus.insets = new Insets(0, 0, 5, 0);
+		gbc_lblConnStatus.gridwidth = 15;
+		gbc_lblConnStatus.gridx = 0;
+		gbc_lblConnStatus.gridy = 5;
+		frmLogIn.getContentPane().add(lblConnStatus, gbc_lblConnStatus);
 		GridBagConstraints gbc_btnConnectionSettins = new GridBagConstraints();
-		gbc_btnConnectionSettins.gridwidth = 5;
-		gbc_btnConnectionSettins.insets = new Insets(0, 0, 5, 5);
+		gbc_btnConnectionSettins.gridwidth = 11;
+		gbc_btnConnectionSettins.insets = new Insets(0, 0, 5, 0);
 		gbc_btnConnectionSettins.gridx = 0;
-		gbc_btnConnectionSettins.gridy = 4;
+		gbc_btnConnectionSettins.gridy = 6;
 		frmLogIn.getContentPane().add(btnConnectionSettins, gbc_btnConnectionSettins);
 		
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
-		gbc_btnCancel.gridwidth = 5;
+		gbc_btnCancel.insets = new Insets(0, 0, 5, 0);
+		gbc_btnCancel.gridwidth = 8;
 		gbc_btnCancel.gridx = 0;
-		gbc_btnCancel.gridy = 5;
+		gbc_btnCancel.gridy = 7;
 		frmLogIn.getContentPane().add(btnCancel, gbc_btnCancel);
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0){
 				System.exit(0);	//Terminates the program
 			}
-		});
-		
-		
+		});	
+	}
+	
+	public void setConnStatusLabel(DbStatus newStatus){
+		lblConnStatus.setText(newStatus.toString());
 	}
 	
 }

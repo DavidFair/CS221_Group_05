@@ -7,6 +7,7 @@ package uk.ac.aber.cs221.group5.gui;
 
 import javax.swing.JOptionPane;
 
+import uk.ac.aber.cs221.group5.logic.DbStatus;
 import uk.ac.aber.cs221.group5.logic.MemberList;
 
 /**
@@ -88,7 +89,9 @@ public class LoginWindow {
 	}
 	
 	
-
+	public void setLabelGUI(DbStatus newStatus){
+		this.childWindow.setConnStatusLabel(newStatus);
+	}
 
 	
 
