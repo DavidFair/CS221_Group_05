@@ -28,7 +28,7 @@ if (isset($_GET['id']))
         <fieldset id="info_box">
             <div class="modal">
                 <label for="taskID" id="titles">Task ID</label>
-                <input name="taskID" id="taskID" type="text" value="<?php echo $output['TaskID']; ?>" readonly /><br/>
+                <input name="taskID" id="taskID" type="text" value="<?php echo $output['TaskID']; ?>" readonly class="viewInput"/><br/>
 
                 <label for="taskName" id="titles">Task Name</label>
                 <input name="taskName" id="taskName" type="text" class="viewInput" value="<?php echo $output['TaskName']; ?>" readonly /><br/>
@@ -47,16 +47,17 @@ if (isset($_GET['id']))
                 <label for="endDate" id="titles">End Date</label>
                 <input name="endDate" id="endDate" type="text" value="<?php echo $output['EndDate']; ?>" readonly class="viewInput" /><br/>
             </div>
+			<hr/>
             <div class="modal">
                 <table class="modal">
                     <thead>
-                    <tr>
+                    <tr class="modalBottomTitles">
                         <th>ID</th>
                         <th>Description</th>
                         <th>Comments</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="modalBottomText">
                     <?php
                     // Retrieve element data
                     try

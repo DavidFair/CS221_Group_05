@@ -82,15 +82,7 @@ All <div> id CSS
 	box-sizing: border-box;
 	}
 	
-#viewInput{
-	float: right;
-	text-align: justify;
-	vertical-align:middle;
-	-moz-box-sizing: border-box;
-	padding-left:12px;
-	box-sizing: border-box;
-	}
-	
+
 
 /*
 All type CSS
@@ -207,6 +199,16 @@ table {
 	display: inline;
 }
 
+.modalBottomTitles{
+	color: black;
+	font-size: 13px;
+	}
+	
+.modalBottomText{
+	color: black;
+	font-size: 13px;
+	}
+
 .modalButton {
     display: inline;
     padding-left: 0;
@@ -292,4 +294,15 @@ table {
     float: right;
 }
 
+.viewInput{
+	float: right;
+	text-align: justify;
+	vertical-align:middle;
+	-moz-box-sizing: border-box;
+	padding-left:12px;
+	box-sizing: border-box;
+	border: 0px;
+	background-color: silver;
+	}
+	
 
