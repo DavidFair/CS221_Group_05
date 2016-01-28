@@ -318,7 +318,7 @@ public class MainWindow extends WindowCommon {
 					while (elementPair != null) {
 						task.addElement(elementPair[0], elementPair[1], elementIndex.toString());
 						elements = removePair(elements);
-						if(elements.trim().equals("|")){
+						if(elements.charAt(0) == '|'){
 							newList.addTask(task);
 							elementPair = null;
 						}
@@ -535,6 +535,7 @@ public class MainWindow extends WindowCommon {
 	private String removePair(String fileLine) {
 		char[] fileLineChar;
 		fileLineChar = fileLine.toCharArray();
+		String trimmed;
 
 		// This evaluates True if there is only one element left in the line
 		if (fileLine.charAt(0) == ',') {
@@ -542,15 +543,16 @@ public class MainWindow extends WindowCommon {
 			// method from trying to seperate an element
 			// that does not exist
 			fileLine = ",|";
+			trimmed = fileLine;
 		} else {
 			for (int charCount = 0; charCount < fileLine.indexOf('|'); charCount++) {
 				fileLineChar[charCount] = ' ';
 			}
 			fileLine = String.copyValueOf(fileLineChar);
-			fileLine.trim();
+			trimmed = fileLine.trim();
 		}
 
-		return fileLine;
+		return trimmed;
 	}
 
 	// Returns a single Task's elements without any editing
