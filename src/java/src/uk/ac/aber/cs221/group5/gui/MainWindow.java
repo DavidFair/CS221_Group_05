@@ -176,7 +176,7 @@ public class MainWindow {
 	
 	public void attachMainWindowToDb(MainWindow main){
 		if (databaseObj != null) {
-			databaseObj.updateHostWindow(main);
+			databaseObj.setHostWindow(main);
 		} else {
 			databaseObj = new Database(MEMBERS_SAVE_PATH, this);
 		}

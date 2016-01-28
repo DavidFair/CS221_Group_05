@@ -55,12 +55,8 @@ public class Database {
 	private static final int REFRESH_SEC_DELAY = 60;
 	private static final int SYNC_ALRT_DELAY = 1;
 
-	/**
-	 * Creates a new database object and loads JDBC into memory
-	 * 
-	 * @param usersFilePath
-	 *            The location to save and load users to
-	 */
+
+
 	public Database(String usersFilePath, MainWindow parentWindow) {
 		// Leave blank so default port is used
 		this.dbPortNo = "";
@@ -85,52 +81,13 @@ public class Database {
 
 	}
 
-	/**
-	 * Saves a list of all user names to a local file
-	 * 
-	 * @param filePath
-	 *            Path of file to be saved
-	 * @param allUsers
-	 *            A MemberList containing all users to be saved
-	 * @throws IOException
-	 */
-	public void saveUserName(String filePath, MemberList allUsers) {
 
-		FileWriter fileWriter;
-
-		try {
-			fileWriter = new FileWriter(filePath);
-			BufferedWriter write = new BufferedWriter(fileWriter);
-
-			int numOfTasks = allUsers.getLength();
-			write.write(numOfTasks + "\n");
-
-			for (int loopCount = 0; loopCount < numOfTasks; loopCount++) {
-				Members writeTask = allUsers.getMember(loopCount);
-				write.write(writeTask.getEmail() + "\n");
-				write.write(writeTask.getName() + "\n");
-			}
-			write.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
 
 	public void connect() {
 		// Attempt to reconnect with existing db settings
 		connect(dbURL, dbPortNo, dbUsername, dbPassword, dbName);
 	}
-
-	public void updateHostWindow(MainWindow newWindow) {
-		this.hostWindow = newWindow;
-	}
-
-	public MainWindow getHostWindow() {
-		return this.hostWindow;
-	}
-
+	
 	public void connect(String hostName, String portNo, String dbUser, String dbPass, String dbName) {
 		this.dbUsername = dbUser;
 		this.dbPassword = dbPass;
@@ -196,6 +153,39 @@ public class Database {
 		connectDb.start();
 
 	}
+	
+
+	public void closeDbConn() {
+
+		if (connTimer != null) {
+			connTimer.cancel();
+			connTimer = null;
+		}
+
+		if (dbConnection != null) {
+			try {
+				dbConnection.close();
+			} catch (SQLException e) {
+				System.err.println("Could not close JDBC connection");
+				// For debugging
+				// e.printStackTrace();
+
+				// Exit as we cannot close JDBC which means something is wrong
+				System.exit(100);
+
+			}
+		}
+
+		// Release current connection
+		dbConnection = null;
+
+		// Set status
+		currentStatus = DbStatus.DISCONNECTED;
+
+	}
+
+
+
 
 	public void updateDbTask(Task updatedTask) {
 
@@ -254,39 +244,54 @@ public class Database {
 	}
 
 
+	public void saveUserName(String filePath, MemberList allUsers) {
 
-	public void closeDbConn() {
+		FileWriter fileWriter;
 
-		if (connTimer != null) {
-			connTimer.cancel();
-			connTimer = null;
-		}
+		try {
+			fileWriter = new FileWriter(filePath);
+			BufferedWriter write = new BufferedWriter(fileWriter);
 
-		if (dbConnection != null) {
-			try {
-				dbConnection.close();
-			} catch (SQLException e) {
-				System.err.println("Could not close JDBC connection");
-				// For debugging
-				// e.printStackTrace();
+			int numOfTasks = allUsers.getLength();
+			write.write(numOfTasks + "\n");
 
-				// Exit as we cannot close JDBC which means something is wrong
-				System.exit(100);
-
+			for (int loopCount = 0; loopCount < numOfTasks; loopCount++) {
+				Members writeTask = allUsers.getMember(loopCount);
+				write.write(writeTask.getEmail() + "\n");
+				write.write(writeTask.getName() + "\n");
 			}
+			write.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
-		// Release current connection
-		dbConnection = null;
-
-		// Set status
-		currentStatus = DbStatus.DISCONNECTED;
 
 	}
+	
+	public void startAutoSync() {
+		createRefreshTimer(REFRESH_SEC_DELAY, this);
+	}
+
+	public void stopAutoSync() {
+
+		if (connTimer == null) {
+			return;
+		}
+
+		connTimer.cancel();
+		connTimer = null;
+
+	}
+
 
 	public DbStatus getConnStatus() {
 		return currentStatus;
 	}
+
+	public MainWindow getHostWindow() {
+		return this.hostWindow;
+	}
+
 
 	public void getTasks() {
 		getTasks("");
@@ -397,25 +402,19 @@ public class Database {
 		createRefreshTimer(REFRESH_SEC_DELAY, this);
 
 	}
+	
 
-	public void startAutoSync() {
-		createRefreshTimer(REFRESH_SEC_DELAY, this);
-	}
 
-	public void stopAutoSync() {
-
-		if (connTimer == null) {
-			return;
-		}
-
-		connTimer.cancel();
-		connTimer = null;
-
-	}
 
 	public long getConnTime() {
 		return this.connTime;
 	}
+	
+	
+	public void setHostWindow(MainWindow newWindow) {
+		this.hostWindow = newWindow;
+	}
+
 
 	/**
 	 * Takes a statement object and SQL query and executes the query. Returns
@@ -448,6 +447,9 @@ public class Database {
 		return sqlOutput;
 
 	}
+	
+
+
 
 	private void executeSqlStatement(String statementString){
 		
