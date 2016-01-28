@@ -245,7 +245,7 @@ public class ConnSettingsWindowGUI {
 	public void setConnStatus(DbStatus status){
 		MainWindow main = new MainWindow(); //Used to get Conn Status
 		lblConnStatus.setText(main.getConnStatus().toString());
-		main.destroyWindow();
+		
 	}
 	
 	public void setLastSyncedLabel(float minutes){
