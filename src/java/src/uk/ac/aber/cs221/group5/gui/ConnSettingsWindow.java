@@ -59,12 +59,12 @@ public class ConnSettingsWindow {
 	 * for later reading to load database configuration 
 	 * 
 	 * @param filename Path to save the config file at
-	 * @param dbName
-	 * @param username
-	 * @param password
-	 * @param dbUrl
-	 * @param portNo
-	 * @throws IOException
+	 * @param dbName The name of the database
+	 * @param username The user name of the database
+	 * @param password The password of the database
+	 * @param dbUrl The url of the database
+	 * @param portNo The port number of the database can be blank or "Leave Blank for Default" for 3306
+	 * @throws IOException Throws an IO exception on an error 
 	 */
 	public void saveConnSettings(String filename, String dbName, String username, String password, 
 			String dbUrl, String portNo) throws IOException{
@@ -102,6 +102,10 @@ public class ConnSettingsWindow {
 		return false;
 	}
 	
+	/**
+	 * Updates the connection status on the connection window
+	 * @param status New status to display
+	 */
 	public void setConnStatus(DbStatus status){
 		this.childWindow.setConnStatus(status);
 	}
