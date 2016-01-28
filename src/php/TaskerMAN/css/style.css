@@ -58,7 +58,7 @@ All <div> id CSS
     width: 50%;
     color: #FFFFFF;
     border-color: #6600CC;
-    float: center;
+   
 
 }
 
@@ -78,7 +78,7 @@ All type CSS
 */
 
 button {
-    background-color: silver;
+    background-color: grey;
 }
 
 footer {
@@ -105,7 +105,7 @@ header {
 }
 
 html body {
-    background-color: silver;
+    background-color: grey;
     margin: 0;
     padding: 0;
     font-family: "Helvetica Neue", Helvetica, sans-serif;
@@ -142,7 +142,7 @@ All class CSS
 	vertical-align:middle;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-	size: 5px;
+	
 	}
 
 .close {
@@ -165,7 +165,7 @@ All class CSS
 }
 
 .container {
-    background-color: silver;
+    background-color: grey;
     border-color: #6600CC;
     border-radius: 25px;
     border-width: 5px;
@@ -176,7 +176,7 @@ All class CSS
 }
 
 .info_box{
-	background: silver;
+	background: grey;
 	border-style: double;
     margin: 10% auto;
     padding: 5px 20px 13px 20px;
@@ -227,7 +227,7 @@ All class CSS
     text-align: center;
     width: 50%;
     color: #FFFFFF;
-	background-color: silver;
+	background-color: grey;
     border-color: #6600CC;
 	border-radius: 20px;
     border-width: 2px;
@@ -249,7 +249,7 @@ All class CSS
 }
 
 .modalWindow {
-    background: silver;
+    background: grey;
     bottom: 0;
     clear: both;
     left: 0;
@@ -324,7 +324,7 @@ All class CSS
 	padding-left:12px;
 	box-sizing: border-box;
 	border: 0px;
-	background-color: silver;
+	background-color: grey;
 	}
 	
 .addInput{
