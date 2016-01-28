@@ -54,9 +54,6 @@ public class MainWindow {
 
 	public void setTaskList(TaskList list) {
 
-		connTime = System.currentTimeMillis();
-		this.taskList = list;
-
 		try {
 			saveChange(TASK_SAVE_PATH);
 			childWindow.populateTable(taskList);
