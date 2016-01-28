@@ -68,10 +68,7 @@ public class MainWindow {
 		}
 
 	}
-
-	public MemberList getMemberList() {
-		return this.memberList;
-	}
+	
 
 	public void setmemberList(MemberList list) {
 		connTime = System.currentTimeMillis();
@@ -229,10 +226,6 @@ public class MainWindow {
 		childWindow.setConnStatusLabel(databaseObj.getConnStatus());
 	}
 
-	public void callWindowLaunch() {
-		childWindow.launchWindow();
-	}
-
 	public void destroyWindow() {
 		databaseObj.closeDbConn();
 
@@ -250,10 +243,10 @@ public class MainWindow {
 	 * String)
 	 */
 	
-	public void setTitleText(String newTitleText) {
+	
 		// TODO Auto-generated method stub
 
-	}
+	
 
 	/*
 	 * (non-Javadoc)
@@ -394,10 +387,6 @@ public class MainWindow {
 		}
 		write.close();
 		fileWriter.close();
-	}
-
-	public int getNumTask() {
-		return this.taskList.getListSize();
 	}
 
 	public void updateLocalFiles(String taskFile) {
@@ -548,9 +537,7 @@ public class MainWindow {
 	}
 
 	// Gets the System time from the Database of when it was last connected
-	private void setConnTime() {
-		databaseObj.getConnTime();
-	}
+
 	
 ////Methods for dealing with Task Element IDs
 	private ArrayList<String> getElementIndexes(String indexes){
