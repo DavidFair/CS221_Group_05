@@ -19,9 +19,8 @@ public class ConnSettingsWindow {
 	
 	private void createWindow(){
 		childWindow = new ConnSettingsWindowGUI();
-		MainWindow main = new MainWindow();	//Just used to get the DB Conn Status & Conn Time and will then exit
-		this.setConnStatus(main.getConnStatus());
-		this.setLastSyncLabel(main.getConnTime());
+		this.setConnStatus(MainWindow.getConnStatus());
+		this.setLastSyncLabel(MainWindow.getConnTime());
 	}
 	
 	public void saveConnSettings(String filename, String dbName, String username, String password, 
@@ -71,19 +70,19 @@ public class ConnSettingsWindow {
 	public void setLastSyncLabel(long connTime){
 		long currentTime = System.currentTimeMillis();
 		long timeDifferenceMillis = currentTime - connTime;
-		long timeDifferenceMinutes = 0;
-		final int conversionFactor = 60000;
+		long timeDifferenceSeconds = 0;
+		final int conversionFactor = 600;
 		//Convert to millis to minutes
 		
 		/////INTEGER DIVISION////
-		timeDifferenceMinutes = timeDifferenceMillis / conversionFactor;
+		timeDifferenceSeconds = timeDifferenceMillis / conversionFactor;
 		
 		if (connTime == 0){
 			timeDifferenceMillis = 0;
 		}
 		
 		//Display result
-		this.childWindow.setLastSyncedLabel(timeDifferenceMinutes);
+		this.childWindow.setLastSyncedLabel(timeDifferenceSeconds);
 	}
 
 }

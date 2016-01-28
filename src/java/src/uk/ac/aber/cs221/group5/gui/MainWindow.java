@@ -152,7 +152,7 @@ public class MainWindow {
 
 	public void setConnStatus(DbStatus connStatus) {
 		if (childWindow!= null){
-			this.childWindow.setConnStatusLabel(connStatus);
+			MainWindow.childWindow.setConnStatusLabel(connStatus);
 		}
 	}
 	
@@ -166,12 +166,12 @@ public class MainWindow {
 		
 	}
 
-	public DbStatus getConnStatus() {
+	public static DbStatus getConnStatus() {
 		return databaseObj.getConnStatus();
 	}
 
-	public long getConnTime() {
-		return this.connTime;
+	public static long getConnTime() {
+		return MainWindow.connTime;
 	}
 
 	public MainWindow() {
@@ -199,11 +199,11 @@ public class MainWindow {
 			if (databaseObj.getConnStatus() == DbStatus.CONNECTED) {
 				saveChange(TASK_SAVE_PATH);
 				loadTasks(TASK_SAVE_PATH);
-				this.childWindow.populateTable(this.taskList);
+				MainWindow.childWindow.populateTable(this.taskList);
 			} else {
 				// If disconnected load then save
 				loadTasks(TASK_SAVE_PATH);
-				this.childWindow.populateTable(this.taskList);
+				MainWindow.childWindow.populateTable(this.taskList);
 			}
 		} catch (FileNotFoundException e) {
 			this.displayWarning("Tasks not found locally, you need to connect to database for tasks");
