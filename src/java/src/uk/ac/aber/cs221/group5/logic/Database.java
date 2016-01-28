@@ -548,76 +548,52 @@ public class Database {
 
 	private void updateTaskElements(TaskList allTasks) {
 
-		// This class runs in seperate threads pulling all task elements
-		class ElementSync implements Runnable {
-			private TaskList listOfTasks;
-			private Database dbObj;
+		int numOfTasks = allTasks.getListSize();
+		for (int i = 0; i < numOfTasks; i++) {
 
-			public ElementSync(TaskList allTasks, Database parentDb) {
-				this.listOfTasks = allTasks;
-				this.dbObj = parentDb;
-			}
+			Task currentTask = allTasks.getTask(i);
 
-			public void run() {
-				// Get the number of tasks we need to collect elements for
+			// Clear current task to avoid duplicates
+			currentTask.clearAllElements();
 
-				int numOfTasks = listOfTasks.getListSize();
-				for (int i = 0; i < numOfTasks; i++) {
+			String sqlQuery = "SELECT * FROM tbl_elements WHERE TaskID = ";
+			sqlQuery = sqlQuery + currentTask.getID();
 
-					Task currentTask = listOfTasks.getTask(i);
+			ResultSet elements = executeSqlStatement(sqlQuery);
 
-					// Clear current task to avoid duplicates
-					currentTask.clearAllElements();
+			if (elements != null) {
 
-					String sqlQuery = "SELECT * FROM tbl_elements WHERE TaskID = ";
-					sqlQuery = sqlQuery + currentTask.getID();
+				try {
+					while (elements.next()) {
+						// Iterate over all comments
+						int index = elements.getInt("Index");
+						String elementDesc = elements.getString("TaskDesc");
+						String elementComments = elements.getString("TaskComments");
+						String elementId = elements.getString("Index");
 
-					ResultSet elements = executeSqlStatement(sqlQuery);
-
-					if (elements != null) {
-
-						try {
-							while (elements.next()) {
-								// Iterate over all comments
-								int index = elements.getInt("Index");
-								String elementDesc = elements.getString("TaskDesc");
-								String elementComments = elements.getString("TaskComments");
-								String elementId = elements.getString("Index");
-
-								if (elementComments == null) {
-									elementComments = "";
-								}
-
-								// Remove pipes and chars from element desc and
-								// comments
-								elementDesc = elementDesc.replace(",", "");
-								elementComments = elementComments.replace("|", "");
-
-								currentTask.addElement(elementDesc, elementComments, elementId);
-							}
-
-							elements.close();
-						} catch (SQLException e) {
-							System.err.println(e.getMessage());
+						if (elementComments == null) {
+							elementComments = "";
 						}
-					} else {
-						throw new NullPointerException("Result set was null in getMembers");
+
+						// Remove pipes and chars from element desc and
+						// comments
+						elementDesc = elementDesc.replace(",", "");
+						elementComments = elementComments.replace("|", "");
+
+						currentTask.addElement(elementDesc, elementComments, elementId);
 					}
 
+					elements.close();
+				} catch (SQLException e) {
+					System.err.println(e.getMessage());
 				}
-
-				// Finished getting task elements
-
+			} else {
+				throw new NullPointerException("Result set was null in getMembers");
 			}
 
-		} // End of anon inner class
+		}
 
-		currentStatus = DbStatus.SYNCHRONIZING;
-
-		Thread execSql = new Thread(new ElementSync(allTasks, this));
-		execSql.start();
-
-		setupLatencyTimer();
+		// Finished getting task elements
 
 	}
 
