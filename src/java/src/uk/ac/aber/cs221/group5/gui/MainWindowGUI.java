@@ -382,7 +382,6 @@ public class MainWindowGUI {
 		
 		table = new JTable();
 		table.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		table.setCellSelectionEnabled(true);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {

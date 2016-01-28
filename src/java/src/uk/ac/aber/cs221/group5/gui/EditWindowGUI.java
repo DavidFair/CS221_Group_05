@@ -8,8 +8,11 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.SwingConstants;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.text.html.parser.Element;
 
 import uk.ac.aber.cs221.group5.logic.Task;
@@ -52,7 +55,7 @@ public class EditWindowGUI {
 	 * Create the application.
 	 * @throws IOException 
 	 */
-	public EditWindowGUI(int row, MainWindow mainWindow) throws IOException {
+	public EditWindowGUI(int row, MainWindow mainWindow) throws IOException{
 		this.rowNo = row;
 
 		//Stop the auto-sync from firing while a Task is being Edited
@@ -230,6 +233,14 @@ public class EditWindowGUI {
 		new String[] {
 			"Element Name", "Element Comment"
 		}));
+		table.getModel().addTableModelListener(new TableModelListener(){
+			public void tableChanged(TableModelEvent e){
+				int row = table.getSelectedRow();
+				int col = table.getSelectedColumn();
+				table.setValueAt(table.getValueAt(row, col), row, col);
+			
+			}
+		});
 		scrollPane.setViewportView(table);
 		
 		JButton btnCancel = new JButton("Cancel");
