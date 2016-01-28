@@ -324,7 +324,9 @@ public class MainWindow {
 					String elementPair[] = { "", "" };
 					while (elementPair != null) {
 						if(elements.length() > 2){	//Evaluates true if the element has something in it other than the seperator characters
-							elements = elements.substring(1);	//Remove the element seperator character from the begining of the elements
+							if(elements.charAt(0) == '|'){
+								elements = elements.substring(1);	//Remove the element seperator character from the begining of the elements
+							}
 							elementPair[0] = elements.substring(0, elements.indexOf(","));
 							elementPair[1] = elements.substring(elements.indexOf(",") + 1, elements.indexOf("|")); //Exception on this line
 							task.addElement(elementPair[0], elementPair[1], elementIndex.toString());
