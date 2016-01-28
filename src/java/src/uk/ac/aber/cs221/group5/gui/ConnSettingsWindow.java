@@ -4,25 +4,68 @@ import java.awt.Frame;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.AnnotatedArrayType;
+
+import org.junit.experimental.theories.Theories;
+import org.junit.internal.MethodSorter;
+
+import com.mysql.jdbc.Wrapper;
 
 import uk.ac.aber.cs221.group5.logic.DbStatus;
 
+
+/**
+ * Provides a wrapper around the Connection Settings Window
+ * and has methods to manipulate the Connection Settings
+ * Window or initialize it
+ * 
+ * @author Ben Dudley (bed19)
+ * @author David Fairbrother (daf5)
+ * @author Jonathan Englund (jee17)
+ * @author Josh Doyle (jod32)
+ * @version 1.0.0
+ * @since 1.0.0
+ * @see ConnSettingsWindowGUI
+ *
+ */
 public class ConnSettingsWindow {
 	
 	private ConnSettingsWindowGUI childWindow;
 	
+	
+	/**
+	 * Creates a new Connection Window object and 
+	 * if flag set true also creates the GUI object and 
+	 * displays it
+	 * @param createNewWindow True to create and display GUI. False for only object
+	 */
 	public ConnSettingsWindow(boolean createNewWindow){
 		if (createNewWindow){
 			this.createWindow();
 		}
 	}
 	
+	/**
+	 * Creates the GUI window and displays it
+	 */
 	private void createWindow(){
 		childWindow = new ConnSettingsWindowGUI();
 		this.setConnStatus(MainWindow.getConnStatus());
 		this.setLastSyncLabel(MainWindow.getConnTime());
 	}
 	
+	/**
+	 * Saves connection settings into a file at specified path
+	 * for later reading to load database configuration 
+	 * 
+	 * @param filename Path to save the config file at
+	 * @param dbName
+	 * @param username
+	 * @param password
+	 * @param dbUrl
+	 * @param portNo
+	 * @throws IOException
+	 */
 	public void saveConnSettings(String filename, String dbName, String username, String password, 
 			String dbUrl, String portNo) throws IOException{
 		
