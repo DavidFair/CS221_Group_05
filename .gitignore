@@ -76,10 +76,11 @@ local.properties
 .buildpath
 
 ######################
-# phpStorm
+# phpStorm & TaskerMAN
 ######################
 
-/.idea/
+/src/php/TaskerMAN/.idea/
+/src/php/TaskerMAN/tmp/
 workspace.xml
 error.txt
 /tmp/

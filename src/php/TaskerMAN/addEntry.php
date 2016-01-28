@@ -41,7 +41,7 @@ require_once('init.php');
 
 
 // switching task status to a number so it can be added to the Database
-function convertStatus($StatusNumber)
+function convertStatusBack($StatusNumber)
 {
     switch ($StatusNumber) {
         case Adondoned:

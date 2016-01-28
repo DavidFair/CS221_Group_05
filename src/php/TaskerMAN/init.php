@@ -115,17 +115,17 @@ function retrieveNames($email, $database)
     }
 }
 
-function convertIsManager(managerInteger)
+function convertIsManager($managerInteger)
 {
-    switch(managerInteger)
+    switch($managerInteger)
     {
-        case: 0
+        case 0:
             return 'No';
             break;
-        case: 1
+        case 1:
             return 'Yes';
             break;
         default:
-            return: 'Unknown';
+            return 'Unknown';
     }
 }
