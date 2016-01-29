@@ -55,7 +55,7 @@ if(!isset($_SESSION['login_auth']))
                 $emailPK = $row['Email'];
                 echo '<tr>'; ?>
                 <td>
-                    <select onChange="window.location.href=this.value">
+                    <select onChange="window.location.href=this.value" id="optionBar">
                         <option value="users.php"> </option>
                         <option value="users.php?edit=<?php echo $emailPK; ?>#editView">Edit</option>
                         <option value="userDelete.php?id=<?php echo $emailPK; ?>">Delete</option>
