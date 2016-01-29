@@ -31,6 +31,7 @@ display_help(){
 	echo -e "\t -p \t Database Password"
 	echo -e "\t -P \t Database Port (default is 3306)"
 	echo -e "\t -u \t Database Username"
+	echo -e "\t -t \t Populate table with test data"
 
 }
 	
@@ -41,9 +42,10 @@ userName=""
 password=""
 port=""
 dbName=""
+testData=FALSE
 	
 #Parse arguments
-while getopts ":a:n:u:p:P:f" opt; do	
+while getopts ":a:n:u:p:P:ft" opt; do	
 	#a - Address,n - DB Name, u - Username, p - Password, P - Port, f - Force
 	case "$opt" in
 		a) 
@@ -63,6 +65,9 @@ while getopts ":a:n:u:p:P:f" opt; do
 			;;
 		P)
 			port=$OPTARG
+			;;
+		t)
+			testData=TRUE
 			;;
 		'?')
 			display_help >&2 #Output to StdError
@@ -119,6 +124,15 @@ then
 		port=3306
 	fi
 	
+fi
+
+if [ "$testData" = FALSE ]
+then 
+	read -p "Do you want to populate database with test data Y/N" -n 1 -r
+	if [ $REPLY = "Y" ] || [ $REPLY = "y" ]
+	then 
+		testData=TRUE
+	fi
 fi
 
 #Checked all parameters
@@ -316,3 +330,160 @@ then
 	do_query "$string"
 fi
 
+#Populate with test data if set
+if [ "$testData" = TRUE ]
+then
+	
+	echo "Populating users table with test data"
+	string="INSERT INTO tbl_users (Email, FirstName, LastName, IsManager) VALUES ('ole4@aber.ac.uk', 'Oliver', 'Earl', '1');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_users (Email, FirstName, LastName, IsManager) VALUES ('daf5@aber.ac.uk', 'David', 'Fairbrother', '1');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_users (Email, FirstName, LastName, IsManager) VALUES ('jod32@aber.ac.uk', 'Joshua', 'Doyle', '1');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_users (Email, FirstName, LastName, IsManager) VALUES ('bed19@aber.ac.uk', 'Ben', 'Dudley', '1');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_users (Email, FirstName, LastName, IsManager) VALUES ('tma1@aber.ac.uk', 'Tim', 'Anderson', '1');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_users (Email, FirstName, LastName, IsManager) VALUES ('mac81@aber.ac.uk', 'Maurice', 'Corriette', '1');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_users (Email, FirstName, LastName, IsManager) VALUES ('jee17@aber.ac.uk', 'Jonothan ', 'Englund', '1');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_users (Email, FirstName, LastName, IsManager) VALUES ('lif5@aber.ac.uk', 'Liam ', 'Fitzgerald', '1');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_users (Email, FirstName, LastName, IsManager) VALUES ('alw21@aber.ac.uk', 'Alex', 'Webb', '0');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_users (Email, FirstName, LastName, IsManager) VALUES ('kir12@aber.ac.uk', 'Kimmit', 'Rai', '0');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_users (Email, FirstName, LastName, IsManager) VALUES ('joc13@aber.ac.uk', 'Johnny', 'Chan', '0');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_users (Email, FirstName, LastName, IsManager) VALUES ('sar14@aber.ac.uk', 'Sanjaya', 'Ranasinghe', '0');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_users (Email, FirstName, LastName, IsManager) VALUES ('mal15@aber.ac.uk', 'Max', 'Limbu', '0');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_users (Email, FirstName, LastName, IsManager) VALUES ('yil16@aber.ac.uk', 'Yiota', 'Laperta', '0');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_users (Email, FirstName, LastName, IsManager) VALUES ('jec17@aber.ac.uk', 'Jesse ', 'Chen', '0');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_users (Email, FirstName, LastName, IsManager) VALUES ('dia18@aber.ac.uk', 'Dionysis ', 'Arvanitis', '0');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_users (Email, FirstName, LastName, IsManager) VALUES ('wej19@aber.ac.uk', 'Wei', 'Jen', '0');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_users (Email, FirstName, LastName, IsManager) VALUES ('kog20@aber.ac.uk', 'Kostas', 'Gasteratos', '0');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_users (Email, FirstName, LastName, IsManager) VALUES ('ali21@aber.ac.uk', 'Alvin', 'Itawad', '0');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_users (Email, FirstName, LastName, IsManager) VALUES ('anc22@aber.ac.uk', 'Atastasia', 'Chatzeli', '0');"
+	do_query "$string"
+	
+	string="UPDATE tbl_users SET FirstName='Nigel', LastName='Hardy' WHERE Email='manager@example.com';"
+	do_query "$string"
+	
+	
+	echo "Populating tasks table with test data"
+	
+	string="INSERT INTO tbl_tasks (TaskID, TaskName, StartDate, EndDate, Status, TaskOwner) VALUES ('3', 'Design specifications', '2015-11-20', '2015-11-27', '1', 'jee17@aber.ac.uk');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_tasks (TaskID, TaskName, StartDate, EndDate, Status, TaskOwner) VALUES ('4', 'Test specification', '2015-11-20', '2015-11-29', '0', 'mac81@aber.ac.uk');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_tasks (TaskID, TaskName, StartDate, EndDate, Status, TaskOwner) VALUES ('5', 'JDBC spike work', '2015-11-01', '2015-11-07', '1', 'bed19@aber.ac.uk');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_tasks (TaskID, TaskName, StartDate, EndDate, Status, TaskOwner) VALUES ('6', 'Mysql spikework', '2015-11-01', '2015-11-08', '1', 'lif5@aber.ac.uk');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_tasks (TaskID, TaskName, StartDate, EndDate, Status, TaskOwner) VALUES ('7', 'Swing spikework', '2015-11-02', '2015-11-08', '0', 'jod32@aber.ac.uk');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_tasks (TaskID, TaskName, StartDate, EndDate, Status, TaskOwner) VALUES ('8', 'prototype CLI implementation', '2015-12-01', '2015-12-16', '1', 'jod32@aber.ac.uk');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_tasks (TaskID, TaskName, StartDate, EndDate, Status, TaskOwner) VALUES ('9', 'Taskerman prototype implementation', '2015-12-01', '2015-12-16', '1', 'ole4@aber.ac.uk');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_tasks (TaskID, TaskName, StartDate, EndDate, Status, TaskOwner) VALUES ('10', 'QA documentatoin', '2015-11-01-01', '2015-11-09', '1', 'ole4@aber.ac.uk');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_tasks (TaskID, TaskName, StartDate, EndDate, Status, TaskOwner) VALUES ('11', 'Group report', '2016-01-20', '2016-02-15', '2', 'daf5@aber.ac.uk');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_tasks (TaskID, TaskName, StartDate, EndDate, Status, TaskOwner) VALUES ('12', 'Test report ', '2016-01-10', '2016-02-15', '1', 'mac81@aber.ac.uk');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_tasks (TaskID, TaskName, StartDate, EndDate, Status, TaskOwner) VALUES ('13', 'Status report', '2016-02-22', '2016-02-29', '1', 'ali21@aber.ac.uk');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_tasks (TaskID, TaskName, StartDate, EndDate, Status, TaskOwner) VALUES ('14', 'Analysis report', '2016-02-18', '2016-02=28', '0', 'anc22@aber.ac.uk');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_tasks (TaskID, TaskName, StartDate, EndDate, Status, TaskOwner) VALUES ('15', 'Risk analysis', '2015-12-05', '2015-12-10', '1', 'daf5@aber.ac.uk');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_tasks (TaskID, TaskName, StartDate, EndDate, Status, TaskOwner) VALUES ('16', 'PHP implementation', '2016-01-25', '2016-01-29', '1', 'ole4@aber.ac.uk');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_tasks (TaskID, TaskName, StartDate, EndDate, Status, TaskOwner) VALUES ('17', 'CLI/MAN testing', '2016-01-27', '2016-01-29', '0', 'mac81@aber.ac.uk');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_tasks (TaskID, TaskName, StartDate, EndDate, Status, TaskOwner) VALUES ('19', 'Java gui debugging', '2016-01-27', '2016-01-29', '1', 'jod32@aber.ac.uk');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_tasks (TaskID, TaskName, StartDate, EndDate, Status, TaskOwner) VALUES ('20', 'Java db debugging', '2016-01-27', '2016-01-29', '0', 'daf5@aber.ac.uk');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_tasks (TaskID, TaskName, StartDate, EndDate, Status, TaskOwner) VALUES ('21', 'Spreadsheet analysis', '2016-02-10', '2016-02-18', '1', 'ali21@aber.ac.uk');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_tasks (TaskID, TaskName, StartDate, EndDate, Status, TaskOwner) VALUES ('22', 'Junit testing', '2016-01-25', '2016-01-29', '0', 'kog20@aber.ac.uk');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_tasks (TaskID, TaskName, StartDate, EndDate, Status, TaskOwner) VALUES ('23', 'Javadoc commenting', '2016-01-25', '2016-01-29', '1', 'tma1@aber.ac.uk');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_tasks (TaskID, TaskName, StartDate, EndDate, Status, TaskOwner) VALUES ('24', 'Phpunit testing', '2016-02-01', '2016-02-10', '0', 'joc13@aber.ac.uk');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_tasks (TaskID, TaskName, StartDate, EndDate, Status, TaskOwner) VALUES ('25', 'Javascript validation', '2016-01-27', '2016-01-29', '1', 'alw21@aber.ac.uk');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_tasks (TaskID, TaskName, StartDate, EndDate, Status, TaskOwner) VALUES ('26', 'Maintenance manual', '2016-01-29', '2016-02-15', '1', 'dia18@aber.ac.uk');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_tasks (TaskID, TaskName, StartDate, EndDate, Status, TaskOwner) VALUES ('27', 'QA inspection of testing documents', '2016-02-01', '2016-02-01', '1', 'mal15@aber.ac.uk');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_tasks (TaskID, TaskName, StartDate, EndDate, Status, TaskOwner) VALUES ('28', 'Project log documentation', '2016-02-05', '2016-02-15', '0', 'wej19@aber.ac.uk');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_tasks (TaskID, TaskName, StartDate, EndDate, Status, TaskOwner) VALUES ('29', 'Shell scripting', '2015-12-21', '2016-01-29', '1', 'yil16@aber.ac.uk');"
+	do_query "$string"
+	
+	string="INSERT INTO tbl_tasks (TaskID, TaskName, StartDate, EndDate, Status, TaskOwner) VALUES ('30', 'Project packaging', '2016-01-25', '2016-01-29', '2', 'kir12@aber.ac.uk');"
+	do_query "$string"
+	
+fi
+	
+	
+	
+	

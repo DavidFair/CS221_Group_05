@@ -8,7 +8,7 @@
 # Author: David (daf5)
 
 #Debug mode
-set -x
+#set -x
 
 # Test for number of args
 
@@ -65,7 +65,7 @@ done
 #Check we have all parameters needed
 if [ -z "$installPath" ] 
 then
-	echo "Please enter the full install path"
+	echo "Please enter the subfolder to write to"
 	read installPath
 fi
 
@@ -78,10 +78,22 @@ fi
 echo "Making folder path"
 mkdir -p $installPath 
 
-echo "Copying files"
-cp "TaskerMAN" $installPath -r
+echo "Extracting files"
 
+tarName="TaskerMan.tar"
+
+if [ -z $installPath ]
+then
+	tar -xf $tarName
+else
+	tar -xf $tarName -C $installPath
+fi
+
+echo "Making tmp folder"
 cd $installPath
+mkdir tmp
+
 find -name "*.php" -exec chmod 600 {} \;
 find -name "*.css" -exec chmod 644 {} \;
 
+exit 0
