@@ -25,13 +25,19 @@ import uk.ac.aber.cs221.group5.logic.Task.Element;
  */
 
 /**
- * Implements a database class for communicating to a TaskerSRV server
  * 
- * @author David (daf5)
+ * Implements database connections, synchronizing and updating
+ * through JDBC interface 
+ * 
+ * @author Ben Dudley (bed19)
+ * @author David Fairbrother (daf5)
+ * @author Jonathan Englund (jee17)
+ * @author Josh Doyle (jod32)
+ * @version 1.0.0
+ * @since 1.0.0
+ * @see MainWindow
  *
  */
-
-// This is currently a skeleton class to allow SQL to be created
 public class Database {
 
 	private String dbURL;
@@ -57,8 +63,13 @@ public class Database {
 	
 	private static final String PENDING_TASK_FILE = "pendingSaveFile.txt";
 
-
-
+	/**
+	 * Creates a new database object and loads in the
+	 * MYSQL JDBC driver. 
+	 * 
+	 * @param usersFilePath The path to save the members list
+	 * @param parentWindow The window to display to and update
+	 */
 	public Database(String usersFilePath, MainWindow parentWindow) {
 		// Leave blank so default port is used
 		this.dbPortNo = "";
@@ -84,18 +95,31 @@ public class Database {
 	}
 
 
-
+	/**
+	 * Reconnects to the database with the currently stored credentials
+	 */
 	public void connect() {
 		// Attempt to reconnect with existing db settings
 		connect(dbURL, dbPortNo, dbUsername, dbPassword, dbName);
 	}
 	
-	public void connect(String hostName, String portNo, String dbUser, String dbPass, String dbName) {
+	/**
+	 * Attempts a new connection to the database in a new
+	 * thread, if this fails it opens an error dialog window
+	 * in the main window.
+	 * 
+	 * @param hostUrl URL to the database server
+	 * @param portNo Database server port number, can be left blank for default of 3306
+	 * @param dbUser User name to login to database
+	 * @param dbPass Password to login to database
+	 * @param dbName Database name to select
+	 */
+	public void connect(String hostUrl, String portNo, String dbUser, String dbPass, String dbName) {
 		this.dbUsername = dbUser;
 		this.dbPassword = dbPass;
 		this.dbName = dbName;
 		this.dbPortNo = portNo;
-		this.dbURL = hostName;
+		this.dbURL = hostUrl;
 
 		// Create appropriate connection string
 		final String urlPrepend = "jdbc:mysql://";
@@ -105,7 +129,7 @@ public class Database {
 		if (portNo == "") {
 			this.dbPortNo = "3306";
 		}
-		String connectionUrl = urlPrepend + hostName + ":" + this.dbPortNo + "/" + this.dbName + urlAppend;
+		String connectionUrl = urlPrepend + hostUrl + ":" + this.dbPortNo + "/" + this.dbName + urlAppend;
 
 		class ConnectThread implements Runnable {
 
@@ -156,12 +180,20 @@ public class Database {
 
 	}
 	
-
+	/**
+	 * Closes the database connection and cancels any timers then
+	 * updates the connection status to reflect changes
+	 */
 	public void closeDbConn() {
 
 		if (connTimer != null) {
 			connTimer.cancel();
 			connTimer = null;
+		}
+		
+		if (latencyTimer != null){
+			latencyTimer.cancel();
+			latencyTimer = null;
 		}
 
 		if (dbConnection != null) {
@@ -187,8 +219,11 @@ public class Database {
 	}
 
 
-
-
+	/**
+	 * Saves a tasks new status and all comments to database
+	 * 
+	 * @param updatedTask 
+	 */
 	public void updateDbTask(Task updatedTask) {
 
 		class UpdateDb implements Runnable {
