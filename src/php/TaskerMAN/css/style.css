@@ -23,7 +23,6 @@ All <div> id CSS
 }
 
 #login {
-
     border-radius: 25px;
     border-width: 10px;
     padding-top: 1px;
@@ -62,6 +61,11 @@ All <div> id CSS
 
 }
 
+#optionBar{
+	border-radius: 15px;
+    border-width: 2px;
+}
+
 #request {
     margin-bottom: 0%;
     text-indent: 15%;
@@ -79,6 +83,7 @@ All type CSS
 
 button {
     background-color: grey;
+	
 }
 
 footer {
@@ -131,6 +136,9 @@ table {
     color: white;
 
 }
+
+
+
 
 /*
 All class CSS
@@ -283,7 +291,8 @@ All class CSS
 	
 }
 
-.modalWindow > div {border: 0px;
+.modalWindow > div {
+	border: 0px;
     margin: 10% auto;
     padding: 5px 20px 13px 20px;
     position: relative;
@@ -319,15 +328,6 @@ All class CSS
     float: right;
 }
 
-.titles{
-	float: left;
-	text-align: justify;
-	vertical-align:middle;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	color: white;
-	}
-	
 .viewInput{
 	float: right;
 	text-align: justify;
@@ -339,5 +339,14 @@ All class CSS
 	background-color: grey;
 	}
 
-	.tableID{
+.titles{
+	float: left;
+	text-align: justify;
+	vertical-align:middle;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	color: white;
+	}
+	
+.tableID{
 	column-count: 3;}
