@@ -29,10 +29,10 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
-import javax.swing.text.html.parser.Element;
 
 import uk.ac.aber.cs221.group5.logic.MemberList;
 import uk.ac.aber.cs221.group5.logic.Task;
+import uk.ac.aber.cs221.group5.logic.Task.Element;
 import uk.ac.aber.cs221.group5.logic.TaskList;
 import uk.ac.aber.cs221.group5.logic.TaskStatuses;
 import uk.ac.aber.cs221.group5.logic.Database;
@@ -373,7 +373,12 @@ public class MainWindow {
 				startDate = read.readLine();
 				endDate = read.readLine();
 				Task task = new Task(taskID, taskName, startDate, endDate, assigned, taskStatus);
-				if (!elements.equals(",|")) {
+				ArrayList<String[]> elementCommentPairs = seperateElementComments(elements);
+				for (String[] processed : elementCommentPairs){
+					task.addElement(processed[0], processed[1], extractedElementIds.get(elementNum));
+				}
+				
+				/*if (!elements.equals(",|")) {
 					String elementPair[] = { "", "" };
 					while (elementPair != null) {
 						if(elements.length() > 2){	//Evaluates true if the element has something in it other than the seperator characters
@@ -394,6 +399,7 @@ public class MainWindow {
 				} else{
 					newList.addTask(task);
 				}
+				*/
 				
 			}
 			read.close();
@@ -457,11 +463,39 @@ public class MainWindow {
 			FileReader fileReader = new FileReader(PENDING_SAVE_PATH);
 			BufferedReader read = new BufferedReader(fileReader);
 			
+			int numOfTasks = Integer.parseInt(read.readLine());
+			for (int i=0; i < numOfTasks; i++){
+			//Read the indexs into an array of elementIndexes
+			ArrayList<String> elementIndexes = getElementIndexes(read.readLine());
+			ArrayList<String[]> elementComments = seperateElementComments(read.readLine());
+			String taskName = read.readLine();
+			String taskStatus = read.readLine();
+			String taskMemeber = read.readLine();
+			String startDate = read.readLine();
+			String endDate = read.readLine();
+			String taskId = read.readLine();
+			
+			TaskStatuses status = TaskStatuses.valueOf(taskStatus);
+			
+			Task toPush = new Task(taskId, taskName, startDate, endDate, taskMemeber, status);
+			
+			int elementIndex = 1;
+			for (String[] elementPair: elementComments){
+				elementIndex++;
+				toPush.addElement(elementPair[0], elementPair[1], elementIndexes.get(elementIndex));
+			}
+			
+			databaseObj.updateDbTask(toPush);
+			
+			} //Loop back over all task objects in save file
+			
 					
 			
+		} catch (Exception e){
+		
 		}
 		
-		
+		blankFile(PENDING_SAVE_PATH);
 	}
 	
 	/**
@@ -474,9 +508,10 @@ public class MainWindow {
 		try {
 		FileWriter fileWriter = new FileWriter(PENDING_SAVE_PATH, true);
 		BufferedWriter write = new BufferedWriter(fileWriter);
-		write.write(pendingTask.getID());
-		int numOfElements = pendingTask.getNumElements();
+		write.write(pendingTask.getID() + "\n");
 		ArrayList<uk.ac.aber.cs221.group5.logic.Task.Element> elements = pendingTask.getAllElements();
+		
+		int numOfElements = pendingTask.getNumElements();
 		if (numOfElements == 0) {
 			write.write("0\n");
 			write.write(",|");
@@ -496,6 +531,8 @@ public class MainWindow {
 		write.write(pendingTask.getMembers() + "\n");
 		write.write(pendingTask.getStart() + "\n");
 		write.write(pendingTask.getEnd() + "\n");
+		write.write(pendingTask.getID() + "\n");
+		write.close();
 		} catch (IOException e) {
 			displayError("Error - Could not write pending tasks to local file", 
 					"Error storing pending tasks");
@@ -593,6 +630,42 @@ public class MainWindow {
 
 		return elements;
 	}
+	
+	private ArrayList<String[]> seperateElementComments(String input) {
+
+		ArrayList<String[]> processedStrings = new ArrayList<String[]>();
+		
+		if (input.equals(",|")) {
+			// No elements or comments
+			// Leave it as is
+			return processedStrings; //Return blank ArrayList
+		}
+
+		while (input.length() > 2) {
+			String[] elementPair = { "", "" };
+				
+			if (input.charAt(0) == '|') {
+					// Remove the element seperator character from the begining
+					// of the elements
+					// Substring copies the string from index to the end
+					input = input.substring(1);
+				}
+			
+				// Input does not have pipe as first char, so copy string from 0
+				// to terminator (',')
+				elementPair[0] = input.substring(0, input.indexOf(","));
+				elementPair[1] = input.substring(input.indexOf(",") + 1, input.indexOf("|"));
+				input = removePair(input);
+			
+				processedStrings.add(elementPair);
+		}
+
+		// Input length is < 2
+		return processedStrings;
+	}
+
+
+	
 
 	/**
 	 * Seperates a single Description-Comment pair so they can be added to the Task as an Element.

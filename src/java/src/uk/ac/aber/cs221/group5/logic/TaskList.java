@@ -10,6 +10,10 @@ public class TaskList {
 		
 	}
 	
+	public ArrayList<Task> getTaskList(){
+		return this.list;
+	}
+	
 	public void addTask(Task task){
 		this.list.add(task);
 	}
