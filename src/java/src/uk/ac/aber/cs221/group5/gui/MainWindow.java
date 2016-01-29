@@ -2,12 +2,14 @@
 package uk.ac.aber.cs221.group5.gui;
 
 import java.awt.Frame;
+import java.awt.ItemSelectable;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.Inet4Address;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -860,14 +862,18 @@ public TaskList getTaskList() {
     *         Task, with all file formatting removed.
     */
    private ArrayList<String> getElementIndexes(String indexes) {
-      ArrayList<String> extractedIndexes = new ArrayList<String>();
 
-      for (int i = 0; i < indexes.length(); i = i + 2) {
-         // This line takes the i'th Element ID from the line, effectively
-         // removing the seperators
-         extractedIndexes.add(indexes.substring(i, i + 1));
-      }
-
-      return extractedIndexes;
+	   ArrayList<String> convertedIndexes = new ArrayList<String>();
+	   
+	   //Used from http://stackoverflow.com/questions/7488643/how-to-convert-comma-separated-string-to-arraylist
+	   String[] splitIndexes = indexes.split("\\s*,\\s*");
+	   
+	   for (String index: splitIndexes){
+		   convertedIndexes.add(index);
+	   }
+	   
+	   return convertedIndexes;
+	   
    }
+   
 }
