@@ -99,5 +99,8 @@ if ($debug)
 <!-- Add Elements -->
 <?php include('addElements.php'); ?>
 
+<!-- Edit Task -->
+<?php include('taskEdit.php'); ?>
+
 </body>
 </html>

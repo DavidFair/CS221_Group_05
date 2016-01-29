@@ -6,7 +6,7 @@
                 <fieldset class="info_box">
                     <a href="taskerman.php" title="Close" class="close">X</a>
                     <label for="add_taskName" class="titles">Task Name:</label>
-                    <input name="add_taskName" id="add_taskName" type="text" class="addInput" maxlength="40" />
+                    <input name="add_taskName" id="add_taskName" type="text" class="addInput" maxlength="45" required />
                     <br/>
 
                     <label for="add_taskAllocated" class="titles">Allocated User:</label>

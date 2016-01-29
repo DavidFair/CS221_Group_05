@@ -42,15 +42,3 @@ ini_set("log_errors", 1);
 
 // Disable errors caused by Aberystwyth University servers
 error_reporting(E_ALL ^ E_NOTICE);
-
-/*
-** Path Array
-*/
-$paths = array
-(
-    "include"   =>  $_SERVER["DOCUMENT_ROOT"] . "/include",
-    "resources" =>  $_SERVER["DOCUMENT_ROOT"] . "/resources",
-    "css"       =>  $_SERVER["DOCUMENT_ROOT"] . "/css",
-    "js"        =>  $_SERVER["DOCUMENT_ROOT"] . "/js",
-    "img"       =>  $_SERVER["DOCUMENT_ROOT"] . "/img"
-);

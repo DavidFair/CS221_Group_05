@@ -83,7 +83,59 @@ function validateElements()
 
 function validateUserEntry()
 {
-    return true;
+    var email = document.forms["userAdd"]["add_email"].value;
+    var firstName = document.forms["userAdd"]["add_firstName"].value;
+    var lastName = document.forms["userAdd"]["add_lastName"].value;
+    var isManager = document.forms["userAdd"]["add_isManager"].value;
+
+    if (email == null || email == " ")
+    {
+        alert("The email field is empty.");
+        return false;
+    } else if (email.length > 45)
+    {
+        alert("The email address is too long.");
+        return false;
+    } else if (!emailRegExp.test(email))
+    {
+        alert("This is not a valid email address.");
+        return false;
+    } else if (firstName == null || email == " ")
+    {
+        alert("The first name field is empty.");
+        return false;
+    } else if (firstName.length > 15) {
+        alert("The first name entered is too long.");
+        return false;
+    } else if (firstName.length < 2) {
+        alert("The first name entered is too short.");
+        return false;
+    } else if (!ASCIIregExp.test(firstName))
+    {
+        alert("Invalid data in the first name field");
+        return false;
+    } else if (lastName == null || lastName == " ")
+    {
+        alert("The last name field is empty.");
+        return false;
+    } else if (lastName.length > 15) {
+        alert("The last name entered is too long.");
+        return false;
+    } else if (lastName.length < 2) {
+        alert("The last name entered is too short.");
+        return false;
+    } else if (!ASCIIregExp.test(lastName))
+    {
+        alert("Invalid data in the last name field");
+        return false;
+    } else if (isManager > 1)
+    {
+        alert("Invalid value specified for isManager");
+        return false;
+    } else
+    {
+        return true;
+    }
 }
 
 function validateUserEdit()
@@ -112,6 +164,9 @@ function validateUserEdit()
     } else if (firstName.length > 15) {
         alert("The first name entered is too long.");
         return false;
+    } else if (firstName.length < 2) {
+        alert("The first name entered is too short.");
+        return false;
     } else if (!ASCIIregExp.test(firstName))
     {
         alert("Invalid data in the first name field");
@@ -122,6 +177,9 @@ function validateUserEdit()
         return false;
     } else if (lastName.length > 15) {
         alert("The last name entered is too long.");
+        return false;
+    } else if (lastName.length < 2) {
+        alert("The last name entered is too short.");
         return false;
     } else if (!ASCIIregExp.test(lastName))
     {
