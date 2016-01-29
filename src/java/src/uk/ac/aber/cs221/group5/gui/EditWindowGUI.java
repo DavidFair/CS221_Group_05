@@ -331,33 +331,20 @@ public class EditWindowGUI {
 		btnSave.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				TaskList updatedTaskList = main.getTaskList();
+				Task updatedTask = updatedTaskList.getTask(rowNo);
+				String newStatus = cmbTaskStatus.getSelectedItem().toString();
+				TaskStatuses enumNewStatus = TaskStatuses.valueOf(newStatus);
 				
-				try{
-					main.updateLocalFiles(TASK_SAVE_PATH);
-				}catch(Exception e){
-					main.displayError("Could not download Task data.", "Connection Error");
+				updatedTask.setStatus(enumNewStatus);
+				
+				main.updateTask(updatedTask);
+				try {
+					main.saveChange(TASK_SAVE_PATH);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				//Send updated Element Comments to Database
-					try {
-						main.loadTasks(TASK_SAVE_PATH);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						main.displayError("Could not load task data", "Loading Error");
-					}
-					TaskList updatedTaskList = main.getTaskList();
-					Task updatedTask = updatedTaskList.getTask(rowNo);
-					if (table.getValueAt(0, 0) != "No Elements"){
-						for(int tableRow = 0; tableRow < table.getRowCount(); tableRow++){
-							String updateComment = (String) table.getValueAt(tableRow, 1);
-							updatedTask.getElement(tableRow).setComment(updateComment);
-						}
-					}
-					String newStatus = cmbTaskStatus.getSelectedItem().toString();
-					TaskStatuses enumNewStatus = TaskStatuses.valueOf(newStatus);
-					
-					updatedTask.setStatus(enumNewStatus);
-					
-					main.updateTask(updatedTask);
 				
 				//Resume auto-sync
 				main.setAutoTimer(true);
