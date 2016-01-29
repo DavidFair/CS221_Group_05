@@ -371,7 +371,7 @@ function validateExtraElement()
         return false;
     }
 
-    if (!(ASCIIregExp.test(taskDesc)))
+    if (!(ASCIIregExp.test(taskComment)))
     {
         alert("Invalid comment in task description.");
         return false;
