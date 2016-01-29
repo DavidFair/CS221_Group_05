@@ -21,7 +21,6 @@ import javax.swing.JOptionPane;
 import uk.ac.aber.cs221.group5.logic.DbStatus;
 import uk.ac.aber.cs221.group5.logic.MemberList;
 
-
 /**
  * Initialize the login window and provides swing implementation
  * 
@@ -33,7 +32,7 @@ import uk.ac.aber.cs221.group5.logic.MemberList;
  * @since 1.0.0
  * @see LoginWindowGUI.java
  * 
- * */
+ */
 
 public class LoginWindow {
 

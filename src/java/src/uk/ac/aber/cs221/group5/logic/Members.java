@@ -1,7 +1,8 @@
 package uk.ac.aber.cs221.group5.logic;
 
 /**
- * This Class deals with Members within TaskerCLI. It enables setting and getting of Member attributes.
+ * This Class deals with Members within TaskerCLI. It enables setting and
+ * getting of Member attributes.
  * 
  * @author Ben Dudley (bed19)
  * @author David Fairbrother (daf5)

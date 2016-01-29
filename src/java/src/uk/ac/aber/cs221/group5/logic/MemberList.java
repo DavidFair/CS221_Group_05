@@ -7,8 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * This Class deals with the list of Members held in memory and used by TaskerCLI, namely loading Members, 
- * and providing validation that a provided email address belongs to a saved Member. 
+ * This Class deals with the list of Members held in memory and used by
+ * TaskerCLI, namely loading Members, and providing validation that a provided
+ * email address belongs to a saved Member.
  * 
  * @author Ben Dudley (bed19)
  * @author David Fairbrother (daf5)
@@ -28,7 +29,7 @@ public class MemberList {
    /**
     * constructs an empty member list
     */
-public MemberList() {
+   public MemberList() {
 
    }
 
@@ -105,10 +106,11 @@ public MemberList() {
 
    /**
     * gets the length of the current member list
+    * 
     * @return the length of the member list as an int
     */
-   
-public int getLength() {
+
+   public int getLength() {
       return this.memberList.size();
    }
 }

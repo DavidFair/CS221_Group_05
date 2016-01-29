@@ -23,9 +23,10 @@ import uk.ac.aber.cs221.group5.logic.TaskStatuses;
 
 /**
  * 
- * This is the main class of the TaskerCLI system. The system starts and exits within this Class. Creating
- * an Object of this Class for the first time will create a LoginWindow Object, forcing the user to log in
- * before they are given access to the system.
+ * This is the main class of the TaskerCLI system. The system starts and exits
+ * within this Class. Creating an Object of this Class for the first time will
+ * create a LoginWindow Object, forcing the user to log in before they are given
+ * access to the system.
  * 
  * @author Ben Dudley (bed19)
  * @author David Fairbrother (daf5)
@@ -63,10 +64,10 @@ public class MainWindow {
 
    /**
     * Gets the entire list of tasks held on the db
-    * @return
-    * 		returns the list of tasks 
+    * 
+    * @return returns the list of tasks
     */
-public TaskList getTaskList() {
+   public TaskList getTaskList() {
       return this.taskList;
    }
 
@@ -122,8 +123,8 @@ public TaskList getTaskList() {
     * This is the entry point to the System. This method created a new
     * LoginWindow Object and spawns the Login Window GUI.
     * 
-    * @param args 
-    * 			 starting arguments
+    * @param args
+    *           starting arguments
     * @throws InterruptedException
     *            if the thread handling establishing a connection to the
     *            Database was somehow interrupted.

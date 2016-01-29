@@ -25,8 +25,9 @@ import uk.ac.aber.cs221.group5.logic.DbStatus;
 import uk.ac.aber.cs221.group5.logic.MemberList;
 
 /**
- * This Class handles all of the GUI aspects of logging in to TaskerCLI. This includes displaying the
- * Login Window GUI and updating all Components on that table.
+ * This Class handles all of the GUI aspects of logging in to TaskerCLI. This
+ * includes displaying the Login Window GUI and updating all Components on that
+ * table.
  * 
  * @author Ben Dudley (bed19)
  * @author David Fairbrother (daf5)
@@ -82,11 +83,13 @@ public class LoginWindowGUI {
    }
 
    /**
-    * Updates which members are allowed to login in based on the MemberList receivingList
+    * Updates which members are allowed to login in based on the MemberList
+    * receivingList
+    * 
     * @param receivingList
-    * 			the updated list of users who are allowed to Login
+    *           the updated list of users who are allowed to Login
     */
-public void passMemberList(MemberList receivingList) {
+   public void passMemberList(MemberList receivingList) {
       for (int memberCount = 0; memberCount < receivingList.getLength(); memberCount++) {
          memberList.addMember(receivingList.getMember(memberCount));
       }

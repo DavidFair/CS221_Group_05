@@ -18,8 +18,8 @@ import uk.ac.aber.cs221.group5.logic.Task;
 import uk.ac.aber.cs221.group5.logic.Task.Element;
 
 /**
- * This Class handles the GUI Window for viewing Task Elements. It spawns a GIU Window and loads Element
- * Data into the Table contained within the Window.
+ * This Class handles the GUI Window for viewing Task Elements. It spawns a GIU
+ * Window and loads Element Data into the Table contained within the Window.
  * 
  * @author Ben Dudley (bed19)
  * @author David Fairbrother (daf5)
@@ -43,7 +43,7 @@ public class ViewElementsWindowGUI {
     * Create the application.
     * 
     * @param tableRow
-    * 			the current task in the table
+    *           the current task in the table
     * 
     * @throws IOException
     *            if the local Tasks save file cannot be read.

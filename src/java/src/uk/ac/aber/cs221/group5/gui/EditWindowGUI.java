@@ -32,8 +32,8 @@ import uk.ac.aber.cs221.group5.logic.TaskList;
 import uk.ac.aber.cs221.group5.logic.TaskStatuses;
 
 /**
- * Initialize an edit window, where you can change the status of the task and edit task element comments.
- * Provides swing implementation
+ * Initialize an edit window, where you can change the status of the task and
+ * edit task element comments. Provides swing implementation
  * 
  * @author Ben Dudley (bed19)
  * @author David Fairbrother (daf5)
@@ -43,7 +43,7 @@ import uk.ac.aber.cs221.group5.logic.TaskStatuses;
  * @since 1.0.0
  * @see MainWindow.java
  * 
- * */
+ */
 public class EditWindowGUI {
 
    private JFrame frmEditTask;
@@ -65,9 +65,9 @@ public class EditWindowGUI {
     * Create the application and spawn the GUI Window.
     * 
     * @param row
-    * 			The current task that is being edited
+    *           The current task that is being edited
     * @param mainWindow
-    * 			The timer would be out of scope if this isnt called
+    *           The timer would be out of scope if this isnt called
     * @throws IOException
     *            if the Task File, which is used to populate the Task Elements
     *            table, cannot be found or has been corrupted.

@@ -20,10 +20,14 @@ public class ViewElementsWindow {
    private ViewElementsWindowGUI childWindow;
 
    /**
-    * Constructor for the View Elements Window. Passes through the index in the Task List of the Task
-    * that was selected in Main Window.
-    * @param tableRow The index in the Task List of the Task that was selected to View Elements.
-    * @throws IOException if the local Task save file cannot be read.
+    * Constructor for the View Elements Window. Passes through the index in the
+    * Task List of the Task that was selected in Main Window.
+    * 
+    * @param tableRow
+    *           The index in the Task List of the Task that was selected to View
+    *           Elements.
+    * @throws IOException
+    *            if the local Task save file cannot be read.
     */
    public ViewElementsWindow(int tableRow) throws IOException {
       childWindow = new ViewElementsWindowGUI(tableRow);

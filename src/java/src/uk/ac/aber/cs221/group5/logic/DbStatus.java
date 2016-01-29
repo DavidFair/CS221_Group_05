@@ -7,22 +7,22 @@ package uk.ac.aber.cs221.group5.logic;
  */
 
 public enum DbStatus {
-	
- /**
- * successfully connected to db
- */
-	
-CONNECTED, 
 
-/**
- * could no establish a connection to the db
- */
+   /**
+    * successfully connected to db
+    */
 
-DISCONNECTED, 
+   CONNECTED,
 
-/**
- * This is currently interacting with the db
- */
+   /**
+    * could no establish a connection to the db
+    */
 
-SYNCHRONIZING
+   DISCONNECTED,
+
+   /**
+    * This is currently interacting with the db
+    */
+
+   SYNCHRONIZING
 }

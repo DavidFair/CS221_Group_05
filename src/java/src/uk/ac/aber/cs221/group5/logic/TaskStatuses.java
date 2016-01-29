@@ -14,22 +14,22 @@ package uk.ac.aber.cs221.group5.logic;
  */
 
 public enum TaskStatuses {
-	
+
    /**
-    * The task has been abandoned 
+    * The task has been abandoned
     */
-	
-Abandoned,
 
-/**
- * This task has been allocated to a member 
- */
+   Abandoned,
 
-Allocated,
+   /**
+    * This task has been allocated to a member
+    */
 
-/**
- * This task has been completed
- */
+   Allocated,
 
-Completed
+   /**
+    * This task has been completed
+    */
+
+   Completed
 }

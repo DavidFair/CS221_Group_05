@@ -286,18 +286,19 @@ public class Database {
          }
       }
 
-
       Thread syncElement = new Thread(new UpdateDb(updatedTask));
       syncElement.start();
 
    }
-   
+
    /**
     * This method saves a MemberList in a specified local file
+    * 
     * @param filePath
-    * 			The location of the file where you want to write the information to
+    *           The location of the file where you want to write the information
+    *           to
     * @param allUsers
-    * 			A list of users 
+    *           A list of users
     */
 
    public void saveUserName(String filePath, MemberList allUsers) {
@@ -326,12 +327,13 @@ public class Database {
 
    /**
     * Starts Automatic Synchronisation
+    * 
     * @see createRefreshTimer
     */
    public void startAutoSync() {
       createRefreshTimer(REFRESH_SEC_DELAY, this);
    }
-   
+
    /**
     * Stops the Automatic Synchronisation
     */
@@ -349,9 +351,10 @@ public class Database {
 
    /**
     * Returns the current status of the db connection
+    * 
     * @return the current status of the connection
     */
-   
+
    public DbStatus getConnStatus() {
       if (this.currentStatus.toString().equals("CONNECTED")) {
          // TODO Execute 'pending sync'
@@ -362,7 +365,8 @@ public class Database {
 
    /**
     * Returns which window you are currently looking at
-    * @return the currently displayed window as a MainWindow type 
+    * 
+    * @return the currently displayed window as a MainWindow type
     */
    public MainWindow getHostWindow() {
       return this.hostWindow;
@@ -374,11 +378,12 @@ public class Database {
    public void getTasks() {
       getTasks("");
    }
-   
+
    /**
-    * This method get the tasks for the specific user 
+    * This method get the tasks for the specific user
+    * 
     * @param username
-    * 			the name of the user that you want to get the tasks of
+    *           the name of the user that you want to get the tasks of
     */
 
    public void getTasks(String username) {
@@ -441,7 +446,7 @@ public class Database {
       createRefreshTimer(REFRESH_SEC_DELAY, this);
 
    }
-   
+
    /**
     * Displays all the users from the Database
     */
@@ -452,7 +457,7 @@ public class Database {
 
       class MemberSync implements Runnable {
 
-    	  private Database parentDB;
+         private Database parentDB;
 
          public MemberSync(Database parentDatabase) {
             this.parentDB = parentDatabase;
@@ -493,6 +498,7 @@ public class Database {
 
    /**
     * Returns the length of time you have been connected as a long
+    * 
     * @return returns how long you have been connected to the db as a long
     */
    public long getConnTime() {
@@ -500,11 +506,14 @@ public class Database {
    }
 
    /**
-    * Sets the window you are currently looking as the host window for future reference
+    * Sets the window you are currently looking as the host window for future
+    * reference
+    * 
     * @param newWindow
-    * 			The window that has been opened i.e. what you are currently looking at
+    *           The window that has been opened i.e. what you are currently
+    *           looking at
     */
-   
+
    public void setHostWindow(MainWindow newWindow) {
       this.hostWindow = newWindow;
    }

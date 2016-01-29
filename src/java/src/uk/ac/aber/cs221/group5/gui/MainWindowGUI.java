@@ -38,8 +38,9 @@ import uk.ac.aber.cs221.group5.logic.TaskList;
 import uk.ac.aber.cs221.group5.logic.TaskStatuses;
 
 /**
- * This Class handles all of the GUI aspects of the Main Window. It dislpays all Tasks and gives the
- * user control to open other windows, such as the Edit Window and View Elements Window.
+ * This Class handles all of the GUI aspects of the Main Window. It dislpays all
+ * Tasks and gives the user control to open other windows, such as the Edit
+ * Window and View Elements Window.
  * 
  * @author Ben Dudley (bed19)
  * @author David Fairbrother (daf5)
@@ -93,8 +94,9 @@ public class MainWindowGUI {
 
    /**
     * Create the application.
-    * @param mainWindow 
-    * 				Referenced the GUI parent object
+    * 
+    * @param mainWindow
+    *           Referenced the GUI parent object
     * 
     */
    public MainWindowGUI(MainWindow mainWindow) {
