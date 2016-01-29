@@ -1,0 +1,63 @@
+//////////LOGIC INTERFACES//////////
+
+Database
+	private String URL, PortNo
+	private Connection connection
+	
+	String[] getDbUsernames(String tblName)
+	void saveUsernames (String filepath)
+	boolean connect()
+	boolean closeDbConn()
+	boolean getConnStatus()
+	
+	Task[] getTasks(String username)
+
+Task
+	private String taskID, taskName, taskStart, taskEnd, taskElements
+	private TaskStatuses, taskStatus
+	
+	String getTaskID()
+	String getTaskName()
+	String getTaskStart()
+	String getTaskEnd()
+	String getTaskElements()
+	TaskStatuses getTaskStatus()
+	
+	void setTaskStatus(TaskStatuses newStatus)
+	void setTaskElements(String newElemen
+	
+	void saveTask()
+	
+	boolean taskChanged()
+	
+Member
+	private String name, email
+	
+	String getName()
+	String getEmail()
+	
+	
+//////////GUI INTERFACES//////////
+		
+Window
+	void drawWindow(Dimension dimensions)
+	
+MainWindow
+	void populateTable(String filepath)
+	void quickView(Task[] selectedTasks)
+	void openEdit()
+	void openConnSettings()
+	void confirmExit()
+	
+ConnWindow
+	void displayConnStatus()
+	void getTimeSinceLastSync()
+	
+EditWindow(Task editTask)
+	void displayTask()
+	void updateTask(String filepath)
+	
+LoginWindow
+	void logIn(String username)
+	void openConnSettings()
+	

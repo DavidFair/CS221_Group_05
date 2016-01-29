@@ -3,6 +3,8 @@
 # Added and adapted gitignore from
 # http://www.bmchild.com/2012/06/git-ignore-for-java-eclipse-project.html
 
+*.txt
+
 # Directories #
 /build/
 /bin/
@@ -18,7 +20,8 @@ target/
 *.class
  
 # Package Files #
-*.jar
+#.jar commented out for pre-built MYSQL-JDBC Connector
+#*.jar
 *.war
 *.ear
 *.db
@@ -53,7 +56,6 @@ Desktop.ini
 ######################
  
 *.pydevproject
-.project
 .metadata
 bin/**
 tmp/**
@@ -62,11 +64,8 @@ tmp/**/*
 *.bak
 *.swp
 *~.nib
-local.properties
-.classpath
-.settings/
-.loadpath
 /src/main/resources/rebel.xml
+
 # External tool builders
 .externalToolBuilders/
  
@@ -88,6 +87,12 @@ local.properties
 workspace.xml
 error.txt
 /tmp/
+
+#Save files
+connSaveFile.txt
+memberSaveFile.txt
+taskSaveFile.txt
+
 
 ####--------------------End of java git ignore-----------------------
 #####################
