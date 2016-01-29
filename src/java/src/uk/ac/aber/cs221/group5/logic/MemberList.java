@@ -6,8 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import uk.ac.aber.cs221.group5.gui.MainWindow;
-
 public class MemberList {
    // TODO implement updating memberList
    private ArrayList<Members> memberList = new ArrayList<Members>();

@@ -3,8 +3,6 @@ package uk.ac.aber.cs221.group5.jUnit;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.Random;
-
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -12,9 +10,6 @@ import org.junit.Test;
 import uk.ac.aber.cs221.group5.gui.MainWindow;
 import uk.ac.aber.cs221.group5.logic.Database;
 import uk.ac.aber.cs221.group5.logic.DbStatus;
-import uk.ac.aber.cs221.group5.logic.Task;
-import uk.ac.aber.cs221.group5.logic.TaskList;
-import uk.ac.aber.cs221.group5.logic.Task.Element;
 
 public class DatabaseTest {
 

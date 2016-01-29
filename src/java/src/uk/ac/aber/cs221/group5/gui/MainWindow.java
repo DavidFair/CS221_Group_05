@@ -20,26 +20,20 @@ package uk.ac.aber.cs221.group5.gui;
 import java.awt.Frame;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
-import javax.swing.text.StyledEditorKit.ForegroundAction;
 
-import org.junit.experimental.theories.Theories;
-
-import uk.ac.aber.cs221.group5.logic.MemberList;
-import uk.ac.aber.cs221.group5.logic.Task;
-import uk.ac.aber.cs221.group5.logic.Task.Element;
-import uk.ac.aber.cs221.group5.logic.TaskList;
-import uk.ac.aber.cs221.group5.logic.TaskStatuses;
 import uk.ac.aber.cs221.group5.logic.Database;
 import uk.ac.aber.cs221.group5.logic.DbStatus;
+import uk.ac.aber.cs221.group5.logic.MemberList;
+import uk.ac.aber.cs221.group5.logic.Task;
+import uk.ac.aber.cs221.group5.logic.TaskList;
+import uk.ac.aber.cs221.group5.logic.TaskStatuses;
 
 public class MainWindow {
 

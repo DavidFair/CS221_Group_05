@@ -3,7 +3,7 @@
  */
 package uk.ac.aber.cs221.group5.jUnit;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.BeforeClass;

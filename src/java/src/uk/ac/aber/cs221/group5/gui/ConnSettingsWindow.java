@@ -4,12 +4,6 @@ import java.awt.Frame;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.AnnotatedArrayType;
-
-import org.junit.experimental.theories.Theories;
-import org.junit.internal.MethodSorter;
-
-import com.mysql.jdbc.Wrapper;
 
 import uk.ac.aber.cs221.group5.logic.DbStatus;
 

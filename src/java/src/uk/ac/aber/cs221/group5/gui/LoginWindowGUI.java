@@ -1,36 +1,28 @@
 package uk.ac.aber.cs221.group5.gui;
 
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
+import java.awt.Font;
 import java.awt.Frame;
-
-import javax.swing.JTextField;
-
-import uk.ac.aber.cs221.group5.logic.DbStatus;
-import uk.ac.aber.cs221.group5.logic.MemberList;
-
-import javax.swing.JButton;
-
-import java.awt.event.ActionListener;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.awt.event.ActionEvent;
-import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.Font;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
+import uk.ac.aber.cs221.group5.logic.DbStatus;
+import uk.ac.aber.cs221.group5.logic.MemberList;
 
 public class LoginWindowGUI {
 
