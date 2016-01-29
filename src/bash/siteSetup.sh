@@ -77,7 +77,11 @@ fi
 
 echo "Making folder path"
 mkdir -p $installPath 
+
 echo "Copying files"
 cp "TaskerMAN" $installPath -r
 
-find $installPath -type d -exec chmod 600 {} +
+cd $installPath
+find -name "*.php" -exec chmod 600 {} \;
+find -name "*.css" -exec chmod 644 {} \;
+
