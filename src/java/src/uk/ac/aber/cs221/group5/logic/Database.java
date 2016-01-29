@@ -158,7 +158,7 @@ public class Database {
 
 				} catch (SQLException e) {
 					parentWindow.displayError("Could not connect to database. " + "Please check connection settings"
-							+ "\nError: " + e.getCause(), "Connection Error");
+							+ "\nError: " + e.getClass(), "Connection Error");
 
 					// For use debugging
 					// Thread.dumpStack();

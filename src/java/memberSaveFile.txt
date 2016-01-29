@@ -1,4 +1,4 @@
-10
+11
 bed19@aber.ac.uk
 Ben Dudley
 daf5@aber.ac.uk
@@ -13,6 +13,8 @@ mac81@aber.ac.uk
 Maurice Corriette
 manager@example.com
 Nigel Hardy
+nonmanager@manager.com
+not a manager
 ole4@aber.ac.uk
 Oliver Earl
 testtodelete@example.com

@@ -29,6 +29,9 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+import javax.swing.text.StyledEditorKit.ForegroundAction;
+
+import org.junit.experimental.theories.Theories;
 
 import uk.ac.aber.cs221.group5.logic.MemberList;
 import uk.ac.aber.cs221.group5.logic.Task;
@@ -42,6 +45,7 @@ public class MainWindow {
 
 
 	private static MainWindowGUI childWindow;
+	private static LoginWindow loginWindow;
 
 
    private TaskList taskList     = new TaskList();
@@ -121,7 +125,7 @@ public class MainWindow {
 		
       childWindow.setVisible(false);
 		
-      LoginWindow loginWindow = new LoginWindow();
+      loginWindow = new LoginWindow();
       loginWindow.passMemberList(memberList);
       loginWindow.createWindow();
       loginWindow.setLabelGUI(databaseObj.getConnStatus());		
@@ -200,10 +204,17 @@ public class MainWindow {
          MainWindow.childWindow.setConnStatusLabel(connStatus);
       }
       
+      if (loginWindow != null){
+    	  loginWindow.setLabelGUI(connStatus);
+      }
+      
       if (connStatus == DbStatus.CONNECTED){
     	  readPendingTasks();
       }
-   }
+      
+      
+      
+    }
 	
    /**
     * Used to enable or disable the auto-sync timer.
