@@ -19,9 +19,13 @@ public class Members {
    private String email;
 
    /**
-    * The constructor for the Member Object. Sets the Member's name and email address.
-    * @param name The new Member's name.
-    * @param email The new Member's email address.
+    * The constructor for the Member Object. Sets the Member's name and email
+    * address.
+    * 
+    * @param name
+    *           The new Member's name.
+    * @param email
+    *           The new Member's email address.
     */
    public Members(String name, String email) {
       this.name = name;
@@ -30,7 +34,9 @@ public class Members {
 
    /**
     * Changes the Member's name.
-    * @param name The Member's new name.
+    * 
+    * @param name
+    *           The Member's new name.
     */
    public void setName(String name) {
       this.name = name;
@@ -38,7 +44,9 @@ public class Members {
 
    /**
     * Changes the Member's email address.
-    * @param email The Member's new email address.
+    * 
+    * @param email
+    *           The Member's new email address.
     */
    public void setEmail(String email) {
       this.email = email;
@@ -46,6 +54,7 @@ public class Members {
 
    /**
     * Gets the Member's saved name.
+    * 
     * @return The Member's name.
     */
    public String getName() {
@@ -54,6 +63,7 @@ public class Members {
 
    /**
     * Gets the Member's saved email address.
+    * 
     * @return The Member's email address.
     */
    public String getEmail() {
