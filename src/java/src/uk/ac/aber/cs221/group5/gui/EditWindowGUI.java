@@ -233,8 +233,8 @@ public class EditWindowGUI {
 		frmEditTask.getContentPane().add(txtEditComment, gbc_txtEditComment);
 		txtEditComment.setColumns(10);
 		
-		JButton btnEdit = new JButton("Edit");
-		btnEdit.addMouseListener(new MouseAdapter() {
+		JButton btnSubmit = new JButton("Submit");
+		btnSubmit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				int tableRow = table.getSelectedRow();
@@ -261,11 +261,11 @@ public class EditWindowGUI {
 				}
 			}
 		});
-		GridBagConstraints gbc_btnEdit = new GridBagConstraints();
-		gbc_btnEdit.insets = new Insets(0, 0, 5, 0);
-		gbc_btnEdit.gridx = 4;
-		gbc_btnEdit.gridy = 6;
-		frmEditTask.getContentPane().add(btnEdit, gbc_btnEdit);
+		GridBagConstraints gbc_btnSubmit = new GridBagConstraints();
+		gbc_btnSubmit.insets = new Insets(0, 0, 5, 0);
+		gbc_btnSubmit.gridx = 4;
+		gbc_btnSubmit.gridy = 6;
+		frmEditTask.getContentPane().add(btnSubmit, gbc_btnSubmit);
 		
 		JLabel lblTaskElements = new JLabel("Task Elements:");
 		lblTaskElements.setFont(new Font("Tahoma", Font.PLAIN, 18));
