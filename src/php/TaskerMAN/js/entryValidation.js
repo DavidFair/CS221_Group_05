@@ -373,7 +373,7 @@ function validateExtraElement()
 
     if (!(ASCIIregExp.test(taskComment)))
     {
-        alert("Invalid comment in task description.");
+        alert("Invalid comment in task comment.");
         return false;
     }
     return true;
