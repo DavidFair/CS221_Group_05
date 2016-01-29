@@ -8,8 +8,10 @@
  * @author David Fairbrother (daf5)
  * @author Jonathan Englund (jee17)
  * @author Josh Doyle (jod32)
+ * 
  * @version 1.0.0
  * @since 1.0.0
+ * 
  * @see MainWindowGUI
  * @see LoginWindow
  * @see ConnSettingsWindow

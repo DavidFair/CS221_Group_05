@@ -1,3 +1,17 @@
+/**
+ * This Class handles all of the GUI aspects of logging in to TaskerCLI. This includes displaying the
+ * Login Window GUI and updating all Components on that table.
+ * 
+ * @author Ben Dudley (bed19)
+ * @author David Fairbrother (daf5)
+ * @author Jonathan Englund (jee17)
+ * @author Josh Doyle (jod32)
+ * 
+ * @version 1.0.0
+ * @since 1.0.0
+ * 
+ */
+
 package uk.ac.aber.cs221.group5.gui;
 
 import java.awt.EventQueue;
@@ -32,7 +46,11 @@ public class LoginWindowGUI {
    private MemberList memberList;
 
    /**
-    * Create the application.
+    * Constructor for the LoginWindowGUI Object. This calls the initialize
+    * method, which displays the GUI for the Login Window, and sets up a
+    * TaskList for this Object.
+    * 
+    * @see initialize
     */
    public LoginWindowGUI() {
       initialize();
@@ -43,7 +61,6 @@ public class LoginWindowGUI {
     * Creates a new thread for the login window and sets that to visible through
     * the event queue
     * 
-    * @throws Exception
     */
    public void launchWindow() {
 
@@ -71,7 +88,8 @@ public class LoginWindowGUI {
    }
 
    /**
-    * Initialize the contents of the frame.
+    * Initialize the contents of the Frame. This positions all components in the
+    * Frame and displays the window.
     */
    private void initialize() {
       frmLogIn = new JFrame();
@@ -134,6 +152,8 @@ public class LoginWindowGUI {
             String enteredEmail = txtEmailField.getText();
 
             if (enteredEmail == "") {
+               // This evaluates True if the user did not enter anything into
+               // the email field
                JOptionPane.showMessageDialog(null, "Error: Login Failed - Please Enter an email address");
                return;
             }
@@ -143,6 +163,8 @@ public class LoginWindowGUI {
             Matcher matcher = pattern.matcher(enteredEmail);
             if (matcher.matches() == true) {
                if (memberList.memberExists(enteredEmail)) {
+                  // This for loop searches through all the Frames and shows the
+                  // Main Window when the user has been logged in.
                   for (Frame frame : JFrame.getFrames()) {
                      if (frame.getTitle().equals("Main Window")) {
                         frame.setVisible(true);
@@ -170,6 +192,8 @@ public class LoginWindowGUI {
       btnConnectionSettins.setFont(new Font("Tahoma", Font.PLAIN, 18));
       btnConnectionSettins.addMouseListener(new MouseAdapter() {
          @Override
+         // This event is triggered when the user clicks the 'Connection
+         // Settings' window
          public void mouseClicked(MouseEvent arg0) {
             ConnSettingsWindow connSettings = new ConnSettingsWindow(true);
          }
@@ -208,11 +232,20 @@ public class LoginWindowGUI {
       frmLogIn.getContentPane().add(btnCancel, gbc_btnCancel);
       btnCancel.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent arg0) {
-            System.exit(0); // Terminates the program
+            System.exit(0); // Terminates the program when the user clicks
+                            // 'Cancel' before logging in
          }
       });
    }
 
+   /**
+    * This method updates the Connection Status label on the Login Window with
+    * the Status value from the Main Window Object that was passed through the
+    * LoginWindow Object.
+    * 
+    * @param newStatus
+    *           The latest status from the Database
+    */
    public void setConnStatusLabel(DbStatus newStatus) {
       lblConnStatus.setText(newStatus.toString());
    }
