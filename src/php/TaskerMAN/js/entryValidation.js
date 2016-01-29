@@ -25,11 +25,11 @@ function validateEntry() {
     {
         alert("The task name is empty.");
         return false;
-    } else if (taskName.length > 20)
+    } else if (taskName.length > 40)
     {
         alert("The task name is too long.");
         return false;
-    } else if (taskName.length < 2)
+    } else if (taskName.length <= 2)
     {
         alert("The task name is too short.");
         return false;
@@ -45,7 +45,7 @@ function validateEntry() {
     {
         alert("End date is not in the correct format. Enter YYYY-MM-DD.");
         return false;
-    } else if (startDate.getDate > endDate.getDate)
+    } else if (startDate.getDate < endDate.getDate)
     {
         alert("Start date exists after the end date. Please readjust your dates.");
         return false;

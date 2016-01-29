@@ -12,7 +12,14 @@ if(!isset($_SESSION['login_auth']))
 <head>
     <?php include('meta.php'); ?>
     <title><?php echo APP_NAME . ' ' . APP_VER; ?></title>
-            </head>
+    <?php
+    if ($_SESSION['emailExists'])
+    {
+        echo "<script>alert('Email already exists! Please try another one.');</script>";
+        unset($_SESSION['emailExists']);
+    }
+    ?>
+</head>
 <body>
 <!-- Container -->
 <div class="container">
