@@ -1,6 +1,4 @@
 /*
-Resources:
-
 This resource proved extremely useful for the development of CSS3/HTML5 modal windows without scripting languages
 http://www.webdesignerdepot.com/2012/10/creating-a-modal-window-with-html5-and-css3/
 */
@@ -327,6 +325,7 @@ All class CSS
 	vertical-align:middle;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+	color: white;
 	}
 	
 .viewInput{

@@ -143,7 +143,7 @@ function isManager ($email, $db)
     }
     catch (PDOException $ex)
     {
-        errorHandler($ex->getMessage(),"Database Error",LOGFILE,timePrint());
+        errorHandler($ex->getMessage(),"User Has Insufficient Privileges",LOGFILE,timePrint());
         die();
     }
 }

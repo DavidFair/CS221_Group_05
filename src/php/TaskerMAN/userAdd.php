@@ -22,8 +22,8 @@
                         <option value="0">No</option>
                     </select><br/><br/>
                     
-                    <input name="submit" class="modalButton" type="submit" value="submit" />
-                    <input name="clear" class="modalButton" type="reset" value="clear" />
+                    <input name="submit" class="modalButton" type="submit" value="Submit" />
+                    <input name="clear" class="modalButton" type="reset" value="Clear" />
                 </fieldset>
             </form>
         </div>

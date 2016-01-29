@@ -75,17 +75,17 @@ if (isset($_GET['edit']))
 
                 <label for="edit_endDate" class="titles">End Date:</label>
                 <input value="<?php echo $endDate; ?>"name="edit_endDate" type="date" id="edit_endDate" class="addInput" required />
-				
+				<br/>
 
-                <label for="edit_taskStatus">Status</label>
+                <label for="edit_taskStatus" class="titles">Status:</label>
                 <select name="edit_taskStatus" class="addInput" id="edit_taskStatus">
                     <option <?php if ($status == 0) { echo 'selected'; }?> value="0">Abandoned</option>
                     <option <?php if ($status == 1) { echo 'selected'; }?> value="1">Allocated</option>
                     <option <?php if ($status == 1) { echo 'selected'; }?> value="2">Completed</option>
                 </select><br/><br/>
 
-                <input name="submit" class="modalButton" type="submit" value="submit"/>
-                <input name="clear" class="modalButton" type="reset" value="clear" />
+                <input name="submit" class="modalButton" type="submit" value="Submit"/>
+                <input name="clear" class="modalButton" type="reset" value="Clear" />
             </fieldset>
         </form>
     </div>
