@@ -48,9 +48,13 @@ public class EditWindowGUI {
    private JTextField txtElementName;
 
    /**
-    * Create the application.
+    * Create the application and spawn the GUI Window.
     * 
     * @throws IOException
+    *            if the Task File, which is used to populate the Task Elements
+    *            table, cannot be found or has been corrupted.
+    * 
+    * @see initialize
     */
    public EditWindowGUI(int row, MainWindow mainWindow) throws IOException {
       this.rowNo = row;
@@ -77,10 +81,10 @@ public class EditWindowGUI {
          @Override
          public void windowClosing(WindowEvent event) {
             main.setAutoTimer(true);
-            try{
-            	main.loadTasks(TASK_SAVE_PATH);
-            } catch (Exception e){
-            	e.printStackTrace();
+            try {
+               main.loadTasks(TASK_SAVE_PATH);
+            } catch (Exception e) {
+               e.printStackTrace();
             }
             frmEditTask.dispose();
          }
@@ -232,6 +236,7 @@ public class EditWindowGUI {
          @Override
          public void mouseClicked(MouseEvent arg0) {
             int tableRow = table.getSelectedRow();
+            // Check the length of the new Task Element Comment
             if (txtEditComment.getText().length() > 45) {
                main.displayError("Task Comments must be no longer than 45 characters.", "Data Error");
             } else {
@@ -239,18 +244,25 @@ public class EditWindowGUI {
                TaskList list = main.getTaskList();
                Task editTask = list.getTask(rowNo);
                uk.ac.aber.cs221.group5.logic.Task.Element editElement = editTask.getElement(tableRow);
+               // Update the Element with the new Comment entered into
+               // txtEditComment
                editElement.setComment(txtEditComment.getText());
                try {
+                  // Send the change to the Database
                   main.updateTask(editTask);
                   main.saveChange(TASK_SAVE_PATH);
                } catch (IOException e) {
                   // TODO Auto-generated catch block
                   e.printStackTrace();
                }
+               // Clear the table so the data can be updated
                model.setRowCount(0);
+               // Clear the edit fields to prevent IndexOutOfBounds exceptions
+               // if the user clicks 'Submit' again
                txtElementName.setText("");
                txtEditComment.setText("");
                try {
+                  // Update the table with the new Element
                   populateTable(rowNo);
                } catch (IOException e) {
                   // TODO Auto-generated catch block
@@ -290,6 +302,8 @@ public class EditWindowGUI {
          @Override
          public void mouseClicked(MouseEvent arg0) {
             if (table.getSelectedRow() > -1) {
+               // Update the edit Text Fields with the Description and Comment
+               // values of the currently selected Element
                txtElementName.setText((String) table.getValueAt(table.getSelectedRow(), 0));
                txtEditComment.setText((String) table.getValueAt(table.getSelectedRow(), 1));
 
@@ -309,10 +323,10 @@ public class EditWindowGUI {
             // concurrency issues.
             try {
                main.updateLocalFiles(TASK_SAVE_PATH);
-               try{
-               	main.loadTasks(TASK_SAVE_PATH);
-               } catch (Exception e){
-               	e.printStackTrace();
+               try {
+                  main.loadTasks(TASK_SAVE_PATH);
+               } catch (Exception e) {
+                  e.printStackTrace();
                }
             } catch (Exception e) {
                main.displayError("Could not downlad Task data.", "Connection Error");
@@ -361,6 +375,21 @@ public class EditWindowGUI {
 
    }
 
+   /**
+    * Assigns the values of the attributes of the Task that was selected from
+    * the Main Window to the text fields in Edit Window GUI
+    * 
+    * @param name
+    *           The name of the Task that was selected to be edited
+    * @param status
+    *           The status of the Task that was selected to be edited
+    * @param assigned
+    *           The Member assigned to the Task that was selected to be edited
+    * @param start
+    *           The start date of the Task that was selected to be edited
+    * @param end
+    *           The expected end date of the Task that was selected to be edited
+    */
    public void setFields(String name, TaskStatuses status, String assigned, String start, String end) {
       txtTaskName.setText(name);
       txtAssignedTaskMembers.setText(assigned);
@@ -371,6 +400,16 @@ public class EditWindowGUI {
       frmEditTask.setVisible(true);
    }
 
+   /**
+    * Adds the Task's Element data to the table in the Edit Window GUI.
+    * 
+    * @param tableIndex
+    *           The position in the TaskList of the Task that has been selected
+    *           for editing
+    * @throws IOException
+    *            if the local Task save file can not be found or has been
+    *            corrupted.
+    */
    public void populateTable(int tableIndex) throws IOException {
       int selectionIndex; // The index in the table that was selected in main
                           // window
@@ -398,6 +437,9 @@ public class EditWindowGUI {
 
    }
 
+   /**
+    * Updates the local files with edited Task data
+    */
    private void updateLocalFiles() {
       main.updateLocalFiles(TASK_SAVE_PATH);
    }

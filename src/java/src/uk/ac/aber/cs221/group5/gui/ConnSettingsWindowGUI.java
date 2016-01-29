@@ -45,6 +45,8 @@ public class ConnSettingsWindowGUI {
 
    /**
     * Creates the GUI window
+    * 
+    * @see initialize
     */
    public ConnSettingsWindowGUI() {
       initialize();
@@ -178,6 +180,7 @@ public class ConnSettingsWindowGUI {
       txtPortNo.setFont(new Font("Tahoma", Font.PLAIN, 18));
       txtPortNo.addFocusListener(new FocusAdapter() {
          @Override
+         // Clears the Default Text when the user clicks on the text field
          public void focusGained(FocusEvent arg0) {
             txtPortNo.setText("");
          }
@@ -196,6 +199,7 @@ public class ConnSettingsWindowGUI {
       btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 18));
       btnCancel.addMouseListener(new MouseAdapter() {
          @Override
+         // Get rid of the window when the user clicks on the Cancel button
          public void mouseClicked(MouseEvent arg0) {
             frmConnectionSettings.dispose(); // Just close the window without
                                              // saving any settings
