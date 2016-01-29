@@ -172,6 +172,7 @@ public class Database {
 
                // Reset state
                parentDb.currentStatus = DbStatus.DISCONNECTED;
+               hostWindow.setConnStatus(currentStatus);
 
             }
 
