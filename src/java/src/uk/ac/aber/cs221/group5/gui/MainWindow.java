@@ -633,6 +633,19 @@ public TaskList getTaskList() {
    }
 
    /**
+    * Reloads the Table in the Main Window GUI to show changes to Tasks
+    */
+   public void refreshGUI() {
+      try {
+         this.childWindow.populateTable(this.taskList);
+      } catch (NumberFormatException e) {
+         this.displayError("Could not read Tasks File.", "Loading Error");
+      } catch (IOException e) {
+         this.displayError("Could not read Tasks File", "Loading Error");
+      }
+   }
+
+   /**
     * Erases the content of a file.
     * 
     * @param filePath
@@ -863,17 +876,18 @@ public TaskList getTaskList() {
     */
    private ArrayList<String> getElementIndexes(String indexes) {
 
-	   ArrayList<String> convertedIndexes = new ArrayList<String>();
-	   
-	   //Used from http://stackoverflow.com/questions/7488643/how-to-convert-comma-separated-string-to-arraylist
-	   String[] splitIndexes = indexes.split("\\s*,\\s*");
-	   
-	   for (String index: splitIndexes){
-		   convertedIndexes.add(index);
-	   }
-	   
-	   return convertedIndexes;
-	   
+      ArrayList<String> convertedIndexes = new ArrayList<String>();
+
+      // Used from
+      // http://stackoverflow.com/questions/7488643/how-to-convert-comma-separated-string-to-arraylist
+      String[] splitIndexes = indexes.split("\\s*,\\s*");
+
+      for (String index : splitIndexes) {
+         convertedIndexes.add(index);
+      }
+
+      return convertedIndexes;
+
    }
-   
+
 }
