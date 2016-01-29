@@ -238,27 +238,33 @@ public class EditWindowGUI {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				int tableRow = table.getSelectedRow();
-				DefaultTableModel model = (DefaultTableModel) table.getModel();
-				TaskList list = main.getTaskList();
-				Task editTask = list.getTask(rowNo);
-				uk.ac.aber.cs221.group5.logic.Task.Element editElement = editTask.getElement(tableRow);
-				editElement.setComment(txtEditComment.getText());
-				try {
-					main.updateTask(editTask);
-					main.saveChange(TASK_SAVE_PATH);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				if(txtEditComment.getText().length() > 45){
+					main.displayError("Task Comments must be no longer than 45 characters.", "Data Error");
 				}
-				model.setRowCount(0);
-				txtElementName.setText("");
-				txtEditComment.setText("");
-				try {
-					populateTable(rowNo);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				else{
+					DefaultTableModel model = (DefaultTableModel) table.getModel();
+					TaskList list = main.getTaskList();
+					Task editTask = list.getTask(rowNo);
+					uk.ac.aber.cs221.group5.logic.Task.Element editElement = editTask.getElement(tableRow);
+					editElement.setComment(txtEditComment.getText());
+					try {
+						main.updateTask(editTask);
+						main.saveChange(TASK_SAVE_PATH);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					model.setRowCount(0);
+					txtElementName.setText("");
+					txtEditComment.setText("");
+					try {
+						populateTable(rowNo);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
+				
 			}
 		});
 		GridBagConstraints gbc_btnSubmit = new GridBagConstraints();
