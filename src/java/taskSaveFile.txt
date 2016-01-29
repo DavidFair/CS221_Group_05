@@ -1,4 +1,4 @@
-26
+27
 3
 0
 ,|
@@ -206,4 +206,12 @@ Shell scripting
 Allocated
 yil16@aber.ac.uk
 2015-12-21
+2016-01-29
+30
+0
+,|
+Project packaging
+Completed
+kir12@aber.ac.uk
+2016-01-25
 2016-01-29
