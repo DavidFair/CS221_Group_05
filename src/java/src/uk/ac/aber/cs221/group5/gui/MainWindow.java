@@ -128,7 +128,14 @@ public class MainWindow {
 	}
 
 
-	
+	/**
+	 * Reads the saved connection settings from the Database Configuration file and attempts to connect to the Database using those settings.
+	 * @param dbFile The filepath of the Database Configuration file.
+	 * 
+	 * @throws IOException if the Database Configuration file cannot be found.
+	 * 
+	 * @see callConnectOnDb
+	 */
 	private static void readConfigToDb(String dbFile) throws IOException {
 		FileReader fileReader;
 		try {
@@ -155,13 +162,26 @@ public class MainWindow {
 			e.printStackTrace();
 		}
 	}
-     
+	
+    /**
+     * Calls the connect method in the Database Object. 
+     * @param url The URL of the database that TaskerCLI is attempting to connect to.
+     * @param dbPort The Port Number being used to connect to the Database.
+     * @param dbUsername The Username for the database that TaskerCLI is attempting to connect to.
+     * @param dbPassword The Password for the database that TaskerCLI is attempting to connect to.
+     * @param dbName The name of the Database that TaskerCLI is attempting to connect to.
+     * 
+     * @see readConfigToDb
+     */
 	public static void callConnectOnDb(String url, String dbPort, String dbUsername, String dbPassword, String dbName) {
 		databaseObj.connect(url, dbPort, dbUsername, dbPassword, dbName);
 	}
 	
 	
-
+	/**
+	 * Checks if the GUI Window for the MainWindow exists. This enables creation of multiple MainWindow Objects without spawning multiple GUI Windows.
+	 * @return Whether or not the Main Window GUI has been created.
+	 */
 	private boolean doesGUIExist() {
 		for (Frame frame : Frame.getFrames()) {
 			if (frame.getTitle().equals("Main Window")) {
@@ -170,13 +190,21 @@ public class MainWindow {
 		}
 		return false;
 	}
-
+	
+	/**
+	 * Sets the value of the Connection Status indicator label in the Main Window GUI
+	 * @param connStatus The current connection status of the Database.
+	 */
 	public void setConnStatus(DbStatus connStatus) {
 		if (childWindow!= null){
 			MainWindow.childWindow.setConnStatusLabel(connStatus);
 		}
 	}
 	
+	/**
+	 * Used to enable or disable the auto-sync timer.
+	 * @param timerState The Boolean state of the auto-syn timer.
+	 */
 	public void setAutoTimer(boolean timerState){
 		if(timerState){
 			databaseObj.startAutoSync();
@@ -187,20 +215,35 @@ public class MainWindow {
 		
 	}
 
+	/**
+	 * Gets the connection status from the Database Object.
+	 * @return The connection status of the Database.
+	 */
 	public static DbStatus getConnStatus() {
 		return databaseObj.getConnStatus();
 	}
 
+	/**
+	 * Gets the System Time of when TaskerCLI last synced with the Database.
+	 * @return The System Time of when TaskerCLI last synced with the Database/
+	 */
 	public static long getConnTime() {
 		return MainWindow.connTime;
 	}
 
+	/**
+	 * Constructor for the MainWindow Class.
+	 */
 	public MainWindow() {
 		// Setup common window features
 		super();
 
 	}
 	
+	/**
+	 * Links the Database Object with this MainWindow Object
+	 * @param main The MainWindow Object to link with the Database Object.
+	 */
 	public void attachMainWindowToDb(MainWindow main){
 		if (databaseObj != null) {
 			databaseObj.setHostWindow(main);
@@ -210,7 +253,15 @@ public class MainWindow {
 		
 	}
 
-	
+	/**
+	 * Creates a Main Window GUI Window. This method also downloads Tasks from the Database or, failing that, loads a previous version of the TaskList from the local save file.
+	 * 
+	 * @see saveChange
+	 * @see loadTasks
+	 * @see displayWarning
+	 * @see displayError
+	 * @see blankFile
+	 */
 	public void createWindow() {
 		// Get a new child window for super class
 		childWindow = new MainWindowGUI(this);
@@ -250,66 +301,46 @@ public class MainWindow {
 		childWindow.setConnStatusLabel(databaseObj.getConnStatus());
 	}
 
+	/**
+	 * Ensures the connection to the Database is closed. Called at each exit point of TaskerCLI to avoid dangling connections on the server side.
+	 */
 	public void destroyWindow() {
 		databaseObj.closeDbConn();
 
 	}
 	
+	/**
+	 * Updates a Task in the Database with a new Task.
+	 * @param updatedTask The Task to update on the Database.
+	 */
 	public void updateTask(Task updatedTask){
 		databaseObj.updateDbTask(updatedTask);
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * uk.ac.aber.cs221.group5.logic.WindowInterface#setTitleText(java.lang.
-	 * String)
+	
+	/**
+	 * Displays a standardised error dialogue pop-up.
+	 * @param errorText The error text to display.
+	 * @param errorType The title of the error dialogue pop-up.
 	 */
-	
-	
-		// TODO Auto-generated method stub
-
-	
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * uk.ac.aber.cs221.group5.logic.WindowInterface#displayError(java.lang.
-	 * String)
-	 */
-	
 	public void displayError(String errorText, String errorType) {
 		JOptionPane.showMessageDialog(null, errorText, errorType, JOptionPane.ERROR_MESSAGE);
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * uk.ac.aber.cs221.group5.logic.WindowInterface#displayWarning(java.lang.
-	 * String)
+	/**
+	 * Displays a standardised errir dialogue pop-up.
+	 * @param warnText The warning text to display.
 	 */
-	
 	public void displayWarning(String warnText) {
 		JOptionPane.showMessageDialog(null, warnText, "Warning", JOptionPane.WARNING_MESSAGE);
-
 	}
 
-	/*
-	 * public TaskList getTaskList(){ return this.taskList; //TODO check if
-	 * table is displaying }
+	/**
+	 * Loads the Tasks from the local save file into the TaskList held by this MainWindow Object.
+	 * @param filename The filename of the Tasks Save File.
 	 * 
-	 * public void setTaskList (TaskList list) { this.taskList = list; }
-	 * 
-	 * public MemberList getMemberList(){ return this.memberList; } public void
-	 * setMemberList (MemberList list){ this.memberList = list;
-	 * 
-	 * }
+	 * @throws Exception if the Tasks Save File cannot be found or is corrupted.
 	 */
-
 	public void loadTasks(String filename) throws Exception {
 		FileReader fileReader = new FileReader(filename);
 		BufferedReader read = new BufferedReader(fileReader);
@@ -374,6 +405,12 @@ public class MainWindow {
 		}
 	}
 
+	/**
+	 * Saves all Tasks from the TaskList held by this MainWindow Object to the local Tasks save file.
+	 * @param filename The filename of the local Tasks save file.
+	 * 
+	 * @throws IOException if the local Tasks save file cannot be found.
+	 */
 	public void saveChange(String filename) throws IOException {
 		ArrayList<uk.ac.aber.cs221.group5.logic.Task.Element> elements;
 		Task writeTask;
@@ -413,6 +450,12 @@ public class MainWindow {
 		fileWriter.close();
 	}
 	
+	/**
+	 * Writes tasks that cannot be sent to the Database to a 'Pending Tasks' file for them to be sent to the Database at a later time.
+	 * @param pendingTask The Task that could not be sent to the Database.
+	 * 
+	 * @throws IOException if the 'Pending Tasks' file cannot be found.
+	 */
 	public void writePendingTask(Task pendingTask) throws IOException{
 		FileWriter fileWriter = new FileWriter(PENDING_SAVE_PATH, true);
 		BufferedWriter write = new BufferedWriter(fileWriter);
@@ -440,12 +483,22 @@ public class MainWindow {
 		write.write(pendingTask.getEnd() + "\n");
 	}
 
+	/**
+	 * Updates the local save files with data downloaded from the Database
+	 * @param taskFile
+	 */
 	public void updateLocalFiles(String taskFile) {
 		databaseObj.getTasks("");
 	}
 
 	//// Methods to deal with loading Task Elements
 
+	/**
+	 * Returns Description-Comment pairs for the Elements associated with a single Task.
+	 * @param tableIndex The position of the Task in the Table in the MainWindow GUI. This is also the index of Task in the TaskList of this MainWindow Object.
+	 * 
+	 * @return Returns an ArrayList of Description-Comment Pairs for all of the Elements associated with a single Task.
+	 */
 	public ArrayList<String[]> getElements(int tableIndex) {
 		ArrayList<String[]> elementPairs;
 
@@ -460,6 +513,10 @@ public class MainWindow {
 		return elementPairs;
 	}
 
+	/**
+	 * Erases the content of a file.
+	 * @param filePath The path of the file to be erased.
+	 */
 	private void blankFile(String filePath) {
 
 		try {
@@ -472,6 +529,15 @@ public class MainWindow {
 
 	}
 
+	/**
+	 * Returns Description-Comment pairs for the Elements associated with a single Task, loaded from the local Tasks save file.
+	 * @param filename The filename of the local Tasks save file.
+	 * @param tableIndex The number of the Task in the Main Window GUI Table. This is also the ordering of the selected Task in the local Tasks save file.
+	 * 
+	 * @return An ArrayList of Description-Comment pairs for the Elements associated with a single Task, loaded from the local Tasks save file.
+	 * 
+	 * @throws IOException if the local Tasks save file is not found.
+	 */
 	public ArrayList<String[]> getElementsLocal(String filename, int tableIndex) throws IOException {
 		ArrayList<String[]> elements = new ArrayList<String[]>();
 		int elementLine = (7 * tableIndex) + 1; // Finds the line in the file
@@ -509,6 +575,12 @@ public class MainWindow {
 		return elements;
 	}
 
+	/**
+	 * Seperates a single Description-Comment pair so they can be added to the Task as an Element.
+	 * @param fileLine The line from the local save file containing the Description and the Comment.
+	 * 
+	 * @return Returns the seperated Description-Comment pair.
+	 */
 	private String[] seperateElement(String fileLine) {
 		String elementName = new String();
 		String elementComment = new String();
@@ -538,10 +610,14 @@ public class MainWindow {
 		return elementPair;
 
 	}
-
-	// Once a pair is loaded from the file, it is removed from the line so the
-	// next to be loaded always starts
-	// at position 0
+	
+	/**
+	 * Once a Description-Comment pair for an Element is loaded from the file, it is removed from the line
+	 * so the next pair to be loaded will always start at position 0.
+	 * @param fileLine The line from the local save file containing the unseperated Description-Comment pair(s) for an Element.
+	 * 
+	 * @return The line from the local save file with the first Description-Comment pair removed.
+	 */
 	private String removePair(String fileLine) {
 		char[] fileLineChar;
 		fileLineChar = fileLine.toCharArray();
@@ -565,7 +641,15 @@ public class MainWindow {
 		return trimmed;
 	}
 
-	// Returns a single Task's elements without any editing
+	/**
+	 * Gets the unedited Element data for a single Task from the local Tasks save file. 
+	 * @param filename The filename of the local Tasks save file.
+	 * 
+	 * @return The Element Data for a single task straight from the local Tasks save file.
+	 * 
+	 * @throws NumberFormatException if the local Tasks save file has been corrupted. 
+	 * @throws IOException if the local Tasks save file cannot be located.
+	 */
 	private ArrayList<String> getUneditedElements(String filename) throws NumberFormatException, IOException {
 		ArrayList<String> elements = new ArrayList<String>();
 		FileReader fileReader = new FileReader(filename);
@@ -587,10 +671,15 @@ public class MainWindow {
 		return elements;
 	}
 
-	// Gets the System time from the Database of when it was last connected
 
 	
 ////Methods for dealing with Task Element IDs
+	/**
+	 * Extracts the unique identifiers for each Element in a Task from the local Tasks save file.
+	 * @param indexes The line from the local save file that contains the unique Element identifiers.
+	 * 
+	 * @return An ArrayList of all the unique identifiers for the Elements of the Task, with all file formatting removed.
+	 */
 	private ArrayList<String> getElementIndexes(String indexes){
 		ArrayList<String> extractedIndexes = new ArrayList<String>();
 		
