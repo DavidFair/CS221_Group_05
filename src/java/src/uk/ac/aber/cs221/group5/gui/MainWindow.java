@@ -137,7 +137,7 @@ public class MainWindow {
 
       childWindow.setVisible(false);
 
-      LoginWindow loginWindow = new LoginWindow();
+      loginWindow = new LoginWindow();
 
       loginWindow.passMemberList(memberList);
       loginWindow.createWindow();

@@ -35,7 +35,7 @@ ole4@aber.ac.uk
 5,
 Status of task,In progreserino|
 Java GUI implementat
-Allocated
+Completed
 jod32@aber.ac.uk
 2016-01-25
 2016-01-29
