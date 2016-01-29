@@ -383,7 +383,7 @@ public class MainWindow {
    }
 
    /**
-    * Displays a standardised errir dialogue pop-up.
+    * Displays a standardised warning dialogue pop-up.
     * 
     * @param warnText
     *           The warning text to display.
