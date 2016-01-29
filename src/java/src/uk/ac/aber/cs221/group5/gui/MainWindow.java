@@ -456,7 +456,12 @@ public class MainWindow {
 			FileReader fileReader = new FileReader(PENDING_SAVE_PATH);
 			BufferedReader read = new BufferedReader(fileReader);
 			
-			int numOfTasks = Integer.parseInt(read.readLine());
+			String firstLine = read.readLine();
+			if (firstLine.equals("")){
+				return; //File is blank
+			}
+			
+			int numOfTasks = Integer.parseInt(firstLine);
 			for (int i=0; i < numOfTasks; i++){
 			//Read the indexs into an array of elementIndexes
 			ArrayList<String> elementIndexes = getElementIndexes(read.readLine());
@@ -485,11 +490,11 @@ public class MainWindow {
 			
 					
 			
-		} catch (IOException e){
-		
+		} catch (Exception e){
+			blankFile(PENDING_SAVE_PATH);
 		}
 		
-		blankFile(PENDING_SAVE_PATH);
+		
 	}
 	
 	/**
