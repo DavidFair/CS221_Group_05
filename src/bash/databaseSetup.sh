@@ -288,11 +288,11 @@ fi
 
 if [ "$skipUsers"  != TRUE ]
 then
-string="CREATE TABLE \`tbl_users\` ( \`Email\` VARCHAR(20) NOT NULL, \`FirstName\` VARCHAR(15) NOT NULL, \`LastName\` VARCHAR(15) NOT NULL, \`IsManager\` INT NOT NULL, PRIMARY KEY (\`Email\`));"
+string="CREATE TABLE \`tbl_users\` ( \`Email\` VARCHAR(45) NOT NULL, \`FirstName\` VARCHAR(15) NOT NULL, \`LastName\` VARCHAR(15) NOT NULL, \`IsManager\` INT NOT NULL, PRIMARY KEY (\`Email\`));"
   echo "Creating Users Table"
   do_query "$string"
   
- string="INSERT INTO \`tbl_users\` (\`Email\`, \`FirstName\`, \`LastName\`, \`isManager\`) VALUES ('manager@example.com', 'A', 'S', '1');"
+ string="INSERT INTO \`tbl_users\` (\`Email\`, \`FirstName\`, \`LastName\`, \`isManager\`) VALUES ('manager@example.com', 'Aa', 'Bb', '1');"
  echo "Adding manager@example to users table"
  do_query "$string"
   
@@ -302,7 +302,7 @@ fi
 
 if [ "$skipTasks" != TRUE ]
 then
-string="CREATE TABLE \`tbl_tasks\` ( \`TaskID\` INT NOT NULL AUTO_INCREMENT, \`TaskName\` VARCHAR(45) NOT NULL, \`StartDate\` DATE NOT NULL, \`EndDate\` DATE NOT NULL, \`Status\` INT NOT NULL, \`TaskOwner\` VARCHAR(20) NULL, PRIMARY KEY (\`TaskID\`), INDEX \`TaskOwner_idx\` (\`TaskOwner\` ASC), CONSTRAINT \`TaskAssigned\` FOREIGN KEY (\`TaskOwner\`) REFERENCES \`tbl_users\` (\`Email\`) ON DELETE NO ACTION ON UPDATE NO ACTION);"
+string="CREATE TABLE \`tbl_tasks\` ( \`TaskID\` INT NOT NULL AUTO_INCREMENT, \`TaskName\` VARCHAR(45) NOT NULL, \`StartDate\` DATE NOT NULL, \`EndDate\` DATE NOT NULL, \`Status\` INT NOT NULL, \`TaskOwner\` VARCHAR(45) NULL, PRIMARY KEY (\`TaskID\`), INDEX \`TaskOwner_idx\` (\`TaskOwner\` ASC), CONSTRAINT \`TaskAssigned\` FOREIGN KEY (\`TaskOwner\`) REFERENCES \`tbl_users\` (\`Email\`) ON DELETE NO ACTION ON UPDATE NO ACTION);"
 	echo "Creating Tasks Table"
 	do_query "$string"
 fi
