@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-5
-=======
 7
->>>>>>> Refactored comment loading, implemented reading pending files...etc
 1
 1,
 what not to do,break the c|
@@ -37,15 +33,9 @@ ole4@aber.ac.uk
 2016-01-29
 5
 5,
-<<<<<<< HEAD
-Status of task,In progress|
-Java GUI implementat
-Allocated
-=======
 Status of task,In progreserino|
 Java GUI implementat
 Abandoned
->>>>>>> Refactored comment loading, implemented reading pending files...etc
 jod32@aber.ac.uk
 2016-01-25
 2016-01-29

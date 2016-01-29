@@ -2,8 +2,11 @@ package uk.ac.aber.cs221.group5.logic;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import uk.ac.aber.cs221.group5.gui.MainWindow;
 
 public class MemberList {
 	//TODO implement updating memberList
@@ -22,6 +25,7 @@ public class MemberList {
 	}
 	
 	public void loadMembers(String filename) throws NumberFormatException, IOException{
+		try{
 		FileReader fileReader = new FileReader(filename);
 		BufferedReader read = new BufferedReader(fileReader);
 		String memberName;
@@ -34,6 +38,12 @@ public class MemberList {
 			memberList.add(member);
 		}
 		read.close();
+		} catch (Exception e){
+			FileWriter blankFile = new FileWriter(filename, true);
+			blankFile.write("");
+			blankFile.close();
+			
+		}
 	}
 	
 	public boolean memberExists(String email){

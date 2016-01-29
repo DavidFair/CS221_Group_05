@@ -377,36 +377,14 @@ public class MainWindow {
 				for (String[] processed : elementCommentPairs){
 					task.addElement(processed[0], processed[1], extractedElementIds.get(elementNum));
 				}
-				
-				/*if (!elements.equals(",|")) {
-					String elementPair[] = { "", "" };
-					while (elementPair != null) {
-						if(elements.length() > 2){	//Evaluates true if the element has something in it other than the seperator characters
-							if(elements.charAt(0) == '|'){
-								elements = elements.substring(1);	//Remove the element seperator character from the begining of the elements
-							}
-							elementPair[0] = elements.substring(0, elements.indexOf(","));
-							elementPair[1] = elements.substring(elements.indexOf(",") + 1, elements.indexOf("|")); //Exception on this line
-							task.addElement(elementPair[0], elementPair[1], extractedElementIds.get(elementNum));
-							elementNum++;
-							elements = removePair(elements);
-						}
-						else{
-							newList.addTask(task);
-							elementPair = null;
-						}
-					}
-				} else{
-					newList.addTask(task);
-				}
-				*/
+				newList.addTask(task);
 				
 			}
 			read.close();
 			this.taskList = newList;
 		} catch (Exception e) {
 			read.close();
-			e.printStackTrace();
+			//e.printStackTrace();
 			throw e;
 		}
 	}

@@ -1,19 +1,8 @@
-<<<<<<< HEAD
-11
-=======
-12
->>>>>>> Refactored comment loading, implemented reading pending files...etc
+10
 bed19@aber.ac.uk
 Ben Dudley
 daf5@aber.ac.uk
 David Fairbrother
-<<<<<<< HEAD
-firstblackprez@bossniggas.com
-Barack Obama
-=======
-ilolatyou@example.com
-r k
->>>>>>> Refactored comment loading, implemented reading pending files...etc
 jee17@aber.ac.uk
 Jonothan  Englund
 jod32@aber.ac.uk
@@ -26,12 +15,7 @@ manager@example.com
 Nigel Hardy
 ole4@aber.ac.uk
 Oliver Earl
-<<<<<<< HEAD
-=======
 testtodelete@example.com
 delete me
->>>>>>> Refactored comment loading, implemented reading pending files...etc
 tma1@aber.ac.uk
 Tim Anderson
-yes@aber.ac.uk
-ole d
