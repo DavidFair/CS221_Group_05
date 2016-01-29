@@ -15,9 +15,9 @@ manager@example.com
 Nigel Hardy
 nonmanager@manager.com
 not a manager
+o@f.com
+srfre sw
 ole4@aber.ac.uk
 Oliver Earl
-testtodelete@example.com
-delete me
 tma1@aber.ac.uk
 Tim Anderson

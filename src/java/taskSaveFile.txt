@@ -1,9 +1,9 @@
-7
+5
 1
 1,
 what not to do,break the cad|
 123456
-Completed
+Allocated
 mac81@aber.ac.uk
 2016-01-20
 2016-01-30
@@ -17,7 +17,7 @@ daf5@aber.ac.uk
 2015-11-13
 3
 3,
-Status of task,version 1.0 |
+Status of task,version 5.0|
 Test specification
 Completed
 mac81@aber.ac.uk
@@ -35,23 +35,7 @@ ole4@aber.ac.uk
 5,
 Status of task,In progreserino|
 Java GUI implementat
-Abandoned
+Allocated
 jod32@aber.ac.uk
 2016-01-25
 2016-01-29
-6
-7,
-please,delete me|
-taskttestdelete
-Abandoned
-testtodelete@example.com
-2016-01-05
-2016-01-20
-7
-8,
-delete,me|
-deletetask
-Abandoned
-testtodelete@example.com
-2016-01-05
-2016-01-12

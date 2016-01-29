@@ -122,7 +122,7 @@ public class MainWindowGUI {
       });
       frmMainWindow.setTitle("Main Window");
       frmMainWindow.setResizable(false);
-      frmMainWindow.setBounds(100, 100, 926, 686);
+      frmMainWindow.setBounds(100, 100, 926, 720);
       frmMainWindow.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
       frmMainWindow.addWindowListener(new WindowAdapter() {
          @Override
@@ -132,18 +132,18 @@ public class MainWindowGUI {
          }
       });
       GridBagLayout gridBagLayout = new GridBagLayout();
-      gridBagLayout.columnWidths = new int[] { 0, 0, 0 };
-      gridBagLayout.rowHeights = new int[] { 0, 0, 0 };
-      gridBagLayout.columnWeights = new double[] { 1.0, 0.0, Double.MIN_VALUE };
-      gridBagLayout.rowWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
+      gridBagLayout.columnWidths = new int[] { 559, 356, 0 };
+      gridBagLayout.rowHeights = new int[] { 291, 0, 384, 0 };
+      gridBagLayout.columnWeights = new double[] { 0.0, 0.0, Double.MIN_VALUE };
+      gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
       frmMainWindow.getContentPane().setLayout(gridBagLayout);
 
       JPanel quickViewPanel = new JPanel();
       quickViewPanel
             .setBorder(new TitledBorder(null, "Quick View", TitledBorder.LEADING, TitledBorder.TOP, null, null));
       GridBagConstraints gbc_quickViewPanel = new GridBagConstraints();
-      gbc_quickViewPanel.insets = new Insets(0, 0, 5, 5);
       gbc_quickViewPanel.fill = GridBagConstraints.BOTH;
+      gbc_quickViewPanel.insets = new Insets(0, 0, 5, 5);
       gbc_quickViewPanel.gridx = 0;
       gbc_quickViewPanel.gridy = 0;
       frmMainWindow.getContentPane().add(quickViewPanel, gbc_quickViewPanel);
@@ -322,9 +322,9 @@ public class MainWindowGUI {
       connSettingsPanel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Connection Status",
             TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
       GridBagConstraints gbc_connSettingsPanel = new GridBagConstraints();
+      gbc_connSettingsPanel.anchor = GridBagConstraints.NORTH;
       gbc_connSettingsPanel.fill = GridBagConstraints.HORIZONTAL;
       gbc_connSettingsPanel.insets = new Insets(0, 0, 5, 0);
-      gbc_connSettingsPanel.anchor = GridBagConstraints.NORTH;
       gbc_connSettingsPanel.gridx = 1;
       gbc_connSettingsPanel.gridy = 0;
       frmMainWindow.getContentPane().add(connSettingsPanel, gbc_connSettingsPanel);
@@ -364,14 +364,33 @@ public class MainWindowGUI {
       gbc_btnConnectionSettings.gridy = 1;
       connSettingsPanel.add(btnConnectionSettings, gbc_btnConnectionSettings);
 
+      JButton btnLogOut = new JButton("Log Out");
+      btnLogOut.addMouseListener(new MouseAdapter() {
+         @Override
+         public void mouseClicked(MouseEvent arg0) {
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?", "Confirmation",
+                  dialogButton);
+            if (dialogResult == JOptionPane.YES_OPTION) {
+               main.destroyWindow();
+               System.exit(0);
+            }
+         }
+      });
+      GridBagConstraints gbc_btnLogOut = new GridBagConstraints();
+      gbc_btnLogOut.gridwidth = 2;
+      gbc_btnLogOut.insets = new Insets(0, 0, 5, 0);
+      gbc_btnLogOut.gridx = 0;
+      gbc_btnLogOut.gridy = 1;
+      frmMainWindow.getContentPane().add(btnLogOut, gbc_btnLogOut);
+
       JPanel panel = new JPanel();
       panel.setBorder(new TitledBorder(null, "Task Table", TitledBorder.LEADING, TitledBorder.TOP, null, null));
       GridBagConstraints gbc_panel = new GridBagConstraints();
-      gbc_panel.gridwidth = 2;
-      gbc_panel.insets = new Insets(0, 0, 0, 5);
       gbc_panel.fill = GridBagConstraints.BOTH;
+      gbc_panel.gridwidth = 2;
       gbc_panel.gridx = 0;
-      gbc_panel.gridy = 1;
+      gbc_panel.gridy = 2;
       frmMainWindow.getContentPane().add(panel, gbc_panel);
       GridBagLayout gbl_panel = new GridBagLayout();
       gbl_panel.columnWidths = new int[] { 0, 0 };
@@ -403,13 +422,6 @@ public class MainWindowGUI {
       table.getColumnModel().getColumn(3).setPreferredWidth(340);
       table.getColumnModel().getColumn(4).setPreferredWidth(97);
       table.getColumnModel().getColumn(5).setPreferredWidth(129);
-      /*
-       * table.getModel().addTableModelListener(new TableModelListener() {
-       * 
-       * @Override public void tableChanged(TableModelEvent e) { int row =
-       * table.getSelectedRow(); int col = table.getSelectedColumn();
-       * table.setValueAt(table.getValueAt(row, col), row, col); } });
-       */
       scrollPane.setViewportView(table);
 
       // Populate Quick View fields when a row from the table is selected
@@ -425,6 +437,13 @@ public class MainWindowGUI {
             }
          }
       });
+      /*
+       * table.getModel().addTableModelListener(new TableModelListener() {
+       * 
+       * @Override public void tableChanged(TableModelEvent e) { int row =
+       * table.getSelectedRow(); int col = table.getSelectedColumn();
+       * table.setValueAt(table.getValueAt(row, col), row, col); } });
+       */
    }
 
    public void setConnStatusLabel(DbStatus status) {
