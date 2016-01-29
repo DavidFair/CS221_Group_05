@@ -285,9 +285,7 @@ public class Database {
 				}
 			}
 		}
-		
-		hostWindow.writePendingTask(updatedTask);
-		hostWindow.readPendingTasks();
+
 
 		Thread syncElement = new Thread(new UpdateDb(updatedTask));
 		syncElement.start();

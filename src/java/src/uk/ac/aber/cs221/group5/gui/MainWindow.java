@@ -199,6 +199,10 @@ public class MainWindow {
       if (childWindow!= null){
          MainWindow.childWindow.setConnStatusLabel(connStatus);
       }
+      
+      if (connStatus == DbStatus.CONNECTED){
+    	  readPendingTasks();
+      }
    }
 	
    /**
@@ -457,19 +461,20 @@ public class MainWindow {
 			
 			Task toPush = new Task(taskId, taskName, startDate, endDate, taskMemeber, status);
 			
-			int elementIndex = 1;
+			int elementIndex = 0;
 			for (String[] elementPair: elementComments){
-				elementIndex++;
 				toPush.addElement(elementPair[0], elementPair[1], elementIndexes.get(elementIndex));
+				elementIndex++;
 			}
 			
 			databaseObj.updateDbTask(toPush);
+			blankFile(PENDING_SAVE_PATH);
 			
 			} //Loop back over all task objects in save file
 			
 					
 			
-		} catch (Exception e){
+		} catch (IOException e){
 		
 		}
 		
