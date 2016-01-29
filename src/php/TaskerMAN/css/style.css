@@ -136,6 +136,17 @@ table {
 All class CSS
 */
 
+.addInput{
+	float: right;
+	text-align: justify;
+	vertical-align:middle;
+	-moz-box-sizing: border-box;
+	padding-left:12px;
+	box-sizing: border-box;
+	height: 18px;
+	width: 150px;
+	}
+	
 .addTask{
 	float: right;
 	text-align: justify;
@@ -209,13 +220,13 @@ All class CSS
     float: left;
     width: 100%;
     color: white;
-	display: inline;
-	
+	display: inline;	
 }
 
 .modalBottomTitles{
 	color: black;
 	font-size: 13px;
+	
 	}
 	
 .modalBottomText{
@@ -326,15 +337,6 @@ All class CSS
 	border: 0px;
 	background-color: grey;
 	}
-	
-.addInput{
-	float: right;
-	text-align: justify;
-	vertical-align:middle;
-	-moz-box-sizing: border-box;
-	padding-left:12px;
-	box-sizing: border-box;
-	height: 18px;
-	width: 150px;
-	}
 
+	.tableID{
+	column-count: 3;}

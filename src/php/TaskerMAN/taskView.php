@@ -58,15 +58,15 @@ if (isset($_GET['id']))
                 <label for="endDate" class="titles">End Date</label>
                 <input name="endDate" id="endDate" type="text" value="<?php echo $output['EndDate']; ?>" readonly class="viewInput" /><br/>
                 <hr/>
-                <table class="modal">
+                <table class="tableID">
                     <thead>
-                    <tr class="modalBottomTitles">
-                        <th>ID</th>
+                    <tr>
+                        <th >ID</th>
                         <th>Description</th>
                         <th>Comments</th>
                     </tr>
                     </thead>
-                    <tbody class="modalBottomText">
+                    <tbody>
                     <?php
                     // Retrieve element data
                     try
