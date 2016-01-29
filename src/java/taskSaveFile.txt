@@ -1,42 +1,26 @@
-29
-3
-0
-,|
-Design specifications
-Allocated
-jee17@aber.ac.uk
-2015-11-20
-2015-11-27
-4
-0
-,|
-Test specification
-Allocated
-mac81@aber.ac.uk
-2015-11-20
-2015-11-29
+32
 5
-0
-,|
+78,79,80,
+Descip,comment|sdf,da|sadew,ga|
 JDBC spike work
-Allocated
-manager@example.com
+Abandoned
+ali21@aber.ac.uk
 2015-11-03
 2015-11-11
 6
-0
-,|
+65,
+Status of task,Competed|
 Mysql spikework
 Abandoned
-lif5@aber.ac.uk
+ali21@aber.ac.uk
 2015-11-01
 2015-11-08
 7
 0
 ,|
 Swing spikework
-Abandoned
-jod32@aber.ac.uk
+Completed
+ali21@aber.ac.uk
 2015-11-02
 2015-11-08
 8
@@ -52,7 +36,7 @@ jod32@aber.ac.uk
 ,|
 Taskerman prototype implementation
 Allocated
-ole4@aber.ac.uk
+ali21@aber.ac.uk
 2015-12-01
 2015-12-16
 10
@@ -224,10 +208,50 @@ daf5@aber.ac.uk
 2015-11-02
 2016-01-11
 35
-57,
-de,dd|
-Test
-Completed
-ole4@aber.ac.uk
+66,69,
+Hey,There|gggggg,sedaasas|
+Mozilla
+Abandoned
+ali21@aber.ac.uk
+1999-01-04
+1999-02-05
+36
+71,
+This is a Description,This is a Comment|
+B23
+Allocated
+jee17@aber.ac.uk
+2016-08-21
+2016-09-30
+37
+73,74,
+a,a|a,a|
+Pepsi
+Allocated
+daf5@aber.ac.uk
+1999-01-01
 2000-01-01
+38
+75,76,
+A,a|$$$$,$$$$$|
+Pepsi
+Allocated
+daf5@aber.ac.uk
+1999-01-01
+2000-01-01
+39
+81,
+fliperino,faperino|
+addtask
+Completed
+daf5@aber.ac.uk
+2016-01-13
+2016-01-21
+40
+82,83,
+Test,a|Test,Test|
+Test
+Allocated
+ali21@aber.ac.uk
+1999-01-01
 2016-01-28
