@@ -194,3 +194,8 @@ function validateUserEdit()
         return true;
     }
 }
+
+function validateTaskEdit()
+{
+    return true;
+}

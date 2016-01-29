@@ -58,7 +58,6 @@ if (isset($_GET['edit']))
                         <option <?php if ($isManager == 0) { echo 'selected'; }?> value="0">No</option>
                     </select><br/><br/>
 
-                    <input name="edit_originalName" type="hidden" value="<?php echo $email; ?>" />
                     <input name="submit" class="modalButton" type="submit" value="submit"/>
                     <input name="clear" class="modalButton" type="reset" value="clear" />
                 </fieldset>

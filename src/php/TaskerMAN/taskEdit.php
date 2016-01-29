@@ -40,6 +40,7 @@ if (isset($_GET['edit']))
         <form name="taskEdit" id="taskEdit" action="editTask.php" method="POST" onsubmit="return validateTaskEdit()">
             <fieldset class="info_box">
                 <a href="taskerman.php" title="Close" class="close">X</a>
+                <input type="hidden" id="edit_taskID" name="edit_taskID" value="<?php echo $taskID; ?>"/>
                 <label for="edit_taskName" class="titles">Task Name:</label>
                 <input value="<?php echo $taskName; ?>" name="edit_taskName" id="edit_taskName" type="text" class="addInput" maxlength="45" required />
                 <br/>
@@ -80,8 +81,10 @@ if (isset($_GET['edit']))
                     <option <?php if ($status == 0) { echo 'selected'; }?> value="0">Abandoned</option>
                     <option <?php if ($status == 1) { echo 'selected'; }?> value="1">Allocated</option>
                     <option <?php if ($status == 1) { echo 'selected'; }?> value="2">Completed</option>
-                </select><br/>
+                </select><br/><br/>
 
+                <input name="submit" class="modalButton" type="submit" value="submit"/>
+                <input name="clear" class="modalButton" type="reset" value="clear" />
             </fieldset>
         </form>
     </div>

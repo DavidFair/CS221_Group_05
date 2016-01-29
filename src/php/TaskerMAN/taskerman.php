@@ -64,8 +64,10 @@ if ($debug)
                     <select title="options" onChange="window.location.href=this.value">
                         <option value="taskerman.php"> </option>
                         <option value="taskerman.php?id=<?php echo $taskID; ?>#openView">View Elements</option>
-                        <option value="taskerman.php?edit=<?php echo $taskID; ?>#editView">Edit</option>
-                        <option value="taskDelete.php?id=<?php echo $taskID; ?>">Delete</option>
+                        <option value="taskerman.php?addElement=<?php echo $taskID; ?>#addElement">Add Element</option>
+                        <option value="taskerman.php?deleteElement=<?php echo $taskID; ?>#deleteElement">Delete Element</option>
+                        <option value="taskerman.php?edit=<?php echo $taskID; ?>#editView">Edit Task</option>
+                        <option value="taskDelete.php?id=<?php echo $taskID; ?>">Delete Task</option>
                     </select>
                 </td> <?php
 
@@ -81,6 +83,7 @@ if ($debug)
         catch (PDOException $ex)
         {
             errorHandler($ex->getMessage(),"Fatal Database Error",LOGFILE,timePrint());
+            die();
         }
         ?>
         </tbody>
