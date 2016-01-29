@@ -18,6 +18,11 @@ if(!isset($_SESSION['login_auth']))
         echo "<script>alert('Email already exists! Please try another one.');</script>";
         unset($_SESSION['emailExists']);
     }
+    if ($_SESSION['taskExists'])
+    {
+        echo "<script>alert('This user has tasks assigned! Delete them first.');</script>";
+        unset($_SESSION['taskExists']);
+    }
     ?>
 </head>
 <body>

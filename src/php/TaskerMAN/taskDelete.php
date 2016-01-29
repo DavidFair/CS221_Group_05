@@ -24,8 +24,7 @@ if (filter_var($_GET['id'],FILTER_SANITIZE_NUMBER_INT))
         $stmt = $pdo->prepare("DELETE FROM tbl_tasks WHERE TaskID = :filteredID");
         $stmt->bindParam(':filteredID',$_GET['id']);
         $stmt->execute();
-        // Alert user and redirect
-        echo '<script>alert("Task Deleted");</script>';
+        // Redirect
         header('Location: taskerman.php');
 
     } catch (PDOException $ex)
