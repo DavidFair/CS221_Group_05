@@ -1,0 +1,354 @@
+/*
+This resource proved extremely useful for the development of CSS3/HTML5 modal windows without scripting languages
+http://www.webdesignerdepot.com/2012/10/creating-a-modal-window-with-html5-and-css3/
+
+@author Tim Anderson, Oliver Earl
+*/
+
+/*
+All <div> id CSS
+*/
+
+
+#email{
+    border: solid 1px black;
+    display: block;
+    font-size: 11px;
+    margin: 5px 0 20px 10px;
+    position: center;
+    padding: 4px 2px;
+    width: 550px;
+}
+
+#leftnav {
+    float: left;
+}
+
+#login {
+    border-radius: 25px;
+    border-width: 10px;
+    padding-top: 1px;
+    padding-bottom: 1%;
+    padding-right: 6%;
+    position: center;
+    width: 350px;
+}
+
+#login_box {
+    border-radius: 25px;
+    padding: 5px;
+    border-width: 5px;
+    border-style: double;
+    border-color: #6600CC;
+    width: 35%;
+    padding-left: 25px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#login_container {
+    border-radius: 25px;
+    border-width: 15px;
+    padding: 20px;
+    height: 10%;
+    left: 25%;
+    margin-top: 12%;
+    padding-bottom: 2%;
+    position: relative;
+    text-align: center;
+    width: 50%;
+    color: #FFFFFF;
+    border-color: #6600CC;
+   
+
+}
+
+#optionBar{
+	border-radius: 15px;
+    border-width: 2px;
+}
+
+#request {
+    margin-bottom: 0%;
+    text-indent: 15%;
+}
+
+#submit{
+    background-color: #4CAF50;}
+
+	
+
+
+/*
+All type CSS
+*/
+
+button {
+    background-color: grey;
+	
+}
+
+footer {
+    padding: 2em 1.5em;
+    vertical-align: center;
+}
+
+h1 {
+    font-weight: lighter;
+    text-align: center;
+    text-shadow: 2px 2px #000;
+}
+
+h2 {
+    font-weight: lighter;
+    text-shadow: 1px 1px #000;
+}
+
+header {
+    color: white;
+    height: 50px;
+    padding: 1.5em;
+    vertical-align: middle;
+}
+
+html body {
+    background-color: grey;
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+}
+
+main {
+    background: 0;
+    padding: 2em 3em;
+}
+
+nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+table {
+    margin-bottom: 20px;
+    max-width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    width: 100%;
+    color: white;
+
+}
+
+
+
+
+/*
+All class CSS
+*/
+
+.addInput{
+	float: right;
+	text-align: justify;
+	vertical-align:middle;
+	-moz-box-sizing: border-box;
+	padding-left:12px;
+	box-sizing: border-box;
+	height: 18px;
+	width: 150px;
+	}
+	
+.addTask{
+	float: right;
+	text-align: justify;
+	vertical-align:middle;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	
+	}
+
+.close {
+    background: #6600CC;
+    border-radius: 15px;
+    color: white;
+    line-height: 25px;
+    position: absolute;
+    right: -12px;
+    text-align: center;
+    text-decoration: none;
+    top: -10px;
+    width: 25px;
+    -moz-border-radius: 12px;
+    -webkit-border-radius: 12px;
+}
+
+.close:hover {
+    background: #bccbdc;
+}
+
+.container {
+    background-color: grey;
+    border-color: #6600CC;
+    border-radius: 25px;
+    border-width: 9px;
+    border-style: double;
+    margin: auto;
+    max-width: 60em;
+    padding: 5px;
+}
+
+.info_box{
+	background: grey;
+	border-style: double;
+    margin: 10% auto;
+    padding: 5px 20px 13px 20px;
+    position: relative;
+    width: 400px;
+	border-radius: 25px;
+    border-width: 5px;
+	border-color:#6600CC;
+	bottom: 150px;
+	}
+
+.list-unstyled {
+    list-style: none;
+    padding-left: 0;
+}
+
+.list-inline {
+    list-style: none;
+    margin-left: -5px;
+    padding-left: 0;
+}
+
+.list-inline > li {
+    display: inline-block;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.modal {
+    float: left;
+    width: 100%;
+    color: white;
+	display: inline;	
+}
+
+.modalBottomTitles{
+	color: black;
+	font-size: 13px;
+	
+	}
+	
+.modalBottomText{
+	color: black;
+	font-size: 13px;
+	}
+
+.modalButton {
+    text-align: center;
+    width: 50%;
+    color: #FFFFFF;
+	background-color: grey;
+    border-color: #6600CC;
+	border-radius: 20px;
+    border-width: 2px;
+	position: relative;
+	bottom: 5%;
+	top: 10px;
+	left: 20%;
+	right: 20%;
+	display: inline;
+	
+	
+	}
+
+.modalTable {
+
+    text-align: center;
+    position: absolute;
+    vertical-align: center;
+}
+
+.modalWindow {
+    background: grey;
+    bottom: 0;
+    clear: both;
+    left: 0;
+    opacity: 0;
+    position: fixed;
+    right: 0;
+    transition: opacity 400ms ease-in;
+    top: 0;
+    z-index: 99999;
+    -moz-transition: opacity 400ms ease-in;
+    -webkit-transition: opacity 400ms ease-in;
+	pointer-events: none;
+	
+	
+}
+
+.modalWindow:target {
+    opacity: 0.95;
+    pointer-events: auto;
+	
+}
+
+.modalWindow > div {
+	border: 0px;
+    margin: 10% auto;
+    padding: 5px 20px 13px 20px;
+    position: relative;
+	border-radius: 25px;
+
+}
+
+.nav li {
+    color: white;
+    display: inline-block;
+    padding: 4px 8px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.nav a {
+    color: white;
+    display: inline-block;
+    padding: 0;
+    text-decoration: none;
+}
+
+.navbar {
+    background: #000;
+}
+
+.nigel {
+    height: 50px;
+    width: 50px;
+}
+
+.rightNav {
+    float: right;
+}
+
+.viewInput{
+	float: right;
+	text-align: justify;
+	vertical-align:middle;
+	-moz-box-sizing: border-box;
+	padding-left:12px;
+	box-sizing: border-box;
+	border: 0px;
+	background-color: grey;
+	}
+
+.titles{
+	float: left;
+	text-align: justify;
+	vertical-align:middle;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	color: white;
+	}
+	
+.tableID{
+	column-count: 3;}

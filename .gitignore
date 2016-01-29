@@ -78,6 +78,17 @@ local.properties
  
 # PDT-specific
 .buildpath
+
+######################
+# phpStorm & TaskerMAN
+######################
+
+/src/php/TaskerMAN/.idea/
+/src/php/TaskerMAN/tmp/
+workspace.xml
+error.txt
+/tmp/
+
 ####--------------------End of java git ignore-----------------------
 #####################
 # Visual Paradigm
