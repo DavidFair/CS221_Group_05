@@ -9,14 +9,13 @@ if (!($_SESSION['login_auth']))
 }
 
 // Receive posted information - it has been validated already
-// TODO add sanitisation
 
-$_SESSION['add_taskName']           = $_POST['add_taskName'];
-$_SESSION['add_taskAllocated']      = $_POST['add_taskAllocated'];
+$_SESSION['add_taskName']           = filter_var($_POST['add_taskName'],FILTER_SANITIZE_STRING);
+$_SESSION['add_taskAllocated']      = filter_var($_POST['add_taskAllocated'], FILTER_SANITIZE_EMAIL);
 $_SESSION['add_startDate']          = $_POST['add_startDate'];
 $_SESSION['add_endDate']            = $_POST['add_endDate'];
-$_SESSION['add_taskStatus']         = $_POST['add_taskStatus'];
-$_SESSION['add_numberOfElements']   = $_POST['add_numberOfElements'];
+$_SESSION['add_taskStatus']         = filter_var($_POST['add_taskStatus'],FILTER_SANITIZE_NUMBER_INT);
+$_SESSION['add_numberOfElements']   = filter_var($_POST['add_numberOfElements'],FILTER_SANITIZE_NUMBER_INT);
 
 // Set and redirect
 header('Location: taskerman.php#addElements');
