@@ -402,4 +402,5 @@ public class EditWindowGUI {
    private void updateLocalFiles() {
       main.updateLocalFiles(TASK_SAVE_PATH);
    }
+
 }

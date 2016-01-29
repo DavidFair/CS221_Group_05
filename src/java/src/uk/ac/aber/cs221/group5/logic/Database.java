@@ -417,7 +417,7 @@ public class Database {
 
       class MemberSync implements Runnable {
 
-         private Database parentDB;
+    	  private Database parentDB;
 
          public MemberSync(Database parentDatabase) {
             this.parentDB = parentDatabase;
