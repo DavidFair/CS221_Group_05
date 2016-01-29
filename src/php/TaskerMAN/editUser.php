@@ -1,4 +1,8 @@
 <?php
+/**
+ * TaskerMAN Main Interface - Edit existing users in the database
+ * @author Oliver Earl
+ */
 require_once('init.php');
 
 // Login check

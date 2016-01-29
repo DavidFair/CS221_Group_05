@@ -4,20 +4,10 @@
  *   @author Oliver Earl
  *
  *   This file should be included into init.php to provide access to the database
- *   Accessible program-wide under $pdo
- *  ░░░░░░░░░░░░░░░░░░░░░
- *  ░░░░░░░░░░░░▄▀▀▀▀▄░░░
- *  ░░░░░░░░░░▄▀░░▄░▄░█░░
- *  ░▄▄░░░░░▄▀░░░░▄▄▄▄█░░
- *  █░░▀▄░▄▀░░░░░░░░░░█░░
- *  ░▀▄░░▀▄░░░░█░░░░░░█░░
- *  ░░░▀▄░░▀░░░█░░░░░░█░░
- *  ░░░▄▀░░░░░░█░░░░▄▀░░░
- *  ░░░▀▄▀▄▄▀░░█▀░▄▀░░░░░
- *  ░░░░░░░░█▀▀█▀▀░░░░░░░
- *  ░░░░░░░░▀▀░▀▀░░░░░░░░
+ *   Accessible program-wide under $pdo (injected where possible)
+
  **/
-// TaskerSRV
+// TaskerSRV -- Not good practice but not a huge deal in this particular scenario
 $hostname = "db.dcs.aber.ac.uk";
 $dbName = "csgp_5_15_16";
 $username = "csgpadm_5";

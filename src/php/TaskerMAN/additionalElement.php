@@ -1,4 +1,10 @@
 <?php
+/**
+ * TaskerMAN Modal Window for New Element - with required logic for Task-related data pulling and database integrity
+ * enforced requirements.
+ *
+ * @author Oliver Earl, Jonathan Englund
+ */
 // Sanitise, run only if we can
 if (isset($_GET['extraElement']))
 {

@@ -1,4 +1,8 @@
 <?php
+/**
+ * TaskerMAN Edit Task - Allows the user to edit existing tasks
+ * @author Oliver Earl
+ */
 require_once('init.php');
 
 // Login check

@@ -1,4 +1,8 @@
 <?php
+/**
+ * TaskerMAN Add Task Gateway - simply serves as a post->session changeover with sanitisation
+ * @author Oliver Earl, Jonathan Englund
+ */
 require_once('init.php');
 // Login check
 if (!($_SESSION['login_auth']))

@@ -1,4 +1,9 @@
 <?php
+/**
+ * TaskerMAN Edit Task Modal Window
+ * @author Oliver Earl, Tim Anderson
+ */
+
 // Sanitise and only run if we have input
 if (isset($_GET['edit']))
 {

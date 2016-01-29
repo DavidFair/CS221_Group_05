@@ -1,3 +1,11 @@
+<?php
+/**
+ * Modal Window - Adding Elements
+ * @author Oliver Earl, Jonathan Englund, Tim Anderson
+ *
+ * Contains presentational elements and is crucial for adding elements to the database.
+ */
+?>
 <div id="addElements" class="modalWindow">
     <div>
         <div class="modal">

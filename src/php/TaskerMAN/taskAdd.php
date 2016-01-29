@@ -1,3 +1,9 @@
+<?php
+/**
+ * TaskerMAN Task Add Modal Window
+ * @author Oliver Earl, Tim Anderson
+ */
+?>
 <div id="addView" class="modalWindow">
     <div>
         <div class="modal">

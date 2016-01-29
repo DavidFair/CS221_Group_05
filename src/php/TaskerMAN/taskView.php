@@ -1,4 +1,8 @@
 <?php
+/**
+ * TaskerMAN Main Interface - Modal Window Task View
+ * @author Oliver Earl, Jonathan Englund, Tim Anderson
+ */
 
 // First sanitise the input
 if (isset($_GET['id']))

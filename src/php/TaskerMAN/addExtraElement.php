@@ -1,4 +1,11 @@
 <?php
+/**
+ * TaskerMAN Add Element
+ *
+ * Logic used for adding an extra element to a task.
+ *
+ * @author Oliver Earl, Jonathan Englund
+ */
 require_once('init.php');
 
 // Login check

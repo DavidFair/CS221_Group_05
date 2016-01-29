@@ -1,4 +1,9 @@
 <?php
+/**
+* TaskerMAN Add Entry - Logic file used to enter Task and Element data into the database.
+* @author Oliver Earl
+*/
+
 require_once('init.php');
 
 // Login check

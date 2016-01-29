@@ -2,6 +2,11 @@
 /**
  * TaskerMAN Main Interface - Tasks View
  * @author Oliver Earl, Tim Anderson
+ *
+ * This is the main Tasks view of the program. It uses modal windows stored in includes to provide functionality.
+ * From here, it is possible to view the contents of the Tasks in the database, and have access to other Task
+ * functionality, including viewing task elements, etc.
+ *
  */
 require('init.php');
 

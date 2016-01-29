@@ -1,4 +1,11 @@
 <?php
+/**
+ * TaskerMAN Main Interface - Users View
+ * @author Oliver Earl, Tim Anderson
+ *
+ * Users equivalent of taskerman.php
+ *
+ */
 
 require('init.php');
 

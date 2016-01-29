@@ -17,13 +17,13 @@
 */
 
 // Is this version of the program in development mode?
-$debug = true;
+$debug = false;
 
 /*
 ** Global Constants
 */
 define("APP_NAME",  "TaskerMAN");
-define("APP_VER",   "0.9");
+define("APP_VER",   "1.0 Initial Release");
 define("APP_DESC",  APP_NAME . " Task Managing Software");
 define("GROUP",     "Group 5");
 define("COPYRIGHT", "Aberystwyth University");
@@ -36,7 +36,7 @@ date_default_timezone_set("Europe/London");
 /*
 ** Error Reporting Settings
 */
-define("LOGFILE",   "error.txt");
+define("LOGFILE",   "error.log");
 ini_set("error_log", LOGFILE);
 ini_set("log_errors", 1);
 

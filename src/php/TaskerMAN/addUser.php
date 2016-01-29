@@ -1,4 +1,9 @@
 <?php
+/**
+ * TaskerMAN - Logic used for adding Users to User table
+ *
+ * @author Oliver Earl
+ */
 require_once('init.php');
 
 // Login check

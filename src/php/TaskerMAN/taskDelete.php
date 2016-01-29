@@ -1,4 +1,8 @@
 <?php
+/**
+ * TaskerMAN - Deletes tasks from the database
+ * @author Oliver Earl
+ */
 require_once('init.php');
 
 // Check that the user is logged in first and redirect if they aren't

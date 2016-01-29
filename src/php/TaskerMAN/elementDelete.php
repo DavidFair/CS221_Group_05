@@ -1,4 +1,8 @@
 <?php
+/**
+ * TaskerMAN Main Interface - Delete elements from a task without deleting the task itself
+ * @author Oliver Earl
+ */
 require_once('init.php');
 
 // Login check
