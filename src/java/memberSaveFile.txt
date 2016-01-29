@@ -1,5 +1,15 @@
-2
+7
+bed19@aber.ac.uk
+Ben Dudley
+daf5@aber.ac.uk
+David Fairbrother
+jod32@aber.ac.uk
+Joshua Doyle
+mac81@aber.ac.uk
+Maurice Corriette
 manager@example.com
-A S
-poo@xample.com
-jim bob
+Nigel Hardy
+ole4@aber.ac.uk
+Oliver Earl
+tma1@aber.ac.uk
+Tim Anderson

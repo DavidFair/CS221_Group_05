@@ -1,5 +1,19 @@
 /**
  * 
+ * This is the main class of the TaskerCLI system. The system starts and exits within this Class. Creating
+ * an Object of this Class for the first time will create a LoginWindow Object, forcing the user to log in
+ * before they are given access to the system.
+ * 
+ * @author Ben Dudley (bed19)
+ * @author David Fairbrother (daf5)
+ * @author Jonathan Englund (jee17)
+ * @author Josh Doyle (jod32)
+ * @version 1.0.0
+ * @since 1.0.0
+ * @see MainWindowGUI
+ * @see LoginWindow
+ * @see ConnSettingsWindow
+ * @see ViewElementsWindow
  */
 package uk.ac.aber.cs221.group5.gui;
 
@@ -23,13 +37,6 @@ import uk.ac.aber.cs221.group5.logic.TaskList;
 import uk.ac.aber.cs221.group5.logic.TaskStatuses;
 import uk.ac.aber.cs221.group5.logic.Database;
 import uk.ac.aber.cs221.group5.logic.DbStatus;
-
-/**
- * @author David (daf5) Provides a wrapper for common window functions such as
- *         creating and destroying the main window
- * 
- */
-
 
 public class MainWindow {
 
@@ -55,6 +62,10 @@ public class MainWindow {
 		return this.taskList;
 	}
 
+	/**
+	 * This method replaces the TaskList held by the MainWindow object with a new TaskList.
+	 * @param list A new TaskList to replace the TaskList held by the MainWindow Object.
+	 */
 	public void setTaskList(TaskList list) {
 
 		this.taskList = list;
@@ -71,7 +82,10 @@ public class MainWindow {
 
 	}
 	
-
+	/**
+	 * This method replaces the MemberList held by the MainWindow object with a new MemberList.
+	 * @param list A new MemberList to replace the MemberList held by the MainWindow Object 
+	 */
 	public void setmemberList(MemberList list) {
 		connTime = System.currentTimeMillis();
 		
@@ -83,7 +97,15 @@ public class MainWindow {
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * This is the entry point to the System. This method created a new LoginWindow Object and spawns the Login
+	 * Window GUI.
+	 * 
+	 * @throws InterruptedException if the thread handling establishing a connection to the Database was somehow interrupted.
+	 * @throws NumberFormatException if the number of Members stored in the Members Save File cannot be read. This is usually because the file was somehow corrupted. 
+	 * @throws IOException if the Members Save File cannot be found.
+	 */
 	public static void main(String args[]) throws InterruptedException, NumberFormatException, IOException {
 		TaskList taskList = new TaskList();
 		MemberList memberList = new MemberList();
