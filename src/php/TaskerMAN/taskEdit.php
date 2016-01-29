@@ -75,6 +75,7 @@ if (isset($_GET['edit']))
 
                 <label for="edit_endDate" class="titles">End Date:</label>
                 <input value="<?php echo $endDate; ?>"name="edit_endDate" type="date" id="edit_endDate" class="addInput" required />
+				
 
                 <label for="edit_taskStatus">Status</label>
                 <select name="edit_taskStatus" class="addInput" id="edit_taskStatus">

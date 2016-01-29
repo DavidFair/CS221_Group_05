@@ -14,7 +14,7 @@
                     <br/>
 
                     <label for="add_lastName" class="titles">Last Name:</label>
-                    <input name="add_lastName" id="add_lastName" type="text" class="addInput" maxlength="15" required />
+                    <input name="add_lastName" id="add_lastName" type="text" class="addInput" maxlength="15" required /><br/>
 
                     <label for="add_isManager" class="titles">Is Manager?</label>
                     <select name="add_isManager" class="addInput" id="add_isManager">

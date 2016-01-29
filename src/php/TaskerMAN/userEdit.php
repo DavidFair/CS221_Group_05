@@ -42,16 +42,18 @@ if (isset($_GET['edit']))
             <form name="userEdit" id="userEdit" action="editUser.php" method="POST" onsubmit="return validateUserEdit()">
                 <fieldset class="info_box">
                     <a href="users.php" title="Close" class="close">X</a>
-                    <label for="edit_email" class="titles">Email (READ ONLY):</label>
+                    <label for="edit_email" class="titles">Email:</label>
                     <input value="<?php echo $email; ?>" name="edit_email" id="edit_email" type="email" class="addInput" maxlength="45" readonly />
                     <br/>
 
                     <label for="edit_firstName" class="titles">First Name:</label>
                     <input value="<?php echo $firstName; ?>" name="edit_firstName" id="add_firstName" type="text" class="addInput" maxlength="15" required />
-
+					<br/>
+					
                     <label for="edit_lastName" class="titles">Last Name:</label>
                     <input value="<?php echo $lastName; ?>" name="edit_lastName" id="edit_lastName" type="text" class="addInput" maxlength="15" required />
-
+					<br/>
+					
                     <label for="edit_isManager" class="titles">Is Manager?</label>
                     <select name="edit_isManager" class="addInput" id="edit_isManager">
                         <option <?php if ($isManager == 1) { echo 'selected'; }?> value="1">Yes</option>
