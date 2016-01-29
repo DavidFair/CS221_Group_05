@@ -1,34 +1,18 @@
-29
-3
-0
-,|
-Design specifications
-Allocated
-jee17@aber.ac.uk
-2015-11-20
-2015-11-27
-4
-0
-,|
-Test specification
-Abandoned
-mac81@aber.ac.uk
-2015-11-20
-2015-11-29
+33
 5
-0
-,|
+90,
+First element,Work nearly complete!!!|
 JDBC spike work
 Allocated
-bed19@aber.ac.uk
-2015-11-01
-2015-11-07
+tma1@aber.ac.uk
+2015-11-25
+2015-11-03
 6
-0
-,|
+65,
+Status of task,Competed|
 Mysql spikework
-Allocated
-lif5@aber.ac.uk
+Abandoned
+ali21@aber.ac.uk
 2015-11-01
 2015-11-08
 7
@@ -36,12 +20,12 @@ lif5@aber.ac.uk
 ,|
 Swing spikework
 Abandoned
-jod32@aber.ac.uk
+ali21@aber.ac.uk
 2015-11-02
 2015-11-08
 8
-0
-,|
+40,
+Test,Testtestestestest|
 prototype CLI implementation
 Allocated
 jod32@aber.ac.uk
@@ -52,7 +36,7 @@ jod32@aber.ac.uk
 ,|
 Taskerman prototype implementation
 Allocated
-ole4@aber.ac.uk
+ali21@aber.ac.uk
 2015-12-01
 2015-12-16
 10
@@ -72,10 +56,10 @@ daf5@aber.ac.uk
 2016-01-20
 2016-02-15
 12
-0
-,|
+41,
+Test,tessssstlol|
 Test report 
-Allocated
+Abandoned
 mac81@aber.ac.uk
 2016-01-10
 2016-02-15
@@ -131,18 +115,10 @@ jod32@aber.ac.uk
 0
 ,|
 Java db debugging
-Abandoned
+Completed
 daf5@aber.ac.uk
 2016-01-27
 2016-01-29
-21
-0
-,|
-Spreadsheet analysis
-Allocated
-ali21@aber.ac.uk
-2016-02-10
-2016-02-18
 22
 0
 ,|
@@ -200,8 +176,8 @@ wej19@aber.ac.uk
 2016-02-05
 2016-02-15
 29
-0
-,|
+42,
+dssdss,sdsdss|
 Shell scripting
 Allocated
 yil16@aber.ac.uk
@@ -224,10 +200,66 @@ daf5@aber.ac.uk
 2015-10-12
 2015-10-19
 34
-35,
-Status of task,Completed|
+35,37,38,39,
+Status of task,Completed|Test,Test|Important,Testing|Important,Spikework|
 Project Plan
 Completed
 daf5@aber.ac.uk
 2015-11-02
 2016-01-11
+35
+66,69,
+Hey,There|gggggg,sedaasas|
+Mozilla
+Abandoned
+ali21@aber.ac.uk
+1999-01-04
+1999-02-05
+36
+71,
+This is a Description,This is a Comment|
+B23
+Allocated
+jee17@aber.ac.uk
+2016-08-21
+2016-09-30
+37
+73,74,
+a,a|a,a|
+Pepsi
+Allocated
+daf5@aber.ac.uk
+1999-01-01
+2000-01-01
+38
+75,76,
+A,a|$$$$,$$$$$|
+Pepsi
+Allocated
+daf5@aber.ac.uk
+1999-01-01
+2000-01-01
+39
+81,
+fliperino,This is an Editing Test|
+addtask
+Allocated
+daf5@aber.ac.uk
+2016-01-13
+2016-01-21
+40
+82,83,
+Test,a|Test,Test|
+Test
+Allocated
+ali21@aber.ac.uk
+1999-01-01
+2016-01-28
+41
+84,85,
+Test,Test|Test,Hehehehe|
+Yes
+Completed
+random@random.com
+2000-01-01
+2016-01-28

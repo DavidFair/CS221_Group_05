@@ -1,17 +1,3 @@
-/**
- * This Class handles all of the GUI aspects of logging in to TaskerCLI. This includes displaying the
- * Login Window GUI and updating all Components on that table.
- * 
- * @author Ben Dudley (bed19)
- * @author David Fairbrother (daf5)
- * @author Jonathan Englund (jee17)
- * @author Josh Doyle (jod32)
- * 
- * @version 1.0.0
- * @since 1.0.0
- * 
- */
-
 package uk.ac.aber.cs221.group5.gui;
 
 import java.awt.EventQueue;
@@ -37,6 +23,20 @@ import javax.swing.JTextField;
 
 import uk.ac.aber.cs221.group5.logic.DbStatus;
 import uk.ac.aber.cs221.group5.logic.MemberList;
+
+/**
+ * This Class handles all of the GUI aspects of logging in to TaskerCLI. This includes displaying the
+ * Login Window GUI and updating all Components on that table.
+ * 
+ * @author Ben Dudley (bed19)
+ * @author David Fairbrother (daf5)
+ * @author Jonathan Englund (jee17)
+ * @author Josh Doyle (jod32)
+ * 
+ * @version 1.0.0
+ * @since 1.0.0
+ * @see MainWindow.java
+ */
 
 public class LoginWindowGUI {
 
@@ -81,9 +81,14 @@ public class LoginWindowGUI {
       EventQueue.invokeLater(new SetVisible(this));
    }
 
-   public void passMemberList(MemberList recievingList) {
-      for (int memberCount = 0; memberCount < recievingList.getLength(); memberCount++) {
-         memberList.addMember(recievingList.getMember(memberCount));
+   /**
+    * Updates which members are allowed to login in based on the MemberList receivingList
+    * @param receivingList
+    * 			the updated list of users who are allowed to Login
+    */
+public void passMemberList(MemberList receivingList) {
+      for (int memberCount = 0; memberCount < receivingList.getLength(); memberCount++) {
+         memberList.addMember(receivingList.getMember(memberCount));
       }
    }
 

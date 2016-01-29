@@ -27,7 +27,7 @@ import uk.ac.aber.cs221.group5.logic.DbStatus;
  * @author Josh Doyle (jod32)
  * @version 1.0.0
  * @since 1.0.0
- * @see ConnSettingsWindow
+ * @see ConnSettingsWindow.java
  *
  */
 public class ConnSettingsWindowGUI {

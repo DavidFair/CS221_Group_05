@@ -33,7 +33,7 @@ import uk.ac.aber.cs221.group5.logic.Task.Element;
  * @author Josh Doyle (jod32)
  * @version 1.0.0
  * @since 1.0.0
- * @see MainWindow
+ * @see MainWindow.java
  *
  */
 public class Database {
@@ -293,6 +293,14 @@ public class Database {
       syncElement.start();
 
    }
+   
+   /**
+    * This method saves a MemberList in a specified local file
+    * @param filePath
+    * 			The location of the file where you want to write the information to
+    * @param allUsers
+    * 			A list of users 
+    */
 
    public void saveUserName(String filePath, MemberList allUsers) {
 
@@ -318,9 +326,17 @@ public class Database {
 
    }
 
+   /**
+    * Starts Automatic Synchronisation
+    * @see createRefreshTimer
+    */
    public void startAutoSync() {
       createRefreshTimer(REFRESH_SEC_DELAY, this);
    }
+   
+   /**
+    * Stops the Automatic Synchronisation
+    */
 
    public void stopAutoSync() {
 
@@ -333,6 +349,11 @@ public class Database {
 
    }
 
+   /**
+    * Returns the current status of the db connection
+    * @return the current status of the connection
+    */
+   
    public DbStatus getConnStatus() {
       if (this.currentStatus.toString().equals("CONNECTED")) {
          // TODO Execute 'pending sync'
@@ -341,13 +362,26 @@ public class Database {
       return currentStatus;
    }
 
+   /**
+    * Returns which window you are currently looking at
+    * @return the currently displayed window as a MainWindow type 
+    */
    public MainWindow getHostWindow() {
       return this.hostWindow;
    }
 
+   /**
+    * This method calls all the tasks instead just tasks for a specific user
+    */
    public void getTasks() {
       getTasks("");
    }
+   
+   /**
+    * This method get the tasks for the specific user 
+    * @param username
+    * 			the name of the user that you want to get the tasks of
+    */
 
    public void getTasks(String username) {
 
@@ -409,6 +443,10 @@ public class Database {
       createRefreshTimer(REFRESH_SEC_DELAY, this);
 
    }
+   
+   /**
+    * Displays all the users from the Database
+    */
 
    public void getMembers() {
 
@@ -455,10 +493,20 @@ public class Database {
 
    }
 
+   /**
+    * Returns the length of time you have been connected as a long
+    * @return returns how long you have been connected to the db as a long
+    */
    public long getConnTime() {
       return this.connTime;
    }
 
+   /**
+    * Sets the window you are currently looking as the host window for future reference
+    * @param newWindow
+    * 			The window that has been opened i.e. what you are currently looking at
+    */
+   
    public void setHostWindow(MainWindow newWindow) {
       this.hostWindow = newWindow;
    }

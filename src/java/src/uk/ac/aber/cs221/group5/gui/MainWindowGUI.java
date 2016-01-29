@@ -1,19 +1,3 @@
-/**
- * This Class handles all of the GUI aspects of the Main Window. It dislpays all Tasks and gives the
- * user control to open other windows, such as the Edit Window and View Elements Window.
- * 
- * @author Ben Dudley (bed19)
- * @author David Fairbrother (daf5)
- * @author Jonathan Englund (jee17)
- * @author Josh Doyle (jod32)
- * 
- * @version 1.0.0
- * @since 1.0.0
- * 
- * @see MainWindow
- * 
- */
-
 package uk.ac.aber.cs221.group5.gui;
 
 import java.awt.Color;
@@ -52,6 +36,22 @@ import uk.ac.aber.cs221.group5.logic.DbStatus;
 import uk.ac.aber.cs221.group5.logic.Task;
 import uk.ac.aber.cs221.group5.logic.TaskList;
 import uk.ac.aber.cs221.group5.logic.TaskStatuses;
+
+/**
+ * This Class handles all of the GUI aspects of the Main Window. It dislpays all Tasks and gives the
+ * user control to open other windows, such as the Edit Window and View Elements Window.
+ * 
+ * @author Ben Dudley (bed19)
+ * @author David Fairbrother (daf5)
+ * @author Jonathan Englund (jee17)
+ * @author Josh Doyle (jod32)
+ * 
+ * @version 1.0.0
+ * @since 1.0.0
+ * 
+ * @see MainWindow.java
+ * 
+ */
 
 public class MainWindowGUI {
 
@@ -94,7 +94,6 @@ public class MainWindowGUI {
    /**
     * Create the application.
     * 
-    * @see initialize()
     */
    public MainWindowGUI(MainWindow mainWindow) {
       this.main = mainWindow;

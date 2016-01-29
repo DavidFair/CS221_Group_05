@@ -1,3 +1,5 @@
+package uk.ac.aber.cs221.group5.logic;
+
 /**
  * This enum details the 3 possible Task Statuses
  * 
@@ -8,10 +10,26 @@
  * 
  * @version 1.0.0
  * @since 1.0.0
+ * @see Task.java
  */
 
-package uk.ac.aber.cs221.group5.logic;
-
 public enum TaskStatuses {
-   Abandoned, Allocated, Completed
+	
+   /**
+    * The task has been abandoned 
+    */
+	
+Abandoned,
+
+/**
+ * This task has been allocated to a member 
+ */
+
+Allocated,
+
+/**
+ * This task has been completed
+ */
+
+Completed
 }

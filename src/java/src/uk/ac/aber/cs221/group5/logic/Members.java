@@ -1,3 +1,5 @@
+package uk.ac.aber.cs221.group5.logic;
+
 /**
  * This Class deals with Members within TaskerCLI. It enables setting and getting of Member attributes.
  * 
@@ -9,10 +11,8 @@
  * @version 1.0.0
  * @since 1.0.0
  * 
- * @see MemberList
+ * @see MemberList.java
  */
-
-package uk.ac.aber.cs221.group5.logic;
 
 public class Members {
    private String name;

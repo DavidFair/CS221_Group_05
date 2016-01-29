@@ -1,22 +1,4 @@
-/**
- * 
- * This is the main class of the TaskerCLI system. The system starts and exits within this Class. Creating
- * an Object of this Class for the first time will create a LoginWindow Object, forcing the user to log in
- * before they are given access to the system.
- * 
- * @author Ben Dudley (bed19)
- * @author David Fairbrother (daf5)
- * @author Jonathan Englund (jee17)
- * @author Josh Doyle (jod32)
- * 
- * @version 1.0.0
- * @since 1.0.0
- * 
- * @see MainWindowGUI
- * @see LoginWindow
- * @see ConnSettingsWindow
- * @see ViewElementsWindow
- */
+
 package uk.ac.aber.cs221.group5.gui;
 
 import java.awt.Frame;
@@ -36,6 +18,26 @@ import uk.ac.aber.cs221.group5.logic.MemberList;
 import uk.ac.aber.cs221.group5.logic.Task;
 import uk.ac.aber.cs221.group5.logic.TaskList;
 import uk.ac.aber.cs221.group5.logic.TaskStatuses;
+
+/**
+ * 
+ * This is the main class of the TaskerCLI system. The system starts and exits within this Class. Creating
+ * an Object of this Class for the first time will create a LoginWindow Object, forcing the user to log in
+ * before they are given access to the system.
+ * 
+ * @author Ben Dudley (bed19)
+ * @author David Fairbrother (daf5)
+ * @author Jonathan Englund (jee17)
+ * @author Josh Doyle (jod32)
+ * 
+ * @version 1.0.0
+ * @since 1.0.0
+ * 
+ * @see MainWindowGUI.java
+ * @see LoginWindow.java
+ * @see ConnSettingsWindow.java
+ * @see ViewElementsWindow.java
+ */
 
 public class MainWindow {
 
@@ -57,7 +59,12 @@ public class MainWindow {
    private static long connTime; // The time when CLI last synced with the
                                  // Database
 
-   public TaskList getTaskList() {
+   /**
+    * Gets the entire list of tasks held on the db
+    * @return
+    * 		returns the list of tasks 
+    */
+public TaskList getTaskList() {
       return this.taskList;
    }
 

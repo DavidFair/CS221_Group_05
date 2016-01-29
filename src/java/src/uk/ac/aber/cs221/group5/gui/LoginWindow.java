@@ -21,6 +21,20 @@ import javax.swing.JOptionPane;
 import uk.ac.aber.cs221.group5.logic.DbStatus;
 import uk.ac.aber.cs221.group5.logic.MemberList;
 
+
+/**
+ * Initialize the login window and provides swing implementation
+ * 
+ * @author Ben Dudley (bed19)
+ * @author David Fairbrother (daf5)
+ * @author Jonathan Englund (jee17)
+ * @author Josh Doyle (jod32)
+ * @version 1.0.0
+ * @since 1.0.0
+ * @see LoginWindowGUI.java
+ * 
+ * */
+
 public class LoginWindow {
 
    private LoginWindowGUI childWindow;

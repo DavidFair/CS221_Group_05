@@ -30,6 +30,19 @@ import uk.ac.aber.cs221.group5.logic.Task;
 import uk.ac.aber.cs221.group5.logic.TaskList;
 import uk.ac.aber.cs221.group5.logic.TaskStatuses;
 
+/**
+ * Initialize an edit window, where you can change the status of the task and edit task element comments.
+ * Provides swing implementation
+ * 
+ * @author Ben Dudley (bed19)
+ * @author David Fairbrother (daf5)
+ * @author Jonathan Englund (jee17)
+ * @author Josh Doyle (jod32)
+ * @version 1.0.0
+ * @since 1.0.0
+ * @see MainWindow.java
+ * 
+ * */
 public class EditWindowGUI {
 
    private JFrame frmEditTask;

@@ -1,3 +1,11 @@
+package uk.ac.aber.cs221.group5.logic;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
 /**
  * This Class deals with the list of Members held in memory and used by TaskerCLI, namely loading Members, 
  * and providing validation that a provided email address belongs to a saved Member. 
@@ -13,19 +21,14 @@
  * @see Members
  */
 
-package uk.ac.aber.cs221.group5.logic;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-
 public class MemberList {
    // TODO implement updating memberList
    private ArrayList<Members> memberList = new ArrayList<Members>();
 
-   public MemberList() {
+   /**
+    * constructs an empty member list
+    */
+public MemberList() {
 
    }
 
@@ -100,7 +103,12 @@ public class MemberList {
       return false;
    }
 
-   public int getLength() {
+   /**
+    * gets the length of the current member list
+    * @return the length of the member list as an int
+    */
+   
+public int getLength() {
       return this.memberList.size();
    }
 }

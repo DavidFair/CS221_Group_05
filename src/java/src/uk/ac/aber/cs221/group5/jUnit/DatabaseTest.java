@@ -11,6 +11,21 @@ import uk.ac.aber.cs221.group5.gui.MainWindow;
 import uk.ac.aber.cs221.group5.logic.Database;
 import uk.ac.aber.cs221.group5.logic.DbStatus;
 
+/**
+ * 
+ * Checks database connections, synchronizing and updating through JDBC
+ * interface
+ * 
+ * @author Ben Dudley (bed19)
+ * @author David Fairbrother (daf5)
+ * @author Jonathan Englund (jee17)
+ * @author Josh Doyle (jod32)
+ * @version 1.0.0
+ * @since 1.0.0
+ * @see Database.java
+ *
+ */
+
 public class DatabaseTest {
 
    /*
@@ -30,7 +45,11 @@ public class DatabaseTest {
    private MainWindow parentWindow;
 
    private Database testClass;
-
+   
+/**
+ * 
+ */
+   
    @BeforeClass
    public static void checkTestFields() {
       boolean allDbFieldsPresent = true;
@@ -49,6 +68,10 @@ public class DatabaseTest {
 
    }
 
+   /**
+    * 
+    */
+  
    @Before
    public void createSupportingClasses() {
       parentWindow = new MainWindow();
@@ -56,6 +79,10 @@ public class DatabaseTest {
       testClass.connect(dbURL, dbPort, dbUsername, dbPassword, dbName);
    }
 
+   /**
+    * 
+    */
+   
    @Test
    public void testConnection() {
       testClass.connect(dbURL, dbPort, dbUsername, dbPassword, dbName);
@@ -69,6 +96,10 @@ public class DatabaseTest {
 
    }
 
+   /**
+    * 
+    */
+   
    @Test
    public void testBlankConnect() {
       testClass.connect();
@@ -82,16 +113,28 @@ public class DatabaseTest {
       assertTrue("Blank connection failed", connectionSuccess);
    }
 
+   /**
+    * 
+    */
+   
    @Test
    public void getUsers() {
       testClass.getMembers();
    }
 
+   /**
+    * 
+    */
+   
    @Test
    public void getTasks() {
       testClass.getTasks("example@example.com");
    }
 
+   /**
+    * 
+    */
+   
    @Test
    public void updateElement() {
       fail("Not implemented");

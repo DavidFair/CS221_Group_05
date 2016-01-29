@@ -1,3 +1,7 @@
+package uk.ac.aber.cs221.group5.logic;
+
+import java.util.ArrayList;
+
 /**
  * This Class represents a Task List, a list of many Task Objects.
  * 
@@ -8,10 +12,8 @@
  * 
  * @version 1.0.0
  * @since 1.0.0
+ * @see Task.java
  */
-package uk.ac.aber.cs221.group5.logic;
-
-import java.util.ArrayList;
 
 public class TaskList {
    private ArrayList<Task> list = new ArrayList<Task>();

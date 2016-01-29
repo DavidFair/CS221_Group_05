@@ -1,12 +1,22 @@
+package uk.ac.aber.cs221.group5.logic;
+
+import java.util.ArrayList;
+
 /**
  * This Class deals with a single Task in TaskerCLI. The Class contains methods to get and set the Task
  * attributes. This Class also contains an inner Class to deal with Task Elements, of which there can be
  * from 0 up to an unknown amount.
+ * 
+ * @author Ben Dudley (bed19)
+ * @author David Fairbrother (daf5)
+ * @author Jonathan Englund (jee17)
+ * @author Josh Doyle (jod32)
+ * 
+ * @version 1.0.0
+ * @since 1.0.0
+ * 
+ * @see TaskList.java
  */
-
-package uk.ac.aber.cs221.group5.logic;
-
-import java.util.ArrayList;
 
 public class Task {
    private String taskID;

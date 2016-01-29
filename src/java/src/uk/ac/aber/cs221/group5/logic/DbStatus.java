@@ -1,10 +1,28 @@
+package uk.ac.aber.cs221.group5.logic;
+
 /**
  * This enum holds the three possible values of the Database Connection Status
  * 
- * @see Database
+ * @see Database.java
  */
-package uk.ac.aber.cs221.group5.logic;
 
 public enum DbStatus {
-   CONNECTED, DISCONNECTED, SYNCHRONIZING
+	
+ /**
+ * successfully connected to db
+ */
+	
+CONNECTED, 
+
+/**
+ * could no establish a connection to the db
+ */
+
+DISCONNECTED, 
+
+/**
+ * This is currently interacting with the db
+ */
+
+SYNCHRONIZING
 }
