@@ -3,8 +3,8 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="C:/Users/Joshua/CS221_Group_05/src/java/swt.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Joshua/CS221_Group_05/src/java/jgoodies-forms-1.8.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Joshua/CS221_Group_05/src/java/lib/mysql-connector/mysql-connector-java-5.1.38-bin.jar"/>
+	<classpathentry kind="lib" path="./java/swt.jar"/>
+	<classpathentry kind="lib" path="./java/jgoodies-forms-1.8.0.jar"/>
+	<classpathentry kind="lib" path="./src/java/lib/mysql-connector/mysql-connector-java-5.1.38-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
