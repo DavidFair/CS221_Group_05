@@ -47,9 +47,8 @@ function validateEntry()
     {
         alert("Start date is not in the correct format. Enter YYYY-MM-DD.");
         return false;
-    } else if (!dateRegExp.test(extraEndDate))
-    {
-        alert("End date is not in the correct format. Enter YYYY-MM-DD.");
+    } else if (!dateRegExp.test(extraEndDate)) {
+        alert("Start date is not in the correct format.");
         return false;
     } else if (startDate.getDate < endDate.getDate)
     {
@@ -84,6 +83,10 @@ function validateElements()
     {
         var formValue = "taskDesc_" + i;
         var taskDesc = document.forms["addElements"][formValue].value;
+
+        var formValue2 = "taskComment_" + i;
+        var taskComment = document.forms["addElements"][formValue2].value;
+
         if (taskDesc == null || taskDesc == " ")
         {
             alert("Description is empty.");
@@ -93,10 +96,6 @@ function validateElements()
             alert("Task description is too long.");
             return false;
         } else if (taskDesc.length < 3)
-        {
-            alert("Task description is too short.");
-            return false;
-        } else if (!(ASCIIregExp.test(taskDesc)))
         {
             alert("Task description is too short.");
             return false;
@@ -242,7 +241,44 @@ function validateElements()
 
     function validateTaskEdit()
     {
-        return true;
+        var taskName = document.forms["taskEdit"]["edit_taskEdit"].value;
+        var startDate = document.forms["taskEdit"]["edit_startDate"].value;
+        var endDate = document.forms["taskEdit"]["edit_endDate"].value;
+        var extraStartDate = startDate;
+        var extraEndDate = endDate;
+
+        startDate = new Date();
+        endDate = new Date();
+
+        if (taskName == null || taskName == " ")
+        {
+            alert("The task name is empty.");
+            return false;
+        } else if (taskName.length > 40)
+        {
+            alert("The task name is too long.");
+            return false;
+        } else if (taskName.length <= 2)
+        {
+            alert("The task name is too short.");
+            return false;
+        } else if (!ASCIIregExp.test(taskName))
+        {
+            alert("The task name contains invalid characters.");
+            return false;
+        } else if (!dateRegExp.test(extraStartDate))
+        {
+            alert("Start date is not in the correct format. Enter YYYY-MM-DD.");
+            return false;
+        } else if (!dateRegExp.test(extraEndDate)) {
+            alert("Start date is not in the correct format.");
+            return false;
+        } else if (startDate.getDate < endDate.getDate) {
+            alert("Start date exists after the end date. Please readjust your dates.");
+            return false;
+        } else {
+            return true;
+        }
     }
 
     function validateExtraElement() {

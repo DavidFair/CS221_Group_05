@@ -1,10 +1,10 @@
 <?php
 // Sanitise, run only if we can
-if (isset($_GET['addElement']))
+if (isset($_GET['extraElement']))
 {
-    if (filter_var($_GET['addElement'],FILTER_SANITIZE_NUMBER_INT))
+    if (filter_var($_GET['extraElement'],FILTER_SANITIZE_NUMBER_INT))
     {
-        $taskID = $_GET['addElement'];
+        $taskID = $_GET['extraElement'];
 
         // Check for existence of actual task, just in case
         try
@@ -46,7 +46,7 @@ if (isset($_GET['addElement']))
                 <input name="taskComment" id="taskComment" type="text" class="addInput" maxlength="45" required />
                 <br/>
 
-                <input type="hidden" name="taskID" id="taskID" value="<?php echo $taskID; ?>" />
+                <input type="hidden" name="extra_taskID" id="extra_taskID" value="<?php echo $taskID; ?>" />
                 <input name="submit" class="modalButton" type="submit" value="Submit" />
                 <input name="clear" class="modalButton" type="reset" value="Clear" />
             </fieldset>

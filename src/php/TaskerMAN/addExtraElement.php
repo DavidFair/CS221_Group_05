@@ -12,7 +12,8 @@ if (!($_SESSION['login_auth']))
 // Some sanitisation but not much is necessary
 $description =      filter_var($_POST['taskDesc'],FILTER_SANITIZE_STRING);
 $comment =          filter_var($_POST['taskComment'],FILTER_SANITIZE_STRING);
-$taskID =           filter_var($_POST['taskID'],FILTER_SANITIZE_NUMBER_INT);
+$taskID =           filter_var($_POST['extra_taskID'],FILTER_SANITIZE_NUMBER_INT);
+
 
 // You don't have to worry about the autokey, just add to the database
 try
