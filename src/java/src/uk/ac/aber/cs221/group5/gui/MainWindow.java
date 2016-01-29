@@ -450,13 +450,28 @@ public class MainWindow {
 		fileWriter.close();
 	}
 	
+
+
+	public void readPendingTasks(){
+		try {
+			FileReader fileReader = new FileReader(PENDING_SAVE_PATH);
+			BufferedReader read = new BufferedReader(fileReader);
+			
+					
+			
+		}
+		
+		
+	}
+	
 	/**
 	 * Writes tasks that cannot be sent to the Database to a 'Pending Tasks' file for them to be sent to the Database at a later time.
 	 * @param pendingTask The Task that could not be sent to the Database.
 	 * 
 	 * @throws IOException if the 'Pending Tasks' file cannot be found.
 	 */
-	public void writePendingTask(Task pendingTask) throws IOException{
+	public void writePendingTask(Task pendingTask){
+		try {
 		FileWriter fileWriter = new FileWriter(PENDING_SAVE_PATH, true);
 		BufferedWriter write = new BufferedWriter(fileWriter);
 		write.write(pendingTask.getID());
@@ -481,6 +496,10 @@ public class MainWindow {
 		write.write(pendingTask.getMembers() + "\n");
 		write.write(pendingTask.getStart() + "\n");
 		write.write(pendingTask.getEnd() + "\n");
+		} catch (IOException e) {
+			displayError("Error - Could not write pending tasks to local file", 
+					"Error storing pending tasks");
+		}
 	}
 
 	/**

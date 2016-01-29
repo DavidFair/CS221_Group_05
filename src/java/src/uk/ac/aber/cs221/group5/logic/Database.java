@@ -264,8 +264,8 @@ public class Database {
 						+ updatedTask.getID() + "';";
 				try{
 					executeSqlStatement(query);
-				}catch(Exception e){
-					//hostWindow.writeTask(PENDING_TASK_FILE, returnPending(updatedTask));
+				}catch(SQLException e){
+					hostWindow.writePendingTask(updatedTask);
 				}
 				
 				//Next update all elements
@@ -274,7 +274,12 @@ public class Database {
 
 					query = "UPDATE `tbl_elements` SET `TaskComments`='" + elementObj.getComment()
 							+ "' WHERE `Index`='" + index + "';";
-					executeSqlStatement(query);
+
+					try{
+						executeSqlStatement(query);
+					}catch(SQLException e){
+						hostWindow.writePendingTask(updatedTask);
+					}
 				}
 			}
 		}
@@ -496,7 +501,7 @@ public class Database {
 
 
 
-	private void executeSqlStatement(String statementString){
+	private void executeSqlStatement(String statementString) throws SQLException{
 		
 		
 		try {
@@ -506,6 +511,9 @@ public class Database {
 			// TODO Auto-generated catch block
 			hostWindow.displayError("Error updating database, the error was :" 
 					+ e.getCause(), "Error updating DB");
+			hostWindow.displayWarning("Storing changes locally will attempt to upload on next connection");
+			//Throw exception up a level
+			throw e;
 		}
 		
 	}
