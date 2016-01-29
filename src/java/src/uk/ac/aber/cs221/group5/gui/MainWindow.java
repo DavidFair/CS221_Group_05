@@ -81,6 +81,7 @@ public class MainWindow {
          saveChange(TASK_SAVE_PATH);
          childWindow.populateTable(taskList);
 
+
       } catch (IOException e) {
          // TODO Auto-generated catch block
          e.printStackTrace();
@@ -102,6 +103,11 @@ public class MainWindow {
       this.memberList = list;
       try {
          saveChange(TASK_SAVE_PATH);
+         
+         if (loginWindow != null){
+        	 loginWindow.passMemberList(list);
+         }
+         
       } catch (IOException e) {
          // TODO Auto-generated catch block
          e.printStackTrace();
