@@ -64,7 +64,7 @@ if ($debug)
                     <select title="options" onChange="window.location.href=this.value">
                         <option value="taskerman.php"> </option>
                         <option value="taskerman.php?id=<?php echo $taskID; ?>#openView">View Elements</option>
-                        <option value="taskerman.php?id=<?php echo $taskID; ?>#editView">Edit</option>
+                        <option value="taskerman.php?edit=<?php echo $taskID; ?>#editView">Edit</option>
                         <option value="taskDelete.php?id=<?php echo $taskID; ?>">Delete</option>
                     </select>
                 </td> <?php

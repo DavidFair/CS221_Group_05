@@ -9,12 +9,21 @@ if (isset($_GET['id']))
         $taskID = $_GET['id'];
 
         // SQL retrieve data
-        $stmt = $pdo->prepare("SELECT * from tbl_tasks WHERE TaskID = :taskID");
-        $stmt->bindParam(':taskID',$taskID);
-        $stmt->execute();
+        try
+        {
+            $stmt = $pdo->prepare("SELECT * from tbl_tasks WHERE TaskID = :taskID");
+            $stmt->bindParam(':taskID',$taskID);
+            $stmt->execute();
 
-        // Retrieve and prepare for output
-        $output = $stmt->fetch(PDO::FETCH_ASSOC);
+            // Retrieve and prepare for output
+            $output = $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $ex)
+        {
+            errorHandler($ex->getMessage(),"Fatal Database Error",LOGFILE,timePrint());
+
+        }
+
     } else
     {
         // Not a number or maybe something odd, refresh the page

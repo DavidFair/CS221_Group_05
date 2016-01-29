@@ -57,7 +57,7 @@ if(!isset($_SESSION['login_auth']))
                 <td>
                     <select onChange="window.location.href=this.value">
                         <option value="users.php"> </option>
-                        <option value="users.php?id=<?php echo $emailPK; ?>#editView">Edit</option>
+                        <option value="users.php?edit=<?php echo $emailPK; ?>#editView">Edit</option>
                         <option value="userDelete.php?id=<?php echo $emailPK; ?>">Delete</option>
                     </select>
                 </td> <?php

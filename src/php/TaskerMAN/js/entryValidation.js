@@ -1,13 +1,19 @@
-function validateEntry() {
-    // Everything is just a long if statement chain. It smells but it works.
-
-// Declare variables first
-// Regexp for checking task names, used in CS25010
-    var ASCIIregExp = /^[a-z\d\-_\s]+$/i;
+// Regexp for general alphanumeric entries and spaces
+var ASCIIregExp = /^[a-z\d\-_\s]+$/i;
 
 // Regexp for YY-MM-DD dates
 // Thank you http://stackoverflow.com/questions/13194322/php-regex-to-check-date-is-in-yyyy-mm-dd-format
-    var dateRegExp = /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+var dateRegExp = /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+
+// Email RegExp from CS25010
+var emailRegExp = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+function validateEntry()
+{
+// Everything is just a long if statement chain. It smells but it works.
+
+// Declare variables first
+// Regexp for checking task names, used in CS25010
 
     var taskName = document.forms["taskAdd"]["add_taskName"].value;
     var startDate = document.forms["taskAdd"]["add_startDate"].value;
@@ -73,4 +79,60 @@ function validateEntry() {
 function validateElements()
 {
     return true;
+}
+
+function validateUserEntry()
+{
+    return true;
+}
+
+function validateUserEdit()
+{
+    var email = document.forms["userEdit"]["edit_email"].value;
+    var firstName = document.forms["userEdit"]["edit_firstName"].value;
+    var lastName = document.forms["userEdit"]["edit_lastName"].value;
+    var isManager = document.forms["userEdit"]["edit_isManager"].value;
+
+    if (email == null || email == " ")
+    {
+        alert("The email field is empty.");
+        return false;
+    } else if (email.length > 45)
+    {
+        alert("The email address is too long.");
+        return false;
+    } else if (!emailRegExp.test(email))
+    {
+        alert("This is not a valid email address.");
+        return false;
+    } else if (firstName == null || email == " ")
+    {
+        alert("The first name field is empty.");
+        return false;
+    } else if (firstName.length > 15) {
+        alert("The first name entered is too long.");
+        return false;
+    } else if (!ASCIIregExp.test(firstName))
+    {
+        alert("Invalid data in the first name field");
+        return false;
+    } else if (lastName == null || lastName == " ")
+    {
+        alert("The last name field is empty.");
+        return false;
+    } else if (lastName.length > 15) {
+        alert("The last name entered is too long.");
+        return false;
+    } else if (!ASCIIregExp.test(lastName))
+    {
+        alert("Invalid data in the last name field");
+        return false;
+    } else if (isManager > 1)
+    {
+        alert("Invalid value specified for isManager");
+        return false;
+    } else
+    {
+        return true;
+    }
 }
