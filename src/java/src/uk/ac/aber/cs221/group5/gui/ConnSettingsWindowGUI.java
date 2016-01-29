@@ -19,6 +19,19 @@ import java.awt.event.FocusEvent;
 import java.awt.Window.Type;
 import java.awt.Font;
 
+/**
+ * Initialize a connection settings window and
+ * provides swing implementation
+ * 
+ * @author Ben Dudley (bed19)
+ * @author David Fairbrother (daf5)
+ * @author Jonathan Englund (jee17)
+ * @author Josh Doyle (jod32)
+ * @version 1.0.0
+ * @since 1.0.0
+ * @see ConnSettingsWindow
+ *
+ */
 public class ConnSettingsWindowGUI {
 
 	private JFrame     frmConnectionSettings;
@@ -34,7 +47,7 @@ public class ConnSettingsWindowGUI {
 
 
 	/**
-	 * Create the application.
+	 * Creates the GUI window
 	 */
 	public ConnSettingsWindowGUI() {
 		initialize();
@@ -241,13 +254,20 @@ public class ConnSettingsWindowGUI {
 		frmConnectionSettings.getContentPane().add(btnConnect, gbc_btnConnect);
 	}
 	
-	
+	/**
+	 * Updates the status displayed in the connection window
+	 * @param status New status to be displayed
+	 */
 	public void setConnStatus(DbStatus status){
 		MainWindow main = new MainWindow(); //Used to get Conn Status
 		lblConnStatus.setText(main.getConnStatus().toString());
 		
 	}
 	
+	/**
+	 * 
+	 * @param seconds
+	 */
 	public void setLastSyncedLabel(float seconds){
 		float minutes = seconds / 60;
 		

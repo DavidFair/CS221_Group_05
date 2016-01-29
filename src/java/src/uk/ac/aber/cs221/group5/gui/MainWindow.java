@@ -54,6 +54,8 @@ public class MainWindow {
 
 	public void setTaskList(TaskList list) {
 
+		this.taskList = list;
+		
 		try {
 			saveChange(TASK_SAVE_PATH);
 			childWindow.populateTable(taskList);
