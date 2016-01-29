@@ -16,7 +16,8 @@ $lastName =     filter_var($_POST['add_lastName'],FILTER_SANITIZE_STRING);
 $isManager =    filter_var($_POST['add_isManager'],FILTER_SANITIZE_NUMBER_INT);
 
 // Check if the $email value exists already in the database
-try {
+try
+{
     $stmt = $pdo->prepare("SELECT * FROM tbl_users WHERE Email = :email");
     $stmt->bindParam(':email', $email);
     $stmt->execute();
@@ -31,6 +32,7 @@ try {
 catch (PDOException $ex)
 {
     errorHandler($ex->getMessage(),"Fatal Database Error",LOGFILE,timePrint());
+    header('Location: users.php');
 }
 
 // Time to enter these into the database
@@ -50,6 +52,7 @@ try
 catch (PDOException $ex)
 {
     errorHandler($ex->getMessage(),"Fatal Database Error",LOGFILE,timePrint());
+    header('Location: users.php');
 }
 
 // Redirect

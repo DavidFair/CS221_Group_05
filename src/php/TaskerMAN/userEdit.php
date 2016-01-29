@@ -26,6 +26,7 @@ if (isset($_GET['edit']))
         catch (PDOException $ex)
         {
             errorHandler($ex->getMessage(),"Fatal Database Error",LOGFILE,timePrint());
+            header('Location: users.php');
         }
     } else
     {
@@ -41,8 +42,8 @@ if (isset($_GET['edit']))
             <form name="userEdit" id="userEdit" action="editUser.php" method="POST" onsubmit="return validateUserEdit()">
                 <fieldset class="info_box">
                     <a href="users.php" title="Close" class="close">X</a>
-                    <label for="edit_email" class="titles">Email:</label>
-                    <input value="<?php echo $email; ?>" name="edit_email" id="edit_email" type="email" class="addInput" maxlength="45" required />
+                    <label for="edit_email" class="titles">Email (READ ONLY):</label>
+                    <input value="<?php echo $email; ?>" name="edit_email" id="edit_email" type="email" class="addInput" maxlength="45" readonly />
                     <br/>
 
                     <label for="edit_firstName" class="titles">First Name:</label>
@@ -57,6 +58,7 @@ if (isset($_GET['edit']))
                         <option <?php if ($isManager == 0) { echo 'selected'; }?> value="0">No</option>
                     </select><br/><br/>
 
+                    <input name="edit_originalName" type="hidden" value="<?php echo $email; ?>" />
                     <input name="submit" class="modalButton" type="submit" value="submit"/>
                     <input name="clear" class="modalButton" type="reset" value="clear" />
                 </fieldset>
