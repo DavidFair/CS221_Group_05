@@ -44,124 +44,124 @@ public class MainWindow {
 	private static MainWindowGUI childWindow;
 
 
-	private TaskList taskList     = new TaskList();
-	//TaskList for holding Tasks that cannot be sent to the database
-	private TaskList pendingList  = new TaskList();
-	private MemberList memberList = new MemberList();
+   private TaskList taskList     = new TaskList();
+   //TaskList for holding Tasks that cannot be sent to the database
+   private TaskList pendingList  = new TaskList();
+   private MemberList memberList = new MemberList();
 
-	private static Database databaseObj;
+   private static Database databaseObj;
 
-	private static final String DB_CONFIG_PATH = "connSaveFile.txt";
-	private static final String MEMBERS_SAVE_PATH = "memberSaveFile.txt";
-	private static final String TASK_SAVE_PATH = "taskSaveFile.txt";
-	private static final String PENDING_SAVE_PATH = "pendingSaveFile.txt";
+   private static final String DB_CONFIG_PATH = "connSaveFile.txt";
+   private static final String MEMBERS_SAVE_PATH = "memberSaveFile.txt";
+   private static final String TASK_SAVE_PATH = "taskSaveFile.txt";
+   private static final String PENDING_SAVE_PATH = "pendingSaveFile.txt";
 	
-	private static long connTime; // The time when CLI last synced with the Database
+   private static long connTime; // The time when CLI last synced with the Database
 
-	public TaskList getTaskList() {
-		return this.taskList;
+   public TaskList getTaskList() {
+      return this.taskList;
 	}
 
-	/**
-	 * This method replaces the TaskList held by the MainWindow object with a new TaskList.
-	 * @param list A new TaskList to replace the TaskList held by the MainWindow Object.
-	 */
-	public void setTaskList(TaskList list) {
+   /**
+    * This method replaces the TaskList held by the MainWindow object with a new TaskList.
+    * @param list A new TaskList to replace the TaskList held by the MainWindow Object.
+    */
+   public void setTaskList(TaskList list) {
 
-		this.taskList = list;
+      this.taskList = list;
 		
-		try {
-			saveChange(TASK_SAVE_PATH);
-			childWindow.populateTable(taskList);
+      try {
+         saveChange(TASK_SAVE_PATH);
+         childWindow.populateTable(taskList);
 			
 
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+      } catch (IOException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
 
-	}
+   }
 	
-	/**
-	 * This method replaces the MemberList held by the MainWindow object with a new MemberList.
-	 * @param list A new MemberList to replace the MemberList held by the MainWindow Object 
-	 */
-	public void setmemberList(MemberList list) {
-		connTime = System.currentTimeMillis();
+   /**
+    * This method replaces the MemberList held by the MainWindow object with a new MemberList.
+    * @param list A new MemberList to replace the MemberList held by the MainWindow Object 
+    */
+   public void setmemberList(MemberList list) {
+      connTime = System.currentTimeMillis();
 		
-		this.memberList = list;
-		try {
-			saveChange(TASK_SAVE_PATH);
-		} catch (IOException e) {
+      this.memberList = list;
+      try {
+         saveChange(TASK_SAVE_PATH);
+         } catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+         e.printStackTrace();
+      }
+   }
 	
-	/**
-	 * This is the entry point to the System. This method created a new LoginWindow Object and spawns the Login
-	 * Window GUI.
-	 * 
-	 * @throws InterruptedException if the thread handling establishing a connection to the Database was somehow interrupted.
-	 * @throws NumberFormatException if the number of Members stored in the Members Save File cannot be read. This is usually because the file was somehow corrupted. 
-	 * @throws IOException if the Members Save File cannot be found.
-	 */
-	public static void main(String args[]) throws InterruptedException, NumberFormatException, IOException {
-		TaskList taskList = new TaskList();
-		MemberList memberList = new MemberList();
+   /**
+    * This is the entry point to the System. This method created a new LoginWindow Object and spawns the Login
+    * Window GUI.
+    * 
+    * @throws InterruptedException if the thread handling establishing a connection to the Database was somehow interrupted.
+    * @throws NumberFormatException if the number of Members stored in the Members Save File cannot be read. This is usually because the file was somehow corrupted. 
+    * @throws IOException if the Members Save File cannot be found.
+    */
+   public static void main(String args[]) throws InterruptedException, NumberFormatException, IOException {
+      TaskList taskList = new TaskList();
+      MemberList memberList = new MemberList();
 
-		memberList.loadMembers(MEMBERS_SAVE_PATH);
+      memberList.loadMembers(MEMBERS_SAVE_PATH);
 
-		MainWindow mainWindow = new MainWindow();
-		mainWindow.attachMainWindowToDb(mainWindow);
-		readConfigToDb(DB_CONFIG_PATH);
-		if (!mainWindow.doesGUIExist()) {
-			mainWindow.createWindow();
-		}
+      MainWindow mainWindow = new MainWindow();
+      mainWindow.attachMainWindowToDb(mainWindow);
+      readConfigToDb(DB_CONFIG_PATH);
+      if (!mainWindow.doesGUIExist()) {
+         mainWindow.createWindow();
+      }
 		
-		childWindow.setVisible(false);
+      childWindow.setVisible(false);
 		
-		LoginWindow loginWindow = new LoginWindow();
-		loginWindow.passMemberList(memberList);
-		loginWindow.createWindow();
-		loginWindow.setLabelGUI(databaseObj.getConnStatus());		
-	}
+      LoginWindow loginWindow = new LoginWindow();
+      loginWindow.passMemberList(memberList);
+      loginWindow.createWindow();
+      loginWindow.setLabelGUI(databaseObj.getConnStatus());		
+   }
 
 
-	/**
-	 * Reads the saved connection settings from the Database Configuration file and attempts to connect to the Database using those settings.
-	 * @param dbFile The filepath of the Database Configuration file.
-	 * 
-	 * @throws IOException if the Database Configuration file cannot be found.
-	 * 
-	 * @see callConnectOnDb
-	 */
-	private static void readConfigToDb(String dbFile) throws IOException {
-		FileReader fileReader;
-		try {
-			fileReader = new FileReader(dbFile);
-			BufferedReader read = new BufferedReader(fileReader);
+   /**
+    * Reads the saved connection settings from the Database Configuration file and attempts to connect to the Database using those settings.
+    * @param dbFile The filepath of the Database Configuration file.
+    * 
+    * @throws IOException if the Database Configuration file cannot be found.
+    * 
+    * @see callConnectOnDb
+    */
+   private static void readConfigToDb(String dbFile) throws IOException {
+      FileReader fileReader;
+      try {
+         fileReader = new FileReader(dbFile);
+         BufferedReader read = new BufferedReader(fileReader);
 
-			String dbName;
-			String dbUsername;
-			String dbPassword;
-			String url;
-			String dbPort;
+         String dbName;
+         String dbUsername;
+         String dbPassword;
+         String url;
+         String dbPort;
 
-			dbName = read.readLine();
-			dbUsername = read.readLine();
-			dbPassword = read.readLine();
-			url = read.readLine();
-			dbPort = read.readLine();
+         dbName = read.readLine();
+         dbUsername = read.readLine();
+         dbPassword = read.readLine();
+         url = read.readLine();
+         dbPort = read.readLine();
 
-			read.close();
+         read.close();
 			
-			callConnectOnDb(url, dbPort, dbUsername, dbPassword, dbName);
+         callConnectOnDb(url, dbPort, dbUsername, dbPassword, dbName);
           
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+      } catch (Exception e) {
+         e.printStackTrace();
+      }
+   }
 	
     /**
      * Calls the connect method in the Database Object. 
@@ -173,125 +173,125 @@ public class MainWindow {
      * 
      * @see readConfigToDb
      */
-	public static void callConnectOnDb(String url, String dbPort, String dbUsername, String dbPassword, String dbName) {
-		databaseObj.connect(url, dbPort, dbUsername, dbPassword, dbName);
-	}
+   public static void callConnectOnDb(String url, String dbPort, String dbUsername, String dbPassword, String dbName) {
+      databaseObj.connect(url, dbPort, dbUsername, dbPassword, dbName);
+   }
 	
 	
-	/**
-	 * Checks if the GUI Window for the MainWindow exists. This enables creation of multiple MainWindow Objects without spawning multiple GUI Windows.
-	 * @return Whether or not the Main Window GUI has been created.
-	 */
-	private boolean doesGUIExist() {
-		for (Frame frame : Frame.getFrames()) {
-			if (frame.getTitle().equals("Main Window")) {
-				return true;   
-			}
-		}
-		return false;
-	}
+   /**
+    * Checks if the GUI Window for the MainWindow exists. This enables creation of multiple MainWindow Objects without spawning multiple GUI Windows.
+    * @return Whether or not the Main Window GUI has been created.
+    */
+   private boolean doesGUIExist() {
+      for (Frame frame : Frame.getFrames()) {
+         if (frame.getTitle().equals("Main Window")) {
+            return true;   
+         }
+      }
+      return false;
+   }
 	
-	/**
-	 * Sets the value of the Connection Status indicator label in the Main Window GUI
-	 * @param connStatus The current connection status of the Database.
-	 */
-	public void setConnStatus(DbStatus connStatus) {
-		if (childWindow!= null){
-			MainWindow.childWindow.setConnStatusLabel(connStatus);
-		}
-	}
+   /**
+    * Sets the value of the Connection Status indicator label in the Main Window GUI
+    * @param connStatus The current connection status of the Database.
+    */
+   public void setConnStatus(DbStatus connStatus) {
+      if (childWindow!= null){
+         MainWindow.childWindow.setConnStatusLabel(connStatus);
+      }
+   }
 	
-	/**
-	 * Used to enable or disable the auto-sync timer.
-	 * @param timerState The Boolean state of the auto-syn timer.
-	 */
-	public void setAutoTimer(boolean timerState){
-		if(timerState){
-			databaseObj.startAutoSync();
-		}
-		else{
-			databaseObj.stopAutoSync();
-		}
+   /**
+    * Used to enable or disable the auto-sync timer.
+    * @param timerState The Boolean state of the auto-syn timer.
+    */
+   public void setAutoTimer(boolean timerState){
+      if(timerState){
+         databaseObj.startAutoSync();
+      }
+      else{
+         databaseObj.stopAutoSync();
+      }
 		
-	}
+   }
 
-	/**
-	 * Gets the connection status from the Database Object.
-	 * @return The connection status of the Database.
-	 */
-	public static DbStatus getConnStatus() {
-		return databaseObj.getConnStatus();
-	}
+   /**
+    * Gets the connection status from the Database Object.
+    * @return The connection status of the Database.
+    */
+   public static DbStatus getConnStatus() {
+      return databaseObj.getConnStatus();
+   }
 
-	/**
-	 * Gets the System Time of when TaskerCLI last synced with the Database.
-	 * @return The System Time of when TaskerCLI last synced with the Database/
-	 */
-	public static long getConnTime() {
-		return MainWindow.connTime;
-	}
+   /**
+    * Gets the System Time of when TaskerCLI last synced with the Database.
+    * @return The System Time of when TaskerCLI last synced with the Database/
+    */
+   public static long getConnTime() {
+      return MainWindow.connTime;
+   }
 
-	/**
-	 * Constructor for the MainWindow Class.
-	 */
-	public MainWindow() {
-		// Setup common window features
-		super();
+   /**
+    * Constructor for the MainWindow Class.
+    */
+   public MainWindow() {
+      // Setup common window features
+      super();
 
-	}
+   }
 	
-	/**
-	 * Links the Database Object with this MainWindow Object
-	 * @param main The MainWindow Object to link with the Database Object.
-	 */
-	public void attachMainWindowToDb(MainWindow main){
-		if (databaseObj != null) {
-			databaseObj.setHostWindow(main);
-		} else {
-			databaseObj = new Database(MEMBERS_SAVE_PATH, this);
-		}
+   /**
+    * Links the Database Object with this MainWindow Object
+    * @param main The MainWindow Object to link with the Database Object.
+    */
+   public void attachMainWindowToDb(MainWindow main){
+      if (databaseObj != null) {
+         databaseObj.setHostWindow(main);
+      } else {
+         databaseObj = new Database(MEMBERS_SAVE_PATH, this);
+      }
 		
-	}
+   }
 
-	/**
-	 * Creates a Main Window GUI Window. This method also downloads Tasks from the Database or, failing that, loads a previous version of the TaskList from the local save file.
-	 * 
-	 * @see saveChange
-	 * @see loadTasks
-	 * @see displayWarning
-	 * @see displayError
-	 * @see blankFile
-	 */
-	public void createWindow() {
-		// Get a new child window for super class
-		childWindow = new MainWindowGUI(this);
+   /**
+    * Creates a Main Window GUI Window. This method also downloads Tasks from the Database or, failing that, loads a previous version of the TaskList from the local save file.
+    * 
+    * @see saveChange
+    * @see loadTasks
+    * @see displayWarning
+    * @see displayError
+    * @see blankFile
+    */
+   public void createWindow() {
+      // Get a new child window for super class
+      childWindow = new MainWindowGUI(this);
 
-		// Update local files with Task files from TaskerSRV if we are connected
-		try {
-			if (databaseObj.getConnStatus() == DbStatus.CONNECTED) {
-				saveChange(TASK_SAVE_PATH);
-				loadTasks(TASK_SAVE_PATH);
-				MainWindow.childWindow.populateTable(this.taskList);
-			} else {
-				// If disconnected load then save
-				loadTasks(TASK_SAVE_PATH);
-				MainWindow.childWindow.populateTable(this.taskList);
-			}
-		} catch (FileNotFoundException e) {
-			this.displayWarning("Tasks not found locally, you need to connect to database for tasks");
-			blankFile(TASK_SAVE_PATH);
-		} catch (Exception e1) {
-			this.displayError("Task file empty - Please connect to database for tasks", "Task File empty");
-			blankFile(TASK_SAVE_PATH);
-		}
+      // Update local files with Task files from TaskerSRV if we are connected
+      try {
+          if (databaseObj.getConnStatus() == DbStatus.CONNECTED) {
+            saveChange(TASK_SAVE_PATH);
+            loadTasks(TASK_SAVE_PATH);
+               MainWindow.childWindow.populateTable(this.taskList);
+          } else {
+               // If disconnected load then save
+               loadTasks(TASK_SAVE_PATH);
+               MainWindow.childWindow.populateTable(this.taskList);
+          }
+      } catch (FileNotFoundException e) {
+         this.displayWarning("Tasks not found locally, you need to connect to database for tasks");
+         blankFile(TASK_SAVE_PATH);
+      } catch (Exception e1) {
+         this.displayError("Task file empty - Please connect to database for tasks", "Task File empty");
+         blankFile(TASK_SAVE_PATH);
+      }
 
-		// Load the members into the Member List
-		try {
-			memberList.loadMembers(MEMBERS_SAVE_PATH);
-		} catch (NumberFormatException | IOException e) {
-			this.displayError("Error loading member list, you need to connect to the database",
-					"Error Loading members");
-			blankFile(MEMBERS_SAVE_PATH);
+      // Load the members into the Member List
+      try {
+         memberList.loadMembers(MEMBERS_SAVE_PATH);
+      } catch (NumberFormatException | IOException e) {
+         this.displayError("Error loading member list, you need to connect to the database",
+               "Error Loading members");
+         blankFile(MEMBERS_SAVE_PATH);
 		}
 
 		// Ask parent to setup window for us and pass
