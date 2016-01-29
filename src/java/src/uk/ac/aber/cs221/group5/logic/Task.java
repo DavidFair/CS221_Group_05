@@ -6,6 +6,7 @@
 
 package uk.ac.aber.cs221.group5.logic;
 
+
 import java.util.ArrayList;
 
 public class Task {
@@ -52,7 +53,9 @@ public class Task {
     * Get the Task's unique identifier.
     * 
     * @return The Task's unique identifier.
-    */
+    */   
+   
+   
    public String getID() {
       return this.taskID;
    }
@@ -62,6 +65,8 @@ public class Task {
     * 
     * @return The name of the Task.
     */
+   
+
    public String getName() {
       return this.taskName;
    }
@@ -71,6 +76,8 @@ public class Task {
     * 
     * @return The start date of the Task.
     */
+   
+  
    public String getStart() {
       return this.taskStart;
    }
@@ -80,6 +87,7 @@ public class Task {
     * 
     * @return The Task's expected end date.
     */
+   
    public String getEnd() {
       return this.taskEnd;
    }
@@ -89,6 +97,8 @@ public class Task {
     * 
     * @return The Member assigned to this Task.
     */
+   
+   
    public String getMembers() {
       return this.taskMembers;
    }
