@@ -51,7 +51,7 @@ if(!isset($_SESSION['login_auth']))
                 </td> <?php
                 echo '<td>'.$emailPK.'</td>';
                 echo '<td>'.$row['FirstName'].'</td>';
-                echo '<td>'.$row['SecondName'].'</td>';
+                echo '<td>'.$row['LastName'].'</td>';
                 echo '<td>'.convertIsManager($row['IsManager']).'</td>';
             }
         }

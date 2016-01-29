@@ -37,7 +37,7 @@ if (isset($_GET['id']))
 
                 <label for="taskStatus" class="titles">Status</label>
                 <input name="taskStatus" id="taskStatus" type="text" class="viewInput"
-                       value="<?php echo convertStatus($output['TaskName']); ?>" readonly  /><br/>
+                       value="<?php echo convertStatus($output['Status']); ?>" readonly  /><br/>
 
                 <label for="assignedTaskMember" class="titles">Allocated Task Member</label>
                 <input name="assignedTaskMember" id="assignedTaskMember" type="text" class="viewInput"

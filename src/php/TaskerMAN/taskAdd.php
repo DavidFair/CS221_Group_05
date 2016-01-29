@@ -2,7 +2,7 @@
     <div>
         <div class="modal">
             <script src="js/entryValidation.js"></script>
-            <form name ="taskAdd" action="taskAddGateway.php" method="POST" onsubmit="return validateEntry()">
+            <form name ="taskAdd" id="taskAdd" action="taskAddGateway.php" method="POST" onsubmit="return validateEntry()">
                 <fieldset class="info_box">
                     <a href="taskerman.php" title="Close" class="close">X</a>
                     <label for="add_taskName" class="titles">Task Name:</label>
