@@ -14,11 +14,11 @@
                         // Print a box for task description and comment
                         echo '<label for="taskDesc_' . $i . '">Task Description ' . $i .
                             '</label><br/>';
-                        echo '<input name="taskDesc_' . $i . '" type="text" id="taskDesc_' . $i . '" required /><br/>';
+                        echo '<input name="taskDesc_' . $i . '" type="text" id="taskDesc_' . $i . '" maxlength="45" required /><br/>';
 
                         echo '<label for="taskComment_' . $i . '">Task Comment ' . $i .
                             '</label><br/>';
-                        echo '<input name="taskComment_' . $i . '" type="text" id="taskComment_' . $i . '" required /><br/>';
+                        echo '<input name="taskComment_' . $i . '" type="text" id="taskComment_' . $i . '" maxlength="45" required /><br/>';
                     } ?>
                     <input name="submit" class="modalButton" type="submit" value="Submit" />
                     <input name="clear" class="modalButton" type="reset" value="Clear" />
