@@ -37,7 +37,9 @@ public class MainWindow {
 	private static MainWindowGUI childWindow;
 
 
-	private TaskList taskList = new TaskList();
+	private TaskList taskList     = new TaskList();
+	//TaskList for holding Tasks that cannot be sent to the database
+	private TaskList pendingList  = new TaskList();
 	private MemberList memberList = new MemberList();
 
 	private static Database databaseObj;
@@ -45,7 +47,8 @@ public class MainWindow {
 	private static final String DB_CONFIG_PATH = "connSaveFile.txt";
 	private static final String MEMBERS_SAVE_PATH = "memberSaveFile.txt";
 	private static final String TASK_SAVE_PATH = "taskSaveFile.txt";
-
+	private static final String PENDING_SAVE_PATH = "pendingSaveFile.txt";
+	
 	private static long connTime; // The time when CLI last synced with the Database
 
 	public TaskList getTaskList() {
@@ -358,7 +361,7 @@ public class MainWindow {
 		int numOfElements = 0; // The number of Elements in a single Task
 		write.write(numOfTasks + "\n");
 		for (int loopCount = 0; loopCount < numOfTasks; loopCount++) {
-			writeTask = this.taskList.getTask(loopCount);
+			writeTask = taskList.getTask(loopCount);
 			elements = writeTask.getAllElements();
 			write.write(writeTask.getID() + "\n");
 			// Elements
@@ -386,6 +389,33 @@ public class MainWindow {
 		}
 		write.close();
 		fileWriter.close();
+	}
+	
+	public void writePendingTask(Task pendingTask) throws IOException{
+		FileWriter fileWriter = new FileWriter(PENDING_SAVE_PATH, true);
+		BufferedWriter write = new BufferedWriter(fileWriter);
+		write.write(pendingTask.getID());
+		int numOfElements = pendingTask.getNumElements();
+		ArrayList<uk.ac.aber.cs221.group5.logic.Task.Element> elements = pendingTask.getAllElements();
+		if (numOfElements == 0) {
+			write.write("0\n");
+			write.write(",|");
+		} else {
+			for (int idCount = 0; idCount < pendingTask.getNumElements(); idCount++){
+				write.write(pendingTask.getElement(idCount).getIndex()+",");
+			}
+			write.write("\n");
+			for (int i = 0; i < pendingTask.getNumElements(); i++) {
+				uk.ac.aber.cs221.group5.logic.Task.Element writeElement = elements.get(i);
+				write.write(writeElement.getName()+","+writeElement.getComment()+"|");
+			}
+		}
+		write.write("\n");
+		write.write(pendingTask.getName() + "\n");
+		write.write(pendingTask.getStatus() + "\n");
+		write.write(pendingTask.getMembers() + "\n");
+		write.write(pendingTask.getStart() + "\n");
+		write.write(pendingTask.getEnd() + "\n");
 	}
 
 	public void updateLocalFiles(String taskFile) {

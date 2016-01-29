@@ -54,6 +54,8 @@ public class Database {
 	// How often the DB attempts to update program information
 	private static final int REFRESH_SEC_DELAY = 60;
 	private static final int SYNC_ALRT_DELAY = 1;
+	
+	private static final String PENDING_TASK_FILE = "pendingSaveFile.txt";
 
 
 
@@ -225,7 +227,11 @@ public class Database {
 				//Update task status on DB
 				String query = "UPDATE `tbl_tasks` SET `Status`='" + statusNum + "' WHERE `TaskID`='"
 						+ updatedTask.getID() + "';";
-				executeSqlStatement(query);
+				try{
+					executeSqlStatement(query);
+				}catch(Exception e){
+					//hostWindow.writeTask(PENDING_TASK_FILE, returnPending(updatedTask));
+				}
 				
 				//Next update all elements
 				for (Element elementObj : taskObj.getAllElements()) {
@@ -285,6 +291,10 @@ public class Database {
 
 
 	public DbStatus getConnStatus() {
+		if(this.currentStatus.toString().equals("CONNECTED")){
+			//TODO Execute 'pending sync'
+			
+		}
 		return currentStatus;
 	}
 
@@ -426,7 +436,7 @@ public class Database {
 	 *            The SQL query to execute
 	 * @return ResultSet containing result. If it fails null.
 	 */
-	private ResultSet executeSqlStatement(Statement statementToExec, String query) {
+	private ResultSet executeSqlSelect(Statement statementToExec, String query) {
 
 		ResultSet sqlOutput;
 
@@ -490,7 +500,7 @@ public class Database {
 		}
 
 		// Pass resultSet straight through to caller
-		return executeSqlStatement(sqlStatementObject, query);
+		return executeSqlSelect(sqlStatementObject, query);
 
 	}
 
@@ -687,6 +697,10 @@ public class Database {
 
 		latencyTimer.schedule(new LatencyAlert(this), SYNC_ALRT_DELAY * 1000);
 
+	}
+	
+	private Task returnPending(Task returnTask){
+		return returnTask;
 	}
 
 }
