@@ -1,7 +1,7 @@
 // @author Oliver Earl
 
 // RegExp for general alphanumeric entries and spaces
-var ASCIIregExp = /^[a-z\d\-_\s]+$/;
+var ASCIIregExp = /^[a-z\d\-_\s]+$/i;
 
 // RegExp for YY-MM-DD dates
 // Thank you http://stackoverflow.com/questions/13194322/php-regex-to-check-date-is-in-yyyy-mm-dd-format
@@ -89,206 +89,292 @@ function validateEntry()
     return true;
 }
 
-function validateElements() {
-    var form = document.getElementById("addElements");
-    var inputChildren = (form.getElementsByClassName('elementInput').length / 2);
-    for (var i = 1; i < inputChildren; i++) {
+function validateElements()
+{
+    // I'm really pleased with the creativity of this function.
+    var inputChildren = (document.getElementsByClassName('elementInput').length / 2);
+
+    for (var i = 1; i < inputChildren; i++);
+    {
         var formValue = "taskDesc_" + i;
         var taskDesc = document.forms["addElements"][formValue].value;
 
         var formValue2 = "taskComment_" + i;
         var taskComment = document.forms["addElements"][formValue2].value;
 
-        if (taskDesc == null || taskDesc == " ") {
+        if (taskDesc == null || taskDesc == " ")
+        {
             alert("Description is empty.");
             return false;
-        } else if (taskDesc.length > 45) {
+        }
+
+        if (taskDesc.length > 45)
+        {
             alert("Task description is too long.");
             return false;
-        } else if (taskDesc.length < 2 || taskDesc.length == 0 || taskDesc.length == 1) {
+        }
+
+        if (taskDesc.length < 2)
+        {
             alert("Task description is too short.");
             return false;
-        } else if (!(ASCIIregExp.test(taskDesc))) {
+        }
+
+        if (!(ASCIIregExp.test(taskDesc)))
+        {
             alert("Invalid characters in task description.");
             return false;
-        } else if (taskComment == null || taskComment == " ") {
+        }
+
+        if (taskComment == null || taskComment == " ")
+        {
             alert("Comment is empty.");
             return false;
-        } else if (taskComment.length > 45) {
+        }
+
+        if (taskComment.length > 45)
+        {
             alert("Task comment is too long.");
             return false;
-        } else if (taskComment.length < 2 || taskComment.length == 0 || taskComment.length == 1) {
+        }
+
+        if (taskComment.length < 2)
+        {
             alert("Task comment is too short.");
             return false;
-        } else if (!(ASCIIregExp.test(taskComment))) {
+        }
+
+        if (!(ASCIIregExp.test(taskComment)))
+        {
             alert("Invalid characters in task comment.");
             return false;
-        } else {
-            return true;
         }
     }
-
-    function validateUserEntry() {
-        var email = document.forms["userAdd"]["add_email"].value;
-        var firstName = document.forms["userAdd"]["add_firstName"].value;
-        var lastName = document.forms["userAdd"]["add_lastName"].value;
-        var isManager = document.forms["userAdd"]["add_isManager"].value;
-
-        if (email == null || email == " ") {
-            alert("The email field is empty.");
-            return false;
-        } else if (email.length > 45) {
-            alert("The email address is too long.");
-            return false;
-        } else if (!emailRegExp.test(email)) {
-            alert("This is not a valid email address.");
-            return false;
-        } else if (firstName == null || email == " ") {
-            alert("The first name field is empty.");
-            return false;
-        } else if (firstName.length > 15) {
-            alert("The first name entered is too long.");
-            return false;
-        } else if (firstName.length < 2) {
-            alert("The first name entered is too short.");
-            return false;
-        } else if (!ASCIIregExp.test(firstName)) {
-            alert("Invalid data in the first name field");
-            return false;
-        } else if (lastName == null || lastName == " ") {
-            alert("The last name field is empty.");
-            return false;
-        } else if (lastName.length > 15) {
-            alert("The last name entered is too long.");
-            return false;
-        } else if (lastName.length < 2) {
-            alert("The last name entered is too short.");
-            return false;
-        } else if (!ASCIIregExp.test(lastName)) {
-            alert("Invalid data in the last name field");
-            return false;
-        } else if (isManager > 1) {
-            alert("Invalid value specified for isManager");
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    function validateUserEdit() {
-        var email = document.forms["userEdit"]["edit_email"].value;
-        var firstName = document.forms["userEdit"]["edit_firstName"].value;
-        var lastName = document.forms["userEdit"]["edit_lastName"].value;
-        var isManager = document.forms["userEdit"]["edit_isManager"].value;
-
-        if (email == null || email == " ") {
-            alert("The email field is empty.");
-            return false;
-        } else if (email.length > 45) {
-            alert("The email address is too long.");
-            return false;
-        } else if (!emailRegExp.test(email)) {
-            alert("This is not a valid email address.");
-            return false;
-        } else if (firstName == null || email == " ") {
-            alert("The first name field is empty.");
-            return false;
-        } else if (firstName.length > 15) {
-            alert("The first name entered is too long.");
-            return false;
-        } else if (firstName.length < 2) {
-            alert("The first name entered is too short.");
-            return false;
-        } else if (!ASCIIregExp.test(firstName)) {
-            alert("Invalid data in the first name field");
-            return false;
-        } else if (lastName == null || lastName == " ") {
-            alert("The last name field is empty.");
-            return false;
-        } else if (lastName.length > 15) {
-            alert("The last name entered is too long.");
-            return false;
-        } else if (lastName.length < 2) {
-            alert("The last name entered is too short.");
-            return false;
-        } else if (!ASCIIregExp.test(lastName)) {
-            alert("Invalid data in the last name field");
-            return false;
-        } else if (isManager > 1) {
-            alert("Invalid value specified for isManager");
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    function validateTaskEdit() {
-        var taskName = document.forms["taskEdit"]["edit_taskEdit"].value;
-        var startDate = document.forms["taskEdit"]["edit_startDate"].value;
-        var endDate = document.forms["taskEdit"]["edit_endDate"].value;
-        var extraStartDate = startDate;
-        var extraEndDate = endDate;
-
-        startDate = new Date();
-        endDate = new Date();
-
-        if (taskName == null || taskName == " ") {
-            alert("The task name is empty.");
-            return false;
-        } else if (taskName.length > 40) {
-            alert("The task name is too long.");
-            return false;
-        } else if (taskName.length <= 2) {
-            alert("The task name is too short.");
-            return false;
-        } else if (!ASCIIregExp.test(taskName)) {
-            alert("The task name contains invalid characters.");
-            return false;
-        } else if (!dateRegExp.test(extraStartDate)) {
-            alert("Start date is not in the correct format. Enter YYYY-MM-DD.");
-            return false;
-        } else if (!dateRegExp.test(extraEndDate)) {
-            alert("Start date is not in the correct format.");
-            return false;
-        } else if (startDate.getDate < endDate.getDate) {
-            alert("Start date exists after the end date. Please readjust your dates.");
-            return false;
-        } else {
-            return true;
-        }
-    }
+    return true;
 }
 
-    function validateExtraElement()
-    {
-        var taskDesc = document.forms["extraElement"]["taskDesc"].value;
-        var taskComment = document.forms["extraElement"]["taskComment"].value;
+function validateUserEntry() {
+    var email = document.forms["userAdd"]["add_email"].value;
+    var firstName = document.forms["userAdd"]["add_firstName"].value;
+    var lastName = document.forms["userAdd"]["add_lastName"].value;
 
-        if (taskDesc == null || taskDesc == " ") {
-            alert("Description is empty.");
-            return false;
-        } else if (taskDesc.length > 45) {
-            alert("Task description is too long.");
-            return false;
-        } else if (taskDesc.length < 2) {
-            alert("Task description is too short.");
-            return false;
-        } else if (!(ASCIIregExp.test(taskDesc))) {
-            alert("Invalid characters in task description.");
-            return false;
-        } else if (taskComment == null || taskComment == " ") {
-            alert("Comment is empty.");
-            return false;
-        } else if (taskComment.length > 45) {
-            alert("Task comment is too long.");
-            return false;
-        } else if (taskComment.length < 2) {
-            alert("Task comment is too short.");
-            return false;
-        } else if (!(ASCIIregExp.test(taskComment))) {
-            alert("Invalid characters in task comment.");
-            return false;
-        } else {
-            return true;
-        }
+    if (email == null || email == " ") {
+        alert("The email field is empty.");
+        return false;
+    }
+
+    if (email.length > 45) {
+        alert("The email address is too long.");
+        return false;
+    }
+
+    if (!(emailRegExp.test(email))) {
+        alert("The email address contains invalid characters.");
+        return false;
+    }
+
+    if (firstName == null || firstName == " ") {
+        alert("The first name field is empty.");
+        return false;
+    }
+
+    if (firstName.length > 15) {
+        alert("The first name field is too long.");
+        return false;
+    }
+
+    if (firstName.length < 2) {
+        alert("The first name field is too small.");
+        return false;
+    }
+
+    if (!(ASCIIregExp.test(firstName))) {
+        alert("The first name contains invalid characters.");
+        return false;
+    }
+
+    if (lastName == null || lastName == " ") {
+        alert("The last name field is empty.");
+        return false;
+    }
+
+    if (lastName.length > 15) {
+        alert("The last name field is too long.");
+        return false;
+    }
+
+    if (lastName.length < 2) {
+        alert("The last name field is too small.");
+        return false;
+    }
+
+    if (!(ASCIIregExp.test(lastName))) {
+        alert("The last name contains invalid characters.");
+        return false;
+    }
+
+    return true;
+}
+function validateUserEdit() {
+    var email = document.forms["userEdit"]["edit_email"].value;
+    var firstName = document.forms["userEdit"]["edit_firstName"].value;
+    var lastName = document.forms["userEdit"]["edit_lastName"].value;
+
+    if (email == null || email == " ") {
+        alert("The email field is empty.");
+        return false;
+    }
+
+    if (email.length > 45) {
+        alert("The email address is too long.");
+        return false;
+    }
+
+    if (!(emailRegExp.test(email))) {
+        alert("The email address contains invalid characters.");
+        return false;
+    }
+
+    if (firstName == null || firstName == " ") {
+        alert("The first name field is empty.");
+        return false;
+    }
+
+    if (firstName.length > 15) {
+        alert("The first name field is too long.");
+        return false;
+    }
+
+    if (firstName.length < 2) {
+        alert("The first name field is too small.");
+        return false;
+    }
+
+    if (!(ASCIIregExp.test(firstName))) {
+        alert("The first name contains invalid characters.");
+        return false;
+    }
+
+    if (lastName == null || lastName == " ") {
+        alert("The last name field is empty.");
+        return false;
+    }
+
+    if (lastName.length > 15) {
+        alert("The last name field is too long.");
+        return false;
+    }
+
+    if (lastName.length < 2) {
+        alert("The last name field is too small.");
+        return false;
+    }
+
+    if (!(ASCIIregExp.test(lastName))) {
+        alert("The last name contains invalid characters.");
+        return false;
+    }
+    return true;
+}
+
+function validateTaskEdit() {
+    var taskName = document.forms["taskEdit"]["edit_taskEdit"].value;
+    var startDate = document.forms["taskEdit"]["edit_startDate"].value;
+    var endDate = document.forms["taskEdit"]["edit_endDate"].value;
+    var extraStartDate = startDate;
+    var extraEndDate = endDate;
+
+    startDate = new Date();
+    endDate = new Date();
+
+    if (taskName == null || taskName == " ") {
+        alert("The task name is empty.");
+        return false;
+    }
+
+    if (taskName.length > 40) {
+        alert("The task name is too long.");
+        return false;
+    }
+
+    if (taskName.length < 2) {
+        alert("The task name is too small.");
+        return false;
+    }
+
+    if (!(ASCIIregExp.test(taskName))) {
+        alert("There are invalid characters in the task name.");
+        return false;
+    }
+
+    if (!dateRegExp.test(extraStartDate)) {
+        alert("The start date is in an invalid format. Please enter in YYYY-MM-DD format.");
+        return false;
+    }
+
+    if (!dateRegExp.test(extraEndDate)) {
+        alert("The end date is in an invalid format. Please enter in YYYY-MM-DD format.");
+        return false;
+    }
+
+    if (startDate.getDate > endDate.getDate) {
+        alert("The start date is in a point in the future further than the end date.");
+        return false;
+    }
+    return true;
+}
+
+function validateExtraElement()
+{
+    var taskDesc = document.forms["extraElement"]["taskDesc"].value;
+    var taskComment = document.forms["extraElement"]["taskComment"].value;
+
+    if (taskDesc == null || taskDesc == " ")
+    {
+        alert("Description is empty.");
+        return false;
+    }
+
+    if (taskDesc.length > 45)
+    {
+        alert("Task description is too long.");
+        return false;
+    }
+
+    if (taskDesc.length < 2)
+    {
+        alert("Task description is too small.");
+        return false;
+    }
+
+    if (!(ASCIIregExp.test(taskDesc)))
+    {
+        alert("Invalid characters in task description.");
+        return false;
+    }
+
+    if (taskComment == null || taskComment == " ")
+    {
+        alert("Comment is empty.");
+        return false;
+    }
+
+    if (taskComment.length > 45)
+    {
+        alert("Task comment is too long.");
+        return false;
+    }
+
+    if (taskComment.length < 2)
+    {
+        alert("Task comment is too small.");
+        return false;
+    }
+
+    if (!(ASCIIregExp.test(taskDesc)))
+    {
+        alert("Invalid comment in task description.");
+        return false;
+    }
+    return true;
 }
