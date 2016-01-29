@@ -1,6 +1,7 @@
 package uk.ac.aber.cs221.group5.gui;
 
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -381,6 +382,10 @@ public class EditWindowGUI {
 
             // Resume auto-sync
             main.setAutoTimer(true);
+
+            // Update the GUI with the Edited Task
+            main.refreshGUI();
+
             frmEditTask.dispose();
          }
       });
