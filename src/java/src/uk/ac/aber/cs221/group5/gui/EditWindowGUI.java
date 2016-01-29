@@ -88,6 +88,11 @@ public class EditWindowGUI {
          @Override
          public void windowClosing(WindowEvent event) {
             main.setAutoTimer(true);
+            try{
+            	main.loadTasks(TASK_SAVE_PATH);
+            } catch (Exception e){
+            	e.printStackTrace();
+            }
             frmEditTask.dispose();
          }
       });
@@ -315,6 +320,11 @@ public class EditWindowGUI {
             // concurrency issues.
             try {
                main.updateLocalFiles(TASK_SAVE_PATH);
+               try{
+               	main.loadTasks(TASK_SAVE_PATH);
+               } catch (Exception e){
+               	e.printStackTrace();
+               }
             } catch (Exception e) {
                main.displayError("Could not downlad Task data.", "Connection Error");
             }
