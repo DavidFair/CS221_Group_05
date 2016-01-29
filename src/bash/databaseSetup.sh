@@ -288,7 +288,7 @@ fi
 
 if [ "$skipUsers"  != TRUE ]
 then
-string="CREATE TABLE \`tbl_users\` ( \`Email\` VARCHAR(20) NOT NULL, \`FirstName\` VARCHAR(15) NOT NULL, \`LastName\` VARCHAR(15) NOT NULL, \`isManager\` INT NOT NULL, PRIMARY KEY (\`Email\`));"
+string="CREATE TABLE \`tbl_users\` ( \`Email\` VARCHAR(20) NOT NULL, \`FirstName\` VARCHAR(15) NOT NULL, \`LastName\` VARCHAR(15) NOT NULL, \`IsManager\` INT NOT NULL, PRIMARY KEY (\`Email\`));"
   echo "Creating Users Table"
   do_query "$string"
   
