@@ -1,8 +1,17 @@
-/*
- * MainWindow.java 1.0 2015-11-09
+/**
+ * This Class handles all of the GUI aspects of the Main Window. It dislpays all Tasks and gives the
+ * user control to open other windows, such as the Edit Window and View Elements Window.
  * 
- * Copyright (c) Aberystwyth University
- * All Rights Reserved
+ * @author Ben Dudley (bed19)
+ * @author David Fairbrother (daf5)
+ * @author Jonathan Englund (jee17)
+ * @author Josh Doyle (jod32)
+ * 
+ * @version 1.0.0
+ * @since 1.0.0
+ * 
+ * @see MainWindow
+ * 
  */
 
 package uk.ac.aber.cs221.group5.gui;
@@ -57,6 +66,11 @@ public class MainWindowGUI {
 
    private MainWindow main;
 
+   /**
+    * This method starts up the Main Window GUI. The Main Window GUI starts out
+    * not being visible because it is called before the user has logged in and
+    * setting the GUI to visible would give anyone access to the Task data.
+    */
    public void launchWindow() {
 
       // Create inner class which implements runnable
@@ -80,10 +94,7 @@ public class MainWindowGUI {
    /**
     * Create the application.
     * 
-    * @author Joshua Doyle
-    * @version 1.0
-    * @since 1.0 Initial Development
-    * @see #initialize()
+    * @see initialize()
     */
    public MainWindowGUI(MainWindow mainWindow) {
       this.main = mainWindow;
@@ -93,10 +104,6 @@ public class MainWindowGUI {
    /**
     * Initialize the contents of the frame. Draws the components of the 'Main'
     * Window.
-    * 
-    * @author Joshua Doyle
-    * @version 1.0
-    * @since 1.0 Initial Development
     */
    private void initialize() {
       frmMainWindow = new JFrame();
@@ -266,12 +273,17 @@ public class MainWindowGUI {
             int selectedRow = table.getSelectedRow();
             if (selectedRow > -1) {
                try {
+                  // Opens up the View Elements Window with the Element data
+                  // from the Task that has been selected in the Table in Main
+                  // Window GUI.
                   ViewElementsWindow viewElements = new ViewElementsWindow(table.getSelectedRow());
                } catch (IOException e) {
                   // TODO Auto-generated catch block
                   e.printStackTrace();
                }
             } else {
+               // Error message if the user tries to view Elements without first
+               // selecting a Task
                JOptionPane.showMessageDialog(null, "Select a Task to View Task Elements", "Selection Error",
                      JOptionPane.ERROR_MESSAGE);
             }
@@ -292,6 +304,8 @@ public class MainWindowGUI {
                EditWindowGUI editWindow;
 
                try {
+                  // Open the Edit Window with the data of the selected task
+                  // from the Table in Main Window
                   editWindow = new EditWindowGUI(table.getSelectedRow(), main);
                   editWindow.setFields(txtTaskName.getText(), TaskStatuses.valueOf(txtStatus.getText()),
                         txtAssigned.getText(), txtStartDate.getText(), txtEndDate.getText());
@@ -301,6 +315,8 @@ public class MainWindowGUI {
                }
 
             } else {
+               // Display an error if the user tries to open the Edit Window
+               // without selecting a Task
                JOptionPane.showMessageDialog(null, "Select a Task to Edit", "Selection Error",
                      JOptionPane.ERROR_MESSAGE);
             }
@@ -344,6 +360,7 @@ public class MainWindowGUI {
       btnConnectionSettings.setFont(new Font("Tahoma", Font.PLAIN, 18));
       btnConnectionSettings.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
+            // Open the Connection Settings Window
             ConnSettingsWindow connSettings = new ConnSettingsWindow(true);
          }
       });
@@ -358,9 +375,11 @@ public class MainWindowGUI {
          @Override
          public void mouseClicked(MouseEvent arg0) {
             int dialogButton = JOptionPane.YES_NO_OPTION;
+            // Confirm the user wants to exit
             int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?", "Confirmation",
                   dialogButton);
             if (dialogResult == JOptionPane.YES_OPTION) {
+               // Make sure we close connections to the Database before we exit
                main.destroyWindow();
                System.exit(0);
             }
@@ -426,20 +445,30 @@ public class MainWindowGUI {
             }
          }
       });
-      /*
-       * table.getModel().addTableModelListener(new TableModelListener() {
-       * 
-       * @Override public void tableChanged(TableModelEvent e) { int row =
-       * table.getSelectedRow(); int col = table.getSelectedColumn();
-       * table.setValueAt(table.getValueAt(row, col), row, col); } });
-       */
    }
 
+   /**
+    * Updates the label that shows the status of the Connection to the Database
+    * 
+    * @param status
+    *           The last received status from the Database
+    */
    public void setConnStatusLabel(DbStatus status) {
       lblConnStatus.setText(status.toString());
       table.repaint();
    }
 
+   /**
+    * This method adds all the Task Data to the Table in the Main Window GUI.
+    * 
+    * @param taskList
+    *           The list of Tasks in memory to load into the Table
+    * @throws NumberFormatException
+    *            if the number of Tasks in the local Tasks save file cannot be
+    *            read.
+    * @throws IOException
+    *            if the local Tasks save file cannot be read.
+    */
    public void populateTable(TaskList taskList) throws NumberFormatException, IOException {
 
       DefaultTableModel model = (DefaultTableModel) (table.getModel());
@@ -455,20 +484,6 @@ public class MainWindowGUI {
       frmMainWindow.repaint();
    }
 
-   public void resizeTableCols(JTable table) {
-      final TableColumnModel columnModel = table.getColumnModel();
-      for (int column = 0; column < table.getColumnCount(); column++) {
-         int minWidth = 75;
-         for (int row = 0; row < table.getRowCount(); row++) {
-            TableCellRenderer renderer = table.getCellRenderer(row, column);
-            Component comp = table.prepareRenderer(renderer, row, column);
-            minWidth = Math.max(comp.getPreferredSize().width + 1, minWidth);
-         }
-         columnModel.getColumn(column).setPreferredWidth(minWidth);
-      }
-      table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-   }
-
    /**
     * Applies saved changes to the table of Tasks after a Task has been edited
     * 
@@ -482,6 +497,12 @@ public class MainWindowGUI {
       model.setValueAt(newStatus, rowNo, 2);
    }
 
+   /**
+    * Sets the visibility of this Main Window GUI.
+    * 
+    * @param b
+    *           The visibility state of the Window.
+    */
    public void setVisible(boolean b) {
       this.frmMainWindow.setVisible(b);
    }
