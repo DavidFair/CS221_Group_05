@@ -1,20 +1,19 @@
 <?php
 /**
- * TODO Insert PHPDoc comment here
- * TODO PHPUnit tests for various sequences
- * @author Oliver Earl
+ * TaskerMAN Main Interface - Tasks View
+ * @author Oliver Earl, Tim Anderson
  */
 require('init.php');
-// If the user isn't logged in, redirect them back to the login page
-if (!isset($_SESSION['login_auth']))
-{
-    header('Location: index.php');
-}
 
-if (isset($_POST['taskAdd']))
-{
-    header('Location: taskerman.php#addElements');
-}
+/*
+ * Authentication and Behaviours
+ */
+
+// Access only if logged in
+if (!(isset($_SESSION['login_auth']))) { header('Location: index.php'); }
+
+// Adding Elements After Gateway Redirection
+if (isset($_POST['taskAdd'])) { header('Location: taskerman.php#addElements'); }
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -23,13 +22,14 @@ if (isset($_POST['taskAdd']))
     <title><?php echo APP_NAME . ' ' . APP_VER; ?></title>
 </head>
 <body>
-
-<?php //It's an easter egg. We don't care if marquee isn't HTML5 compliant. It's glorious.
+<?php
+// Easter Egg
 if ($debug)
-{ ?>
-    <marquee><img class="nigel" src="img/nigel.jpg" alt="We're debugging right now!">Debug Mode!</marquee>
-<?php } ?>
-
+{
+    // Even if marquee isn't HTML5 compliant, we had fun with this
+    echo '<marquee><img class="nigel" src="img/nigel.jpg" alt="Debug!"></marquee>';
+}
+?>
 <!-- Container -->
 <div class="container">
     <!-- Header -->
@@ -110,3 +110,4 @@ if ($debug)
 
 </body>
 </html>
+
