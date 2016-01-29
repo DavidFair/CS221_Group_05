@@ -65,7 +65,7 @@ if ($debug)
                         <option value="taskerman.php"> </option>
                         <option value="taskerman.php?id=<?php echo $taskID; ?>#openView">View Elements</option>
                         <option value="taskerman.php?extraElement=<?php echo $taskID; ?>#extraElement">Add Element</option>
-                        <option value="taskerman.php?deleteElement=<?php echo $taskID; ?>#deleteElement">Delete Element</option>
+                        <option value="elementDelete.php?id=<?php echo $taskID; ?>#deleteElement">Delete Elements</option>
                         <option value="taskerman.php?edit=<?php echo $taskID; ?>#editView">Edit Task</option>
                         <option value="taskDelete.php?id=<?php echo $taskID; ?>">Delete Task</option>
                     </select>
