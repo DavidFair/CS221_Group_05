@@ -132,7 +132,7 @@ public class EditWindowGUI {
 		
 		cmbTaskStatus = new JComboBox();
 		cmbTaskStatus.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		cmbTaskStatus.setModel(new DefaultComboBoxModel(new String[] {"Allocated", "Abandoned", "Completed"}));
+		cmbTaskStatus.setModel(new DefaultComboBoxModel(new String[] {"Abandoned", "Allocated", "Completed"}));
 		GridBagConstraints gbc_cmbTaskStatus = new GridBagConstraints();
 		gbc_cmbTaskStatus.gridwidth = 3;
 		gbc_cmbTaskStatus.insets = new Insets(0, 0, 5, 5);
