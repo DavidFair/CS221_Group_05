@@ -199,3 +199,46 @@ function validateTaskEdit()
 {
     return true;
 }
+
+function validateExtraElement()
+{
+    var taskDesc = document.forms["extraElement"]["taskDesc"].value;
+    var taskComment = document.forms["extraElement"]["taskComment"].value;
+
+    if (taskDesc == null || taskDesc == " ")
+    {
+        alert("Description is empty.");
+        return false;
+    } else if (taskDesc.length > 45)
+    {
+        alert("Task description is too long.");
+        return false;
+    } else if (taskDesc.length < 3)
+    {
+        alert("Task description is too short.");
+        return false;
+    } else if (!(ASCIIregExp.test(taskDesc)))
+    {
+        alert("Invalid characters in task description.");
+        return false;
+    } else if (taskComment == null || taskComment == " ")
+    {
+        alert("Comment is empty.");
+        return false;
+    } else if (taskComment.length > 45)
+    {
+        alert("Task comment is too long.");
+        return false;
+    } else if (taskComment.length < 3)
+    {
+        alert("Task comment is too short.");
+        return false;
+    } else if (!(ASCIIregExp.test(taskComment)))
+    {
+        alert("Invalid characters in task comment.");
+        return false;
+    } else
+    {
+        return true;
+    }
+}
