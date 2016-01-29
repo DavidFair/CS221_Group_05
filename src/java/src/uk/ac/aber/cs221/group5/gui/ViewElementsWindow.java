@@ -1,3 +1,7 @@
+package uk.ac.aber.cs221.group5.gui;
+
+import java.io.IOException;
+
 /**
  * This Class creates the View Elements Window GUI.
  * 
@@ -8,11 +12,8 @@
  * 
  * @version 1.0.0
  * @since 1.0.0
+ * @see ViewElementsWindowGUI.java
  */
-
-package uk.ac.aber.cs221.group5.gui;
-
-import java.io.IOException;
 
 public class ViewElementsWindow {
 

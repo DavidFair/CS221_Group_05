@@ -122,6 +122,8 @@ public TaskList getTaskList() {
     * This is the entry point to the System. This method created a new
     * LoginWindow Object and spawns the Login Window GUI.
     * 
+    * @param args 
+    * 			 starting arguments
     * @throws InterruptedException
     *            if the thread handling establishing a connection to the
     *            Database was somehow interrupted.

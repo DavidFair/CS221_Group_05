@@ -63,6 +63,10 @@ public class EditWindowGUI {
    /**
     * Create the application and spawn the GUI Window.
     * 
+    * @param row
+    * 			The current task that is being edited
+    * @param mainWindow
+    * 			The timer would be out of scope if this isnt called
     * @throws IOException
     *            if the Task File, which is used to populate the Task Elements
     *            table, cannot be found or has been corrupted.

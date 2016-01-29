@@ -1,4 +1,4 @@
-23
+21
 ali21@aber.ac.uk
 Alvin Itawad
 alw21@aber.ac.uk
@@ -6,15 +6,15 @@ Alex Webb
 anc22@aber.ac.uk
 Atastasia Chatzeli
 bed19@aber.ac.uk
-Ben  Dudley
+Ben Dudley
 daf5@aber.ac.uk
-David Fairbother
+David Fairbrother
 dia18@aber.ac.uk
 Dionysis  Arvanitis
 jec17@aber.ac.uk
 Jesse  Chen
 jee17@aber.ac.uk
-Jonathan Englund
+Jonothan  Englund
 joc13@aber.ac.uk
 Johnny Chan
 jod32@aber.ac.uk
@@ -24,7 +24,7 @@ Kimmit Rai
 kog20@aber.ac.uk
 Kostas Gasteratos
 lif5@aber.ac.uk
-Liam Fitzgerald
+Liam  Fitzgerald
 mac81@aber.ac.uk
 Maurice Corriette
 mal15@aber.ac.uk
@@ -33,10 +33,6 @@ manager@example.com
 Nigel Hardy
 ole4@aber.ac.uk
 Oliver Earl
-random@random.com
-Jim Bob
-riuq@irtuyi.com
-edw rleawut
 sar14@aber.ac.uk
 Sanjaya Ranasinghe
 tma1@aber.ac.uk

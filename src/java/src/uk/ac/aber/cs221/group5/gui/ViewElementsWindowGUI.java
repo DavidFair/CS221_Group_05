@@ -1,16 +1,3 @@
-/**
- * This Class handles the GUI Window for viewing Task Elements. It spawns a GIU Window and loads Element
- * Data into the Table contained within the Window.
- * 
- * @author Ben Dudley (bed19)
- * @author David Fairbrother (daf5)
- * @author Jonathan Englund (jee17)
- * @author Josh Doyle (jod32)
- * 
- * @version 1.0.0
- * @since 1.0.0
- */
-
 package uk.ac.aber.cs221.group5.gui;
 
 import java.awt.Font;
@@ -30,6 +17,20 @@ import javax.swing.table.DefaultTableModel;
 import uk.ac.aber.cs221.group5.logic.Task;
 import uk.ac.aber.cs221.group5.logic.Task.Element;
 
+/**
+ * This Class handles the GUI Window for viewing Task Elements. It spawns a GIU Window and loads Element
+ * Data into the Table contained within the Window.
+ * 
+ * @author Ben Dudley (bed19)
+ * @author David Fairbrother (daf5)
+ * @author Jonathan Englund (jee17)
+ * @author Josh Doyle (jod32)
+ * 
+ * @version 1.0.0
+ * @since 1.0.0
+ * @see MainWindow.java
+ */
+
 public class ViewElementsWindowGUI {
 
    private JFrame frmViewTaskElements;
@@ -40,6 +41,9 @@ public class ViewElementsWindowGUI {
 
    /**
     * Create the application.
+    * 
+    * @param tableRow
+    * 			the current task in the table
     * 
     * @throws IOException
     *            if the local Tasks save file cannot be read.

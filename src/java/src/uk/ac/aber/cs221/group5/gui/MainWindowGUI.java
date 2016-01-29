@@ -93,6 +93,8 @@ public class MainWindowGUI {
 
    /**
     * Create the application.
+    * @param mainWindow 
+    * 				Referenced the GUI parent object
     * 
     */
    public MainWindowGUI(MainWindow mainWindow) {
