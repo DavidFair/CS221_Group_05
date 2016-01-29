@@ -1,3 +1,16 @@
+/**
+ * This Class handles the GUI Window for viewing Task Elements. It spawns a GIU Window and loads Element
+ * Data into the Table contained within the Window.
+ * 
+ * @author Ben Dudley (bed19)
+ * @author David Fairbrother (daf5)
+ * @author Jonathan Englund (jee17)
+ * @author Josh Doyle (jod32)
+ * 
+ * @version 1.0.0
+ * @since 1.0.0
+ */
+
 package uk.ac.aber.cs221.group5.gui;
 
 import java.awt.Font;
@@ -29,6 +42,7 @@ public class ViewElementsWindowGUI {
     * Create the application.
     * 
     * @throws IOException
+    *            if the local Tasks save file cannot be read.
     */
    public ViewElementsWindowGUI(int tableRow) throws IOException {
       this.selectedRow = tableRow;
@@ -36,9 +50,10 @@ public class ViewElementsWindowGUI {
    }
 
    /**
-    * Initialize the contents of the frame.
+    * Initialize the contents of the Frame and display the Frame.
     * 
     * @throws IOException
+    *            if the local Tasks save file cannot be read.
     */
    private void initialize() throws IOException {
       frmViewTaskElements = new JFrame();
@@ -92,6 +107,15 @@ public class ViewElementsWindowGUI {
       frmViewTaskElements.setVisible(true);
    }
 
+   /**
+    * Displays Task Element data in the Table contained within the Frame.
+    * 
+    * @param tableIndex
+    *           The position in the TaskList of the Task that was selected to
+    *           view Elements
+    * @throws IOException
+    *            if the local Tasks save file cannot be read.
+    */
    private void populateTable(int tableIndex) throws IOException {
       MainWindow main = new MainWindow(); // Used for loading elements and will
                                           // not spawn a GUI
