@@ -789,8 +789,5 @@ public class Database {
 
    }
 
-   private Task returnPending(Task returnTask) {
-      return returnTask;
-   }
 
 }
