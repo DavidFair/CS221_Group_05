@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="WINDOWS-1252" standalone="no"?>
+<jardesc>
+    <jar path="C:/Users/Joshua/Desktop/TaskerCLI.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/CS221_Group_05/jardesc.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="true" overwrite="false" saveDescription="true" storeRefactorings="true" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" mainClassHandleIdentifier="=CS221_Group_05/src&lt;uk.ac.aber.cs221.group5.gui{MainWindow.java[MainWindow" manifestLocation="/CS221_Group_05/manifest" manifestVersion="1.0" reuseManifest="false" saveManifest="true" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="false" exportJavaFiles="true" exportOutputFolder="true">
+        <javaElement handleIdentifier="=CS221_Group_05/src"/>
+        <file path="/CS221_Group_05/.classpath"/>
+        <file path="/CS221_Group_05/pendingSaveFile.txt"/>
+        <file path="/CS221_Group_05/manifest"/>
+        <file path="/CS221_Group_05/jardesc.jardesc"/>
+        <file path="/CS221_Group_05/members.txt"/>
+        <file path="/CS221_Group_05/miglayout-src.zip"/>
+        <file path="/CS221_Group_05/connSaveFile.txt"/>
+        <folder path="/CS221_Group_05/lib"/>
+        <file path="/CS221_Group_05/TaskerCLI_Interface_List.txt"/>
+        <file path="/CS221_Group_05/jgoodies-forms-1.8.0-sources.jar"/>
+        <file path="/CS221_Group_05/memberSaveFile.txt"/>
+        <file path="/CS221_Group_05/taskSaveFile.txt"/>
+        <file path="/CS221_Group_05/.gitignore"/>
+        <file path="/CS221_Group_05/.project"/>
+    </selectedElements>
+</jardesc>

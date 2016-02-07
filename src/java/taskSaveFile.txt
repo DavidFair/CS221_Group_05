@@ -1,0 +1,217 @@
+27
+3
+0
+,|
+Design specifications
+Allocated
+jee17@aber.ac.uk
+2015-11-20
+2015-11-27
+4
+0
+,|
+Test specification
+Abandoned
+mac81@aber.ac.uk
+2015-11-20
+2015-11-29
+5
+0
+,|
+JDBC spike work
+Allocated
+bed19@aber.ac.uk
+2015-11-01
+2015-11-07
+6
+0
+,|
+Mysql spikework
+Allocated
+lif5@aber.ac.uk
+2015-11-01
+2015-11-08
+7
+0
+,|
+Swing spikework
+Abandoned
+jod32@aber.ac.uk
+2015-11-02
+2015-11-08
+8
+0
+,|
+prototype CLI implementation
+Allocated
+jod32@aber.ac.uk
+2015-12-01
+2015-12-16
+9
+0
+,|
+Taskerman prototype implementation
+Allocated
+ole4@aber.ac.uk
+2015-12-01
+2015-12-16
+10
+0
+,|
+QA documentatoin
+Allocated
+ole4@aber.ac.uk
+2015-11-01
+2015-11-09
+11
+0
+,|
+Group report
+Completed
+daf5@aber.ac.uk
+2016-01-20
+2016-02-15
+12
+0
+,|
+Test report 
+Allocated
+mac81@aber.ac.uk
+2016-01-10
+2016-02-15
+13
+0
+,|
+Status report
+Allocated
+ali21@aber.ac.uk
+2016-02-22
+2016-02-29
+14
+0
+,|
+Analysis report
+Abandoned
+anc22@aber.ac.uk
+2016-02-18
+2016-02-28
+15
+0
+,|
+Risk analysis
+Allocated
+daf5@aber.ac.uk
+2015-12-05
+2015-12-10
+16
+0
+,|
+PHP implementation
+Allocated
+ole4@aber.ac.uk
+2016-01-25
+2016-01-29
+17
+0
+,|
+CLI/MAN testing
+Abandoned
+mac81@aber.ac.uk
+2016-01-27
+2016-01-29
+19
+0
+,|
+Java gui debugging
+Allocated
+jod32@aber.ac.uk
+2016-01-27
+2016-01-29
+20
+0
+,|
+Java db debugging
+Abandoned
+daf5@aber.ac.uk
+2016-01-27
+2016-01-29
+21
+0
+,|
+Spreadsheet analysis
+Allocated
+ali21@aber.ac.uk
+2016-02-10
+2016-02-18
+22
+0
+,|
+Junit testing
+Abandoned
+kog20@aber.ac.uk
+2016-01-25
+2016-01-29
+23
+0
+,|
+Javadoc commenting
+Allocated
+tma1@aber.ac.uk
+2016-01-25
+2016-01-29
+24
+0
+,|
+Phpunit testing
+Abandoned
+joc13@aber.ac.uk
+2016-02-01
+2016-02-10
+25
+0
+,|
+Javascript validation
+Allocated
+alw21@aber.ac.uk
+2016-01-27
+2016-01-29
+26
+0
+,|
+Maintenance manual
+Allocated
+dia18@aber.ac.uk
+2016-01-29
+2016-02-15
+27
+0
+,|
+QA inspection of testing documents
+Allocated
+mal15@aber.ac.uk
+2016-02-01
+2016-02-01
+28
+0
+,|
+Project log documentation
+Abandoned
+wej19@aber.ac.uk
+2016-02-05
+2016-02-15
+29
+0
+,|
+Shell scripting
+Allocated
+yil16@aber.ac.uk
+2015-12-21
+2016-01-29
+30
+0
+,|
+Project packaging
+Completed
+kir12@aber.ac.uk
+2016-01-25
+2016-01-29
