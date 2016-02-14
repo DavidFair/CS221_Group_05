@@ -1,5 +1,5 @@
 csgp_5_15_16
-csgpadm_5
+csgpam_5
 906BnQjD
 db.dcs.aber.ac.uk
-3306
+3945784385739
