@@ -1,15 +1,7 @@
-27
-3
-0
-,|
-Design specifications
-Allocated
-jee17@aber.ac.uk
-2015-11-20
-2015-11-27
+29
 4
-0
-,|
+1,2,
+Test Element,%$^$%£|Please do not,Break TaskerMAN|
 Test specification
 Abandoned
 mac81@aber.ac.uk
@@ -19,7 +11,7 @@ mac81@aber.ac.uk
 0
 ,|
 JDBC spike work
-Allocated
+Completed
 bed19@aber.ac.uk
 2015-11-01
 2015-11-07
@@ -58,9 +50,9 @@ ole4@aber.ac.uk
 10
 0
 ,|
-QA documentatoin
-Allocated
-ole4@aber.ac.uk
+QA documentation
+Abandoned
+ali21@aber.ac.uk
 2015-11-01
 2015-11-09
 11
@@ -83,7 +75,7 @@ mac81@aber.ac.uk
 0
 ,|
 Status report
-Allocated
+Abandoned
 ali21@aber.ac.uk
 2016-02-22
 2016-02-29
@@ -215,3 +207,27 @@ Completed
 kir12@aber.ac.uk
 2016-01-25
 2016-01-29
+32
+6,7,
+Un,dau|dau,dau|
+T2 Aber
+Completed
+nwh@aber.ac.uk
+2016-02-04
+2016-02-06
+33
+8,
+Just one,aaa|
+T2 Other
+Completed
+nwh@aber.ac.uk
+2016-02-04
+2016-02-11
+34
+9,10,
+aaa,aaa|aaa,aaa|
+T1 Other
+Abandoned
+ali21@aber.ac.uk
+2016-02-04
+2016-02-05
