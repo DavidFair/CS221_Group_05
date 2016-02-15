@@ -1,0 +1,262 @@
+[33mcommit a7cff9a972211a642fb93231844ad7800d00ab96[m
+Author: Oliver Earl <ole4@aber.ac.uk>
+Date:   Mon Feb 15 00:18:37 2016 +0000
+
+    Final changes by me to the design deliverable. Just need the UI desperately.
+
+[33mcommit a4a7935002f488d591af5f1de58cfa2bb0775a7d[m
+Author: anti-b (David.F) <antibones@users.noreply.github.com>
+Date:   Sun Feb 14 23:10:41 2016 +0000
+
+    Updated design docs again
+
+[33mcommit 2b9852dcb0fbbdb24c0454846c9bda4ae11c59ad[m
+Author: anti-b (David.F) <antibones@users.noreply.github.com>
+Date:   Sun Feb 14 22:55:48 2016 +0000
+
+    Design spec changes
+
+[33mcommit 6cbfd30d97a6a0dbe8681a12b486411b4e19e68c[m
+Author: anti-b (David.F) <antibones@users.noreply.github.com>
+Date:   Sun Feb 14 22:48:13 2016 +0000
+
+    Added Tim
+    s personal performance
+
+[33mcommit 2418f428c2681cb84fe13ae7d4751eaa8be45f84[m
+Merge: ffcb36f 2977171
+Author: Oliver Earl <ole4@aber.ac.uk>
+Date:   Sun Feb 14 22:47:40 2016 +0000
+
+    Merge branch 'master' of github.com:antibones/CS221_Group_05
+
+[33mcommit ffcb36f9a5d0e857da33a997f799dcd01719fe33[m
+Author: Oliver Earl <ole4@aber.ac.uk>
+Date:   Sun Feb 14 22:47:30 2016 +0000
+
+    Major design changes coming your way. David is also a gimp for spraying me with water.
+
+[33mcommit 2977171089c9d045cbb32e6894a4236613345bc7[m
+Author: unknown <mac81@PSVWS445.pau.local>
+Date:   Sun Feb 14 22:24:12 2016 +0000
+
+    changed one test thingy
+
+[33mcommit 8d2697a105c5fc655e175194c5d30d1b8221ce42[m
+Author: anti-b (David.F) <antibones@users.noreply.github.com>
+Date:   Sun Feb 14 21:55:15 2016 +0000
+
+    Minor change to test report
+
+[33mcommit aa9e9a24179700907b00f0d4947ab70a9c620d64[m
+Author: Oliver Earl <ole4@aber.ac.uk>
+Date:   Sun Feb 14 21:54:31 2016 +0000
+
+    Changes to UI design
+
+[33mcommit 22dfbd952d6eea9663f3da9c8f23934fabf632c6[m
+Author: Oliver Earl <ole4@aber.ac.uk>
+Date:   Sun Feb 14 21:10:26 2016 +0000
+
+    More changes to design. Oh boy.
+
+[33mcommit b52e319697efda7bb5b0c8c2d9130fcc3b4785ae[m
+Author: anti-b (David.F) <antibones@users.noreply.github.com>
+Date:   Sun Feb 14 21:08:36 2016 +0000
+
+    Updated documents following QA
+
+[33mcommit 5c1142dba826c5fe7056a94c2d4b13f11a26ab06[m
+Author: anti-b (David.F) <antibones@users.noreply.github.com>
+Date:   Sun Feb 14 19:14:48 2016 +0000
+
+    Updated time sheets and some minor changes to report
+
+[33mcommit 661183a8149eb0e91585573f9fea1c09d7a9a86f[m
+Author: Oliver Earl <ole4@aber.ac.uk>
+Date:   Sun Feb 14 18:35:54 2016 +0000
+
+    Design changes, added PHP File List and TaskerMAN description, will add more later.
+
+[33mcommit 32ab7d5fcc774e27182c7a086b647b66b0cf083d[m
+Author: anti-b (David.F) <antibones@users.noreply.github.com>
+Date:   Sun Feb 14 15:10:25 2016 +0000
+
+    Updated project plan with new mock ups for CLI
+
+[33mcommit a331ced127108f2f8d1a421e62d0f562623ced9a[m
+Author: anti-b (David.F) <antibones@users.noreply.github.com>
+Date:   Sun Feb 14 01:45:01 2016 +0000
+
+    Updated class diagram for TaskerMAN in design
+
+[33mcommit 694dc8744382a69a5f88e40fd6906abec615d56b[m
+Author: anti-b (David.F) <antibones@users.noreply.github.com>
+Date:   Sat Feb 13 23:46:35 2016 +0000
+
+    Pulled in documentation changes
+
+[33mcommit 72fc2d228152a02a1b1428b0321b3e714ee64905[m
+Author: David F <antibones@users.noreply.github.com>
+Date:   Sat Feb 13 13:00:37 2016 +0000
+
+    Added final state docs
+
+[33mcommit a354752207508399d55f554454a2e84ceb53c83b[m
+Author: David F <antibones@users.noreply.github.com>
+Date:   Fri Feb 12 23:17:02 2016 +0000
+
+    Added critical evaluation
+
+[33mcommit 2eea5aade8bc28253fa169a0529dab6a8991f217[m
+Author: David F <antibones@users.noreply.github.com>
+Date:   Thu Feb 11 22:58:08 2016 +0000
+
+    Added Josh Doyle performance report
+
+[33mcommit 2e33c71947c9a840a9557d602b8c145a182b2cf2[m
+Author: David F <antibones@users.noreply.github.com>
+Date:   Thu Feb 11 22:36:35 2016 +0000
+
+    Added David Fairbrother performance report
+
+[33mcommit 870b5c40e8c48aad0f34e668f157ae6a18ebdee0[m
+Author: David F <antibones@users.noreply.github.com>
+Date:   Thu Feb 11 21:54:52 2016 +0000
+
+    Updated management summary
+
+[33mcommit 345db2c4c6947c99de4790224f723945b16644ec[m
+Author: David F <antibones@users.noreply.github.com>
+Date:   Thu Feb 11 20:11:43 2016 +0000
+
+    Added Ben's Time sheets
+
+[33mcommit 49038da4b8c6de8a3d602c429b9b0e4e6858dbee[m
+Author: David F <antibones@users.noreply.github.com>
+Date:   Thu Feb 11 15:22:13 2016 +0000
+
+    Update time management sheets
+
+[33mcommit 5ce3081dcf393fcecbc82966e3614222b03918db[m
+Author: Oliver Earl <ole4@aber.ac.uk>
+Date:   Wed Feb 10 18:49:15 2016 +0000
+
+    Added my timesheets
+
+[33mcommit 808b0f5d1d3c846e4810cd5124111ce861baf6f1[m
+Author: David F <antibones@users.noreply.github.com>
+Date:   Wed Feb 10 11:05:37 2016 +0000
+
+    Added timesheets on behalf of other users
+
+[33mcommit c20105c7065e81ffc3bfce6a341aeaeb18f6e34b[m
+Author: David F <antibones@users.noreply.github.com>
+Date:   Sun Feb 7 17:44:26 2016 +0000
+
+    Merged duplicate design docs and updated Logic class diagram from Ben
+
+[33mcommit 40ee42e2aadda3ac02af9b51d98fdd3102b84f07[m
+Author: jod32-aber <jod32@aber.ac.uk>
+Date:   Sun Feb 7 00:32:56 2016 +0000
+
+    Completed time sheet for week 25-01-2016
+
+[33mcommit 77e10660a67f9e326596d4d9eca53a9f62ad9148[m
+Author: jod32-aber <jod32@aber.ac.uk>
+Date:   Sun Feb 7 00:15:38 2016 +0000
+
+    Added time sheet for week 04-01-2016
+
+[33mcommit 0e25ea1ff7368b1c31210954aa64a68c664140f8[m
+Author: jod32-aber <jod32@aber.ac.uk>
+Date:   Sat Feb 6 23:18:20 2016 +0000
+
+    Added time sheet for the week 2015-12-07
+
+[33mcommit b4d51ff1a0d558fbf91b5420e7c3cd978752b5a0[m
+Author: jod32-aber <jod32@aber.ac.uk>
+Date:   Sat Feb 6 22:57:24 2016 +0000
+
+    Added time sheet for week 30-11-2015
+
+[33mcommit 7fb6fa7a937288582c8ca177fa449229db756888[m
+Author: jod32-aber <jod32@aber.ac.uk>
+Date:   Sat Feb 6 22:31:18 2016 +0000
+
+    Added completed time sheet for week 23-11-2015
+
+[33mcommit 3c6dcaffb8cdb2b0e3bfea88ccfce5296693ee6b[m
+Author: jod32-aber <jod32@aber.ac.uk>
+Date:   Sat Feb 6 22:10:08 2016 +0000
+
+    Added time sheet for week 2015-11-16
+
+[33mcommit a114afb6aacdc7ad2f9e8728b89989412fe79257[m
+Author: jod32-aber <jod32@aber.ac.uk>
+Date:   Sat Feb 6 22:06:52 2016 +0000
+
+    Fixed format error in timesheet
+
+[33mcommit b0d3d471d94379f19c98c0cd1d181bcc3e640fe0[m
+Author: jod32-aber <jod32@aber.ac.uk>
+Date:   Sat Feb 6 22:01:22 2016 +0000
+
+    Added completed sheet for week 2015-11-9
+
+[33mcommit 7ee0b55c469e2cd9511fe93f159bccb4255bbaa6[m
+Author: David F <antibones@users.noreply.github.com>
+Date:   Sat Feb 6 15:34:59 2016 +0000
+
+    Added backlogged time sheets for Daf5. Added future placeholders
+
+[33mcommit 9753b849aaf5d5ac73a9cdf74bdf3b413de68166[m
+Author: anti-b (David.F) <antibones@users.noreply.github.com>
+Date:   Fri Jan 29 15:48:05 2016 +0000
+
+    Added new taskercli jar
+
+[33mcommit 19638737d4c2b7090cb5fadf92314e51412b19d2[m
+Author: anti-b (David.F) <antibones@users.noreply.github.com>
+Date:   Fri Jan 29 15:46:20 2016 +0000
+
+    Removed older taskerCLI jar file
+
+[33mcommit 9bfa89e690891ebd7b74596076d16dd8947b605b[m
+Merge: a97906a 65258f9
+Author: anti-b (David.F) <antibones@users.noreply.github.com>
+Date:   Fri Jan 29 15:45:18 2016 +0000
+
+    Fixed merge conflict in git ignore
+
+[33mcommit 65258f9e6cf7bc7329df60459040c2f8d4d20940[m
+Author: jod32-aber <jod32@aber.ac.uk>
+Date:   Fri Jan 29 15:43:36 2016 +0000
+
+    Final formatting and built javadoc
+
+[33mcommit 91b45dd9568189e007f36fc30f8d69355eecc0a7[m
+Merge: 4ed5e91 19a0a0a
+Author: unknown <jee17@aber.ac.uk>
+Date:   Fri Jan 29 15:37:07 2016 +0000
+
+    fixed merge conflict
+
+[33mcommit 4ed5e9107909f4167b2f551a6126c3ada013acdb[m
+Author: unknown <jee17@aber.ac.uk>
+Date:   Fri Jan 29 15:35:34 2016 +0000
+
+    finished javadoc
+
+[33mcommit a97906ac5d7453a304741e59a82fb77c84962f25[m
+Merge: a2c9b1d f7e800e
+Author: anti-b (David.F) <antibones@users.noreply.github.com>
+Date:   Fri Jan 29 15:34:29 2016 +0000
+
+    Merge branch 'php_staging'
+    Merging php staging into master
+
+[33mcommit f7e800e6e8c6823b1359923559ab354b49ff9e2f[m
+Author: anti-b (David.F) <antibones@users.noreply.github.com>
+Date:   Fri Jan 29 15:33:45 2016 +0000
+
